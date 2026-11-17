@@ -88,6 +88,10 @@ figure { margin: 0; }
 .shot--hero { margin-top: 18px; }
 .shot--wide { margin-top: 24px; }
 
+/* walkthrough video: click to play, never larger than its 1280x720 recording */
+.video { margin: 18px 0 20px; max-width: 960px; }
+.video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--card); box-shadow: 0 0 0 1px var(--line2); border-radius: 6px; }
+
 .step { margin-top: 28px; }
 .step h3 { margin-top: 0; }
 .step__text { max-width: var(--measure); }

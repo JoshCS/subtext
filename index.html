@@ -8,6 +8,16 @@
 <!-- DRAFT marker: the owner removes this robots line when he approves the copy. -->
 <meta name="robots" content="noindex">
 <meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://joshcs.github.io/subtext/">
+<meta property="og:title" content="Subtext: a browser extension that shows what a web page is doing">
+<meta property="og:description" content="Subtext is an open-source browser extension. It shows who is behind the page you are reading, how the site earns money, and the techniques the page uses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joshcs.github.io/subtext/">
+<meta property="og:image" content="https://joshcs.github.io/subtext/assets/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Subtext panel on a test shop page, beside the words: It is hard to know what to trust online. Subtext shows what a page is doing.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,9 +29,9 @@
     <a class="wordmark" href="#main">Subtext</a>
     <nav aria-label="Sections">
       <ul>
+        <li><a href="#demo">Demo</a></li>
         <li><a href="#example">Examples</a></li>
         <li><a href="#privacy">Privacy</a></li>
-        <li><a href="#status">Status</a></li>
         <li><a href="#get-it">Install</a></li>
       </ul>
     </nav>
@@ -59,6 +69,31 @@
   </div>
 </section>
 
+<!-- 1b. Watch it work -->
+<section id="demo" aria-labelledby="h-demo">
+  <div class="wrap">
+    <h2 id="h-demo">Watch it work</h2>
+    <p class="measure">This 73-second video has no sound. It shows two test pages.</p>
+    <figure class="video">
+      <video controls preload="none" playsinline poster="assets/walkthrough-poster.webp" width="1280" height="720" aria-label="Video: Subtext on a test shop page and a test article" aria-describedby="video-steps">
+        <source src="assets/walkthrough.mp4" type="video/mp4">
+        <source src="assets/walkthrough.webm" type="video/webm">
+      </video>
+    </figure>
+    <ol class="measure" id="video-steps">
+      <li>A test shop page opens. The Subtext pill appears in its corner.</li>
+      <li>The pointer rests on the countdown timer. A tooltip reads "Countdown timer".</li>
+      <li>A click on the pill opens the panel. A click on a label opens its explanation.</li>
+      <li>On a test article, a tooltip on the chart reads "Truncated axis".</li>
+    </ol>
+    <h3>Try it yourself</h3>
+    <p class="measure">Install Subtext, then open the two test pages.</p>
+    <div class="actions">
+      <a class="standalone" href="demo/">Open the test pages</a>
+    </div>
+  </div>
+</section>
+
 <!-- 2. Why this matters -->
 <section id="why" aria-labelledby="h-why">
   <div class="wrap">
@@ -77,8 +112,6 @@
 <section id="example" aria-labelledby="h-example">
   <div class="wrap">
     <h2 id="h-example">Two examples: a shop page and a chart</h2>
-    <p class="measure">Both examples are test pages we built.</p>
-
     <div class="step">
       <div class="step__text">
         <h3>Shop page: the tooltip on a countdown timer</h3>
@@ -99,7 +132,7 @@
 
     <div class="step">
       <div class="step__text">
-        <h3>Shop page: the same label in the panel</h3>
+        <h3>Shop page: the panel</h3>
         <p>Click the pill, the small Subtext button in the corner of the page, to open the panel.</p>
       </div>
       <figure class="shot">
@@ -110,7 +143,7 @@
           <img data-shot="shop-pill" src="assets/shop-pill.png" srcset="assets/shop-pill.png 2x" width="320" height="86" loading="lazy" decoding="async" alt="A strip of the test shop page. In its corner a small pill reads &quot;Sells your data +15&quot;.">
         </picture>
         <!-- /shot -->
-        <figcaption>The pill on the test shop page. "+15" means the panel has 15 more labels.</figcaption>
+        <figcaption>"+15" means the panel has 15 more labels.</figcaption>
       </figure>
     </div>
 
@@ -177,13 +210,13 @@
   <div class="wrap">
     <h2 id="h-questions">Three questions Subtext asks about each page</h2>
     <p class="measure">These lists are examples, not every check.</p>
+    <p class="measure">Subtext also checks misleading charts, cookie banners, ads that look like content, and who runs a site that is not a news outlet. On a click, it can add context from public records and official statistics.</p>
     <div class="cols3">
       <div class="col">
         <h3>What the page is doing to you</h3>
         <ul>
           <li>Countdown timers, including a timer that restarts between visits.</li>
           <li>Boxes ticked for you, and cookie banners with no reject button.</li>
-          <li>Charts whose bars start above zero.</li>
         </ul>
       </div>
       <div class="col">
@@ -201,10 +234,6 @@
           <li>Clauses in the privacy policy and terms, such as one that lets the site sell your data.</li>
         </ul>
       </div>
-    </div>
-    <h3>What else Subtext checks</h3>
-    <div class="measure">
-      <p>The checks also cover pressure and urgency, pop-ups about other buyers, tracking, and design that steers your choices, often called dark patterns. The panel also says when a page is labelled as paid for or republished from another publisher.</p>
     </div>
   </div>
 </section>
@@ -248,9 +277,9 @@
         <ul>
           <li>A public file on the site, named ads.txt, that lists who sells its ad space.</li>
           <li>The site's own privacy and terms pages, when the page links them.</li>
-          <li>On a shop page with no company name or phone: up to five of the site's contact and legal pages. Subtext may also read up to three public files that the site publishes for search engines.</li>
+          <li>On a shop page that shows no company name, or no phone number: up to five of the site's contact and legal pages. Subtext may also read up to three public files that the site publishes for search engines.</li>
         </ul>
-        <p>These requests carry no cookies and do not say which page you came from. The site you are visiting can see them, and it can pass them to another site.</p>
+        <p>These requests go to the site you are visiting or its main address, with no cookies and no referrer. A redirect can lead to another host.</p>
       </div>
       <div class="card">
         <h3>Only when you click</h3>
@@ -337,8 +366,6 @@
     <div class="faq measure">
       <h3>Does Subtext work without an AI key?</h3>
       <p>Yes. Only Investigate needs a key.</p>
-      <h3>Is it free?</h3>
-      <p>The extension is free and open source.</p>
       <h3>Is it politically one-sided?</h3>
       <p>The checks look for techniques, not political sides. We have not yet tested that left-leaning and right-leaning pages get labels at similar rates.</p>
     </div>
@@ -350,7 +377,7 @@
   <div class="wrap">
     <h2 id="h-open-source">Open source: licences and method</h2>
     <div class="measure">
-      <p>Anyone can read, copy and change the code. Licences: AGPL-3.0-or-later for code, and CC BY-SA 4.0 for rules, documents and the outlet list.</p>
+      <p>Licences: AGPL-3.0-or-later for code, and CC BY-SA 4.0 for rules, documents and the outlet list.</p>
       <p>Method and limits: <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/RELIABILITY.md" rel="noopener">docs/RELIABILITY.md</a></code>, <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/CALIBRATION.md" rel="noopener">docs/CALIBRATION.md</a></code> and <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/THREAT-MODEL.md" rel="noopener">docs/THREAT-MODEL.md</a></code>. Checks and data: <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/TAXONOMY.md" rel="noopener">docs/TAXONOMY.md</a></code>, <code><a href="https://github.com/JoshCS/subtext/blob/main/extension/rules/text-rules.json" rel="noopener">extension/rules/text-rules.json</a></code> and <code><a href="https://github.com/JoshCS/subtext/blob/main/extension/data/outlets.json" rel="noopener">extension/data/outlets.json</a></code>.</p>
     </div>
   </div>
@@ -366,6 +393,7 @@
         <li><a data-slot="REPO_URL" href="https://github.com/JoshCS/subtext" rel="noopener">Source</a></li>
         <li><a data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip" rel="noopener">Download</a></li>
         <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#status">Status</a></li>
       </ul>
     </nav>
   </div>

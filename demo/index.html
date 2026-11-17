@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Try Subtext on two test pages</title>
+<meta name="description" content="Two test pages for the Subtext browser extension: a shop page and an article with a chart. Nothing on them is for sale and nothing is real.">
+<!-- DRAFT marker, as on the landing page: the owner removes this robots line when he approves the copy. -->
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://joshcs.github.io/subtext/demo/">
+<meta property="og:title" content="Try Subtext on two test pages">
+<meta property="og:description" content="Two test pages for the Subtext browser extension: a shop page and an article with a chart. Nothing on them is for sale and nothing is real.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joshcs.github.io/subtext/demo/">
+<meta property="og:image" content="https://joshcs.github.io/subtext/assets/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Subtext panel on a test shop page, beside the words: It is hard to know what to trust online. Subtext shows what a page is doing.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="wordmark" href="../">Subtext</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#shop">Shop page</a></li>
+        <li><a href="#article">Article</a></li>
+        <li><a href="../#get-it">Install</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="h-try">
+  <div class="wrap">
+    <h1 id="h-try">Try Subtext on two test pages</h1>
+    <p class="hero__sub">We built both pages for testing. Nothing on them is for sale, nothing is real, and they contact no outside company.</p>
+    <ol class="measure steps">
+      <li>Install Subtext. <a href="../#get-it">The install steps</a> are on the Subtext page.</li>
+      <li>Open <a href="shop.html">the shop test page</a>. It shows a pop-up of its own after about two seconds. Close the pop-up.</li>
+      <li>Click the pill, the small Subtext button in a bottom corner of the page. The panel opens.</li>
+    </ol>
+    <p class="hero__status">The text below is what Subtext v0.2.0 showed on these pages in Chromium on 17 November 2026.</p>
+  </div>
+</section>
+
+<section id="shop" aria-labelledby="h-shop">
+  <div class="wrap">
+    <h2 id="h-shop">What you should see on the shop test page</h2>
+    <ul class="measure">
+      <li>The pill reads "Sells your data +16". The top of the panel reads this site's address, then "17 things to know · 10 outside companies contacted".</li>
+      <li>If your mouse was outside the page when the pop-up opened, each count is one lower: "+15" and "16 things to know".</li>
+      <li>Under "What's going on", the sentence starts "A pressure sale of a digital product".</li>
+      <li>Rest the mouse on the countdown timer. A tooltip reads "Countdown timer", then "Timers raise arousal and cut deliberation."</li>
+      <li>In the panel, click "Countdown timer". The label opens with an explanation, what to do, and a quote from the page.</li>
+    </ul>
+    <h3>Reload the page to test the timer</h3>
+    <p class="measure">Wait one minute, then reload the shop test page. The page's timer starts again from two hours. The panel stays open after a reload. It now lists a label that reads "Fake deadline", then "This timer restarted on reload."</p>
+    <p class="measure">If you reload sooner than about 20 seconds, the new label does not appear.</p>
+    <h3>Why the panel says "10 outside companies contacted"</h3>
+    <p class="measure">The shop test page names ten outside companies in its code, but your browser never contacts them. Each of those script tags is switched off, so nothing loads. Subtext reads the names in the page and counts them. On a real shop page, these would be real requests.</p>
+    <h3>What Subtext requests on this page</h3>
+    <p class="measure">With its default settings, Subtext reads the test shop's two policy pages. It also asks this site for two public files, named ads.txt and robots.txt. It asks for ads.txt a second time at the same site name with "www." in front. This site has neither file.</p>
+  </div>
+</section>
+
+<section id="article" aria-labelledby="h-article">
+  <div class="wrap">
+    <h2 id="h-article">Then try the article test page</h2>
+    <p class="measure">Open <a href="article.html">the article test page</a>. Its text copies the style of a page that stirs up anger. We wrote it for testing, and it reports nothing real.</p>
+    <ul class="measure">
+      <li>Scroll down to the first chart, a red bar chart, and rest the mouse on it. A tooltip reads "Truncated axis", then "Bars start above zero; differences look huge."</li>
+      <li>Click Details in the tooltip. It reads "The y-axis starts at 80 instead of 0."</li>
+      <li>The top of the panel reads "4 things to know · 2 outside companies contacted". If you close the panel, the pill reads "Truncated axis +3".</li>
+      <li>The page names two ad companies in its code. As on the shop test page, your browser does not contact them.</li>
+    </ul>
+    <h3>One difference from the pictures on the Subtext page</h3>
+    <p class="measure">Here the sentence under "What's going on" starts "A page hosted on github.io". The picture on the Subtext page shows another sentence, because that capture used a different site address.</p>
+    <h3>If you see something else</h3>
+    <p class="measure">Subtext is an early test version, and some labels are wrong. To report a difference, <a href="https://github.com/JoshCS/subtext/issues" rel="noopener">open an issue</a> on the repository's issues page.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="../">Subtext page</a></li>
+        <li><a href="https://github.com/JoshCS/subtext" rel="noopener">Source</a></li>
+        <li><a href="../#privacy">Privacy</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
