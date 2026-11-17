@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Subtext: a browser extension that labels persuasion techniques on web pages</title>
-<meta name="description" content="Subtext is an open-source browser extension. It labels countdown timers, boxes ticked for you, outside companies and policy clauses on the page you are reading.">
-<!-- DRAFT marker: remove this robots line at launch. -->
+<title>Subtext: a browser extension that shows what a web page is doing</title>
+<meta name="description" content="Subtext is an open-source browser extension. It shows who is behind the page you are reading, how the site earns money, and the techniques the page uses.">
+<!-- DRAFT marker: the owner removes this robots line when he approves the copy. -->
 <meta name="robots" content="noindex">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -19,7 +19,7 @@
     <a class="wordmark" href="#main">Subtext</a>
     <nav aria-label="Sections">
       <ul>
-        <li><a href="#example">Example</a></li>
+        <li><a href="#example">Examples</a></li>
         <li><a href="#privacy">Privacy</a></li>
         <li><a href="#status">Status</a></li>
         <li><a href="#get-it">Install</a></li>
@@ -33,13 +33,13 @@
 <!-- 1. Hero -->
 <section class="hero" aria-labelledby="h-hero">
   <div class="wrap">
-    <h1 id="h-hero">Subtext is a browser extension that labels the persuasion techniques on the page you are reading</h1>
-    <p class="hero__sub">It asks three questions: what the page is doing to you, who is behind it, and what they get if you comply. Each label has a one-line reason, and the evidence is in the panel.</p>
+    <h1 id="h-hero">It is hard to know what to trust online. Subtext shows what a page is doing.</h1>
+    <p class="hero__sub">AI-made fakes, concentrated media ownership and misinformation make pages harder to judge. Subtext is a browser extension that shows who is behind a page, what they gain, and the dark patterns it uses.</p>
     <div class="actions">
       <a class="btn" href="#get-it">How to install it by hand</a>
-      <span class="group"><a class="standalone" data-slot="REPO_URL" href="https://github.com/JoshCS/subtext">Read the code</a></span>
+      <span class="group"><a class="standalone" data-slot="REPO_URL" href="https://github.com/JoshCS/subtext" rel="noopener">Read the code</a></span>
     </div>
-    <p class="hero__status">Subtext is an early test version, v0.2. It is built for Chrome, Edge, Brave and Arc.</p>
+    <p class="hero__status">Subtext is an early test version, v0.2. It is built and tested in Chromium, the base of Chrome 110 or newer, Edge, Brave and Arc.</p>
     <figure class="shot shot--hero">
       <!-- shot:shop-hero -->
       <picture>
@@ -59,33 +59,30 @@
   </div>
 </section>
 
-<!-- 2. One example -->
+<!-- 2. Why this matters -->
+<section id="why" aria-labelledby="h-why">
+  <div class="wrap">
+    <h2 id="h-why">Why this matters</h2>
+    <p class="measure">A sale timer can restart each time you load the page. A chart can start its bars at 80, so a small rise looks large.</p>
+    <ul class="facts measure">
+      <li>In 2026, 37% of people across 48 markets said they trust the news, the lowest since 2015. So most readers already doubt the news they see. <span class="src">Source: <a href="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/dnr-executive-summary" rel="noopener">Reuters Institute, Digital News Report 2026</a>.</span></li>
+      <li>In 2025, 53% of US adults were not confident they could tell AI-made content from human-made content. So a look at the page is often not enough. <span class="src">Source: <a href="https://www.pewresearch.org/science/2025/09/17/how-americans-view-ai-and-its-impact-on-people-and-society/" rel="noopener">Pew Research Center, 2025</a>.</span></li>
+      <li>A 2026 assessment of media in Europe rated the concentration of media markets as a very high risk. So it helps to know who owns an outlet. <span class="src">Source: <a href="https://cmpf.eui.eu/monopolies-within-borders-media-concentration/" rel="noopener">Media Pluralism Monitor 2026</a>.</span></li>
+    </ul>
+    <p class="measure">Subtext does not decide what is true, and it does not detect AI-made content. It adds context and shows its evidence, so you can judge the page yourself.</p>
+  </div>
+</section>
+
+<!-- 3. Two examples -->
 <section id="example" aria-labelledby="h-example">
   <div class="wrap">
-    <h2 id="h-example">One example: a test shop page</h2>
-    <p class="measure">dealzone-shop.test is not a real shop. It is a test page we built.</p>
+    <h2 id="h-example">Two examples: a shop page and a chart</h2>
+    <p class="measure">Both examples are test pages we built.</p>
 
     <div class="step">
       <div class="step__text">
-        <h3>Pill: one label by name and a count</h3>
-        <p>A small pill sits in the corner of the page. Here it reads "Sells your data +15". It names one label, and "+15" means the panel has 15 more.</p>
-      </div>
-      <figure class="shot">
-        <!-- shot:shop-pill -->
-        <picture>
-          <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/shop-pill-dark.webp 2x" width="320" height="86">
-          <source type="image/webp" srcset="assets/shop-pill.webp 2x" width="320" height="86">
-          <img data-shot="shop-pill" src="assets/shop-pill.png" srcset="assets/shop-pill.png 2x" width="320" height="86" loading="lazy" decoding="async" alt="A strip of the test shop page. In its corner a small pill reads &quot;Sells your data +15&quot;.">
-        </picture>
-        <!-- /shot -->
-        <figcaption>The pill on the test page.</figcaption>
-      </figure>
-    </div>
-
-    <div class="step">
-      <div class="step__text">
-        <h3>Tooltip: a label and a one-line reason</h3>
-        <p>The test page also has a countdown timer. Rest the mouse on the timer, and a small box called a tooltip appears. It reads "Countdown timer", then "Timers raise arousal and cut deliberation."</p>
+        <h3>Shop page: the tooltip on a countdown timer</h3>
+        <p>Rest the mouse on the countdown timer, and a small box called a tooltip appears. It reads "Countdown timer", then "Timers raise arousal and cut deliberation."</p>
       </div>
       <figure class="shot">
         <!-- shot:shop-hover -->
@@ -97,49 +94,89 @@
           <img data-shot="shop-hover" src="assets/shop-hover-372.png" srcset="assets/shop-hover-372.png 2x" width="372" height="281" loading="lazy" decoding="async" alt="The test shop page with the mouse resting on its countdown timer. A tooltip shows the label &quot;Countdown timer&quot; and the category &quot;Pressure&quot;. Its reason reads &quot;Timers raise arousal and cut deliberation.&quot; Below are the controls &quot;Details&quot; and &quot;Open in panel&quot;.">
         </picture>
         <!-- /shot -->
-        <figcaption>The tooltip on the countdown timer.</figcaption>
       </figure>
     </div>
 
     <div class="step">
       <div class="step__text">
-        <h3>Panel: the explanation, what to do, and the evidence</h3>
-        <p>Click the pill to open the panel, then click a label. The explanation for the countdown timer label starts: "A ticking clock is counting down on this page." Under "Why it works on you" it describes scarcity, loss aversion and present bias.</p>
+        <h3>Shop page: the same label in the panel</h3>
+        <p>Click the pill, the small Subtext button in the corner of the page, to open the panel.</p>
       </div>
       <figure class="shot">
-        <!-- shot:detail-why -->
+        <!-- shot:shop-pill -->
         <picture>
-          <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/detail-why-dark.webp 2x" width="360" height="420">
-          <source type="image/webp" srcset="assets/detail-why.webp 2x" width="360" height="420">
-          <img data-shot="detail-why" src="assets/detail-why.png" srcset="assets/detail-why.png 2x" width="360" height="420" loading="lazy" decoding="async" alt="Part of the Subtext panel with the &quot;Countdown timer&quot; label open. The explanation starts &quot;A ticking clock is counting down on this page.&quot; Under the heading &quot;Why it works on you&quot; are three named biases.">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/shop-pill-dark.webp 2x" width="320" height="86">
+          <source type="image/webp" srcset="assets/shop-pill.webp 2x" width="320" height="86">
+          <img data-shot="shop-pill" src="assets/shop-pill.png" srcset="assets/shop-pill.png 2x" width="320" height="86" loading="lazy" decoding="async" alt="A strip of the test shop page. In its corner a small pill reads &quot;Sells your data +15&quot;.">
         </picture>
         <!-- /shot -->
-        <figcaption>The countdown timer label, open in the panel.</figcaption>
+        <figcaption>The pill on the test shop page. "+15" means the panel has 15 more labels.</figcaption>
       </figure>
     </div>
 
     <div class="step step--cont">
       <div class="step__text">
-        <p>Under "What to do" it says: "Reload the page." Under "Evidence (click to locate on page)" it quotes the page's own words.</p>
+        <p>Click a label to read the explanation, what to do, and the evidence quoted from the page.</p>
+      </div>
+      <div class="step__shots">
+        <figure class="shot">
+          <!-- shot:detail-why -->
+          <picture>
+            <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/detail-why-dark.webp 2x" width="360" height="420">
+            <source type="image/webp" srcset="assets/detail-why.webp 2x" width="360" height="420">
+            <img data-shot="detail-why" src="assets/detail-why.png" srcset="assets/detail-why.png 2x" width="360" height="420" loading="lazy" decoding="async" alt="Part of the Subtext panel with the &quot;Countdown timer&quot; label open. The explanation starts &quot;A ticking clock is counting down on this page.&quot; Under the heading &quot;Why it works on you&quot; are three named biases.">
+          </picture>
+          <!-- /shot -->
+        </figure>
+        <figure class="shot">
+          <!-- shot:detail-do -->
+          <picture>
+            <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/detail-do-dark.webp 2x" width="360" height="229">
+            <source type="image/webp" srcset="assets/detail-do.webp 2x" width="360" height="229">
+            <img data-shot="detail-do" src="assets/detail-do.png" srcset="assets/detail-do.png 2x" width="360" height="229" loading="lazy" decoding="async" alt="The rest of the same label. Under &quot;What to do&quot; it says &quot;Reload the page.&quot; Under &quot;Evidence (click to locate on page)&quot; is a quote from the test page. The two controls at the end read &quot;Not accurate&quot; and &quot;Don't flag this again&quot;.">
+          </picture>
+          <!-- /shot -->
+        </figure>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step__text">
+        <h3>Chart: bars that start at 80, not at zero</h3>
+        <p>On a test article, rest the mouse on the bar chart. The tooltip reads "Truncated axis", then "Bars start above zero; differences look huge."</p>
+        <p>Click Details in the tooltip to see the measurement: "The y-axis starts at 80 instead of 0."</p>
       </div>
       <figure class="shot">
-        <!-- shot:detail-do -->
+        <!-- shot:article-hover -->
         <picture>
-          <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/detail-do-dark.webp 2x" width="360" height="229">
-          <source type="image/webp" srcset="assets/detail-do.webp 2x" width="360" height="229">
-          <img data-shot="detail-do" src="assets/detail-do.png" srcset="assets/detail-do.png 2x" width="360" height="229" loading="lazy" decoding="async" alt="The rest of the same label. Under &quot;What to do&quot; it says &quot;Reload the page.&quot; Under &quot;Evidence (click to locate on page)&quot; is a quote from the test page. The two controls at the end read &quot;Not accurate&quot; and &quot;Don't flag this again&quot;.">
+          <source media="(min-width: 700px) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-hover-620-dark.webp 2x" width="620" height="347">
+          <source media="(min-width: 700px)" type="image/webp" srcset="assets/article-hover-620.webp 2x" width="620" height="347">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-hover-372-dark.webp 2x" width="372" height="347">
+          <source type="image/webp" srcset="assets/article-hover-372.webp 2x" width="372" height="347">
+          <img data-shot="article-hover" src="assets/article-hover-372.png" srcset="assets/article-hover-372.png 2x" width="372" height="347" loading="lazy" decoding="async" alt="The bar chart on the test article with the mouse resting on it. A tooltip shows the label &quot;Truncated axis&quot;, the category &quot;Chart&quot;, and the reason &quot;Bars start above zero; differences look huge.&quot;">
         </picture>
         <!-- /shot -->
-        <figcaption>The same label, further down.</figcaption>
       </figure>
     </div>
+    <figure class="shot shot--wide">
+      <!-- shot:article-panel -->
+      <picture>
+        <source media="(min-width: 1148px) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-panel-1100-dark.webp 2x" width="1100" height="620">
+        <source media="(min-width: 1148px)" type="image/webp" srcset="assets/article-panel-1100.webp 2x" width="1100" height="620">
+        <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-panel-panel-dark.webp 2x" width="360" height="596">
+        <source type="image/webp" srcset="assets/article-panel-panel.webp 2x" width="360" height="596">
+        <img data-shot="article-panel" src="assets/article-panel-panel.png" srcset="assets/article-panel-panel.png 2x" width="360" height="596" loading="lazy" decoding="async" alt="The Subtext panel on a test article. The panel header reads &quot;4 things to know · 2 outside companies contacted&quot;. Three labels are listed: &quot;Truncated axis&quot;, &quot;Inverted axis&quot; and &quot;Ads as content&quot;.">
+      </picture>
+      <!-- /shot -->
+    </figure>
   </div>
 </section>
 
-<!-- 3. Three questions -->
+<!-- 4. Three questions -->
 <section id="questions" aria-labelledby="h-questions">
   <div class="wrap">
     <h2 id="h-questions">Three questions Subtext asks about each page</h2>
+    <p class="measure">These lists are examples, not every check.</p>
     <div class="cols3">
       <div class="col">
         <h3>What the page is doing to you</h3>
@@ -153,53 +190,26 @@
         <h3>Who is behind it</h3>
         <ul>
           <li>The owner and funding of 134 outlets, each with a link to a public source.</li>
-          <li>For other sites: whether the page shows a company name or an address.</li>
-          <li>Whether a public warning list includes the site, and who listed it.</li>
+          <li>For a site that is not on the outlet list: whether the page shows a company name or an address.</li>
         </ul>
       </div>
       <div class="col">
-        <h3>What they get if you comply</h3>
+        <h3>What they gain</h3>
         <ul>
           <li>How the site earns money: ads, subscriptions, sales commissions or data collection.</li>
           <li>Which outside companies the page contacts.</li>
-          <li>Clauses in the privacy policy and terms. Two examples are a clause that lets the site sell your data and a clause that stops you from going to court.</li>
+          <li>Clauses in the privacy policy and terms, such as one that lets the site sell your data.</li>
         </ul>
       </div>
     </div>
-
-    <div class="step step--example">
-      <div class="step__text">
-        <p>On a test article we built, the panel lists "Truncated axis". Its reason reads "Bars start above zero; differences look huge." Click Details in the tooltip to see the measurement: "The y-axis starts at 80 instead of 0."</p>
-      </div>
-      <figure class="shot">
-        <!-- shot:article-hover -->
-        <picture>
-          <source media="(min-width: 700px) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-hover-620-dark.webp 2x" width="620" height="347">
-          <source media="(min-width: 700px)" type="image/webp" srcset="assets/article-hover-620.webp 2x" width="620" height="347">
-          <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-hover-372-dark.webp 2x" width="372" height="347">
-          <source type="image/webp" srcset="assets/article-hover-372.webp 2x" width="372" height="347">
-          <img data-shot="article-hover" src="assets/article-hover-372.png" srcset="assets/article-hover-372.png 2x" width="372" height="347" loading="lazy" decoding="async" alt="The bar chart on the test article with the mouse resting on it. A tooltip shows the label &quot;Truncated axis&quot;, the category &quot;Chart&quot;, and the reason &quot;Bars start above zero; differences look huge.&quot;">
-        </picture>
-        <!-- /shot -->
-        <figcaption>The tooltip on the bar chart.</figcaption>
-      </figure>
+    <h3>What else Subtext checks</h3>
+    <div class="measure">
+      <p>The checks also cover pressure and urgency, pop-ups about other buyers, tracking, and design that steers your choices, often called dark patterns. The panel also says when a page is labelled as paid for or republished from another publisher.</p>
     </div>
-    <figure class="shot shot--wide">
-      <!-- shot:article-panel -->
-      <picture>
-        <source media="(min-width: 1148px) and (prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-panel-1100-dark.webp 2x" width="1100" height="620">
-        <source media="(min-width: 1148px)" type="image/webp" srcset="assets/article-panel-1100.webp 2x" width="1100" height="620">
-        <source media="(prefers-color-scheme: dark)" type="image/webp" srcset="assets/article-panel-panel-dark.webp 2x" width="360" height="596">
-        <source type="image/webp" srcset="assets/article-panel-panel.webp 2x" width="360" height="596">
-        <img data-shot="article-panel" src="assets/article-panel-panel.png" srcset="assets/article-panel-panel.png 2x" width="360" height="596" loading="lazy" decoding="async" alt="The Subtext panel on a test article. The panel header reads &quot;4 things to know · 2 outside companies contacted&quot;. Three labels are listed: &quot;Truncated axis&quot;, &quot;Inverted axis&quot; and &quot;Ads as content&quot;.">
-      </picture>
-      <!-- /shot -->
-      <figcaption>The panel on a test article.</figcaption>
-    </figure>
   </div>
 </section>
 
-<!-- 4. Limits -->
+<!-- 5. Limits -->
 <section id="limits" aria-labelledby="h-limits">
   <div class="wrap">
     <h2 id="h-limits">What Subtext does not claim</h2>
@@ -207,10 +217,10 @@
       <li>Subtext names a technique and shows evidence. It does not claim to know a site's motive.</li>
       <li>A technique on a page is not proof of bad intent. Many ordinary sites use time limits, customer counts and emotional words.</li>
       <li>Subtext gives no score or grade of its own. For some outlets it repeats how outside raters place them.</li>
-      <li>Today 34 checks may show a label. Of the 86 checks that read a page's wording, one may. A check must first pass tests on real pages, unless it is a direct measurement or an outside listing.</li>
+      <li>Today 33 checks may show a label. Up to three more state plain facts about a shop page. Most checks that read a page's wording stay hidden until they pass tests on real pages.</li>
       <li>The checks are simple tests, and some labels are wrong. Each label from a check has a "Don't flag this again" control.</li>
     </ul>
-    <h3>What the panel shows when no check finds anything</h3>
+    <h3>When no check finds anything</h3>
     <p class="measure">On an ordinary test page, the panel reads "Nothing to flag". That means the checks found nothing. It does not mean the page uses no techniques.</p>
     <figure class="shot shot--wide">
       <!-- shot:clean-panel -->
@@ -222,12 +232,11 @@
         <img data-shot="clean-panel" src="assets/clean-panel-panel.png" srcset="assets/clean-panel-panel.png 2x" width="360" height="470" loading="lazy" decoding="async" alt="The Subtext panel on a test food page. The panel header reads &quot;Nothing to flag&quot;. The line below reads &quot;No ad slots or buy buttons found on this page.&quot;">
       </picture>
       <!-- /shot -->
-      <figcaption>The panel on an ordinary test page.</figcaption>
     </figure>
   </div>
 </section>
 
-<!-- 5. Privacy -->
+<!-- 6. Privacy -->
 <section id="privacy" aria-labelledby="h-privacy">
   <div class="wrap">
     <h2 id="h-privacy">Privacy: what leaves your browser, and when</h2>
@@ -235,19 +244,18 @@
     <p class="measure">Some requests do leave your browser. Each site or service that receives a request can see your IP address.</p>
     <div class="cards3">
       <div class="card">
-        <h3>On every page, unless you turn it off</h3>
+        <h3>On every page, unless you turn it off in Settings</h3>
         <ul>
           <li>A public file on the site, named ads.txt, that lists who sells its ad space.</li>
           <li>The site's own privacy and terms pages, when the page links them.</li>
           <li>On a shop page with no company name or phone: up to five of the site's contact and legal pages. Subtext may also read up to three public files that the site publishes for search engines.</li>
         </ul>
         <p>These requests carry no cookies and do not say which page you came from. The site you are visiting can see them, and it can pass them to another site.</p>
-        <p>You can turn off each request in Settings.</p>
       </div>
       <div class="card">
         <h3>Only when you click</h3>
         <ul>
-          <li>Compare: this button appears beside a link to a company filing, a study or a clinical trial. Subtext sends the document's public reference number to the archive that holds it. The archives are the SEC, Europe PMC and ClinicalTrials.gov.</li>
+          <li>Compare: this button appears beside a link to a company filing, a study or a clinical trial. Subtext sends the document's public reference number to the SEC, Europe PMC or ClinicalTrials.gov.</li>
           <li>Show context: Subtext asks public sources such as Wikipedia and Google News about the page's subject. It sends the site address (such as example.com), a name, or up to 14 headline words. It never sends the full page address or the article text.</li>
           <li>Show context also sends the subject's name to Google Trends with your Google cookies. Google can link that name to your Google account. This lookup is on until you turn it off in Settings.</li>
           <li>Investigate: Subtext sends page excerpts to the AI company you chose, with your key. It can also read up to two public records or the site's own disclosure pages. It can send search words from the page to the SEC, Europe PMC or the AI company's search service.</li>
@@ -256,130 +264,107 @@
       <div class="card">
         <h3>Only if you turn it on</h3>
         <ul>
-          <li>ToS;DR lookup: Subtext sends the site address to tosdr.org.</li>
+          <li>Terms-of-service rating lookup (ToS;DR): Subtext sends the site address to tosdr.org.</li>
           <li>Domain registration lookup: Subtext sends the site address to the registry that holds it. Sometimes it also goes to the registrar or to rdap.org.</li>
           <li>Load context automatically: the Show context requests run on each page, without Google Trends.</li>
         </ul>
       </div>
     </div>
-    <p class="measure after-cards-note">This list is a summary. It leaves out the other public sources that Show context uses, chart images in the one-pass analysis, the opt-in web check, and analysing saved pages.</p>
+    <p class="measure after-cards-note">This list is a summary. It leaves out other Show context sources and three optional AI features: chart pictures, a web check, and saved pages.</p>
     <div class="actions">
-      <span class="group"><a class="standalone" data-slot="REPO_URL" href="https://github.com/JoshCS/subtext#privacy">Read the full list, request by request</a></span>
+      <span class="group"><a class="standalone" data-slot="REPO_URL" href="https://github.com/JoshCS/subtext#privacy" rel="noopener">Read the full list, request by request</a></span>
     </div>
     <h3>Why the extension asks to read every site</h3>
-    <p class="measure">Subtext must read a page to label it. It reads the page inside your browser. Subtext makes no scan and no requests on a site that you exclude in Settings.</p>
+    <p class="measure">Subtext must read a page to label it. Subtext makes no scan and no requests on a site that you exclude in Settings.</p>
   </div>
 </section>
 
-<!-- 6. Investigate -->
+<!-- 7. Investigate -->
 <section id="investigate" aria-labelledby="h-investigate">
   <div class="wrap">
     <h2 id="h-investigate">Investigate: an optional AI answer that uses your own key</h2>
     <div class="measure">
       <p>Investigate is off until you add an API key in Settings. An API key is an access code that you get from Anthropic (Claude) or OpenAI (ChatGPT). That company bills you for each use.</p>
-      <p>It runs only when you click the Investigate button. With the default Claude model, one use costs about 11 cents, measured on 43 real pages. A web search that the AI company runs, when it happens, adds about 5 cents.</p>
+      <p>With the default Claude model, one use costs about 11 cents, measured on 43 real pages. With Claude, a web search can also run, and it adds about 5 cents.</p>
       <p>The AI company receives the page title, headings, button text, link addresses and excerpts of the main text. It also receives excerpts of the sources Subtext read and the facts Subtext found. If the page shows personal information, such as your name, the excerpts can include it.</p>
       <p>When the web search runs, the AI company also receives the page address, without anything after a question mark.</p>
-      <p>A separate AI request reviews the draft answer. The result is still an AI answer, not a verified fact.</p>
+      <p>The result is an AI answer, not a verified fact.</p>
     </div>
   </div>
 </section>
 
-<!-- 7. Status -->
+<!-- 8. Status -->
 <section id="status" aria-labelledby="h-status">
   <div class="wrap">
     <h2 id="h-status">Status: an early test version</h2>
-    <div class="cols2">
-      <div class="card card--plain">
-        <h3>What works today</h3>
-        <ul>
-          <li>Version 0.2 is built for Chrome, Edge, Brave and Arc. Chrome must be version 110 or newer.</li>
-          <li>Today 34 checks may show a label.</li>
-        </ul>
-      </div>
-      <div class="card card--plain">
-        <h3>What is not built or not tested</h3>
-        <ul>
-          <li>Subtext is not built or tested for Safari or Firefox.</li>
-          <li>The automated tests run in Chromium only. Edge, Brave and Arc have no test run of their own.</li>
-          <li>There is no browser store listing.</li>
-          <li>Only AI models have reviewed the results on real pages. No person has reviewed them yet.</li>
-          <li>The makers wrote the outlet list by hand. 25 of its 134 entries still need a second review.</li>
-          <li>ChatGPT support is not tested.</li>
-          <li>The test for equal treatment of left-leaning and right-leaning pages is not done.</li>
-        </ul>
-      </div>
+    <div class="card card--plain card--solo">
+      <h3>What is not built or not tested</h3>
+      <ul>
+        <li>Subtext is not built or tested for Safari or Firefox.</li>
+        <li>Edge, Brave and Arc have no test run of their own.</li>
+        <li>There is no browser store listing.</li>
+        <li>Only AI models have reviewed the results on real pages. No person has reviewed them yet.</li>
+        <li>The makers wrote the outlet list by hand. 25 of its 134 entries still need a second review.</li>
+        <li>Some data files are held back for a licence review, so a few panel lines do not appear.</li>
+        <li>To send a correction, <a href="https://github.com/JoshCS/subtext/issues" rel="noopener">open an issue</a> on the repository's issues page. Subtext has no e-mail address.</li>
+        <li>ChatGPT support is not tested.</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- 8. Get it -->
+<!-- 9. Get it -->
 <section id="get-it" aria-labelledby="h-get-it">
   <div class="wrap">
-    <h2 id="h-get-it">Install Subtext from a zip file in Chrome, Edge, Brave or Arc</h2>
+    <h2 id="h-get-it">Install Subtext from a zip file</h2>
     <ol class="measure">
-      <li>Download <a href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">the zip file</a> and unzip it. Developers can clone <a href="https://github.com/JoshCS/subtext">the code</a> instead.</li>
+      <li>Download <a href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip" rel="noopener">the zip file</a> and unzip it. Developers can clone <a href="https://github.com/JoshCS/subtext" rel="noopener">the code</a> instead.</li>
       <li>Type <code>chrome://extensions</code> in the address bar. In Edge, type <code>edge://extensions</code>, and in Brave, type <code>brave://extensions</code>.</li>
       <li>Turn on Developer mode. In Chrome the switch is at the top right.</li>
       <li>Click Load unpacked and choose the unzipped folder. In a clone, choose the folder named extension.</li>
-      <li>Pin the Subtext icon and visit any page. The icon shows a count of labels. Click the icon to open the panel.</li>
+      <li>Pin the Subtext icon and visit any page. Click the icon to open the panel.</li>
     </ol>
     <div class="actions">
-      <span class="group"><a class="btn" data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">Download v0.2 (zip)</a></span>
+      <span class="group"><a class="btn" data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip" rel="noopener">Download v0.2 (zip)</a></span>
     </div>
   </div>
 </section>
 
-<!-- 9. FAQ -->
+<!-- 10. FAQ -->
 <section id="faq" aria-labelledby="h-faq">
   <div class="wrap">
-    <h2 id="h-faq">Questions and answers about Subtext</h2>
+    <h2 id="h-faq">Questions and answers</h2>
     <div class="faq measure">
-      <h3>Can I turn Subtext off on some sites?</h3>
-      <p>Yes. Add the site to the excluded list in Settings. Subtext then makes no scan and no requests there.</p>
       <h3>Does Subtext work without an AI key?</h3>
-      <p>Yes. The labels, Compare and Show context need no key. Only Investigate needs a key.</p>
+      <p>Yes. Only Investigate needs a key.</p>
       <h3>Is it free?</h3>
-      <p>The extension is free and open source. The optional Investigate feature is billed to your own account with the AI company.</p>
-      <h3>Does it block anything?</h3>
-      <p>No. It adds a pill, a tooltip and a panel you open. Page content stays as it is.</p>
-      <h3>Does it say a site is dishonest?</h3>
-      <p>No. For a site on a public warning list, Subtext says who listed the site. Subtext adds no verdict of its own.</p>
+      <p>The extension is free and open source.</p>
       <h3>Is it politically one-sided?</h3>
-      <p>The checks look for techniques, not for political sides. We plan to test that the checks label left-leaning and right-leaning pages at similar rates. We have not done that test yet.</p>
-      <h3>Why does Subtext give no score of its own?</h3>
-      <p>One number hides which techniques a page uses. Subtext names each technique instead.</p>
+      <p>The checks look for techniques, not political sides. We have not yet tested that left-leaning and right-leaning pages get labels at similar rates.</p>
     </div>
   </div>
 </section>
 
-<!-- 10. Open source -->
+<!-- 11. Open source -->
 <section id="open-source" aria-labelledby="h-open-source">
   <div class="wrap">
-    <h2 id="h-open-source">Open source: licences, method and how to contribute</h2>
+    <h2 id="h-open-source">Open source: licences and method</h2>
     <div class="measure">
-      <p>Anyone can read, copy and change the code. The code licence is AGPL-3.0-or-later. The licence for the rules, documents and outlet list is CC BY-SA 4.0.</p>
-      <p>The bundled warning-list file carries its own licences, listed in <code>extension/data/NOTICE-lists.md</code>.</p>
-      <ul>
-        <li>Add a rule: add it to <code>extension/rules/text-rules.json</code> with a row in <code>docs/TAXONOMY.md</code> and a test example.</li>
-        <li>Add an outlet: append an entry to <code>extension/data/outlets.json</code>, with a public source link.</li>
-      </ul>
-      <p>The method and its limits are in <code>docs/RELIABILITY.md</code>, <code>docs/CALIBRATION.md</code> and <code>docs/THREAT-MODEL.md</code>.</p>
+      <p>Anyone can read, copy and change the code. Licences: AGPL-3.0-or-later for code, and CC BY-SA 4.0 for rules, documents and the outlet list.</p>
+      <p>Method and limits: <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/RELIABILITY.md" rel="noopener">docs/RELIABILITY.md</a></code>, <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/CALIBRATION.md" rel="noopener">docs/CALIBRATION.md</a></code> and <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/THREAT-MODEL.md" rel="noopener">docs/THREAT-MODEL.md</a></code>. Checks and data: <code><a href="https://github.com/JoshCS/subtext/blob/main/docs/TAXONOMY.md" rel="noopener">docs/TAXONOMY.md</a></code>, <code><a href="https://github.com/JoshCS/subtext/blob/main/extension/rules/text-rules.json" rel="noopener">extension/rules/text-rules.json</a></code> and <code><a href="https://github.com/JoshCS/subtext/blob/main/extension/data/outlets.json" rel="noopener">extension/data/outlets.json</a></code>.</p>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- 11. Footer -->
+<!-- 12. Footer -->
 <footer class="foot">
   <div class="wrap">
-    <p>Subtext v0.2 is an early test version. There is no Subtext server.</p>
-    <p>Code: AGPL-3.0-or-later. Rules, documents and outlet list: CC BY-SA 4.0.</p>
     <nav aria-label="Footer">
       <ul>
-        <li><a data-slot="REPO_URL" href="https://github.com/JoshCS/subtext">Source</a></li>
-        <li><a data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">Download</a></li>
+        <li><a data-slot="REPO_URL" href="https://github.com/JoshCS/subtext" rel="noopener">Source</a></li>
+        <li><a data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip" rel="noopener">Download</a></li>
         <li><a href="#privacy">Privacy</a></li>
       </ul>
     </nav>
