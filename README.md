@@ -1,7 +1,9 @@
 # Subtext
 
 **A browser extension that shows you the subtext of the page you're on: what it is doing to you, who is behind it, and what they get if you comply.**
-It flags dark patterns, manufactured urgency, social-proof theatre, rhetorical and logical tricks, emotional and tribal framing, cognitive-bias pricing, interpersonal-manipulation tactics (love bombing, negging, isolation, DARVO…), misleading charts, trackers and data brokers, the site's business model and incentives, red-flag clauses in its privacy policy and terms, undisclosed commercial relationships, and who owns and funds the outlet. Every flag is a short warning label, a one-line reason, and on click the full explanation of the psychology behind it and what to do.
+Its checks cover dark patterns, manufactured urgency, social-proof theatre, rhetorical and logical tricks, emotional and tribal framing, cognitive-bias pricing, interpersonal-manipulation tactics (love bombing, negging, isolation, DARVO…), misleading charts, trackers and data brokers, the site's business model and incentives, red-flag clauses in its privacy policy and terms, undisclosed commercial relationships, and who owns and funds the outlet. Every flag is a short warning label, a one-line reason, and on click the full explanation of the psychology behind it and what to do.
+
+Not every check shows a label yet. In this version the wording checks for rhetoric, emotional framing and interpersonal tactics are held back and show nothing, because word matching was wrong too often on real pages ([docs/RELIABILITY.md](docs/RELIABILITY.md)). The optional AI analysis reads the argument instead.
 
 Status: **proof of concept (v0.2)**. No person has labelled its results: every accuracy figure in the docs comes from AI judges or from checks in code, not from people. Treat what it reports as leads to check, not as findings. Built and tested on Chromium: load it in Chrome, Edge, Brave or Arc (Chrome 110 or newer). Safari and Firefox are not built or tested yet. Scanning runs locally, the site's own privacy and terms pages are fetched on load (see [Privacy](#privacy)), and an optional AI deep-analysis layer uses your own Claude (Anthropic) or ChatGPT (OpenAI) API key. The ChatGPT path has not been run with a real key; its model ids and prices are unverified.
 
@@ -44,7 +46,7 @@ The full file list is under [Project layout](#project-layout).
 
 ## How it talks to you
 
-Three tiers, so a page with sixty findings is still readable:
+Four tiers, so a page with sixty findings is still readable:
 
 | Tier | Where | What |
 |---|---|---|
@@ -86,7 +88,7 @@ To share with others without a store listing, `npm run package` produces `dist/s
 Neither is built or tested. Safari should be possible through Apple's `xcrun safari-web-extension-converter`, and Firefox would at least need a `background.scripts` fallback and its own test run. Until someone does that work, treat both as not supported.
 
 ## Using it
-- **Badge / pill**: the pill names the strongest flag, and the badge counts flags. Only rules that have proved reliable on real pages can flag ([docs/RELIABILITY.md](docs/RELIABILITY.md)). Click the pill to open the report panel on the page; drag its left edge or bottom to resize it (the size is remembered); hover a finding in it to see where on the page it sits, click a quote to scroll there.
+- **Badge / pill**: the pill names the strongest flag, and the badge counts flags. Only rules that proved reliable on recorded real pages can flag, as rated by AI judges or counted by checks in code ([docs/RELIABILITY.md](docs/RELIABILITY.md)). No person has checked those ratings. Click the pill to open the report panel on the page; drag its left edge or bottom to resize it (the size is remembered); hover a finding in it to see where on the page it sits, click a quote to scroll there.
 - **Hover**: rest the mouse on a flagged element for its label and one-line why; "Details" expands the explanation, "Open in panel" jumps to the full entry. Escape closes it. Turn hover tooltips off in Settings.
 - **What's going on** starts with what the browser can observe: for example, who owns the outlet, who gets paid on a sale, or how a subscription renews. A recorded policy for a particular section applies only when the article address establishes the section and date. On a Washington Post opinion piece after February 26, 2025, the panel can name Bezos's published policy; an ordinary news report gets ownership context only.
 - **Shop facts**: on a page that sells, the report states plain facts about the seller, for example "no social profile, no phone, no company name on this page", each with how often the same fact shows on shops from public warning lists and on honest shops. It never calls a shop dishonest. Only the rare combination (no real social profile, no phone and no company name) reaches the one-line summary, and not when a record names the site's owner. The truth of these facts is measured by `eval/fact-check.py` ([docs/CALIBRATION.md](docs/CALIBRATION.md) section 10).
