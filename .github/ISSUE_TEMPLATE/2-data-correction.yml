@@ -1,0 +1,45 @@
+name: Correction to outlet or owner data
+description: A row about an outlet or its owner is wrong, out of date or missing.
+title: "Data: "
+labels: ["data-correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every correction needs a public source link. A correction without one cannot be applied.
+        If the error is about a private person, do not use this form. Report it in private, as SECURITY.md describes.
+  - type: input
+    id: record
+    attributes:
+      label: Outlet, owner or domain
+      placeholder: example-news.com
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What Subtext says now
+      description: Quote the statement in the panel or the row in the data file.
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: What it should say
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Public source link
+      description: A link anyone can open that supports the correction, such as a company filing, a registry page or the outlet's own ownership page.
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date of the change, if known
+      description: For example the date a sale was completed.
+    validations:
+      required: false

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: What Subtext is and how to try it
+    url: https://joshcs.github.io/subtext/
+    about: The project page, with examples and install steps.

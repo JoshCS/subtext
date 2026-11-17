@@ -1,0 +1,50 @@
+name: Wrong or misleading label on a page
+description: Subtext showed a label that is wrong or misleading on a page, or missed something plain.
+title: "Label: "
+labels: ["wrong-label"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Reports from real pages are the most useful help.
+        "Not accurate" in the panel stays on your device, so this form is how a report reaches the project.
+        Do not include personal data. Remove personal tokens from the page address.
+  - type: input
+    id: url
+    attributes:
+      label: Page address
+      description: A public address that anyone can open.
+      placeholder: https://www.example.com/page
+    validations:
+      required: true
+  - type: input
+    id: label
+    attributes:
+      label: The label
+      description: The label as the panel shows it, for example "Countdown timer". Leave empty if Subtext missed something.
+    validations:
+      required: false
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong
+      options:
+        - The label is wrong for this page
+        - The label is right but its wording misleads
+        - Subtext missed something on this page
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What the page shows
+      description: Quote the text or describe the element. Say why the label is wrong or misleading here.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Subtext version and browser
+      placeholder: 0.2.0, Chrome 142
+    validations:
+      required: true
