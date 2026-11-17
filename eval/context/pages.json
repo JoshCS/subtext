@@ -1,0 +1,362 @@
+[
+  {
+    "id": "cpi-october-cnbc",
+    "url": "https://www.cnbc.com/2026/11/10/cpi-inflation-report-october-2026.html",
+    "kind": "News article naming an official statistic (US inflation)",
+    "site": "CNBC (NBCUniversal / Comcast)",
+    "subject": "The US Consumer Price Index for October 2026, which the Bureau of Labor Statistics reported as a 0.4% monthly rise, and what it means for Federal Reserve interest-rate decisions.",
+    "useful": "The consumer price index history itself (all items and core, monthly and 12-month change, from BLS series CUUR0000SA0 and CUUR0000SA0L1E), so a reader can see the October figure against the prior months. Possibly the federal funds rate history alongside, since the article ties the number to the Fed.",
+    "not_useful": "Wikipedia page views for the word 'inflation'; Google search interest in 'Fed'; anything about the outlet's parent company Comcast.",
+    "identifiers": "Headline 'Consumer prices rose 0.4% in October'; Bureau of Labor Statistics; US Consumer Price Index; Federal Reserve; country: United States."
+  },
+  {
+    "id": "jobs-september-cnn",
+    "url": "https://www.cnn.com/2026/10/02/economy/us-jobs-report-september-final",
+    "kind": "News article naming an official statistic (US unemployment and jobs)",
+    "site": "CNN (Warner Bros. Discovery)",
+    "subject": "The US September 2026 jobs report from the Bureau of Labor Statistics: 29,000 jobs added and the unemployment rate rising to 4.2%.",
+    "useful": "The BLS unemployment rate series (LNS14000000) and monthly nonfarm payroll change (CES0000000001) over the past two to five years, so a reader can see where 4.2% and +29,000 sit against recent months.",
+    "not_useful": "Attention to the word 'jobs' on Wikipedia; stock price of CNN's parent company; unemployment for another country.",
+    "identifiers": "Headline 'The US economy added just 29,000 jobs last month and the unemployment rate ticked up to 4.2%'; Bureau of Labor Statistics; country: United States."
+  },
+  {
+    "id": "mortgage-rates-consumeraffairs",
+    "url": "https://www.consumeraffairs.com/news/mortgage-rates-fall-for-a-fourth-straight-week-to-711-111326.html",
+    "kind": "News article naming an official statistic (US mortgage rates)",
+    "site": "ConsumerAffairs (consumer news and reviews site)",
+    "subject": "Freddie Mac's weekly survey showing the 30-year fixed US mortgage rate falling for a fourth straight week to 7.11% (week of November 12, 2026).",
+    "useful": "The Freddie Mac Primary Mortgage Market Survey history for the 30-year fixed rate (FRED series MORTGAGE30US), ideally with the 15-year rate, so the 7.11% reading can be placed against the last year or longer.",
+    "not_useful": "Wikipedia traffic for 'mortgage'; housing-bubble search interest; any chart about the website ConsumerAffairs itself.",
+    "identifiers": "Headline 'Mortgage rates fall for a fourth straight week to 7.11%'; Freddie Mac; 30-year fixed-rate mortgage; country: United States."
+  },
+  {
+    "id": "boeing-layoffs-cnbc",
+    "url": "https://www.cnbc.com/2026/11/09/boeing-layoffs-commercial-airplane.html",
+    "kind": "News article about a named public company (layoffs)",
+    "site": "CNBC (NBCUniversal / Comcast)",
+    "subject": "Boeing plans to cut about 5% of its commercial airplane workforce through attrition and layoffs, with notifications starting in December.",
+    "useful": "Company records for Boeing (NYSE: BA, SEC CIK 0000012927): employee count and revenue from its 10-K and 10-Q filings, and recent 8-K filings, so a reader can see the size of the workforce and the trend the cut sits in.",
+    "not_useful": "Wikipedia page views for 'Boeing'; Google search interest in 'layoffs' generally; attention to the city of Seattle.",
+    "identifiers": "The Boeing Company; ticker BA (NYSE); Commercial Airplanes division; country: United States."
+  },
+  {
+    "id": "marvell-lumentum-ibtimes",
+    "url": "https://www.ibtimes.com/marvell-acquire-lumentum-ai-optical-connectivity-3809283",
+    "kind": "News article about a named public company (acquisition)",
+    "site": "International Business Times",
+    "subject": "Marvell Technology announced an all-stock acquisition of optical components maker Lumentum Holdings with an implied enterprise value of about $115 billion, aimed at AI data-center connectivity.",
+    "useful": "SEC filings for both companies (the merger 8-K and 425 filings, recent 10-K figures), so a reader can see the filed deal terms and each company's size. Stock price history for MRVL and LITE around the announcement date would also be relevant.",
+    "not_useful": "Wikipedia traffic for 'optical fiber'; attention to AI in general; anything about the publisher International Business Times.",
+    "identifiers": "Marvell Technology, Inc. (NASDAQ: MRVL); Lumentum Holdings Inc. (NASDAQ: LITE); announced November 2, 2026; country: United States."
+  },
+  {
+    "id": "pepsico-jobs-cnbc",
+    "url": "https://www.cnbc.com/2026/11/09/pepsico-north-america-job-cuts.html",
+    "kind": "News article about a named public company (layoffs)",
+    "site": "CNBC (NBCUniversal / Comcast)",
+    "subject": "PepsiCo is cutting about 1,000 jobs in North America as part of a restructuring after weak regional sales.",
+    "useful": "PepsiCo filings (NASDAQ: PEP, SEC CIK 0000077476): employee count and North America segment revenue from the 10-K and 10-Q, so a reader can see the cut against company size and recent sales trend.",
+    "not_useful": "Wikipedia page views for 'Pepsi'; search interest for soda or snacks; weather in the city where headquarters sit.",
+    "identifiers": "PepsiCo, Inc.; ticker PEP (NASDAQ); PepsiCo North America; country: United States."
+  },
+  {
+    "id": "popup-superpacs-cnbc",
+    "url": "https://www.cnbc.com/2026/10/31/2026-midterm-election-super-pacs-donor-disclosure.html",
+    "kind": "News article about political donations / super PACs",
+    "site": "CNBC (NBCUniversal / Comcast)",
+    "subject": "An analysis of FEC filings showing late-formed 'pop-up' super PACs spent record sums in the 2026 midterms before their donors were disclosed.",
+    "useful": "Federal Election Commission records: independent expenditures and receipts for the named super PACs (for example Our Heritage Matters) and the FEC filing deadlines, so a reader can check the totals and see which donors are on file.",
+    "not_useful": "Search interest in 'midterm elections'; Wikipedia traffic for the word 'super PAC'; stock data for CNBC's parent company.",
+    "identifiers": "Headline '2026 midterms: Pop-up super PACs spend record sums'; Federal Election Commission; named PACs such as Our Heritage Matters; country: United States."
+  },
+  {
+    "id": "ai-superpacs-bellingcat",
+    "url": "https://www.bellingcat.com/news/2026/11/02/ai-super-pacs-political-advertising/",
+    "kind": "News article about political donations / super PACs",
+    "site": "Bellingcat (investigative journalism nonprofit)",
+    "subject": "An investigation into campaign advertising funded by super PACs backed by AI-industry money in the 2026 US midterms.",
+    "useful": "FEC filings for the named AI-linked super PACs: receipts, top donors and independent expenditures by candidate, so a reader can check who funded the ads.",
+    "not_useful": "Google Trends for 'artificial intelligence'; Wikipedia views for 'political advertising'; any data on the Bellingcat organization itself.",
+    "identifiers": "Headline 'Inside the Secretive World of Campaign Ads Funded by AI Super PACs'; Federal Election Commission; super PACs named in the article; country: United States."
+  },
+  {
+    "id": "corporate-superpac-money-nationofchange",
+    "url": "https://www.nationofchange.org/2026/11/05/corporations-gave-737-million-to-super-pacs-in-2026-midterms/",
+    "kind": "News article about political donations / super PACs",
+    "site": "Nation of Change (progressive news site)",
+    "subject": "A report, drawn from Public Citizen's tally of FEC data, that corporations gave about $737 million to super PACs in the 2026 midterm cycle.",
+    "useful": "FEC receipts for super PACs by donor type across election cycles (2018 to 2026), so a reader can compare the 2026 corporate total with earlier cycles using the filed records.",
+    "not_useful": "Wikipedia traffic for 'Citizens United'; search interest in 'campaign finance'; attention to any single corporation named only in passing.",
+    "identifiers": "Headline 'Corporations gave $737 million to super PACs in 2026 midterms'; Public Citizen; Federal Election Commission; country: United States."
+  },
+  {
+    "id": "huang-resigns-aljazeera",
+    "url": "https://www.aljazeera.com/news/2026/11/12/why-did-nvidia-ceo-jensen-huang-resign-and-who-is-colette-kress",
+    "kind": "News article about a person (executive)",
+    "site": "Al Jazeera Media Network",
+    "subject": "Why Nvidia chief executive Jensen Huang resigned on November 12, 2026, and who Colette Kress, the chief financial officer named interim CEO, is.",
+    "useful": "Nvidia's SEC filings (NASDAQ: NVDA, 8-K on the leadership change) and the NVDA share price around November 12, 2026, so a reader can see the filed facts and the market reaction the article describes.",
+    "not_useful": "Wikipedia page views for 'Jensen Huang' as a proxy for importance; search interest in 'AI chips'; anything about Al Jazeera.",
+    "identifiers": "Jensen Huang; Colette Kress; Nvidia Corporation, ticker NVDA (NASDAQ); date 2026-11-12."
+  },
+  {
+    "id": "robertson-profile-nhl",
+    "url": "https://www.nhl.com/stars/news/2026-27-player-profile-jason-robertson-080426",
+    "kind": "News/feature about a person (athlete)",
+    "site": "NHL.com, Dallas Stars team pages (National Hockey League)",
+    "subject": "A 2026-27 season profile of Dallas Stars forward Jason Robertson after his one-year, $12 million contract and a 96-point season.",
+    "useful": "Official NHL player statistics for Jason Robertson by season (games, goals, assists, points), so a reader can see his scoring history against the 96-point figure cited.",
+    "not_useful": "Wikipedia traffic for 'Dallas Stars'; attention to the city of Dallas; search interest in 'ice hockey'.",
+    "identifiers": "Jason Robertson; Dallas Stars; National Hockey League; 2026-27 season; country: United States."
+  },
+  {
+    "id": "peltola-senate-alaskapublic",
+    "url": "https://alaskapublic.org/news/politics/elections/2026-11-13/peltola-leads-in-u-s-senate-race-nearing-50-mark-with-almost-all-ballots-counted",
+    "kind": "News article about a person (politician)",
+    "site": "Alaska Public Media (public broadcaster)",
+    "subject": "Democrat Mary Peltola leading incumbent Republican Sen. Dan Sullivan in the 2026 Alaska US Senate race, nearing 50% with nearly all ballots counted.",
+    "useful": "Alaska Division of Elections results for the race (vote counts by candidate and ballots counted), and FEC fundraising totals for the Peltola and Sullivan campaigns, so a reader can check the count and the money.",
+    "not_useful": "Wikipedia page views for 'Mary Peltola'; Google search interest in 'Alaska'; weather or population data for Alaska.",
+    "identifiers": "Mary Peltola; Dan Sullivan; US Senate race, Alaska; election of November 2026; country: United States."
+  },
+  {
+    "id": "splc-indictment-npr",
+    "url": "https://www.npr.org/2026/04/22/nx-s1-5794620/doj-indicts-southern-poverty-law-center-on-federal-fraud-charges",
+    "kind": "News article about a nonprofit or advocacy group (not on its own site)",
+    "site": "NPR (National Public Radio)",
+    "subject": "The Justice Department indicting the Southern Poverty Law Center on federal fraud charges in April 2026.",
+    "useful": "The SPLC's IRS Form 990 filings (ProPublica Nonprofit Explorer, EIN for the Southern Poverty Law Center): revenue, assets and expenses by year, so a reader can see the organization's finances the case concerns.",
+    "not_useful": "Wikipedia page views for 'SPLC'; Google search interest in 'hate groups'; attention to Montgomery, Alabama.",
+    "identifiers": "Southern Poverty Law Center; US Department of Justice; indictment of April 2026; country: United States."
+  },
+  {
+    "id": "wwp-soldier-ride-fox5vegas",
+    "url": "https://fox5vegas.com/2026/11/09/wounded-warrior-project-nfl-team-up-soldier-ride-las-vegas-phoenix/",
+    "kind": "News article about a nonprofit (local TV coverage)",
+    "site": "FOX5 Las Vegas (local TV station)",
+    "subject": "Wounded Warrior Project and the NFL running a multi-day adaptive cycling Soldier Ride from Allegiant Stadium in Las Vegas toward Phoenix, in November 2026.",
+    "useful": "Wounded Warrior Project's IRS Form 990 filings (revenue, program spending, assets by year) from ProPublica Nonprofit Explorer, so a reader can see the size and finances of the organization behind the event.",
+    "not_useful": "Weather or tourism data for Las Vegas; NFL television ratings; Wikipedia traffic for 'veterans'.",
+    "identifiers": "Wounded Warrior Project (nonprofit for post-9/11 veterans); NFL Salute to Service; Soldier Ride; Allegiant Stadium, Las Vegas; country: United States."
+  },
+  {
+    "id": "red-kettle-milwaukee-wisn",
+    "url": "https://www.wisn.com/article/salvation-army-2026-red-kettle-campaign-milwaukee/74423104",
+    "kind": "News article about a nonprofit (local TV coverage)",
+    "site": "WISN 12 (Milwaukee local TV station)",
+    "subject": "The Salvation Army of Milwaukee County launching its 2026 Red Kettle Campaign with a $3.3 million fundraising goal.",
+    "useful": "IRS Form 990 filings for The Salvation Army (national and the relevant regional entity) from ProPublica Nonprofit Explorer, giving revenue and program spending by year to put the $3.3 million local goal in scale.",
+    "not_useful": "Milwaukee weather or unemployment data; Wikipedia traffic for 'Christmas'; search interest for 'bell ringers'.",
+    "identifiers": "The Salvation Army of Milwaukee County; Red Kettle Campaign 2026; Milwaukee, Wisconsin; country: United States."
+  },
+  {
+    "id": "redcross-about",
+    "url": "https://www.redcross.org/about-us.html",
+    "kind": "US nonprofit's own page, large (about)",
+    "site": "American Red Cross",
+    "subject": "The About Us page of the American Red Cross, describing its mission and work in disaster relief, blood donation and other services.",
+    "useful": "The organization's IRS Form 990 filings (ProPublica Nonprofit Explorer): total revenue, program expenses and executive compensation by year, and a charity-evaluator record if available.",
+    "not_useful": "Wikipedia traffic for 'Red Cross'; search interest in 'blood donation'; news-attention counts for disasters in general.",
+    "identifiers": "American Red Cross; redcross.org; US charity chartered by Congress; country: United States."
+  },
+  {
+    "id": "chester-food-bank-home",
+    "url": "https://chestercountyfoodbank.org/",
+    "kind": "US nonprofit's own page, mid-sized (home)",
+    "site": "Chester County Food Bank (Pennsylvania)",
+    "subject": "The home page of the Chester County Food Bank, which says it mobilizes the community to ensure access to real, healthy food in Chester County, Pennsylvania.",
+    "useful": "The food bank's IRS Form 990 filings (ProPublica Nonprofit Explorer): revenue, expenses and program spending by year, plus county food-insecurity figures from Feeding America 'Map the Meal Gap' for Chester County.",
+    "not_useful": "Google search interest for 'food bank'; Wikipedia traffic for 'Pennsylvania'; national SNAP news attention.",
+    "identifiers": "Chester County Food Bank; Chester County, Pennsylvania; country: United States."
+  },
+  {
+    "id": "dogwood-rescue-home",
+    "url": "https://dogwoodanimalrescue.org/",
+    "kind": "US nonprofit's own page, small or local (home)",
+    "site": "Dogwood Animal Rescue Project (volunteer-driven nonprofit, Northern California)",
+    "subject": "The home page of Dogwood Animal Rescue Project, a volunteer-driven nonprofit that rescues dogs and cats in Northern California and finds them homes.",
+    "useful": "Its IRS Form 990 or 990-EZ filings, if any exist (ProPublica Nonprofit Explorer), showing revenue and expenses; otherwise nothing defensible, as the group is very small.",
+    "not_useful": "Wikipedia traffic for 'animal shelter'; search interest in 'adopt a dog'; national pet-ownership statistics.",
+    "identifiers": "Dogwood Animal Rescue Project; Northern California; country: United States."
+  },
+  {
+    "id": "crocs-classic-clog",
+    "url": "https://www.crocs.com/p/classic-clog/10001.html",
+    "kind": "Product page on a public company's own shop (footwear)",
+    "site": "Crocs, Inc. (crocs.com)",
+    "subject": "The Classic Clog, a molded foam clog sold by Crocs, Inc. on its own online store.",
+    "useful": "Crocs, Inc. company records (NASDAQ: CROX): revenue and net income by quarter from SEC filings, and share price history, which describe the maker's business. Nothing is defensible about this single shoe's price or sales, since no public record exists for it.",
+    "not_useful": "Wikipedia page views for 'clog'; fashion search interest in 'Crocs' as a proxy for sales; attention to the shoe's color options.",
+    "identifiers": "Crocs, Inc.; ticker CROX (NASDAQ); product 'Classic Clog' (style 10001); country: United States."
+  },
+  {
+    "id": "sonos-era-100",
+    "url": "https://www.sonos.com/en-us/shop/era-100",
+    "kind": "Product page on a public company's own shop (gadget)",
+    "site": "Sonos, Inc. (sonos.com)",
+    "subject": "The Era 100, a stereo bookshelf speaker sold by Sonos, Inc. on its own online store.",
+    "useful": "Sonos, Inc. company records (NASDAQ: SONO): revenue by quarter and annual results from SEC filings and share price history, which describe the maker. Nothing is defensible about this single speaker's sales.",
+    "not_useful": "Wikipedia traffic for 'smart speaker'; Google Trends for 'wireless speaker'; anything about the speaker's color options.",
+    "identifiers": "Sonos, Inc.; ticker SONO (NASDAQ); product 'Era 100'; country: United States."
+  },
+  {
+    "id": "dell-14-laptop",
+    "url": "https://www.dell.com/en-us/shop/dell-laptops/dell-14-laptop/spd/dell-dc14250-laptop",
+    "kind": "Product page on a public company's own shop (laptop)",
+    "site": "Dell Technologies Inc. (dell.com US store)",
+    "subject": "The Dell 14 laptop with Intel Core processors, sold on Dell's own US store.",
+    "useful": "Dell Technologies company records (NYSE: DELL): revenue and PC-segment (Client Solutions Group) results from SEC filings. Nothing is defensible about this single model's price history from public records.",
+    "not_useful": "Wikipedia traffic for 'laptop'; search interest in 'Intel Core'; PC market share charts for other brands.",
+    "identifiers": "Dell Technologies Inc.; ticker DELL (NYSE); product 'Dell 14 Laptop' (DC14250); country: United States."
+  },
+  {
+    "id": "heather-benjamin-patch-set",
+    "url": "https://heatherbenjamin.bigcartel.com/product/patch-set",
+    "kind": "Product page on a small independent shop (Big Cartel)",
+    "site": "Heather Benjamin (independent artist, Big Cartel shop)",
+    "subject": "A set of six 6x6 inch screenprinted canvas patches made in 2026 by the artist Heather Benjamin.",
+    "useful": "Nothing defensible: it is a one-person artist shop and no public record would help a reader decide on this product.",
+    "not_useful": "Wikipedia traffic for 'patch' or 'screen printing'; Google Trends for 'art prints'; any chart about the Big Cartel platform.",
+    "identifiers": "Heather Benjamin (artist; New York City per Big Cartel's profile); product 'Patch Set'; no company or ticker."
+  },
+  {
+    "id": "bachman-double-wick-candle",
+    "url": "https://bachmancandleco.bigcartel.com/product/signature-double-wick-candle",
+    "kind": "Product page on a small independent shop (Big Cartel)",
+    "site": "Bachman Candle Co. (family micro business, Wexford, Pennsylvania)",
+    "subject": "The Signature Double Wick Candle, a 10 oz hand-poured coconut soy wax candle in a tin, sold by Bachman Candle Co.",
+    "useful": "Nothing defensible: a micro business candle has no public data that would inform a buyer. Product safety or recall records could matter only if a recall existed, which the page does not suggest.",
+    "not_useful": "Wikipedia traffic for 'candle'; search interest in 'soy wax'; weather data for Pennsylvania.",
+    "identifiers": "Bachman Candle Co.; Wexford, Pennsylvania; product 'Signature Double Wick Candles - 10 Oz.'; no ticker."
+  },
+  {
+    "id": "two-chimps-gift-box",
+    "url": "https://twochimpscoffee.com/shop/christmas-coffee-and-cake-gift-box/",
+    "kind": "Product page on a small independent shop (WooCommerce)",
+    "site": "Two Chimps Coffee (independent UK coffee roastery)",
+    "subject": "The Christmas Coffee and Cake Gift Box, a gift set of coffee and cake sold by Two Chimps Coffee.",
+    "useful": "Nothing defensible about the product. If anything, Companies House filings for the roastery's legal entity (UK) could show it is a real small company, but they would not help someone choosing a gift.",
+    "not_useful": "Coffee commodity prices (the C price); Wikipedia traffic for 'coffee'; Google Trends for 'Christmas gifts'.",
+    "identifiers": "Two Chimps Coffee; United Kingdom; product 'Christmas Coffee and Cake Gift Box'; no ticker."
+  },
+  {
+    "id": "butter-chicken-recipetineats",
+    "url": "https://www.recipetineats.com/butter-chicken/",
+    "kind": "Recipe page",
+    "site": "RecipeTin Eats (food blog)",
+    "subject": "A butter chicken recipe from the food blog RecipeTin Eats.",
+    "useful": "Nothing defensible: no public record answers a question a cook has about a recipe. The page already gives ingredients and method.",
+    "not_useful": "Wikipedia traffic for an ingredient such as 'ghee' or 'cream'; search interest in 'butter chicken' by country; commodity prices for chicken.",
+    "identifiers": "Butter Chicken recipe; RecipeTin Eats; no organization subject."
+  },
+  {
+    "id": "sandwich-bread-kingarthur",
+    "url": "https://www.kingarthurbaking.com/recipes/classic-sandwich-bread-recipe",
+    "kind": "Recipe page",
+    "site": "King Arthur Baking Company (employee-owned flour company; recipe site)",
+    "subject": "A classic American sandwich bread recipe on the King Arthur Baking website.",
+    "useful": "Nothing defensible: a bread recipe has no public-record question. Wheat price or flour-recall records would not help someone baking bread.",
+    "not_useful": "Wikipedia traffic for 'yeast' or 'flour'; wheat futures prices; attention to the company's home state of Vermont.",
+    "identifiers": "Classic Sandwich Bread recipe; King Arthur Baking Company; no ticker (private company)."
+  },
+  {
+    "id": "tomato-soup-loveandlemons",
+    "url": "https://www.loveandlemons.com/tomato-soup-recipe/",
+    "kind": "Recipe page",
+    "site": "Love and Lemons (food blog)",
+    "subject": "A creamy homemade tomato soup recipe from the food blog Love and Lemons.",
+    "useful": "Nothing defensible: there is no public data that answers a question about making this soup.",
+    "not_useful": "Wikipedia traffic for 'tomato'; search interest in 'grilled cheese'; tomato commodity prices.",
+    "identifiers": "Tomato Soup Recipe; Love and Lemons; no organization subject."
+  },
+  {
+    "id": "best-laptops-cnet",
+    "url": "https://www.cnet.com/tech/computing/best-laptop/",
+    "kind": "Buying guide or product review",
+    "site": "CNET (Ziff Davis)",
+    "subject": "CNET's list of the best laptops of 2026, with picks tested by the site's reviewers across sizes and uses.",
+    "useful": "Little that a public record covers. At most, recall or safety notices from the US Consumer Product Safety Commission for the named laptop brands, or filings for the makers of the top picks. Nothing defensible for ranking the laptops.",
+    "not_useful": "Wikipedia traffic for 'laptop'; stock charts for every brand named in the list; Google Trends for 'best laptop'.",
+    "identifiers": "Headline 'Best Laptops of 2026: Top Picks Tested by CNET'; CNET; Ziff Davis; named laptop models and brands inside the page."
+  },
+  {
+    "id": "best-standing-desks-wirecutter",
+    "url": "https://www.nytimes.com/wirecutter/reviews/best-standing-desks/",
+    "kind": "Buying guide or product review",
+    "site": "Wirecutter (The New York Times Company)",
+    "subject": "Wirecutter's guide to the three best standing desks in 2026 and how it tested them.",
+    "useful": "Nothing defensible from public data about which desk to buy. At most, CPSC recall notices for a named desk model or brand.",
+    "not_useful": "Wikipedia traffic for 'standing desk'; search interest in 'ergonomics'; The New York Times Company stock.",
+    "identifiers": "Headline 'The 3 Best Standing Desks in 2026'; Wirecutter; The New York Times Company; named desk models inside the page."
+  },
+  {
+    "id": "best-tvs-rtings",
+    "url": "https://www.rtings.com/tv/reviews/best/tvs",
+    "kind": "Buying guide or product review",
+    "site": "RTINGS.com (independent product-testing site)",
+    "subject": "RTINGS's ranking of the six best TVs of 2026 based on its lab testing.",
+    "useful": "Nothing defensible from public data about which TV is better. At most, CPSC recall notices for a named TV model.",
+    "not_useful": "Wikipedia traffic for 'television'; stock charts for TV makers; Google Trends for 'OLED'.",
+    "identifiers": "Headline 'The 6 Best TVs of 2026'; RTINGS.com; named TV models inside the page."
+  },
+  {
+    "id": "slack-pricing",
+    "url": "https://slack.com/pricing",
+    "kind": "Software pricing or plans page",
+    "site": "Slack Technologies (a Salesforce company)",
+    "subject": "The pricing and plans page for Slack, listing its paid workplace messaging plans for businesses.",
+    "useful": "Little defensible for a buyer from public records. The parent company's filings (Salesforce, NYSE: CRM) show business scale but do not help choose a plan.",
+    "not_useful": "Wikipedia traffic for 'Slack'; Google Trends for 'team chat'; Salesforce stock as a signal of plan value.",
+    "identifiers": "Slack; Slack Technologies, LLC; Salesforce, Inc. (NYSE: CRM); plans such as Pro, Business+ and Enterprise Grid."
+  },
+  {
+    "id": "asana-pricing",
+    "url": "https://asana.com/pricing",
+    "kind": "Software pricing or plans page",
+    "site": "Asana, Inc. (public company)",
+    "subject": "The pricing page for Asana's work management software plans (Personal, Starter, Advanced, Enterprise).",
+    "useful": "Asana, Inc. filings (NYSE: ASAN): revenue, customer counts and net losses by quarter from SEC filings, relevant to a buyer weighing the vendor's size and stability. Nothing defensible about plan value.",
+    "not_useful": "Wikipedia traffic for 'project management'; Google Trends for 'Asana' (also a yoga term); stock price as a signal of product quality.",
+    "identifiers": "Asana, Inc.; ticker ASAN (NYSE); plans Personal, Starter, Advanced, Enterprise; country: United States."
+  },
+  {
+    "id": "figma-pricing",
+    "url": "https://www.figma.com/pricing/",
+    "kind": "Software pricing or plans page",
+    "site": "Figma, Inc.",
+    "subject": "The plans and pricing page for Figma's design software, where buyers pick a plan and seats.",
+    "useful": "Figma, Inc. SEC filings (ticker FIG): revenue and customer figures since its public listing, showing the vendor's size. Nothing defensible about which plan to choose.",
+    "not_useful": "Wikipedia traffic for 'user interface design'; Google Trends for 'Figma'; stock price as a signal of plan value.",
+    "identifiers": "Figma, Inc.; ticker FIG; plans and seats; country: United States."
+  },
+  {
+    "id": "oakcrest-san-marcos-coastnews",
+    "url": "https://thecoastnews.com/san-marcos-approves-257-home-oakcrest-development/",
+    "kind": "Local-news / small-site article",
+    "site": "The Coast News Group (local newspaper, North San Diego County)",
+    "subject": "The San Marcos, California city council voting on November 10 to approve Oakcrest, a 257-home development by Meritage Homes of California on Twin Oaks Valley Road.",
+    "useful": "Meritage Homes Corporation filings (NYSE: MTH) showing company size, and Census or building-permit counts for San Marcos housing units, so a reader can see how 257 homes compares with local housing growth.",
+    "not_useful": "Attention to the word 'San Marcos' (several cities share the name, including San Marcos, Texas); Wikipedia traffic for 'San Diego County'; attention to the name of the newspaper's region.",
+    "identifiers": "City of San Marcos, California; Oakcrest development; Meritage Homes of California; Twin Oaks Valley Road; vote of November 10, 2026."
+  },
+  {
+    "id": "homelab-2026-danb",
+    "url": "https://danb.me/blog/2026-homelab/",
+    "kind": "Personal blog post",
+    "site": "Danb Blog (personal site of an individual)",
+    "subject": "The author's description of the home server hardware and software setup he runs in 2026.",
+    "useful": "Nothing defensible: it is one person's hobby setup and no public record would inform a reader.",
+    "not_useful": "Wikipedia traffic for 'Proxmox' or 'Linux'; Google Trends for 'homelab'; stock prices for hardware makers mentioned in passing.",
+    "identifiers": "Post titled 'My HomeLab Setup in 2026'; author Dan B.; no organization subject."
+  },
+  {
+    "id": "yellowstone-plan-your-visit-nps",
+    "url": "https://www.nps.gov/yell/planyourvisit/index.htm",
+    "kind": "Government page",
+    "site": "National Park Service, US Department of the Interior",
+    "subject": "The Plan Your Visit page for Yellowstone National Park, with trip-planning information for visitors.",
+    "useful": "National Park Service visitation statistics for Yellowstone National Park (monthly recreation visits, from the NPS Stats site), so a reader can judge how busy different months are. Possibly the park's entrance and road status, which the page already carries.",
+    "not_useful": "Wikipedia traffic for 'Yellowstone' (also a TV series); search interest in the television show; weather data for the whole state of Wyoming.",
+    "identifiers": "Yellowstone National Park (Wyoming, Montana, Idaho); National Park Service unit code YELL; country: United States."
+  }
+]

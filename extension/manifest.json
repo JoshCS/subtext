@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "Subtext",
+  "short_name": "Subtext",
+  "version": "0.2.0",
+  "minimum_chrome_version": "110",
+  "description": "Flags the persuasion, dark-pattern, rhetorical, emotional, data-visualization and ownership tricks a web page is using on you, and explains the psychology behind each one.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Subtext",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "common.js",
+        "claim-context.js",
+        "public-records.js",
+        "inquiry-sources.js",
+        "investigate.js",
+        "ui/view.js",
+        "content/shared.js",
+        "content/detectors/text.js",
+        "content/detectors/dom.js",
+        "content/detectors/behavior.js",
+        "content/detectors/charts.js",
+        "content/detectors/trackers.js",
+        "content/detectors/transparency.js",
+        "content/detectors/incentives.js",
+        "content/detectors/transaction.js",
+        "content/detectors/sellerpages.js",
+        "content/detectors/provenance.js",
+        "content/detectors/shoptraits.js",
+        "content/detectors/scampatterns.js",
+        "content/ui.js",
+        "content/engine.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Open or close the Subtext panel"
+    }
+  }
+}

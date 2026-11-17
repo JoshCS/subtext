@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Subtext</title>
+<link rel="stylesheet" href="popup.css">
+<script src="../common.js"></script>
+<script src="../ui/view.js"></script>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr__text">
+    <div class="hdr__site" id="site">…</div>
+    <div class="hdr__label" id="label">Scanning…</div>
+    <div class="hdr__meta" id="meta"></div>
+  </div>
+  <button class="icon-btn" id="settingsBtn" type="button" title="Settings" aria-label="Settings"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 5h5m4 0h2m-11 6h2m4 0h5"/><circle cx="9.5" cy="5" r="1.75"/><circle cx="6.5" cy="11" r="1.75"/></svg></button>
+</header>
+<nav class="toolbar" id="toolbar">
+  <button id="panelBtn" class="tb" title="Open the Subtext report panel on the page">Open panel on page</button>
+  <button id="rescanBtn" class="tb" title="Scan the page again">Rescan</button>
+  <button id="aiBtn" class="tb tb--primary" title="Send the page text and charts to the AI provider you set up, for a deeper reading">Deep analyze (AI)</button>
+</nav>
+<main id="main">
+  <section id="notice" class="notice" hidden></section>
+  <div id="report"></div>
+</main>
+<footer class="ftr" id="footer">
+  <span id="ftrNote" hidden>Techniques present are not proof of bad intent; honest sites use some of them. Decide with the evidence in front of you. </span><a href="#" id="aboutLink">About the taxonomy</a>
+</footer>
+<script src="popup.js"></script>
+</body>
+</html>

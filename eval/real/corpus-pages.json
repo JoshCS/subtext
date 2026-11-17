@@ -1,0 +1,1329 @@
+[
+  {
+    "group": "news",
+    "name": "guardian-news",
+    "url": "https://www.theguardian.com/world",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "guardian-recipe",
+    "url": "https://www.theguardian.com/food/series/nigel-slater-recipes",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "npr",
+    "url": "https://www.npr.org/sections/news/",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "propublica",
+    "url": "https://www.propublica.org/",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "apnews",
+    "url": "https://apnews.com/politics",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "foxnews-opinion",
+    "url": "https://www.foxnews.com/opinion",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "breitbart",
+    "url": "https://www.breitbart.com/politics/",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "nypost",
+    "url": "https://nypost.com/news/",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "dailywire",
+    "url": "https://www.dailywire.com/",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "federalist",
+    "url": "https://thefederalist.com/",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "huffpost",
+    "url": "https://www.huffpost.com/news/politics",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "motherjones",
+    "url": "https://www.motherjones.com/politics/",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "jacobin",
+    "url": "https://jacobin.com/",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "dailykos",
+    "url": "https://www.dailykos.com/",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "vox",
+    "url": "https://www.vox.com/politics",
+    "split": "holdout"
+  },
+  {
+    "group": "news",
+    "name": "bbc-article-home",
+    "url": "https://www.bbc.com/news/world",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "cnn",
+    "url": "https://edition.cnn.com/politics",
+    "split": "train"
+  },
+  {
+    "group": "news",
+    "name": "theverge",
+    "url": "https://www.theverge.com/tech",
+    "split": "train"
+  },
+  {
+    "group": "blog",
+    "name": "daringfireball",
+    "url": "https://daringfireball.net/",
+    "split": "train"
+  },
+  {
+    "group": "blog",
+    "name": "paulgraham",
+    "url": "https://paulgraham.com/articles.html",
+    "split": "train"
+  },
+  {
+    "group": "blog",
+    "name": "kottke",
+    "url": "https://kottke.org/",
+    "split": "train"
+  },
+  {
+    "group": "blog",
+    "name": "marginalrevolution",
+    "url": "https://marginalrevolution.com/",
+    "split": "train"
+  },
+  {
+    "group": "blog",
+    "name": "simonwillison",
+    "url": "https://simonwillison.net/",
+    "split": "train"
+  },
+  {
+    "group": "blog",
+    "name": "danluu",
+    "url": "https://danluu.com/",
+    "split": "holdout"
+  },
+  {
+    "group": "blog",
+    "name": "acx",
+    "url": "https://www.astralcodexten.com/",
+    "split": "train"
+  },
+  {
+    "group": "indie",
+    "name": "sivers",
+    "url": "https://sive.rs/book",
+    "split": "holdout"
+  },
+  {
+    "group": "indie",
+    "name": "practicaltypography",
+    "url": "https://practicaltypography.com/",
+    "split": "train"
+  },
+  {
+    "group": "indie",
+    "name": "gumroad-discover",
+    "url": "https://gumroad.com/",
+    "split": "train"
+  },
+  {
+    "group": "indie",
+    "name": "tailwindplus",
+    "url": "https://tailwindcss.com/plus",
+    "split": "train"
+  },
+  {
+    "group": "indie",
+    "name": "nomadlist",
+    "url": "https://nomads.com/",
+    "split": "holdout"
+  },
+  {
+    "group": "indie",
+    "name": "shapeup",
+    "url": "https://basecamp.com/shapeup",
+    "split": "train"
+  },
+  {
+    "group": "saas",
+    "name": "basecamp",
+    "url": "https://basecamp.com/pricing",
+    "split": "train"
+  },
+  {
+    "group": "saas",
+    "name": "linear",
+    "url": "https://linear.app/pricing",
+    "split": "holdout"
+  },
+  {
+    "group": "saas",
+    "name": "figma",
+    "url": "https://www.figma.com/pricing/",
+    "split": "holdout"
+  },
+  {
+    "group": "saas",
+    "name": "slack",
+    "url": "https://slack.com/pricing",
+    "split": "train"
+  },
+  {
+    "group": "saas",
+    "name": "nordvpn",
+    "url": "https://nordvpn.com/pricing/",
+    "split": "train"
+  },
+  {
+    "group": "saas",
+    "name": "hostinger",
+    "url": "https://www.hostinger.com/pricing",
+    "split": "train"
+  },
+  {
+    "group": "saas",
+    "name": "mailchimp",
+    "url": "https://mailchimp.com/pricing/",
+    "split": "holdout"
+  },
+  {
+    "group": "retail",
+    "name": "ikea",
+    "url": "https://www.ikea.com/us/en/p/billy-bookcase-white-00263850/",
+    "split": "train"
+  },
+  {
+    "group": "retail",
+    "name": "patagonia",
+    "url": "https://www.patagonia.com/shop/mens-jackets-vests",
+    "split": "train"
+  },
+  {
+    "group": "retail",
+    "name": "rei",
+    "url": "https://www.rei.com/c/backpacks",
+    "split": "train"
+  },
+  {
+    "group": "retail",
+    "name": "bestbuy",
+    "url": "https://www.bestbuy.com/site/searchpage.jsp?st=headphones",
+    "split": "holdout"
+  },
+  {
+    "group": "retail",
+    "name": "etsy",
+    "url": "https://www.etsy.com/c/jewelry",
+    "split": "train"
+  },
+  {
+    "group": "retail",
+    "name": "temu",
+    "url": "https://www.temu.com/",
+    "split": "train"
+  },
+  {
+    "group": "retail",
+    "name": "wish",
+    "url": "https://www.wish.com/",
+    "split": "train"
+  },
+  {
+    "group": "review",
+    "name": "seriouseats",
+    "url": "https://www.seriouseats.com/classic-tomato-sauce-recipe",
+    "split": "holdout"
+  },
+  {
+    "group": "review",
+    "name": "allrecipes",
+    "url": "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/",
+    "split": "holdout"
+  },
+  {
+    "group": "review",
+    "name": "budgetbytes",
+    "url": "https://www.budgetbytes.com/",
+    "split": "train"
+  },
+  {
+    "group": "review",
+    "name": "rtings",
+    "url": "https://www.rtings.com/headphones/reviews/best/headphones",
+    "split": "holdout"
+  },
+  {
+    "group": "review",
+    "name": "nerdwallet",
+    "url": "https://www.nerdwallet.com/credit-cards",
+    "split": "train"
+  },
+  {
+    "group": "review",
+    "name": "tomsguide",
+    "url": "https://www.tomsguide.com/best-picks/best-vpn",
+    "split": "holdout"
+  },
+  {
+    "group": "review",
+    "name": "bankrate",
+    "url": "https://www.bankrate.com/credit-cards/best-credit-cards/",
+    "split": "train"
+  },
+  {
+    "group": "inst",
+    "name": "cdc",
+    "url": "https://www.cdc.gov/flu/index.html",
+    "split": "train"
+  },
+  {
+    "group": "inst",
+    "name": "ftc",
+    "url": "https://consumer.ftc.gov/articles/how-avoid-scam",
+    "split": "train"
+  },
+  {
+    "group": "inst",
+    "name": "govuk",
+    "url": "https://www.gov.uk/browse/benefits",
+    "split": "train"
+  },
+  {
+    "group": "inst",
+    "name": "harvard",
+    "url": "https://www.harvard.edu/",
+    "split": "train"
+  },
+  {
+    "group": "inst",
+    "name": "ox-ac-uk",
+    "url": "https://www.ox.ac.uk/",
+    "split": "holdout"
+  },
+  {
+    "group": "inst",
+    "name": "who",
+    "url": "https://www.who.int/news-room/fact-sheets",
+    "split": "train"
+  },
+  {
+    "group": "de",
+    "name": "spiegel",
+    "url": "https://www.spiegel.de/politik/",
+    "split": "holdout"
+  },
+  {
+    "group": "de",
+    "name": "tagesschau",
+    "url": "https://www.tagesschau.de/inland/",
+    "split": "train"
+  },
+  {
+    "group": "de",
+    "name": "heise",
+    "url": "https://www.heise.de/",
+    "split": "holdout"
+  },
+  {
+    "group": "de",
+    "name": "otto",
+    "url": "https://www.otto.de/",
+    "split": "train"
+  },
+  {
+    "group": "de",
+    "name": "zalando",
+    "url": "https://www.zalando.de/herren-home/",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "heritage-report",
+    "url": "https://www.heritage.org/immigration",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "cato",
+    "url": "https://www.cato.org/",
+    "split": "holdout"
+  },
+  {
+    "group": "advocacy",
+    "name": "nra",
+    "url": "https://home.nra.org/",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "aei",
+    "url": "https://www.aei.org/",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "americanprogress",
+    "url": "https://www.americanprogress.org/",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "plannedparenthood",
+    "url": "https://www.plannedparenthood.org/",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "sierraclub",
+    "url": "https://www.sierraclub.org/",
+    "split": "train"
+  },
+  {
+    "group": "advocacy",
+    "name": "hrc",
+    "url": "https://www.hrc.org/",
+    "split": "train"
+  },
+  {
+    "group": "health",
+    "name": "goop",
+    "url": "https://goop.com/",
+    "split": "train"
+  },
+  {
+    "group": "health",
+    "name": "hims",
+    "url": "https://www.hims.com/",
+    "split": "holdout"
+  },
+  {
+    "group": "health",
+    "name": "mercola",
+    "url": "https://www.mercola.com/",
+    "split": "train"
+  },
+  {
+    "group": "health",
+    "name": "webmd",
+    "url": "https://www.webmd.com/",
+    "split": "train"
+  },
+  {
+    "group": "health",
+    "name": "mayoclinic",
+    "url": "https://www.mayoclinic.org/diseases-conditions/flu/symptoms-causes/syc-20351719",
+    "split": "train"
+  },
+  {
+    "group": "finance",
+    "name": "robinhood",
+    "url": "https://robinhood.com/us/en/",
+    "split": "holdout"
+  },
+  {
+    "group": "finance",
+    "name": "coinbase",
+    "url": "https://www.coinbase.com/",
+    "split": "holdout"
+  },
+  {
+    "group": "finance",
+    "name": "vanguard",
+    "url": "https://investor.vanguard.com/",
+    "split": "train"
+  },
+  {
+    "group": "article",
+    "side": "left",
+    "name": "art-guardian-opinion",
+    "url": "https://www.theguardian.com/commentisfree/2026/nov/03/midterms-trump-era-lame-duck",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "right",
+    "name": "art-foxnews-opinion",
+    "url": "https://www.foxnews.com/opinion/doug-schoen-biggest-winner-biggest-loser-2026-midterms",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "right",
+    "name": "art-breitbart",
+    "url": "https://www.breitbart.com/clips/2026/11/04/pa-gov-shapiro-on-dem-position-on-israel-dems-united-a-lot-will-depend-on-if-bibis-in-power/",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "right",
+    "name": "art-federalist",
+    "url": "https://thefederalist.com/2026/11/03/scotus-grills-colorado-for-boxing-christians-out-of-universal-preschool-program/",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "left",
+    "name": "art-huffpost",
+    "url": "https://www.huffpost.com/entry/herzog-accepts-certified-election-results-israel_n_6aeb0d2de4b0dcee62e189a9?origin=top-ad-recirc",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "left",
+    "name": "art-jacobin",
+    "url": "https://jacobin.com/2026/11/mckinney-detroit-democratic-socialism-congress",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "left",
+    "name": "art-vox",
+    "url": "https://www.vox.com/politics/508952/2026-midterm-elections-democrats-republicans-trump",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "center",
+    "name": "art-npr",
+    "url": "https://www.npr.org/2026/11/04/nx-s1-6028664/world-reacts-midterm-elections",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "center",
+    "name": "art-propublica",
+    "url": "https://www.propublica.org/series/life-of-the-mother",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "center",
+    "name": "art-apnews",
+    "url": "https://apnews.com/article/iran-us-strikes-strait-hormuz-183b3d32d9bf5241f744abb917e6713e",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "center",
+    "name": "art-bbc",
+    "url": "https://www.bbc.com/news/articles/cjy56z440nl9o",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "right-adv",
+    "name": "art-heritage",
+    "url": "https://www.heritage.org/border-security/commentary/trumps-border-and-order-agenda-working",
+    "split": "articles"
+  },
+  {
+    "group": "article",
+    "side": "left-adv",
+    "name": "art-americanprogress",
+    "url": "https://www.americanprogress.org/people/mathema-silva/",
+    "split": "articles"
+  },
+  {
+    "group": "news",
+    "name": "fr-atlantic",
+    "url": "https://www.theatlantic.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "news",
+    "name": "fr-independent",
+    "url": "https://www.independent.co.uk/news/world",
+    "split": "fresh"
+  },
+  {
+    "group": "news",
+    "name": "fr-dailymail",
+    "url": "https://www.dailymail.co.uk/ushome/index.html",
+    "split": "fresh"
+  },
+  {
+    "group": "news",
+    "name": "fr-newsmax",
+    "url": "https://www.newsmax.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "news",
+    "name": "fr-thehill",
+    "url": "https://thehill.com/opinion/",
+    "split": "fresh"
+  },
+  {
+    "group": "news",
+    "name": "fr-dailybeast",
+    "url": "https://www.thedailybeast.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "review",
+    "name": "fr-wirecutter",
+    "url": "https://www.nytimes.com/wirecutter/reviews/best-robot-vacuums/",
+    "split": "fresh"
+  },
+  {
+    "group": "review",
+    "name": "fr-pcmag",
+    "url": "https://www.pcmag.com/picks/the-best-vpn-services",
+    "split": "fresh"
+  },
+  {
+    "group": "review",
+    "name": "fr-investopedia",
+    "url": "https://www.investopedia.com/best-online-brokers-4587872",
+    "split": "fresh"
+  },
+  {
+    "group": "saas",
+    "name": "fr-dropbox",
+    "url": "https://www.dropbox.com/plans",
+    "split": "fresh"
+  },
+  {
+    "group": "saas",
+    "name": "fr-asana",
+    "url": "https://asana.com/pricing",
+    "split": "fresh"
+  },
+  {
+    "group": "saas",
+    "name": "fr-zoom",
+    "url": "https://www.zoom.com/en/products/virtual-meetings/pricing/",
+    "split": "fresh"
+  },
+  {
+    "group": "shop",
+    "name": "fr-allbirds",
+    "url": "https://www.allbirds.com/products/mens-tree-runners",
+    "split": "fresh"
+  },
+  {
+    "group": "shop",
+    "name": "fr-shein",
+    "url": "https://us.shein.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "shop",
+    "name": "fr-groupon",
+    "url": "https://www.groupon.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "shop",
+    "name": "fr-booking",
+    "url": "https://www.booking.com/hotel/fr/le-grand-paris.html",
+    "split": "fresh"
+  },
+  {
+    "group": "shop",
+    "name": "fr-walmart",
+    "url": "https://www.walmart.com/cp/electronics/3944",
+    "split": "fresh"
+  },
+  {
+    "group": "indie",
+    "name": "fr-gwern",
+    "url": "https://gwern.net/about",
+    "split": "fresh"
+  },
+  {
+    "group": "indie",
+    "name": "fr-stratechery",
+    "url": "https://stratechery.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "indie",
+    "name": "fr-overreacted",
+    "url": "https://overreacted.io/",
+    "split": "fresh"
+  },
+  {
+    "group": "indie",
+    "name": "fr-leanpub",
+    "url": "https://leanpub.com/",
+    "split": "fresh"
+  },
+  {
+    "group": "health",
+    "name": "fr-healthline",
+    "url": "https://www.healthline.com/health/sleep/how-to-fall-asleep",
+    "split": "fresh"
+  },
+  {
+    "group": "charity",
+    "name": "fr-redcross",
+    "url": "https://www.redcross.org/donate/donation.html/",
+    "split": "fresh"
+  },
+  {
+    "group": "gov",
+    "name": "fr-nasa",
+    "url": "https://www.nasa.gov/",
+    "split": "fresh"
+  },
+  {
+    "group": "gov",
+    "name": "fr-irs",
+    "url": "https://www.irs.gov/",
+    "split": "fresh"
+  },
+  {
+    "group": "news",
+    "name": "f2-latimes",
+    "url": "https://www.latimes.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "news",
+    "name": "f2-usatoday",
+    "url": "https://www.usatoday.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "news",
+    "name": "f2-slate",
+    "url": "https://slate.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "news",
+    "name": "f2-nationalreview",
+    "url": "https://www.nationalreview.com/corner/",
+    "split": "fresh2"
+  },
+  {
+    "group": "news",
+    "name": "f2-thenation",
+    "url": "https://www.thenation.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "news",
+    "name": "f2-townhall",
+    "url": "https://townhall.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "review",
+    "name": "f2-techradar",
+    "url": "https://www.techradar.com/best/vpn",
+    "split": "fresh2"
+  },
+  {
+    "group": "review",
+    "name": "f2-cnet",
+    "url": "https://www.cnet.com/tech/services-and-software/best-vpn/",
+    "split": "fresh2"
+  },
+  {
+    "group": "shop",
+    "name": "f2-ebay",
+    "url": "https://www.ebay.com/b/Laptops-Netbooks/175672/bn_1648276",
+    "split": "fresh2"
+  },
+  {
+    "group": "shop",
+    "name": "f2-aliexpress",
+    "url": "https://www.aliexpress.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "shop",
+    "name": "f2-nike",
+    "url": "https://www.nike.com/t/air-force-1-07-mens-shoes-jBrhbr/CW2288-111",
+    "split": "fresh2"
+  },
+  {
+    "group": "shop",
+    "name": "f2-warby",
+    "url": "https://www.warbyparker.com/eyeglasses",
+    "split": "fresh2"
+  },
+  {
+    "group": "saas",
+    "name": "f2-notion",
+    "url": "https://www.notion.com/pricing",
+    "split": "fresh2"
+  },
+  {
+    "group": "saas",
+    "name": "f2-hubspot",
+    "url": "https://www.hubspot.com/pricing/marketing",
+    "split": "fresh2"
+  },
+  {
+    "group": "saas",
+    "name": "f2-squarespace",
+    "url": "https://www.squarespace.com/pricing",
+    "split": "fresh2"
+  },
+  {
+    "group": "health",
+    "name": "f2-mnt",
+    "url": "https://www.medicalnewstoday.com/articles/how-to-fall-asleep",
+    "split": "fresh2"
+  },
+  {
+    "group": "course",
+    "name": "f2-masterclass",
+    "url": "https://www.masterclass.com/",
+    "split": "fresh2"
+  },
+  {
+    "group": "course",
+    "name": "f2-udemy",
+    "url": "https://www.udemy.com/course/the-complete-web-development-bootcamp/",
+    "split": "fresh2"
+  },
+  {
+    "group": "finance",
+    "name": "f2-sofi",
+    "url": "https://www.sofi.com/personal-loans/",
+    "split": "fresh2"
+  },
+  {
+    "group": "indie",
+    "name": "f2-kalzumeus",
+    "url": "https://www.kalzumeus.com/greatest-hits/",
+    "split": "fresh2"
+  },
+  {
+    "group": "indie",
+    "name": "f2-seths",
+    "url": "https://seths.blog/",
+    "split": "fresh2"
+  },
+  {
+    "group": "charity",
+    "name": "f2-msf",
+    "url": "https://donate.doctorswithoutborders.org/secure/donate",
+    "split": "fresh2"
+  },
+  {
+    "group": "gov",
+    "name": "f2-nih",
+    "url": "https://www.nih.gov/",
+    "split": "fresh2"
+  },
+  {
+    "group": "edu",
+    "name": "f2-mit",
+    "url": "https://www.mit.edu/",
+    "split": "fresh2"
+  },
+  {
+    "group": "news",
+    "name": "f3-sfgate",
+    "url": "https://www.sfgate.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "news",
+    "name": "f3-telegraph",
+    "url": "https://www.telegraph.co.uk/news/",
+    "split": "fresh3"
+  },
+  {
+    "group": "news",
+    "name": "f3-salon",
+    "url": "https://www.salon.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "news",
+    "name": "f3-washexaminer",
+    "url": "https://www.washingtonexaminer.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "news",
+    "name": "f3-theconversation",
+    "url": "https://theconversation.com/us",
+    "split": "fresh3"
+  },
+  {
+    "group": "review",
+    "name": "f3-zdnet",
+    "url": "https://www.zdnet.com/article/best-vpn/",
+    "split": "fresh3"
+  },
+  {
+    "group": "review",
+    "name": "f3-goodhousekeeping",
+    "url": "https://www.goodhousekeeping.com/home-products/best-air-purifiers/",
+    "split": "fresh3"
+  },
+  {
+    "group": "review",
+    "name": "f3-usnews",
+    "url": "https://money.usnews.com/credit-cards",
+    "split": "fresh3"
+  },
+  {
+    "group": "shop",
+    "name": "f3-costco",
+    "url": "https://www.costco.com/laptops.html",
+    "split": "fresh3"
+  },
+  {
+    "group": "shop",
+    "name": "f3-sephora",
+    "url": "https://www.sephora.com/shop/moisturizing-cream-oils-mists",
+    "split": "fresh3"
+  },
+  {
+    "group": "shop",
+    "name": "f3-wayfair",
+    "url": "https://www.wayfair.com/furniture/sb0/sofas-c413892.html",
+    "split": "fresh3"
+  },
+  {
+    "group": "shop",
+    "name": "f3-glossier",
+    "url": "https://www.glossier.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "shop",
+    "name": "f3-casper",
+    "url": "https://casper.com/mattresses/",
+    "split": "fresh3"
+  },
+  {
+    "group": "saas",
+    "name": "f3-canva",
+    "url": "https://www.canva.com/pricing/",
+    "split": "fresh3"
+  },
+  {
+    "group": "saas",
+    "name": "f3-shopify",
+    "url": "https://www.shopify.com/pricing",
+    "split": "fresh3"
+  },
+  {
+    "group": "saas",
+    "name": "f3-grammarly",
+    "url": "https://www.grammarly.com/plans",
+    "split": "fresh3"
+  },
+  {
+    "group": "saas",
+    "name": "f3-expressvpn",
+    "url": "https://www.expressvpn.com/order",
+    "split": "fresh3"
+  },
+  {
+    "group": "health",
+    "name": "f3-ritual",
+    "url": "https://ritual.com/products/essential-for-women-multivitamin-18-plus",
+    "split": "fresh3"
+  },
+  {
+    "group": "course",
+    "name": "f3-skillshare",
+    "url": "https://www.skillshare.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "finance",
+    "name": "f3-creditkarma",
+    "url": "https://www.creditkarma.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "indie",
+    "name": "f3-waitbutwhy",
+    "url": "https://waitbutwhy.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "indie",
+    "name": "f3-lesswrong",
+    "url": "https://www.lesswrong.com/",
+    "split": "fresh3"
+  },
+  {
+    "group": "charity",
+    "name": "f3-unicef",
+    "url": "https://www.unicefusa.org/",
+    "split": "fresh3"
+  },
+  {
+    "group": "edu",
+    "name": "f3-stanford",
+    "url": "https://www.stanford.edu/",
+    "split": "fresh3"
+  },
+  {
+    "group": "news",
+    "name": "f4-nbc",
+    "url": "https://www.nbcnews.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "news",
+    "name": "f4-politico",
+    "url": "https://www.politico.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "news",
+    "name": "f4-axios",
+    "url": "https://www.axios.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "news",
+    "name": "f4-oann",
+    "url": "https://www.oann.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "news",
+    "name": "f4-commondreams",
+    "url": "https://www.commondreams.org/",
+    "split": "fresh4"
+  },
+  {
+    "group": "news",
+    "name": "f4-theblaze",
+    "url": "https://www.theblaze.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "review",
+    "name": "f4-engadget",
+    "url": "https://www.engadget.com/best-vpn-130004396.html",
+    "split": "fresh4"
+  },
+  {
+    "group": "review",
+    "name": "f4-consumeraffairs",
+    "url": "https://www.consumeraffairs.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "review",
+    "name": "f4-pcworld",
+    "url": "https://www.pcworld.com/article/578984/best-vpn-services.html",
+    "split": "fresh4"
+  },
+  {
+    "group": "shop",
+    "name": "f4-newegg",
+    "url": "https://www.newegg.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "shop",
+    "name": "f4-gap",
+    "url": "https://www.gap.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "shop",
+    "name": "f4-chewy",
+    "url": "https://www.chewy.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "shop",
+    "name": "f4-bestwestern",
+    "url": "https://www.hotels.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "shop",
+    "name": "f4-dollarshave",
+    "url": "https://www.dollarshaveclub.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "saas",
+    "name": "f4-mailerlite",
+    "url": "https://www.mailerlite.com/pricing",
+    "split": "fresh4"
+  },
+  {
+    "group": "saas",
+    "name": "f4-adobe",
+    "url": "https://www.adobe.com/creativecloud/plans.html",
+    "split": "fresh4"
+  },
+  {
+    "group": "saas",
+    "name": "f4-surfshark",
+    "url": "https://surfshark.com/pricing",
+    "split": "fresh4"
+  },
+  {
+    "group": "saas",
+    "name": "f4-audible",
+    "url": "https://www.audible.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "finance",
+    "name": "f4-lendingtree",
+    "url": "https://www.lendingtree.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "finance",
+    "name": "f4-chime",
+    "url": "https://www.chime.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "health",
+    "name": "f4-noom",
+    "url": "https://www.noom.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "health",
+    "name": "f4-betterhelp",
+    "url": "https://www.betterhelp.com/",
+    "split": "fresh4"
+  },
+  {
+    "group": "indie",
+    "name": "f4-pluralistic",
+    "url": "https://pluralistic.net/",
+    "split": "fresh4"
+  },
+  {
+    "group": "indie",
+    "name": "f4-marco",
+    "url": "https://marco.org/",
+    "split": "fresh4"
+  },
+  {
+    "group": "charity",
+    "name": "f4-aclu",
+    "url": "https://www.aclu.org/",
+    "split": "fresh4"
+  },
+  {
+    "group": "charity",
+    "name": "f4-heartorg",
+    "url": "https://www.heart.org/",
+    "split": "fresh4"
+  },
+  {
+    "group": "gov",
+    "name": "f4-usagov",
+    "url": "https://www.usa.gov/",
+    "split": "fresh4"
+  },
+  {
+    "group": "news",
+    "name": "f5-abc",
+    "url": "https://abcnews.go.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "news",
+    "name": "f5-cbs",
+    "url": "https://www.cbsnews.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "news",
+    "name": "f5-rawstory",
+    "url": "https://www.rawstory.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "news",
+    "name": "f5-epochtimes",
+    "url": "https://www.theepochtimes.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "news",
+    "name": "f5-reason",
+    "url": "https://reason.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "news",
+    "name": "f5-theintercept",
+    "url": "https://theintercept.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "review",
+    "name": "f5-techcrunch",
+    "url": "https://techcrunch.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "review",
+    "name": "f5-makeuseof",
+    "url": "https://www.howtogeek.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "review",
+    "name": "f5-thespruce",
+    "url": "https://www.thespruce.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "shop",
+    "name": "f5-lowes",
+    "url": "https://www.lowes.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "shop",
+    "name": "f5-macys",
+    "url": "https://www.macys.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "shop",
+    "name": "f5-adidas",
+    "url": "https://www.adidas.com/us",
+    "split": "fresh5"
+  },
+  {
+    "group": "shop",
+    "name": "f5-expedia",
+    "url": "https://www.expedia.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "shop",
+    "name": "f5-hellofresh",
+    "url": "https://www.hellofresh.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "saas",
+    "name": "f5-zoho",
+    "url": "https://www.zoho.com/mail/zohomail-pricing.html",
+    "split": "fresh5"
+  },
+  {
+    "group": "saas",
+    "name": "f5-github",
+    "url": "https://github.com/pricing",
+    "split": "fresh5"
+  },
+  {
+    "group": "saas",
+    "name": "f5-nytimes",
+    "url": "https://www.nytimes.com/subscription",
+    "split": "fresh5"
+  },
+  {
+    "group": "saas",
+    "name": "f5-spotify",
+    "url": "https://www.spotify.com/us/premium/",
+    "split": "fresh5"
+  },
+  {
+    "group": "finance",
+    "name": "f5-sofi2",
+    "url": "https://www.creditonebank.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "finance",
+    "name": "f5-experian",
+    "url": "https://www.experian.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "health",
+    "name": "f5-ro",
+    "url": "https://ro.co/",
+    "split": "fresh5"
+  },
+  {
+    "group": "health",
+    "name": "f5-everlywell",
+    "url": "https://www.everlywell.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "indie",
+    "name": "f5-kottke2",
+    "url": "https://stratechery.com/about/",
+    "split": "fresh5"
+  },
+  {
+    "group": "indie",
+    "name": "f5-wbw",
+    "url": "https://www.joelonsoftware.com/",
+    "split": "fresh5"
+  },
+  {
+    "group": "charity",
+    "name": "f5-wwf",
+    "url": "https://www.worldwildlife.org/",
+    "split": "fresh5"
+  },
+  {
+    "group": "gov",
+    "name": "f5-cfpb",
+    "url": "https://www.consumerfinance.gov/",
+    "split": "fresh5"
+  },
+  {
+    "group": "edu",
+    "name": "f5-yale",
+    "url": "https://www.yale.edu/",
+    "split": "fresh5"
+  }
+]

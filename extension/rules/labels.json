@@ -1,0 +1,762 @@
+{
+  "version": "0.2.0",
+  "notes": "UX copy for the three-tier display. Tier 1 = `label` (a warning-sign name, 1–3 words, shown as a chip or hover tag). Tier 2 = `why` (≤ 12 words: the single most pointed reason it is flagged, shown on hover). Tier 3 = the finding's full `explain`, mechanism glossary, evidence and `tip` (shown on click). Keys are finding ids; `tracker.*` and `ai.*` fall back to prefixes. Edit copy here, not in code.",
+  "categories": {
+    "dark_pattern": {
+      "short": "Dark pattern",
+      "icon": "⚠️",
+      "sign": "Interface built to trick you"
+    },
+    "urgency_scarcity": {
+      "short": "Pressure",
+      "icon": "⏱️",
+      "sign": "Manufactured hurry"
+    },
+    "social_proof": {
+      "short": "Crowd",
+      "icon": "👥",
+      "sign": "'Everyone else is doing it'"
+    },
+    "attention": {
+      "short": "Hook",
+      "icon": "🧲",
+      "sign": "Built to keep you here"
+    },
+    "bias_exploit": {
+      "short": "Nudge",
+      "icon": "🎯",
+      "sign": "Pricing and framing tricks"
+    },
+    "deceptive_claims": {
+      "short": "Claim",
+      "icon": "❗",
+      "sign": "Promises that don't hold up"
+    },
+    "rhetoric": {
+      "short": "Argument",
+      "icon": "🗣️",
+      "sign": "Persuasion without evidence"
+    },
+    "emotional": {
+      "short": "Emotion",
+      "icon": "🔥",
+      "sign": "Feelings instead of facts"
+    },
+    "interpersonal": {
+      "short": "Coercion",
+      "icon": "🪞",
+      "sign": "Tactics from manipulative relationships"
+    },
+    "charts": {
+      "short": "Chart",
+      "icon": "📉",
+      "sign": "Picture distorts the numbers"
+    },
+    "source_funding": {
+      "short": "Backers",
+      "icon": "🏛️",
+      "sign": "Who is behind this"
+    },
+    "incentives": {
+      "short": "Incentive",
+      "icon": "💰",
+      "sign": "What they get from you"
+    },
+    "surveillance": {
+      "short": "Tracking",
+      "icon": "👁️",
+      "sign": "Watching and profiling you"
+    },
+    "design_psych": {
+      "short": "Design",
+      "icon": "🎨",
+      "sign": "Visuals steer the choice"
+    }
+  },
+  "labels": {
+    "urgency.deadline_language": {
+      "label": "Deadline wording",
+      "why": "Hurry-up words shrink your thinking time."
+    },
+    "scarcity.low_stock": {
+      "label": "'Only N left'",
+      "why": "A stock count you cannot check."
+    },
+    "scarcity.high_demand": {
+      "label": "'People viewing'",
+      "why": "Live-viewer counts are usually random numbers."
+    },
+    "urgency.countdown_words": {
+      "label": "Countdown framing",
+      "why": "A ticking clock is a pressure prop."
+    },
+    "urgency.price_increase_threat": {
+      "label": "Price-rise threat",
+      "why": "Unverifiable threat to make you buy now."
+    },
+    "urgency.live_countdown": {
+      "label": "Countdown timer",
+      "why": "Timers raise arousal and cut deliberation."
+    },
+    "urgency.fake_countdown_reset": {
+      "label": "Fake deadline",
+      "why": "This timer restarted on reload."
+    },
+    "social.join_millions": {
+      "label": "Big-number proof",
+      "why": "Unaudited user counts; popularity isn't quality."
+    },
+    "social.bestseller_badges": {
+      "label": "'#1' badge",
+      "why": "Ranked by whom, in what, since when?"
+    },
+    "social.activity_feed": {
+      "label": "Purchase toasts",
+      "why": "'Someone just bought' pop-ups are generated."
+    },
+    "social.everyone_is": {
+      "label": "Bandwagon",
+      "why": "Claims about others replace facts about the product."
+    },
+    "social.testimonial_markers": {
+      "label": "Testimonials",
+      "why": "Seller-selected quotes you can't verify."
+    },
+    "attention.clickbait_curiosity": {
+      "label": "Clickbait",
+      "why": "Headline withholds its point until you click."
+    },
+    "attention.listicle_headline": {
+      "label": "Listicle",
+      "why": "Numbered lists are built for pageviews."
+    },
+    "attention.engagement_bait": {
+      "label": "Engagement bait",
+      "why": "Asks for likes/shares to game the algorithm."
+    },
+    "attention.gamification": {
+      "label": "Streaks & rewards",
+      "why": "Slot-machine mechanics make checking compulsive."
+    },
+    "attention.fomo_notifications": {
+      "label": "'You missed…'",
+      "why": "Manufactured social obligation to come back."
+    },
+    "attention.autoplay_next": {
+      "label": "Autoplay next",
+      "why": "Continuing is the default; stopping takes effort."
+    },
+    "attention.engagement_feed": {
+      "label": "Engagement feed",
+      "why": "Ordered by what provokes you, not what informs you."
+    },
+    "attention.infinite_scroll": {
+      "label": "Infinite scroll",
+      "why": "No end means no natural stopping point."
+    },
+    "attention.autoplay_media": {
+      "label": "Autoplay",
+      "why": "Motion grabs attention you didn't give."
+    },
+    "attention.title_bait": {
+      "label": "Tab-title bait",
+      "why": "Title flashes to pull you back."
+    },
+    "surveillance.personalized_feed": {
+      "label": "Personalized for you",
+      "why": "Selected from your past activity, not by merit."
+    },
+    "surveillance.notification_prompt_language": {
+      "label": "Notification ask",
+      "why": "A channel into your attention they control."
+    },
+    "surveillance.notification_preprompt": {
+      "label": "Notification pre-prompt",
+      "why": "Screens you before the browser's real prompt."
+    },
+    "surveillance.email_capture_incentive": {
+      "label": "Email for discount",
+      "why": "Your email becomes a marketing channel until you unsubscribe."
+    },
+    "surveillance.barnum_personalization": {
+      "label": "Fake personalization",
+      "why": "Generic statements dressed up as insight about you."
+    },
+    "surveillance.consent_no_reject": {
+      "label": "No 'reject' button",
+      "why": "Accept is one click; refusing is buried."
+    },
+    "design.consent_asymmetry": {
+      "label": "Reject buried",
+      "why": "Both buttons exist; one is made to look wrong."
+    },
+    "rhetoric.weasel_attribution": {
+      "label": "'Experts say'",
+      "why": "Unnamed experts; look for who they are."
+    },
+    "rhetoric.absolutism": {
+      "label": "Absolutes",
+      "why": "'Always', 'everyone', 'only way': reality isn't that clean."
+    },
+    "rhetoric.obviousness_appeal": {
+      "label": "'Obviously'",
+      "why": "Marks the claim that most needs support."
+    },
+    "rhetoric.false_dilemma": {
+      "label": "False dilemma",
+      "why": "Two options offered; the third is hidden."
+    },
+    "rhetoric.slippery_slope": {
+      "label": "Slippery slope",
+      "why": "Dread substitutes for a mechanism."
+    },
+    "rhetoric.ad_hominem": {
+      "label": "Name-calling",
+      "why": "Attacks people because the argument is thin."
+    },
+    "rhetoric.strawman_markers": {
+      "label": "Straw man",
+      "why": "Opponents' view restated to be easy to beat."
+    },
+    "rhetoric.whataboutism": {
+      "label": "Whataboutism",
+      "why": "Changes the subject instead of answering."
+    },
+    "rhetoric.thought_terminating": {
+      "label": "Discussion-ender",
+      "why": "A cliché where the reasoning stopped."
+    },
+    "rhetoric.loaded_question": {
+      "label": "Loaded question",
+      "why": "Answering it concedes the premise."
+    },
+    "rhetoric.anecdote_as_evidence": {
+      "label": "Anecdote as proof",
+      "why": "One vivid story, no denominator."
+    },
+    "rhetoric.appeal_to_nature_tradition": {
+      "label": "'Natural' appeal",
+      "why": "'Natural' and 'chemical-free' say nothing about safety."
+    },
+    "rhetoric.false_precision_stats": {
+      "label": "Unsourced statistic",
+      "why": "Precise number, no source, no sample."
+    },
+    "rhetoric.euphemism_corporate": {
+      "label": "Euphemism",
+      "why": "Soft words for bad news you'd otherwise notice."
+    },
+    "rhetoric.passive_agency_hiding": {
+      "label": "Passive voice",
+      "why": "Passive voice removes whoever is responsible."
+    },
+    "rhetoric.just_asking_questions": {
+      "label": "Just asking",
+      "why": "Implies a claim it won't defend."
+    },
+    "rhetoric.cherry_pick_markers": {
+      "label": "Big % change",
+      "why": "Big % changes depend on the window chosen."
+    },
+    "rhetoric.percent_vs_points": {
+      "label": "Relative risk",
+      "why": "'50% higher' may mean 2 in 10,000 became 3."
+    },
+    "emotional.outrage_lexicon": {
+      "label": "Outrage words",
+      "why": "'Slams' and 'destroys' usually mean 'disagreed'."
+    },
+    "emotional.fear_lexicon": {
+      "label": "Fear words",
+      "why": "Threat words raise arousal and shorten deliberation."
+    },
+    "emotional.tribal_labels": {
+      "label": "Us vs them",
+      "why": "Sorts you into a team so you stop weighing arguments."
+    },
+    "emotional.dehumanizing": {
+      "label": "Dehumanizing",
+      "why": "People described as pests or floods."
+    },
+    "emotional.guilt_trip": {
+      "label": "Guilt trip",
+      "why": "You're made responsible unless you comply."
+    },
+    "emotional.sensational_formatting": {
+      "label": "SHOUTING!!!",
+      "why": "Caps and exclamation marks sell arousal, not information."
+    },
+    "interpersonal.flattery_love_bombing": {
+      "label": "Flattery",
+      "why": "Personal flattery from a company that cannot know you."
+    },
+    "interpersonal.negging": {
+      "label": "Negging",
+      "why": "Lowers your status so buying restores it."
+    },
+    "interpersonal.isolation_distrust_others": {
+      "label": "'Trust only us'",
+      "why": "Tells you to distrust every other source."
+    },
+    "interpersonal.future_faking": {
+      "label": "Future promises",
+      "why": "'Coming soon' keeps you paying for nothing checkable."
+    },
+    "interpersonal.darvo_victim_reversal": {
+      "label": "Victim reversal",
+      "why": "The accused becomes the victim; the question is never answered."
+    },
+    "interpersonal.gaslighting_markers": {
+      "label": "Gaslighting",
+      "why": "Denies the record so you doubt your memory."
+    },
+    "interpersonal.hoovering_winback": {
+      "label": "Cancel pressure",
+      "why": "Guilt and sudden discounts when you try to cancel."
+    },
+    "interpersonal.cult_community": {
+      "label": "'Join the movement'",
+      "why": "Belonging language makes doubt feel like betrayal."
+    },
+    "interpersonal.manufactured_enemy": {
+      "label": "Manufactured enemy",
+      "why": "An outside enemy is named to bind the group."
+    },
+    "interpersonal.foot_in_door": {
+      "label": "Small first ask",
+      "why": "A tiny yes makes the big ask feel consistent."
+    },
+    "bias.anchoring_price_compare": {
+      "label": "'Was' price",
+      "why": "A higher 'was' figure makes the current price feel cheaper."
+    },
+    "bias.anchoring_strikethrough": {
+      "label": "Crossed-out price",
+      "why": "Reference prices are often never actually charged."
+    },
+    "bias.charm_pricing": {
+      "label": ".99 pricing",
+      "why": "$9.99 reads as nine; it's ten."
+    },
+    "bias.per_day_reframing": {
+      "label": "'Per day' price",
+      "why": "$1.50 a day is $547 a year."
+    },
+    "bias.bnpl": {
+      "label": "Pay later",
+      "why": "Instalments make the total price easier to overlook."
+    },
+    "bias.decoy_tier_badge": {
+      "label": "'Most popular' tier",
+      "why": "The highlighted plan is the one they want to sell."
+    },
+    "bias.free_with_conditions": {
+      "label": "Conditions on 'free'",
+      "why": "Free trial business models run on people who forget."
+    },
+    "bias.monthly_display_annual_billing": {
+      "label": "Yearly bill",
+      "why": "You'll pay twelve times the headline, at once."
+    },
+    "bias.hidden_fees": {
+      "label": "Fees at checkout",
+      "why": "Mandatory fees revealed after you've invested effort."
+    },
+    "bias.sunk_cost_progress": {
+      "label": "'Almost there'",
+      "why": "The step you're hurried through is the costly one."
+    },
+    "bias.reciprocity_gift": {
+      "label": "Free gift",
+      "why": "An unasked-for gift creates an urge to repay."
+    },
+    "bias.default_optout_language": {
+      "label": "Auto-renew / opt-out",
+      "why": "Whatever is pre-set stays set unless you change it."
+    },
+    "bias.loss_framing": {
+      "label": "Loss framing",
+      "why": "'Stop losing' moves you more than 'gain'."
+    },
+    "bias.exclusivity_access": {
+      "label": "Exclusive / waitlist",
+      "why": "Exclusivity advertised to everyone isn't exclusive."
+    },
+    "claims.asterisked_claim": {
+      "label": "Asterisk claim",
+      "why": "The * means the headline isn't true as written."
+    },
+    "claims.unlimited_hedge": {
+      "label": "'Unlimited' hedge",
+      "why": "Unlimited with a fair-use clause is limited."
+    },
+    "claims.guarantee_puffery": {
+      "label": "Guarantee",
+      "why": "A refund promise; check its conditions and deadline."
+    },
+    "claims.grandiosity_puffery": {
+      "label": "Superlatives",
+      "why": "'Revolutionary' is unprovable and carries no information."
+    },
+    "claims.health_cure": {
+      "label": "Miracle cure",
+      "why": "Cure/detox language is a regulator red flag."
+    },
+    "claims.financial_promises": {
+      "label": "Get-rich promise",
+      "why": "Specific income figures with no audited basis."
+    },
+    "claims.greenwashing": {
+      "label": "Green claims",
+      "why": "'Eco-friendly' with no certifier named."
+    },
+    "claims.fake_trust_signals": {
+      "label": "Trust words",
+      "why": "A trust claim with no named source to check."
+    },
+    "claims.trust_badge_images": {
+      "label": "Trust badges",
+      "why": "A static image certifies nothing."
+    },
+    "claims.results_disclaimer": {
+      "label": "'Results may vary'",
+      "why": "The fine print admits the testimonial isn't typical."
+    },
+    "claims.authority_credentials_vague": {
+      "label": "'Doctor recommended'",
+      "why": "Which doctors, how many, who paid?"
+    },
+    "dark.confirmshaming": {
+      "label": "Confirmshaming",
+      "why": "The 'no' is worded to make you feel stupid."
+    },
+    "dark.trick_question": {
+      "label": "Trick question",
+      "why": "Double negative: the intuitive click does the opposite."
+    },
+    "dark.forced_registration": {
+      "label": "Sign-up wall",
+      "why": "Harvests your data as the price of entry."
+    },
+    "dark.sneak_into_basket": {
+      "label": "Sneaked add-on",
+      "why": "Extras added unless you notice and remove them."
+    },
+    "dark.cancellation_friction": {
+      "label": "Hard to cancel",
+      "why": "Sign up online; cancelling requires a phone call."
+    },
+    "dark.bait_switch_unavailable": {
+      "label": "Bait and switch",
+      "why": "The deal vanished; the alternative costs more."
+    },
+    "dark.preselection": {
+      "label": "Pre-checked box",
+      "why": "Most people never untick a default."
+    },
+    "dark.disguised_ads": {
+      "label": "Ads as content",
+      "why": "Ads carry a tiny or faint 'Sponsored' label."
+    },
+    "dark.content_gate": {
+      "label": "Content gate",
+      "why": "Teaser first, wall after you're invested."
+    },
+    "dark.no_cancel_path": {
+      "label": "No cancel info",
+      "why": "Subscribe is prominent; cancel isn't mentioned."
+    },
+    "dark.interrupting_overlay": {
+      "label": "Pop-up interruption",
+      "why": "Appeared unasked, blocking the page until you answer."
+    },
+    "dark.exit_intent_popup": {
+      "label": "Exit-intent pop-up",
+      "why": "Fired as you tried to leave. The offer appeared only then."
+    },
+    "dark.nagging": {
+      "label": "Repeated pop-ups",
+      "why": "Repeated prompts wear down refusal."
+    },
+    "design.asymmetric_choice": {
+      "label": "Buried 'no'",
+      "why": "Big bright yes, tiny grey no."
+    },
+    "design.red_urgency": {
+      "label": "Red alarm styling",
+      "why": "Red makes marketing read as a warning."
+    },
+    "design.sticky_overlays": {
+      "label": "Pinned overlays",
+      "why": "Large pinned elements stay in view while you read."
+    },
+    "design.animated_cta": {
+      "label": "Pulsing button",
+      "why": "Motion pulls your eye and hand toward it."
+    },
+    "charts.inverted_axis": {
+      "label": "Inverted axis",
+      "why": "Up means less here. A rise looks like a fall."
+    },
+    "charts.truncated_bar_axis": {
+      "label": "Truncated axis",
+      "why": "Bars start above zero; differences look huge."
+    },
+    "charts.zoomed_line_axis": {
+      "label": "Zoomed axis",
+      "why": "Small moves fill the chart."
+    },
+    "charts.unlabeled_log_scale": {
+      "label": "Hidden log scale",
+      "why": "Exponential growth flattened without saying so."
+    },
+    "charts.irregular_axis": {
+      "label": "Uneven axis",
+      "why": "Equal gaps, unequal values: slopes are distorted."
+    },
+    "charts.dual_axis": {
+      "label": "Two y-axes",
+      "why": "Any two lines can be made to 'correlate'."
+    },
+    "charts.short_window": {
+      "label": "Short time window",
+      "why": "Zoom out; the long run may say the opposite."
+    },
+    "charts.few_points": {
+      "label": "Few data points",
+      "why": "A trend through four points is fragile."
+    },
+    "charts.pie": {
+      "label": "Pie chart",
+      "why": "Angles are hard to compare; check they sum to 100%."
+    },
+    "charts.flat_aspect": {
+      "label": "Flattened chart",
+      "why": "Wide and short makes change look small."
+    },
+    "charts.tall_aspect": {
+      "label": "Stretched chart",
+      "why": "Tall and narrow makes change look dramatic."
+    },
+    "charts.no_axis_titles": {
+      "label": "No units",
+      "why": "Numbers with no units can mean anything."
+    },
+    "charts.no_source": {
+      "label": "No source",
+      "why": "Uncited chart; nothing to check."
+    },
+    "charts.svg_chart_ok": {
+      "label": "Chart checked",
+      "why": "No axis problems found; data selection unverified."
+    },
+    "charts.canvas_chart": {
+      "label": "Chart (uninspectable)",
+      "why": "Drawn on canvas; check the axes yourself."
+    },
+    "charts.embedded_chart": {
+      "label": "Embedded chart",
+      "why": "Inside a frame; open it directly to inspect."
+    },
+    "charts.image_chart": {
+      "label": "Chart image",
+      "why": "A picture of data; AI analysis can read it."
+    },
+    "tracker.session_replay": {
+      "label": "Records your visit",
+      "why": "Records your clicks and scrolling; some vendors also capture typing."
+    },
+    "tracker.fingerprinting": {
+      "label": "Fingerprinting",
+      "why": "Identifies your device even without cookies."
+    },
+    "tracker.social_pixel": {
+      "label": "Tells Facebook, others",
+      "why": "Tells ad platforms you visited, often tied to your account."
+    },
+    "tracker.advertising": {
+      "label": "Ad-tech",
+      "why": "Your attention is auctioned in real time."
+    },
+    "tracker.analytics": {
+      "label": "Analytics",
+      "why": "Measures what you do on the page."
+    },
+    "tracker.marketing_automation": {
+      "label": "Links your email",
+      "why": "Ties what you browse here to your email address."
+    },
+    "tracker.ab_testing": {
+      "label": "A/B testing",
+      "why": "Variants of this page are tested for conversion."
+    },
+    "tracker.push_notifications": {
+      "label": "Push vendor",
+      "why": "Infrastructure to pull you back after you leave."
+    },
+    "tracker.chat_widget": {
+      "label": "Chat bubble",
+      "why": "Interruption marketing feeding a CRM."
+    },
+    "tracker.consent_manager": {
+      "label": "Consent manager",
+      "why": "Shows the cookie banner; check it's symmetric."
+    },
+    "tracker.social_proof_widget": {
+      "label": "Social-proof vendor",
+      "why": "'Someone just bought' pop-ups come from a vendor service."
+    },
+    "tracker.urgency_widget": {
+      "label": "Countdown vendor",
+      "why": "Evergreen timers restart for every visitor."
+    },
+    "tracker.popup_capture": {
+      "label": "Pop-up vendor",
+      "why": "Exit-intent and scroll pop-ups as a service."
+    },
+    "tracker.bnpl": {
+      "label": "Pay-later widget",
+      "why": "Installments raise how much you spend."
+    },
+    "tracker.affiliate": {
+      "label": "Affiliate network",
+      "why": "Recommendations here are paid on purchase."
+    },
+    "tracker.native_ads": {
+      "label": "Chumbox ads",
+      "why": "'Around the web' boxes disguise ads as articles."
+    },
+    "tracker.data_broker": {
+      "label": "Data brokers",
+      "why": "Partners whose business is matching and reselling profiles."
+    },
+    "tracker.third_party_volume": {
+      "label": "Many third parties",
+      "why": "Dozens of companies learned you're here."
+    },
+    "source.affiliate_links": {
+      "label": "Affiliate links",
+      "why": "The publisher earns when you buy. Reviews are compensated."
+    },
+    "source.sponsored_content": {
+      "label": "Sponsored content",
+      "why": "One unit here is sponsored; read that unit as an ad."
+    },
+    "source.low_transparency": {
+      "label": "No masthead",
+      "why": "No author, date or contact: nobody to hold accountable."
+    },
+    "source.advocacy_no_funding_disclosure": {
+      "label": "Undisclosed funding",
+      "why": "Sounds like an institute; won't say who pays."
+    },
+    "source.ownership": {
+      "label": "Owner",
+      "why": "The owner's interests shape what gets covered."
+    },
+    "source.lean_extreme": {
+      "label": "Strongly partisan",
+      "why": "Raters place this outlet at the edge of the spectrum."
+    },
+    "incentives.business_model": {
+      "label": "Business model",
+      "why": "What this site earns from your visit."
+    },
+    "incentives.you_are_the_product": {
+      "label": "Funded by data",
+      "why": "Free to use and heavily tracked: your data pays for it."
+    },
+    "incentives.do_not_sell_link": {
+      "label": "Data sale link",
+      "why": "California law requires this link where data is sold or shared."
+    },
+    "incentives.data_brokers": {
+      "label": "Data brokers present",
+      "why": "Partners whose business is reselling you."
+    },
+    "incentives.lead_capture": {
+      "label": "Lead capture",
+      "why": "Contact details requested in exchange for a quote."
+    },
+    "incentives.tosdr_grade": {
+      "label": "Terms grade",
+      "why": "Independent rating of the terms you're agreeing to."
+    },
+    "incentives.policy_unavailable": {
+      "label": "No privacy policy",
+      "why": "Nothing says what happens to your data."
+    },
+    "ai": {
+      "label": "AI finding",
+      "why": "Found by the AI reading of the page."
+    },
+    "source.unknown_operator": {
+      "label": "Unnamed operator",
+      "why": "The site does not say who runs it."
+    },
+    "incentives.purchase_path": {
+      "label": "Purchase path",
+      "why": "How you pay, and whether you can get money back."
+    },
+    "ai.online_warnings": {
+      "label": "Online record",
+      "why": "What the web already says about this site."
+    },
+    "source.funded_section": {
+      "label": "Funded section",
+      "why": "A named organisation pays for this section or series."
+    },
+    "ai.outlet_dossier": {
+      "label": "Insider notes",
+      "why": "What the web says about how this outlet earns and behaves."
+    },
+    "policy.auto_renewal": {
+      "label": "Auto-renews",
+      "why": "The terms say the subscription renews unless you cancel first."
+    },
+    "policy.non_refundable": {
+      "label": "Non-refundable",
+      "why": "The terms say payments are not refunded."
+    },
+    "surveillance.consent_or_pay": {
+      "label": "Consent or pay",
+      "why": "Refusing cookies means paying for a subscription."
+    },
+    "source.affiliate_disclosure": {
+      "label": "Earns commission",
+      "why": "The page says it earns when you buy through its links."
+    },
+    "tracker.advertising.buy": {
+      "label": "Ad pixels",
+      "why": "This site buys ads that follow visitors elsewhere."
+    },
+    "tracker.ad_measurement": {
+      "label": "Ad verification",
+      "why": "These vendors count audiences and check ad placement."
+    },
+    "tracker.identity": {
+      "label": "Cross-site ID",
+      "why": "Builds a cross-site ID for you."
+    },
+    "tracker.bot_defence": {
+      "label": "Bot defence",
+      "why": "Your device is fingerprinted to tell humans from bots."
+    },
+    "tracker.fraud_check": {
+      "label": "Fraud check",
+      "why": "Your device is fingerprinted to score payment risk."
+    },
+    "tracker.reviews_widget": {
+      "label": "Reviews widget",
+      "why": "A review platform supplies the reviews shown here."
+    },
+    "tracker.funnel_builder": {
+      "label": "Funnel builder",
+      "why": "This page was made with a sales-funnel builder."
+    },
+    "source.named_operator": {
+      "label": "Named operator",
+      "why": "The page names who runs it."
+    }
+  }
+}

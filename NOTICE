@@ -1,0 +1,46 @@
+Subtext
+Copyright (C) 2026 The Subtext authors.
+
+Code (extension/ JavaScript, CSS and HTML; scripts/; test/; eval/) is licensed under the
+GNU Affero General Public License, version 3 or later. The text is in LICENSE.
+
+Rules, labels, the project's own data, documentation and test fixtures are licensed under
+Creative Commons Attribution-ShareAlike 4.0 International. The text is in LICENSE-DATA.
+
+The name "Subtext" and the logo are not covered by either licence.
+
+Test fixtures are synthetic. Where a fixture is served under a real outlet's name or address,
+the text is invented and the page says so in a banner.
+
+Data files that ship, their source and their licence
+
+  extension/rules/*.json
+      Written by this project. CC BY-SA 4.0.
+  extension/data/outlets.json
+      Compiled by hand by this project from public sources, most of them Wikipedia
+      (CC BY-SA). Each row links its sources. CC BY-SA 4.0.
+  extension/data/owners.json
+      Built from Wikidata by scripts/build-owners.py. Wikidata's data is CC0.
+  extension/data/sec-tickers.json
+      Built from the US Securities and Exchange Commission's public list of company tickers
+      by scripts/build-sec-tickers.js. A work of the US government, in the public domain.
+  extension/data/stat-series.json
+      Written by this project: a list of official statistical series and their ids.
+      CC BY-SA 4.0. The statistics themselves are fetched from their publishers at run time.
+  extension/data/category-playbook.json
+      Researched and written by this project, with links to the pages described and short
+      quotations from them. CC BY-SA 4.0. The quoted words belong to their publishers.
+  data/lists/*.json, data/reliability-ledger.json
+      Written by this project. CC BY-SA 4.0.
+
+Data files that are not in the public copy
+
+  Some data files are held out of the public copy until their licences or contents have
+  been reviewed. docs/PUBLISHING.md lists them. A copy that does include
+  extension/data/known-bad.json must also include extension/data/GPL-3.0.txt,
+  extension/data/COI-open-data-licence.txt and extension/data/NOTICE-lists.md, which
+  credit its sources and carry their licence texts.
+
+Third-party software
+
+  Playwright (Apache-2.0) is used for tests only and is not distributed with the extension.

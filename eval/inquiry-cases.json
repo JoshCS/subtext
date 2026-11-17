@@ -1,0 +1,1221 @@
+{
+  "purpose": "Original synthetic inquiry evaluation cases. Use the criteria for qualitative review after generation. The pages and linked records are fictional.",
+  "cases": [
+    {
+      "id": "dock-launch",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://alderquay.example/field-day",
+        "title": "The dock that gets trucks moving",
+        "mainText": "Alder Quay hosted its October field day for freight operators. Drivers put the TurnDock loading platform through three timed maneuvers at the Salt Reach yard. The fastest run was 72 seconds. See the replay or reserve a field trial. For more about the yard buildout, read our October bondholder update.",
+        "headings": [
+          "Watch the fastest run"
+        ],
+        "ctas": [
+          "Reserve a field trial",
+          "Watch replay"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://alderquay.example/investors/october",
+          "title": "October bondholder update",
+          "passages": [
+            "Bondholders will vote November 18 on whether to release the construction reserve for the second Salt Reach yard. The board recommends release and asks holders to return a proxy in favor.",
+            "The October TurnDock field day at Salt Reach forms part of the board’s case for releasing the reserve. Management cites the three timed maneuvers as evidence that the operating plan can fit the site. The proposed lease-up forecast assumes commercial operation of six bays."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://alderquay.example/products/turndock",
+          "title": "TurnDock equipment overview",
+          "passages": [
+            "TurnDock is a swiveling load platform for conventional freight trucks. This page lists the 2025 prototype’s dimensions and expected maintenance intervals. Speed varies with load and driver training. A provisional dealer map covers three regions. Commercial pricing is available by request after a site review."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Connect the operator demonstration to management’s use of it in asking bondholders to release reserve money.",
+          "Separate the fastest field trial maneuver from commercial throughput or lease-up evidence."
+        ],
+        "overreach": [
+          "Allege that the time was fabricated or that the vote was the only purpose of the event.",
+          "Treat the reserve vote as shareholder approval or an outcome already decided."
+        ]
+      }
+    },
+    {
+      "id": "print-credit",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://mossline.example/offers/studio",
+        "title": "Print your first run on us",
+        "mainText": "Get a $120 credit when you move your shop to Mossline Studio. Choose a paper weight, send in your artwork and give customers something worth keeping. Offer ends September 30, 2026. Read the Studio launch offer details before you upload.",
+        "headings": [
+          "Start with a $120 printing credit"
+        ],
+        "ctas": [
+          "Open a Studio account",
+          "Browse paper samples"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://mossline.example/terms/studio-2026",
+          "title": "Studio launch offer details, September 2026",
+          "passages": [
+            "Eligible new Studio customers pay the first $59 monthly membership charge on account creation. The $120 credit is applied after a customer completes three production orders of at least $75 each. It can be spent on the fourth and later orders within 90 days of issue.",
+            "The credit cannot be applied to the first three qualifying orders or to membership, delivery, tax, or proofing charges. The original billing method is charged for the qualifying orders."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://mossline.example/guides/paper-samples",
+          "title": "Paper and proofing guide",
+          "passages": [
+            "Mossline Studio produces small-format cards on three stock weights. The free sample pack uses standardized color strips. Customers can order a personalized press proof after uploading artwork, with separate shipping rates for rush orders. Proofs do not count as production runs. The artwork remains on file until shipment."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Translate the qualifying purchases and later redemption into what happens to a first-time customer.",
+          "Connect the gap directly to the headline’s first-run promise."
+        ],
+        "overreach": [
+          "Claim nobody can ever redeem the credit or the first three orders each cost exactly $75.",
+          "Treat $120 as an automatic signup discount."
+        ]
+      }
+    },
+    {
+      "id": "reservations-inbox",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://lanternhush.example/atlas-speaker",
+        "title": "Hold your Atlas before release day",
+        "mainText": "Atlas goes on sale in November. Hold yours now and be ready when we open the shop. The form asks for an email address only. Submit to receive a notice when orders open. Everyone who receives the notice uses the same public checkout. Your place at checkout is determined when you place your order.",
+        "headings": [
+          "Hold your Atlas",
+          "When ordering opens"
+        ],
+        "ctas": [
+          "Hold mine"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [],
+      "criteria": {
+        "useful": [
+          "Explain why this form signs the reader up for a notice without holding a unit or securing a queue position.",
+          "Use the actual sequence of submission, public checkout and order placement without requiring an outside source."
+        ],
+        "overreach": [
+          "Invent a plan to sell subscriber emails or an undisclosed inventory problem.",
+          "Treat the form as a preorder or assert an unshown fee."
+        ]
+      }
+    },
+    {
+      "id": "covered-work",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://ferrencold.example/energy",
+        "title": "Every Ferren Cold delivery is powered by the sun",
+        "mainText": "From our depot doors to your loading bay, your order goes the distance on sunshine. We have completed the first year of the 2026 Sun Ledger agreement. Download our annual accounting statement or see photos from the 2024 depot pilot.",
+        "headings": [
+          "Your delivery, on sunshine"
+        ],
+        "ctas": [
+          "Get a delivery quote",
+          "Annual accounting statement"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://ferrencold.example/resources/pilot-2024",
+          "title": "2024 depot solar pilot wrap-up",
+          "passages": [
+            "From February to May 2024 one truck at the Fenwick depot was charged at a dedicated rooftop solar carport. Trucks elsewhere were outside this trial. This pilot ended May 31. The depot used a direct meter to isolate daytime charging energy and did not participate in the Sun Ledger agreement. The meter was disconnected after the trial."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://ferrencold.example/resources/sun-ledger-2026",
+          "title": "2026 Sun Ledger accounting statement",
+          "passages": [
+            "The company purchased certificates for 4,800 MWh, matching annual grid electricity use at the distribution centers. The program does not trace electricity to individual outlets or match generation by time of use.",
+            "Line-haul carriers and local subcontractors are outside the boundary. Vehicle fuel, electricity drawn for charging the company’s vans, and refrigeration during transport are accounted for separately and receive no certificates under this agreement."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Distinguish annual certificate matching at the centers from energy used on a specific shipment.",
+          "Use the current exclusions for vehicles and carriers and keep the earlier pilot separate."
+        ],
+        "overreach": [
+          "Infer that trucks burn diesel, that no solar electricity was generated, or that the 2024 pilot supplies current coverage.",
+          "Present the certificates as physical power traced to delivery vehicles."
+        ]
+      }
+    },
+    {
+      "id": "tuition-reward",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://weftforge.example/operator-academy",
+        "title": "Train here and take your skills anywhere",
+        "mainText": "A place in the Weft Forge Operator Academy comes with a $2,400 training award. Our workshop training puts you in a position to choose your next move. Read the academy calendar and the award agreement before applying for the winter intake.",
+        "headings": [
+          "A paid start in technical weaving"
+        ],
+        "ctas": [
+          "Apply for the winter intake"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://weftforge.example/academy/calendar",
+          "title": "Winter workshop calendar",
+          "passages": [
+            "Workshop groups meet on Mondays and Thursdays at the Beck Mill. Units include loom setup, yarn handling, job costing and a practical assessment. Attendees have access to the shop during each scheduled class. Places are allocated by application date within each skill level. The final assessment takes one morning."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://weftforge.example/academy/award",
+          "title": "Training award agreement",
+          "passages": [
+            "The $2,400 award is paid by Weft Forge to the training center on each participant’s behalf. For a participant who accepts a Weft Forge job offer, $200 is forgiven after each completed month of employment.",
+            "A participant who declines a job offer must reimburse the award. A participant who resigns before twelve completed months owes the remaining balance. Weft Forge waives repayment when it does not offer a qualifying position or terminates the participant without cause."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Describe the award as conditional support that may create a repayment decision when an offered job is declined or left early.",
+          "Keep the waiver for no qualifying offer or termination without cause alongside the conditions."
+        ],
+        "overreach": [
+          "Call it a cash stipend or assert nobody may take another job.",
+          "Give a legal conclusion about enforceability or assert a private motive."
+        ]
+      }
+    },
+    {
+      "id": "clear-renewal",
+      "domain": "corporate",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://reedcabinet.example/workshop-pass",
+        "title": "A $12 week in the Reed Cabinet workshop",
+        "mainText": "The $12 workshop pass covers seven days of entry. At purchase choose either a single week or weekly renewal. Renewal is $12 each week and defaults off. Both options show the same safety induction. The purchase confirmation identifies your selection and explains how to switch it off before the next charge.",
+        "headings": [
+          "Single week or weekly renewal"
+        ],
+        "ctas": [
+          "Buy one week",
+          "Start weekly renewal"
+        ],
+        "credits": [
+          "Run and sold by Reed Cabinet"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://reedcabinet.example/membership/pass-terms",
+          "title": "Workshop pass payment terms",
+          "passages": [
+            "A single-week pass expires at the end of the seventh day. Weekly renewal is enabled only if the purchaser chooses the button marked Start weekly renewal. The renewal price is $12 every seven days, charged to the payment method supplied at checkout. Customers can disable future renewal in their account before their next charge."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Recognize the explicit choice between one week and renewal.",
+          "Treat the terms as confirmation of the choice already described on the page."
+        ],
+        "overreach": [
+          "Call it a hidden recurring charge or imply renewal is preselected.",
+          "Treat the company credit as outside sponsorship."
+        ]
+      }
+    },
+    {
+      "id": "public-plant-tour",
+      "domain": "corporate",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://brickheron.example/open-workshop",
+        "title": "Come see how the kiln room works",
+        "mainText": "Brick Heron is opening its tile plant to visitors for a Saturday tour. Tours leave every half hour from the front office. There are twelve places per group because everyone borrows a headset. Reserve online or ask about availability at the door. The showroom will be open afterward for visitors who want to browse.",
+        "headings": [
+          "Saturday plant tours",
+          "Free entry"
+        ],
+        "ctas": [
+          "Reserve a tour place"
+        ],
+        "credits": [
+          "Hosted by Brick Heron Tile"
+        ],
+        "signals": {}
+      },
+      "documents": [],
+      "criteria": {
+        "useful": [
+          "Recognize a hosted plant tour with an explained capacity and optional showroom visit.",
+          "A minimal account or no deeper finding is appropriate."
+        ],
+        "overreach": [
+          "Invent false scarcity, a purchase obligation or a disguised deposit.",
+          "Treat optional browsing as proof of a separate scheme."
+        ]
+      }
+    },
+    {
+      "id": "similar-lender-name",
+      "domain": "corporate",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://brindlevolt.example/field-pack",
+        "title": "BrindleVolt Field Pack ships next week",
+        "mainText": "Published October 11, 2026. The Field Pack has finished final assembly at our Plover Park workshop. Orders for the standard battery pack begin shipping next week. Express your interest in an additional charging cable while supplies last.",
+        "headings": [
+          "Standard pack shipping from Plover Park"
+        ],
+        "ctas": [
+          "Ask for a shipping estimate",
+          "Request a charging cable"
+        ],
+        "credits": [
+          "BrindleVolt Mobility Ltd."
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://eidercapital.example/notices/brindle-2026",
+          "title": "October 2026 lender notice for Brindle Voltage Storage Inc.",
+          "passages": [
+            "Borrower: Brindle Voltage Storage Inc. Facility address: Renwick Trade Campus. Under the October amendment the borrower must obtain lender consent before exporting Falcon line modules held at its East Pier warehouse. This notice applies only to the warehouse assets listed in Annex A. It does not describe consumer charging cables or packs made by other companies."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Recognize that the notice concerns a different entity, facility and product.",
+          "Keep shipping as a company-stated schedule with no matching independent confirmation or contradiction."
+        ],
+        "overreach": [
+          "Transfer the restriction to BrindleVolt Mobility or the Field Pack.",
+          "Use similar names to infer an affiliate relationship or likely shipment freeze."
+        ]
+      }
+    },
+    {
+      "id": "prior-beta",
+      "domain": "corporate",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://sableecho.example/voice-transcription",
+        "title": "Instant captions for the whole team",
+        "mainText": "Sable Echo Teams is now available. Start captions in any Teams room with one click. Each participant can turn captions on separately. The new app launches June 2026. Existing customers are invited to move their meetings over when they are ready.",
+        "headings": [
+          "Turn on captions in Teams"
+        ],
+        "ctas": [
+          "Try Sable Echo Teams"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://sableecho.example/support/caption-beta-archive",
+          "title": "Caption beta test notes from December 2024",
+          "passages": [
+            "For the December 2024 closed test, all Beta Rooms recordings and generated captions were retained for 90 days to let invited testers annotate errors. This pilot was available only inside the original Sable Echo desktop app. Beta Rooms closed January 5, 2025, and the workspace was removed. This archived page describes that test configuration only."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Identify the different product generation and closed-test date.",
+          "Keep present retention unknown given the material supplied."
+        ],
+        "overreach": [
+          "Claim today’s captions are retained for 90 days or deleted immediately.",
+          "Treat a product launch as evidence of a specific privacy practice."
+        ]
+      }
+    },
+    {
+      "id": "visible-customer-voice",
+      "domain": "corporate",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://orchidbench.example/software/marsh-co",
+        "title": "How Marsh & Co books its fitting rooms",
+        "mainText": "In this customer profile, Marsh & Co owner Nia Ren describes her staff’s experience after switching to Orchid Bench. “Our calendar took half as long to update during July,” Ren says. The estimate comes from her team, which did not keep time logs. Orchid Bench offered Marsh & Co two free months in return for permission to publish this profile.",
+        "headings": [
+          "Marsh & Co customer profile"
+        ],
+        "ctas": [
+          "See Orchid Bench scheduling"
+        ],
+        "credits": [
+          "Published by Orchid Bench. Marsh & Co received two months of service for permission to publish."
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://orchidbench.example/customers/marsh-method",
+          "title": "How the Marsh & Co quote was collected",
+          "passages": [
+            "Nia Ren emailed her estimate after the customer team asked about calendar administration. Ren told Orchid Bench it reflected her impression from July scheduling, with no timing logs and no comparison to other stores. Marsh & Co approved the words and received two months of service after signing the release. The profile identifies Ren as the sole source."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Preserve the distinction between a customer estimate and a vendor performance measurement.",
+          "Recognize that the incentive, speaker and evidence limits are already visible."
+        ],
+        "overreach": [
+          "Attribute the estimate to independent testing or generalize it to all users.",
+          "Call the compensation hidden or use it to conclude that Ren was lying."
+        ]
+      }
+    },
+    {
+      "id": "position-rules",
+      "domain": "comparison",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://sundialbroadband.example/city/lorne",
+        "title": "The best broadband in Lorne, ranked",
+        "mainText": "Our speed team measured the Lorne plans and picked three providers to make getting online easier. The current results put HarrierNet first with the Best Overall badge, then Reed Fibre and Dockwave. Read the plan-testing notes and provider participation handbook below the results.",
+        "headings": [
+          "Our top three",
+          "Best Overall HarrierNet"
+        ],
+        "ctas": [
+          "Check HarrierNet availability",
+          "Compare all 12 test results"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://sundialbroadband.example/partners/handbook",
+          "title": "Provider participation handbook",
+          "passages": [
+            "The comparison page’s first card and Best Overall badge are a package assigned to the eligible provider with the highest weekly placement payment. The remaining featured cards follow the panel’s normalized performance score. Any eligible provider can buy the package regardless of its score. The all-results table remains ordered by that score."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://sundialbroadband.example/methods/lorne",
+          "title": "Lorne plan-testing notes",
+          "passages": [
+            "Twelve Lorne plans were measured at three addresses. The normalized score combines evening speed and latency. Reed Fibre scored 91, Dockwave 88, and HarrierNet 72. Retests are run when a plan changes speed tier. Data collection was carried out in June 2026. Tests used each provider’s standard router without optional mesh units."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Distinguish the purchasable first card and badge from the measured ordering in the complete table.",
+          "Use both records if naming the discrepancy between the displayed winner and a higher-scoring provider."
+        ],
+        "overreach": [
+          "Declare that every position was bought or that HarrierNet cannot perform well.",
+          "Invent a payment amount or allege manipulated testing."
+        ]
+      }
+    },
+    {
+      "id": "bike-city-filter",
+      "domain": "comparison",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://rackready.example/best-subscriptions",
+        "title": "Find the best bike subscription in your city",
+        "mainText": "RackReady compares subscriptions that deliver where you live. Enter your city and we’ll show your matches. Only subscriptions with an application you can finish on RackReady appear in these results. Local workshops that take bookings by phone or on their own site are outside this list. Sort results by monthly price.",
+        "headings": [
+          "Bike subscriptions near you"
+        ],
+        "ctas": [
+          "Find my matches",
+          "Apply through RackReady"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [],
+      "criteria": {
+        "useful": [
+          "Explain why the cheapest in-platform result need not be the cheapest local subscription.",
+          "Tie that limit to the explicit application rule and distinguish sorting from market coverage."
+        ],
+        "overreach": [
+          "Assert that a specific cheaper provider exists or that excluded workshops refused to pay.",
+          "Call the published eligibility rule secret or the sort rigged."
+        ]
+      }
+    },
+    {
+      "id": "water-first-invoice",
+      "domain": "comparison",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://cisternindex.example/home-filter-deals",
+        "title": "The lowest-cost filter plan is ClearGlade",
+        "mainText": "Our cost winner starts at $18, next to Pike Water at $25 and Lute Basin at $27. The plans serve homes of up to four people. Each includes one cartridge with a recurring shipment option. All offers were checked July 10, 2026. See the price file and the lab worksheet for details.",
+        "headings": [
+          "Lowest cost ClearGlade $18",
+          "Our filter test"
+        ],
+        "ctas": [
+          "View ClearGlade offer"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://cisternindex.example/data/july-price-file",
+          "title": "July price file used for the cost column",
+          "passages": [
+            "The table reproduces the first invoice for each partner’s recurring shipment offer. ClearGlade’s $18 opening price is a one-time promotion. Subsequent monthly shipments cost $39. Pike Water charges $25 per month from the first invoice. Lute Basin charges $27 per month from the first invoice. All three offers can be stopped before a new shipment."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://cisternindex.example/lab/filter-worksheet",
+          "title": "Filter lab worksheet",
+          "passages": [
+            "The worksheet records flow rate before and after 200 liters of test water and includes notes on housing dimensions. The lab tested retail units and did not compare the cost of replacement cartridges. Samples were assigned letters during measurement. A separate file maps the letters to retail models and includes the batch numbers."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Explain why ClearGlade is cheapest to start but dearer per renewal.",
+          "Ground any longer-window cost in a stated shipment count or the period the reader intends to subscribe."
+        ],
+        "overreach": [
+          "Claim a minimum subscription term or hidden cancellation penalty.",
+          "Treat cheaper as a result about filtration quality."
+        ]
+      }
+    },
+    {
+      "id": "shared-booking-desk",
+      "domain": "comparison",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://staysift.example/bexley-weekend",
+        "title": "Compare Bexley’s weekend booking services",
+        "mainText": "The directory compares four online reservation services. It lists Steeproom, Basketbed, Ash Lantern and Rainhouse as separate services, showing each logo, room rate and a book-here button. Read our merchant appendix for how the services handle your reservation.",
+        "headings": [
+          "Four ways to reserve a weekend",
+          "Find a room under $140"
+        ],
+        "ctas": [
+          "Book via Steeproom",
+          "Book via Basketbed",
+          "Book via Ash Lantern",
+          "Book via Rainhouse"
+        ],
+        "credits": [
+          "Directory run by StaySift"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://staysift.example/merchant-appendix",
+          "title": "Merchant and fulfillment appendix",
+          "passages": [
+            "StaySift Reservations LLC is the merchant of record for Steeproom and Basketbed. Both brands dispatch changes and cancellations to the same StaySift service desk and draw rooms from the same base allotment. Their brand sites can display different promotions and cancellation terms. Ash Lantern and Rainhouse take their own payments and fulfill their own reservations."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://staysift.example/reviews/policy",
+          "title": "How we publish room reviews",
+          "passages": [
+            "Reviewers receive an email after a booking is marked complete. Reviews are screened for personal information and duplicate submissions. Review volume varies by season. A property can answer a review with an account verified by StaySift. A response does not change the score or remove a review. Reviewers can amend their own posts."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Explain how two services route purchases through the directory operator and share inventory and support.",
+          "Distinguish shared fulfillment from identical deals and keep the other two services separate."
+        ],
+        "overreach": [
+          "Claim all four share a parent or that every deal must match.",
+          "Infer fabricated reviews or a ranking payoff from shared fulfillment."
+        ]
+      }
+    },
+    {
+      "id": "installer-matches",
+      "domain": "comparison",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://rainspancompare.example/quote-quiz",
+        "title": "See your best three gutter installers",
+        "mainText": "Tell us your street and how many stories your home has. We’ll match you with the best three installers for the job. Our pre-quote form asks for a name and phone number. There’s no commitment to hire. Read how matches are sent before starting.",
+        "headings": [
+          "Answer two questions for your local match"
+        ],
+        "ctas": [
+          "Match me with installers"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://rainspancompare.example/partners/match-delivery",
+          "title": "How matches are sent",
+          "passages": [
+            "A provider enters the eligible pool by enrolling in the lead delivery program and setting a postcode, building height limit and lead budget. Eligible providers are chosen in rotation while their lead budgets remain open. Customer ratings, prior job quality and current quote prices do not enter the rotation.",
+            "Submitting a match request sends the address, name, phone number and building height to up to three eligible providers for direct follow-up."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Explain that the inquiry goes to available enrolled providers within area and height filters without ranking prices or quality.",
+          "Identify what gets sent to whom when the reader requests a match."
+        ],
+        "overreach": [
+          "Claim the highest bidder always wins or that data reaches every local business.",
+          "Assert a call means a job was booked or that enrolled providers are low quality."
+        ]
+      }
+    },
+    {
+      "id": "labeled-member-offers",
+      "domain": "comparison",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://pocketbay.example/member-offers",
+        "title": "Compare offers from five Pocket Bay member shops",
+        "mainText": "This list covers the five camera shops in our member network. Shops outside the network do not appear. We earn $4 per completed reservation from any of the five. The table starts in alphabetical order. Use the columns to compare pickup prices and dates. Each shop sets its own prices.",
+        "headings": [
+          "Member offers only",
+          "Our reservation fee"
+        ],
+        "ctas": [
+          "Sort by pickup price",
+          "Reserve at a member shop"
+        ],
+        "credits": [
+          "Pocket Bay earns $4 per completed reservation"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://pocketbay.example/network/merchant-rules",
+          "title": "Membership and reservation fee schedule",
+          "passages": [
+            "The five shops participating in Pocket Bay’s camera reservation list pay the same $4 for each completed rental. They do not pay to appear higher in the list. The published member list matches the participating shops as of September 2026. An alphabetical list is shown until a visitor chooses one of the column sorts."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Recognize that the universe of shops and the reservation payment are already explicit.",
+          "If useful, note that the source confirms the same fee and initial order."
+        ],
+        "overreach": [
+          "Claim $4 buys a higher rank or allege a hidden affiliate deal.",
+          "Describe the list as covering all camera shops."
+        ]
+      }
+    },
+    {
+      "id": "regular-ferry-table",
+      "domain": "comparison",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://tidetableoffice.example/weekend-ferries",
+        "title": "Compare Saturday crossings between the East and West Quays",
+        "mainText": "The harbor information desk lists the passenger crossings from all three operators serving the route this timetable season. The departures table defaults to time order. Add a bicycle to display the separate bicycle fare. Tickets are sold by each operator at the quay or on its own site.",
+        "headings": [
+          "Outbound departures",
+          "Passenger and bicycle prices"
+        ],
+        "ctas": [
+          "Show fares for a bicycle"
+        ],
+        "credits": [
+          "Harbor information desk"
+        ],
+        "signals": {}
+      },
+      "documents": [],
+      "criteria": {
+        "useful": [
+          "Recognize a neutral timetable and price comparison with a clear route and period.",
+          "Keep any mention of the bicycle control to the fare it displays."
+        ],
+        "overreach": [
+          "Treat default departure order as preferred placement or affiliate steering.",
+          "Suggest that showing a bicycle fare places a booking."
+        ]
+      }
+    },
+    {
+      "id": "acquisition-names",
+      "domain": "comparison",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://boltroster.example/service-check",
+        "title": "Compare service plans for Boltroster presses",
+        "mainText": "September 2026 edition. Boltroster Press Club publishes service plans for model R4 presses. The table lists three maintenance vendors in ascending order of callout fee. Use each vendor’s website to check availability. About this club is linked below the table.",
+        "headings": [
+          "Model R4 callout fees"
+        ],
+        "ctas": [
+          "Compare vendor availability"
+        ],
+        "credits": [
+          "Published by Boltroster Press Club, registration 88215"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://scribenorth.example/news/roster-acquisition",
+          "title": "Scribe North completes purchase of Bolt Roster Media",
+          "passages": [
+            "On September 1, 2026 Scribe North completed its purchase of Bolt Roster Media Inc., registration 24419. Bolt Roster Media runs a mailing-list service for amateur baseball leagues. The purchase includes the League Roster mailing platform and its customer accounts. The transaction contains no assets connected to printing presses or maintenance services."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://boltroster.example/about",
+          "title": "About Boltroster Press Club",
+          "passages": [
+            "Boltroster Press Club, registration 88215, is a member group for owners of Boltroster printing presses. Volunteers assemble its fee table from service provider submissions. The club publishes those entries monthly. Members can send corrections to the club administrator. The club does not schedule or perform maintenance visits."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Distinguish the two registrations and businesses before connecting the acquisition to the page.",
+          "Treat the table as submitted fees, leaving ownership implications unsupported by these documents."
+        ],
+        "overreach": [
+          "Claim the club was acquired by Scribe North or the club controls any listed provider.",
+          "Treat the acquisition as proof of a financial motive for ascending callout fees."
+        ]
+      }
+    },
+    {
+      "id": "archived-weights",
+      "domain": "comparison",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://stillmeter.example/quiet-dehumidifiers",
+        "title": "Quietest dehumidifiers for small bedrooms, 2026 edition",
+        "mainText": "Our October 2026 table shows median decibels on low mode at one meter. It labels the Evenside 12 as quietest among the seven units tested. The minimum, median and maximum appear next to each product. Older ranking records are still available through the archive.",
+        "headings": [
+          "2026 low-mode sound readings",
+          "Seven units tested"
+        ],
+        "ctas": [
+          "Open the test archive"
+        ],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://stillmeter.example/archive/2022-sound-ranking",
+          "title": "2022 sound ranking and partner weights",
+          "passages": [
+            "The 2022 workshop dehumidifier guide listed full-speed noise for models larger than 30 liters per day. Its recommended score was weighted 70 percent for noise and 30 percent for an active retailer partnership. This scoring rubric applied to the 2022 workshop chart only. The old guide is retained for readers tracing earlier recommendations."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Separate the archived workshop recommendation score from the current bedroom low-mode readings.",
+          "Do not make the absence of current scoring evidence a reason to allege partnership influence."
+        ],
+        "overreach": [
+          "Apply the 30 percent weight to the 2026 chart.",
+          "Claim the 2022 scoring approach proves the current measurements were fabricated."
+        ]
+      }
+    },
+    {
+      "id": "explained-sort",
+      "domain": "comparison",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://plancloth.example/patch-tests",
+        "title": "Which repair patches lasted longest in our wash test?",
+        "mainText": "We washed six denim repair patches in identical machines for 25 cycles. Each chart starts with the patch that detached the least. A standalone orange card above the test is labeled paid ad from Hemworks. Hemworks made one of the tested patches, which finished fourth. No patches were submitted by manufacturers.",
+        "headings": [
+          "Ad from Hemworks",
+          "Detached area after 25 washes"
+        ],
+        "ctas": [
+          "Sort by detached area",
+          "View test photos"
+        ],
+        "credits": [
+          "Paid ad from Hemworks on the orange card only."
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://plancloth.example/protocols/denim-25",
+          "title": "Denim patch wash protocol and score sheet",
+          "passages": [
+            "The testing desk bought all six packages from retail stock. Patches were sewn onto six pieces from one bolt of denim. Staff photographed each piece after 25 identical wash cycles and measured the detached area. Hemworks placed fourth on that measure. Advertising is managed separately and did not supply the units or protocol."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Keep the labeled advertisement separate from the rankings and recognize the fourth-place result.",
+          "Limit the test result to detached area under this protocol."
+        ],
+        "overreach": [
+          "Treat the whole comparison as paid by Hemworks or allege the scores were reordered.",
+          "Treat retail purchase as proof that the protocol predicts every kind of repair life."
+        ]
+      }
+    },
+    {
+      "id": "neighborhood-invite",
+      "domain": "social",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://loopline.example/p/5am36",
+        "title": "Local creators are all heading to the Laurel Market preview",
+        "mainText": "I keep seeing these little paper lanterns on the feed. We had the whole upper floor to ourselves before doors opened. Laurel Market opens next Friday. Save this for your weekend walk. There’s a copy of the preview invite in the market’s press room if you want the details.",
+        "headings": [],
+        "ctas": [
+          "Save this post",
+          "See Laurel Market hours"
+        ],
+        "credits": [
+          "Post by Lina Maps"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://laurelmarket.example/press/preview-host-invite",
+          "title": "Laurel Market creator preview host invitation",
+          "passages": [
+            "Lina Maps is on the preview guest list with the other accounts named in the host schedule. Each listed creator is offered a tour and a $50 market voucher in return for publishing one post before opening. A market employee will give guests an envelope of paper lanterns for the photos. Creators are asked to provide a post link, but hosts do not approve captions."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Read the repeated early posts as at least partly produced by an organized preview with a posting condition, including this named creator.",
+          "Keep coordination and the voucher distinct from claims about each creator’s opinion or the actual reception after opening."
+        ],
+        "overreach": [
+          "Claim every positive post was bought or the market approved this caption.",
+          "Say the invitation proves a voucher was redeemed or that the market will be unpopular."
+        ]
+      }
+    },
+    {
+      "id": "audience-before-hearing",
+      "domain": "social",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://townwire.example/p/vale-park",
+        "title": "Help make Vale Park a reality before Monday",
+        "mainText": "Our neighborhood needs a place to swim. Get a $20 Founding Neighbor badge before the Monday hearing. Every badge sends a signal that people are ready for the pool. We’ll bring the total with us. Here are the hearing agenda and badge questions.",
+        "headings": [],
+        "ctas": [
+          "Get a Founding Neighbor badge",
+          "See the hearing agenda"
+        ],
+        "credits": [
+          "Post by Vale Park Friends"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://valecouncil.example/meetings/pool-hearing",
+          "title": "Monday Vale pool hearing agenda",
+          "passages": [
+            "The parks commission will take public testimony Monday on whether to commission a site study. An interested resident can sign up to speak without paying a fee. The agenda contains no construction authorization, site selection or funding vote. The commission accepts letters for the record through 5 p.m. on Monday."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://valeparkfriends.example/fundraising/badge-questions",
+          "title": "Founding Neighbor badge questions",
+          "passages": [
+            "Badge payments go to Vale Park Friends, not the council or the parks commission. Proceeds reimburse event printing and hall rental. The group will report the number of badges sold in its testimony. A purchase is not filed as individual public comment, and payment does not reserve access to the pool if it is built."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Distinguish funding the group’s organizing and contributing to its support count from paying toward construction or submitting public testimony.",
+          "Distinguish the study decision on Monday from construction approval and identify the free route for individual testimony if mentioned."
+        ],
+        "overreach": [
+          "Suggest the badge buys a commission vote or priority use of the pool.",
+          "Claim the organizers are diverting money earmarked for construction."
+        ]
+      }
+    },
+    {
+      "id": "one-reach-reopened",
+      "domain": "social",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://rivercircle.example/p/alehouse-reach",
+        "title": "The Alder flood route is finally open again",
+        "mainText": "Just back from the north bank. The River Office says “the route is now open” so you can get back on the Alder flood route this weekend. Share with your riding group. I attached the October access notice and left the link to the spring map in my profile.",
+        "headings": [],
+        "ctas": [
+          "Share with your riding group",
+          "October access notice"
+        ],
+        "credits": [
+          "Post by Weekend Mudguards"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://alderriveroffice.example/notices/october-access",
+          "title": "October Alder access notice",
+          "passages": [
+            "The Alder maintenance route at Alehouse Reach between ferry gate and marker 6 passed its surface inspection this morning, and the route is now open to walking and cycling on that section. The lower flood route between marker 6 and Lath Bridge remains closed following damage to a retaining wall. Use the signed public road detour if continuing downstream."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://alderriveroffice.example/maps/spring-alder",
+          "title": "Spring 2026 Alder access map",
+          "passages": [
+            "This map records public access as of April 6, 2026, before the August flood. The flood route runs continuously from ferry gate to Lath Bridge under ordinary conditions. Markers 1 through 6 lie on the north bank above Alehouse Reach. Cross-check with seasonal access notices before following any section of the map."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Connect the quotation to the specific reopened section and note that it does not extend to the still-closed lower section.",
+          "Use the current notice over the spring map and give the resulting route implication."
+        ],
+        "overreach": [
+          "Say the office never announced a reopening or that the whole route remains closed.",
+          "Assert that the poster intentionally changed the notice or infer closure of unrelated trails."
+        ]
+      }
+    },
+    {
+      "id": "reusable-jar-link",
+      "domain": "social",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://squarefeed.example/p/pantry-jars",
+        "title": "The jars I bought after sorting the pantry",
+        "mainText": "I ordered these Merrow jars for my bulk flour. The seal clicks instead of twisting. If you’re curious, this link takes you to the same kit and knocks $6 off. I put a link to the Merrow kitchen circle under the video for anyone asking where to find the style guide.",
+        "headings": [],
+        "ctas": [
+          "Get $6 off the same kit"
+        ],
+        "credits": [
+          "Post by Nine Shelves, discount through the post link"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://merrowhome.example/kitchen-circle/commission",
+          "title": "Merrow Kitchen Circle link guide",
+          "passages": [
+            "Nine Shelves uses the campaign token NINE6 for the glass pantry kit. The token reduces an eligible shopper’s first order by $6 and credits Nine Shelves with $9 for each completed and retained purchase made through it. Creators write their own captions and may use products they purchased themselves. Commission does not apply to returns."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Explain that using the discount also creates a sale-based payment for the poster, an incentive distinct from the buyer’s discount.",
+          "Keep the commercial link separate from whether the poster bought the jars or likes them."
+        ],
+        "overreach": [
+          "Call the item a gift or assume the opinion is fabricated.",
+          "Treat the payment as earned from clicks alone or deny the buyer’s discount."
+        ]
+      }
+    },
+    {
+      "id": "petition-and-mailing-list",
+      "domain": "social",
+      "caseType": "interpretation",
+      "page": {
+        "url": "https://circleboard.example/p/studio-hours",
+        "title": "Tell the Arts Board to keep the pottery studio open late",
+        "mainText": "Add your name to show the Arts Board that you use the studio after work. This form joins your name and postcode to the signers list. Under the form there is a checked box reading Send me updates from Clay Doors and allied studio campaigns. Clear the box if you only want to sign.",
+        "headings": [
+          "Sign for later studio hours"
+        ],
+        "ctas": [
+          "Add my name"
+        ],
+        "credits": [
+          "Posted by Clay Doors volunteers"
+        ],
+        "signals": {}
+      },
+      "documents": [],
+      "criteria": {
+        "useful": [
+          "Identify signing and receiving campaign updates as two actions bundled by the checked default.",
+          "Explain the concrete choice available to a reader who wants only to sign."
+        ],
+        "overreach": [
+          "Claim the signature is void if the box is cleared or that every signer affirmatively chose updates.",
+          "Infer that addresses are sold or identify unnamed recipient organizations."
+        ]
+      }
+    },
+    {
+      "id": "attributed-workshop-quote",
+      "domain": "social",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://loopline.example/p/marsh-walk-notes",
+        "title": "Two proposals from last night’s marsh workshop",
+        "mainText": "Quick notes from the meeting. “The walkway should be fenced before summer,” said the reserve warden. The kayak group’s secretary argued for signs first. The facilitator recorded both proposals for a later committee discussion. The workshop transcript is available. These are participant positions, no decision was taken.",
+        "headings": [],
+        "ctas": [
+          "Open workshop transcript"
+        ],
+        "credits": [
+          "Post by Jana Kiln, workshop note taker"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://marshcommittee.example/meetings/workshop-transcript",
+          "title": "Marsh workshop transcript",
+          "passages": [
+            "Reserve warden: The walkway should be fenced before summer. Kayak secretary: Try signs first and look at the crossing counts in June. Facilitator: I am recording both options for the committee agenda. We are not voting tonight. A cost estimate and a staff access review will be circulated with the agenda next month."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Keep the fencing proposal attributed to the warden and the other position to the kayak group.",
+          "Recognize that the post and transcript both distinguish proposals from a decision."
+        ],
+        "overreach": [
+          "Assign the fencing view to the poster or describe it as an adopted rule.",
+          "Treat the note taker as secretly advocating for a fence."
+        ]
+      }
+    },
+    {
+      "id": "ordinary-repair-notice",
+      "domain": "social",
+      "caseType": "straightforward",
+      "page": {
+        "url": "https://townwire.example/p/pine-step-stairs",
+        "title": "Pine Step library stairs are closed for two days",
+        "mainText": "The upper entrance staircase is being resealed Tuesday and Wednesday. Use the street-level door beside the bike rack. Return bins and the elevator stay open. If you are bringing a stroller, there is a flat entrance from Gable Street.",
+        "headings": [],
+        "ctas": [
+          "View entrances on map"
+        ],
+        "credits": [
+          "Post by Pine Step Library"
+        ],
+        "signals": {}
+      },
+      "documents": [],
+      "criteria": {
+        "useful": [
+          "Treat the post as a first-party access notice with an alternative route.",
+          "A minimal reading is sufficient."
+        ],
+        "overreach": [
+          "Infer that the library is closing or that the elevator is inaccessible.",
+          "Treat the map button as a tracking or persuasion mechanism absent evidence."
+        ]
+      }
+    },
+    {
+      "id": "dated-primary-tally",
+      "domain": "social",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://squarefeed.example/p/october-field-pass",
+        "title": "October 2026 field pass check-in",
+        "mainText": "They say there are still plenty of slots for the Saturday ridge walk this month. I bought two passes this morning. The recreation service has an old allotment table on its site if you’re wondering how the pass system started.",
+        "headings": [],
+        "ctas": [
+          "Check current pass availability"
+        ],
+        "credits": [
+          "Post by Ridge Wanderer"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://ridgeparks.example/reports/launch-allotment",
+          "title": "Official ridge walk allotment, October 2023 launch",
+          "passages": [
+            "All 60 Saturday ridge walk passes issued for October 2023 were used. Launch limits were established for that month while the recreation service tested the permit system. This report records the first month only. Current permit allotments may differ by date and by whether the east trail is accessible. The report does not track future bookings."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Leave current availability unresolved given an anecdotal purchase and an official table for a different year.",
+          "Separate the number issued or used in the launch month from inventory today."
+        ],
+        "overreach": [
+          "Use the official source to claim current slots are sold out or capped at 60.",
+          "Use one buyer’s purchase to confirm broad current availability."
+        ]
+      }
+    },
+    {
+      "id": "same-short-name",
+      "domain": "social",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://circleboard.example/p/copper-music",
+        "title": "Copper Studio’s new drum classes start Tuesday",
+        "mainText": "We toured the Copper Studio at 11 Pilot Lane this afternoon. The ground-floor rooms are getting new drum kits for evening classes. The host gave us the new signup link. Our group has heard the name in the news, but I only visited this location.",
+        "headings": [],
+        "ctas": [
+          "See the drum class schedule"
+        ],
+        "credits": [
+          "Post by Lorne Music Walk"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://lorneartsboard.example/minutes/copper-house",
+          "title": "Board minutes: Copper Studio renovation grant",
+          "passages": [
+            "The board approved a renovation grant for Copper Studio Arts Center at 80 Willow Cross. It pays for roof repairs and a damp-proof storage room for paintings. Copper Studio Arts Center administers the award for its Willow Cross address only. The grant schedule lists no leased satellite space or program costs, and renovation begins in December."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Keep the arts-center grant tied to the named grantee and Willow Cross address.",
+          "Treat the relationship between the similarly named venues and the funding of the kits as unresolved."
+        ],
+        "overreach": [
+          "Claim the grant paid for Pilot Lane drum kits or that the project misused restricted funds.",
+          "Assert that the venues share an operator or that they definitively do not."
+        ]
+      }
+    },
+    {
+      "id": "cropped-time-count",
+      "domain": "social",
+      "caseType": "insufficient",
+      "page": {
+        "url": "https://loopline.example/p/greenbeam-views",
+        "title": "Greenbeam cut the queue by 40% in just one morning",
+        "mainText": "Look at the image the station account reposted. It shows an arrow and “40% fewer waiting.” I can’t see the chart labels in this crop but the new Greenbeam entrance was open by lunch. The account linked to an image download.",
+        "headings": [],
+        "ctas": [
+          "View the cropped image",
+          "Share the result"
+        ],
+        "credits": [
+          "Post by Gate Minute"
+        ],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://greenbeamrail.example/images/queue-image-description",
+          "title": "Download description for station repost image",
+          "passages": [
+            "The exported square image shows text reading 40% fewer waiting. The chart legend and labels are outside the crop. The export record includes station account repost time but no test date, baseline count, observation interval, entrance name, or definition of waiting. The file is stored alongside other images gathered during the summer travel campaign."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Separate the visible percentage from the poster’s claimed place, time, and cause.",
+          "Explain what a full chart or underlying count would need to establish the specific queue interpretation."
+        ],
+        "overreach": [
+          "Invent the denominator, time of observation or the event being counted.",
+          "Claim the number was fabricated or proves the entrance caused a drop."
+        ]
+      }
+    }
+  ]
+}

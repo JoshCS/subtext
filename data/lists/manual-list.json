@@ -1,0 +1,4 @@
+{
+  "notes": "Sites we add by hand, for a big news event or a site readers report a lot. Every entry needs a source someone else published: a regulator notice, a consumer body, or a news report. Never our own opinion. Fields: domain, added (YYYY-MM-DD), added_by, source_name, source_url, source_date, note (one sentence from the source), expires (default added + 180 days). Reader reports alone never create an entry. Change only through a reviewed commit, then run npm run lists.",
+  "entries": []
+}

@@ -1,0 +1,415 @@
+{
+ "about": "How each category of site makes money and what an insider would point out, so a page can be matched to a category without researching the page. Each entry has at least one source opened on 2026-11-05.",
+ "procedure_for_reference_set": "Pages drawn from eval/out-corpus/final4-all.json (219 rows): keep rows with chars >= 800 and no error (169 remain), sort by name, group by group (17 groups), shuffle each group's list with random.Random('subtext-reference-50'), then take one page per group in alphabetical group order, round after round, until 50 are drawn (rounds: 17 + 17 + 16). No page was swapped.",
+ "checked": "2026-11-05",
+ "categories": [
+  {
+   "category": "think tank",
+   "how_it_earns": "Donors pay: tax-deductible gifts from individuals, foundations and companies make up most revenue, and the exact share is on the Form 990 (ProPublica Nonprofit Explorer).",
+   "insider_point": "Lobbying is usually done by a separate 501(c)(4) sister whose gifts are not deductible, and these sites carry no ad sellers.",
+   "sources": [
+    {
+     "url": "https://www.aei.org/donate/",
+     "says": "AEI: 501(c)(3), no government funding, individual donors the largest source."
+    },
+    {
+     "url": "https://projects.propublica.org/nonprofits/organizations/237327730",
+     "says": "Heritage 990: contributions 79.2% of $133.9 million revenue."
+    },
+    {
+     "url": "https://heritageaction.com/about",
+     "says": "Heritage Action for America founded 2010 by The Heritage Foundation; 501(c)(4); contributions not tax deductible; lobbies Congress and state capitals, publishes a scorecard; says it accepts no government funds."
+    }
+   ]
+  },
+  {
+   "category": "wire news service",
+   "how_it_earns": "Licensing customers pay: the agency sells its wire to other news organisations, and the consumer site is a small ad-funded extra.",
+   "insider_point": "The ads on the consumer site are often run by an outside manager named in ads.txt (MANAGERDOMAIN), not by the agency's own sales staff.",
+   "sources": [
+    {
+     "url": "https://pressgazette.co.uk/publishers/wires_and_agencies/advertising-philanthropy-and-ai-how-the-ap-is-diversifying-its-revenue-streams/",
+     "says": "AP: licensing 82% of 2023 revenue; apnews.com ads capped near 10%."
+    },
+    {
+     "url": "https://apnews.com/ads.txt",
+     "says": "MANAGERDOMAIN=freestar.com; 360 seller records."
+    }
+   ]
+  },
+  {
+   "category": "subscription newsletter",
+   "how_it_earns": "Readers pay through the hosting platform, which keeps a cut (Substack: 10% plus card fees); the writer, not the platform, is the publisher.",
+   "insider_point": "Most posts are free and the paid tier sells extras, so the free archive is the funnel for subscriptions.",
+   "sources": [
+    {
+     "url": "https://substack.com/going-paid",
+     "says": "Substack's own page: writers keep 90% of revenue minus credit card fees, i.e. a 10% platform cut."
+    },
+    {
+     "url": "https://www.astralcodexten.com/about",
+     "says": "Written by Scott Alexander, a doctor at Lorien Psychiatry; all important content free; paid subscribers get extra threads, AMAs and drafts; subscriptions fund time off his day job and the psychiatry project."
+    }
+   ]
+  },
+  {
+   "category": "charity donation page",
+   "how_it_earns": "Donors pay, and the Form 990 shows the share; the US arm of a global brand is often a separate legal entity that grants money onward.",
+   "insider_point": "Some large charities earn more from services than from gifts (Red Cross blood products), and the form itself often runs on a third-party fundraising platform.",
+   "sources": [
+    {
+     "url": "https://www.unicef.org/unicef-national-committees",
+     "says": "32 National Committees, each an independent local NGO; they raise about one third of UNICEF's annual income; the United States committee listed is unicefusa.org."
+    },
+    {
+     "url": "https://www.doctorswithoutborders.org/who-we-are/finances-reporting-accountability",
+     "says": "MSF USA grants funds to field programs run by European MSF partners; donation form on Classy."
+    },
+    {
+     "url": "https://give.org/charity-reviews/Human-Services/American-Red-Cross-in-Washington-dc-679",
+     "says": "Biomedical products $2.3 billion of $4.0 billion revenue, FY2025."
+    }
+   ]
+  },
+  {
+   "category": "course subscription service",
+   "how_it_earns": "Customers pay an auto-renewing annual membership for the whole catalogue.",
+   "insider_point": "The membership renews at the then-current price and partly used periods are not refunded, per the seller's own listing.",
+   "sources": [
+    {
+     "url": "https://apps.apple.com/us/app/masterclass-become-more-you/id1273867416",
+     "says": "Seller: Yanka Industries, Inc.; in-app purchases $119.99 Individual, $179.99 Duo, $239.99 Family; annual membership auto-renews; partially unused periods not refunded."
+    }
+   ]
+  },
+  {
+   "category": "course marketplace",
+   "how_it_earns": "Customers buy courses made by independent instructors; the platform keeps part of each sale and sells business subscriptions.",
+   "insider_point": "The instructor's share of subscription revenue has been cut in steps (Udemy: 25% to 15% by 2026), so a cheap course page funds the platform more each year.",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1607939/000160793925000011/udmy-20241231.htm",
+     "says": "Subscription instructor share cut from 25% to 20% (2024), 17.5% (2025), 15% (2026); Enterprise 63% of revenue."
+    }
+   ]
+  },
+  {
+   "category": "retailer with marketplace",
+   "how_it_earns": "Customers pay for the retailer's own stock, and third-party sellers pay commissions, logistics and advertising fees for listings on the same pages.",
+   "insider_point": "A product page does not show which model applies; the brand may own the stock and set the price while the retailer takes a commission.",
+   "sources": [
+    {
+     "url": "https://partner.zalando.com/partnership/partnership-models",
+     "says": "Wholesale: Zalando owns the stock. Partner Program: brands keep stock and set prices."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1474627/000121390025036055/ea0238113-20f_newegg.htm",
+     "says": "Newegg: 91% own inventory, marketplace commissions 8-15%, services incl. advertising 7%."
+    }
+   ]
+  },
+  {
+   "category": "university",
+   "how_it_earns": "Endowment income, research grants, patient care (where there is a medical school), tuition and gifts; tuition is a minority line at the large private universities.",
+   "insider_point": "The .edu homepage sells nothing and carries no ad sellers; the money facts live on the university's own facts or finance page and its Form 990.",
+   "sources": [
+    {
+     "url": "https://facts.stanford.edu/admin-finances/finances",
+     "says": "Health care 26%, endowment 20%, sponsored research 16%, student income 13%."
+    },
+    {
+     "url": "https://facts.mit.edu/operating-financials/",
+     "says": "FY2025 operating revenues $5,372.8M by source: investment return 29%, Lincoln Laboratory sponsored support 27%, campus sponsored research 17%, gifts 9%, net tuition 8%, other 6%, auxiliaries 3%, SMART 1%; operating expenditures $5,117.2M."
+    },
+    {
+     "url": "https://news.yale.edu/2025/10/24/yale-reports-investment-return-fiscal-2025",
+     "says": "Endowment USD 44.1bn at 30 June 2025, 11.1% return; USD 2.1bn distributed to the operating budget; over one-third of operating revenue and 60% of Yale College's budget."
+    }
+   ]
+  },
+  {
+   "category": "financial product comparison",
+   "how_it_earns": "Lenders pay, not users: the site collects a fee when a user is approved for a product it recommends (cost-per-action), so the free score is the front end of lead generation.",
+   "insider_point": "Regulators have acted on 'pre-approved' and 'odds of approval' wording on these sites (FTC v. Credit Karma, 2023).",
+   "sources": [
+    {
+     "url": "https://www.creditkarma.com/about/howitworks",
+     "says": "Lender pays after a member is approved; members pay nothing."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/896878/000089687826000037/intu-20260731.htm",
+     "says": "Intuit 10-K filed 2026-09-09: INTU on Nasdaq Global Select Market; Credit Karma revenue is primarily cost-per-action fees for approved actions on qualified links; partners are credit bureaus, banks, card issuers, insurers and lenders; Credit Karma revenue up $441 million in fiscal 2026."
+    },
+    {
+     "url": "https://www.ftc.gov/news-events/news/press-releases/2023/01/ftc-finalizes-order-requiring-credit-karma-pay-3-million-halt-deceptive-pre-approved-claims",
+     "says": "Jan 23, 2023: FTC finalized order requiring Credit Karma to pay $3 million to consumers and to stop deceptive 'pre-approved' and '90% odds' claims."
+    }
+   ]
+  },
+  {
+   "category": "government agency",
+   "how_it_earns": "Taxpayers pay through appropriations set by Congress, though some agencies are fee-funded (FTC merger fees) or funded outside appropriations (CFPB via the Federal Reserve).",
+   "insider_point": "The page sells and advertises nothing; the only asks are sign-ups and accounts, and budget figures come from CRS reports or the agency's budget justification.",
+   "sources": [
+    {
+     "url": "https://www.ftc.gov/system/files/ftc_gov/pdf/fy-2026-cbj.pdf",
+     "says": "FY2026 Congressional Budget Justification: request $383.6M and 1,100 FTE, down $42.1M from FY2025 ($425.7M); assumes $300.954M HSR filing fees and $15M Do Not Call fees as offsetting collections (82%), $67.6M from the General Fund; HSR fees split 50-50 with DOJ."
+    },
+    {
+     "url": "https://www.consumerfinance.gov/about-us/budget-strategy/",
+     "says": "States 'We receive funding from the Federal Reserve Board' and that the bureau publishes its funds transfer requests, budget estimates and financial reports."
+    },
+    {
+     "url": "https://www.everycrsreport.com/files/2026-04-29_R43419_1b2c3e33791bbd087d55d0f51cfefe91d1eb1c0e.html",
+     "says": "CRS R43419 'NASA Appropriations and Authorizations: At a Glance' (updated 29 April 2026): FY2025 enacted $24.838B (P.L. 119-4) plus $9.995B (P.L. 119-21); FY2026 request $18.809B; FY2026 enacted $24.438B under P.L. 119-74."
+    }
+   ]
+  },
+  {
+   "category": "ad-funded health publisher",
+   "how_it_earns": "Advertisers pay, with pharmaceutical companies a large share, plus sponsored content and affiliate commissions; ads.txt lists hundreds of sellers and names the owning domain.",
+   "insider_point": "The publisher is usually owned by private equity or a health-insurance group (KKR behind WebMD; Optum and Red Ventures behind Healthline/MNT).",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1326583/000119312517065495/d292172d10k.htm",
+     "says": "WebMD Health Corp 10-K for 2016: revenue primarily from advertising and sponsorship; biopharma and device advertising/sponsorship $428.5 million in 2016; health services subscriptions 16.2% of revenue; particularly dependent on pharma, biotech and device clients."
+    },
+    {
+     "url": "https://www.medicalnewstoday.com/about/ad-policy",
+     "says": "Funded through the sale of advertising; sponsorships provide financial benefit; editors' product links may earn a payment on purchase; names Fullspan Health alongside the Healthline Media UK Ltd copyright line."
+    },
+    {
+     "url": "https://www.healthline.com/about/about-us",
+     "says": "Healthline is part of RVO Health, backed by Red Ventures and UnitedHealth Group's Optum; Fullspan Health's brand portfolio includes MedicalNewsToday.com; funding from ads, sponsored content and affiliate programs."
+    },
+    {
+     "url": "https://media.kkr.com/news-details?news_id=52f23b2c-b397-41c5-8381-071bce5be20b",
+     "says": "July 19, 2022: Internet Brands recapitalized at over $12 billion with KKR, Temasek and new investors led by Warburg Pincus; KKR remains majority investor; brands include WebMD and Medscape."
+    }
+   ]
+  },
+  {
+   "category": "nonprofit community forum",
+   "how_it_earns": "Donors pay; a few institutional funders can dominate, and the organisation may run a venue or other paid service alongside the site.",
+   "insider_point": "Read the latest fundraiser post: it names which funders have left and how much the site itself costs to run.",
+   "sources": [
+    {
+     "url": "https://www.lesswrong.com/posts/eKGdCNdKjvTBG9i6y",
+     "says": "Lightcone needs about $2M; Lighthaven $3.6M costs vs $3.2M revenue; FTX gone, Open Philanthropy blacklist, SFF partial."
+    }
+   ]
+  },
+  {
+   "category": "subscription news publisher",
+   "how_it_earns": "Readers pay subscriptions, and the publisher may be a nonprofit filing a Form 990 that shows program-service revenue.",
+   "insider_point": "A subscriber-funded claim can sit beside an ads.txt that still authorises hundreds of ad sellers; report both.",
+   "sources": [
+    {
+     "url": "https://www.theepochtimes.com/about-us",
+     "says": "'More than 90 percent of our funding comes directly from subscribers'."
+    },
+    {
+     "url": "https://www.theepochtimes.com/ads.txt",
+     "says": "229 seller records."
+    }
+   ]
+  },
+  {
+   "category": "discount marketplace",
+   "how_it_earns": "Merchants pay: transaction fees or commissions on each sale plus paid 'sponsored' placements; shoppers pay the merchants, and the parent is often an offshore holding company.",
+   "insider_point": "Ownership can change hands or dissolve without the site changing (Wish sold to Qoo10 in 2024, Qoo10 wound up months later), so check the latest filing date.",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/0001737806/000110465926050727/pdd-20251231x20f.htm",
+     "says": "PDD Holdings Inc. is a Cayman Islands holding company, ADSs on Nasdaq under PDD, principal executive office 25 St Stephen's Green, Dublin; Temu founded September 2022 in Boston; revenues primarily from transaction services and online marketing services from merchants; FY2025 revenues RMB431,845.7M; may raise transaction services fees for certain merchants; US de minimis exemption eliminated for all countries effective August 29, 2025; tariffs may raise import costs; UFLPA inquiries received; Tencent a principal shareholder."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1822250/000095017024025210/wish-20231231.htm",
+     "says": "FY2023 10-K: marketplace revenue includes commission fees on user purchases of merchants' products, rates vary by geography, category and Wish Standards tier; ProductBoost is merchant advertising; merchants prepay logistics per order; majority of merchants based in China; 2023 revenue $287M = core marketplace $86M + ProductBoost $24M + logistics $177M."
+    },
+    {
+     "url": "https://www.thestar.com.my/business/business-news/2024/11/14/qoo10-vendors-accept-likelihood-of-losing-money",
+     "says": "Straits Times report of 2024-11-14: the Singapore High Court ordered Qoo10 wound up on the Monday (2024-11-11) on a petition over nearly 76 billion won of unpaid debt; liquidators appointed; vendors expect little recovery."
+    }
+   ]
+  },
+  {
+   "category": "affiliate review publisher",
+   "how_it_earns": "Commissions pay: the publisher gets a share of each completed purchase made through its links, disclosed at the top of the page, with display ads second.",
+   "insider_point": "Vendors set the rate (VPN sellers pay affiliates 40% of a sale), the writers may not know what a link pays, and the same brand may also license its name or seal to product makers.",
+   "sources": [
+    {
+     "url": "https://www.pcworld.com/about/affiliate-link-policy",
+     "says": "Journalists generally do not know how much commission a purchase pays."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/71691/000007169125000047/nyt-20241231.htm",
+     "says": "FY2024 10-K: other revenues include Wirecutter affiliate referrals (share of completed sales via merchant links); 2024 revenue USD 2.59bn split subscriptions/advertising/other; digital other revenues USD 186.1m; Wirecutter referral growth USD 17.1m; family trust holds ~95% of Class B, elects 70% of board."
+    },
+    {
+     "url": "https://surfshark.com/affiliates",
+     "says": "40% revenue share on new sales, 30-day cookie."
+    },
+    {
+     "url": "https://licensinginternational.org/news/good-housekeeping-and-live-comfortably-announce-exclusive-bedding-licensing-partnership/",
+     "says": "2026-03-16: Hearst Magazines licenses the Good Housekeeping brand to Live Comfortably for bedding and bath products; GHI tests them and approved items carry the Seal."
+    }
+   ]
+  },
+  {
+   "category": "subscription service pricing page",
+   "how_it_earns": "Customers pay recurring subscriptions; a free tier or trial is the funnel, and the company's filing or press coverage says how big the paid share is.",
+   "insider_point": "The headline discount covers a fixed first term and then auto-renews at a separate renewal price, stated in the terms rather than on the price card.",
+   "sources": [
+    {
+     "url": "https://surfshark.com/pricing",
+     "says": "curl HTTP 200: footer names Surfshark B.V.; plans 'Save 91%' for the first 27 months, 'Upon renewal, you will be charged the applicable renewal price'; 30-day money-back guarantee."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1639920/000162828026006874/ck0001639920-20251231.htm",
+     "says": "Form 20-F for fiscal 2025: registrant Spotify Technology S.A., Grand Duchy of Luxembourg, 33 Boulevard Prince Henri; ordinary shares registered on the New York Stock Exchange under symbol SPOT; Premium subscribers come mainly from converting Ad-Supported users."
+    },
+    {
+     "url": "https://www.grammarly.com/plans",
+     "says": "Free $0 USD per month; Pro $12 USD with free trial; Enterprise contact sales, 'available through Superhuman Go'; prompts quoted per member per month; invoice for 10 or more members on an annual plan; footer '2026 Superhuman Platform'."
+    }
+   ]
+  },
+  {
+   "category": "direct-to-consumer brand shop",
+   "how_it_earns": "Customers pay for the brand's own goods; the company is usually private and venture-backed, or a listed company whose filing shows stores outselling the website.",
+   "insider_point": "Subscription discounts are introductory and renew at full price, per the terms; the legal entity on the privacy policy can differ from the brand name.",
+   "sources": [
+    {
+     "url": "https://ritual.com/pages/terms-of-service",
+     "says": "Site operated by Natals, Inc. (dba Ritual), 1370 N St Andrews Pl, Los Angeles; Delaware registered agent; new customers save up to 30% on first subscription order; subscriptions auto-renew at full retail price until cancelled."
+    },
+    {
+     "url": "https://www.retaildive.com/news/glossier-secures-debt-financing-tiger-finance/823384/",
+     "says": "June 22, 2026: $45M revolving credit facility from Tiger Finance closed June 8; last funding round $80M in 2021, unicorn in 2019; Emily Weiss stepped down 2022, Kyle Leahy left June 2025, Colin Walsh CEO from September 2025; first wholesale deal with Sephora under Leahy; about 12 stores; 2022 layoff of about a third of staff."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1504776/000150477626000006/wrby-20251231.htm",
+     "says": "FY2025 10-K: Delaware public benefit corporation (elected June 2021), Class A on NYSE as WRBY; net revenue $871.9M up 13.0%; 323 stores (318 US, 5 Canada), 285 offer eye exams; most revenue from glasses, contacts 11.1%, eye exams and vision care 6.4%; significant portion of revenue historically from retail stores; in-house optical labs in Sloatsburg NY and Las Vegas NV."
+    }
+   ]
+  },
+  {
+   "category": "public broadcaster",
+   "how_it_earns": "Licence fees (Germany) or member-station fees, sponsors and donors (US NPR) pay; direct federal money to NPR itself is tiny, and German law bars ads on ARD's online services.",
+   "insider_point": "An empty or absent ads.txt is the expected state; the political fight is over the stations' funding conduit (CPB), not the national site's own books.",
+   "sources": [
+    {
+     "url": "https://landtag-niedersachsen.de/drucksachen/drucksachen_19_07500/05001-05500/19-05352.pdf",
+     "says": "Niedersachsen state parliament Drucksache 19/5352 (government answer): under section 30(5) sentence 1 MStV advertising in ARD and ZDF Telemedien offerings, including the Mediatheken, is not permitted; section 39 MStV allows ads only on Das Erste and ZDF, max 20 minutes per weekday, none after 20:00 or on Sundays; ARD earns ad and sponsoring income only on TV and radio within these limits."
+    },
+    {
+     "url": "https://pdf.guidestar.org/PDF_Images/2024/520/907/2024-520907625-202542259349301919-9.pdf",
+     "says": "NPR 990 FY2024: government grants $105,131 of $325 million revenue."
+    },
+    {
+     "url": "https://text.npr.org/nx-s1-5489808",
+     "says": "NPR, Aug 1, 2025: the Corporation for Public Broadcasting, the conduit for federal funds to NPR and PBS, is winding down after a law clawed back $1.1B through fiscal 2027 as part of a $9B rescissions package; some stations began layoffs; NPR CEO Katherine Maher said NPR would step up to support local stations."
+    }
+   ]
+  },
+  {
+   "category": "personal blog",
+   "how_it_earns": "An individual owns it; money, if any, is members, a small ad network slot or affiliate commissions, each disclosed on the about page, or nothing at all.",
+   "insider_point": "The site often works as a shop window for the author's other paid work (apps, podcasts, an accelerator), which earns elsewhere.",
+   "sources": [
+    {
+     "url": "https://kottke.org/about/",
+     "says": "Member support via Memberful, Carbon Ads, affiliate commissions."
+    },
+    {
+     "url": "https://marco.org/about",
+     "says": "Marco Arment, web and iPhone developer, writer and podcaster in New York; makes Overcast; co-hosts ATP; includes Amazon Associate links and earns a commission from qualifying purchases."
+    },
+    {
+     "url": "https://paulgraham.com/bio.html",
+     "says": "Programmer, writer, investor; co-founded Viaweb 1995 (acquired by Yahoo 1998, became Yahoo Store) and Y Combinator 2005; essays on paulgraham.com since 2001, about 25 million page views a year; only commercial links are to his books on Amazon."
+    }
+   ]
+  },
+  {
+   "category": "retail trading platform",
+   "how_it_earns": "'Commission-free' is paid for by third parties: market makers pay for order flow, and the platform earns interest on cash and stablecoin reserves plus a paid membership tier.",
+   "insider_point": "Read the revenue table in the 10-K: transaction-based revenue (PFOF) was 59% at Robinhood in 2025, and a USDC reserve share was Coinbase's largest non-trading line.",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000013/q42025robinhoodexhibit991.htm",
+     "says": "Transaction-based $2,628 million of $4,473 million; reliance on PFOF."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+     "says": "Transaction 59%, subscription and services 41%, stablecoin revenue $1.35 billion."
+    }
+   ]
+  },
+  {
+   "category": "creator commerce platform",
+   "how_it_earns": "The sellers pay: a percentage plus a fixed fee per sale, with a much higher cut when the platform's own marketplace brought the buyer.",
+   "insider_point": "Crowdfunded platforms must file annual Form C-AR reports with the SEC, which is where revenue and headcount become public.",
+   "sources": [
+    {
+     "url": "https://gumroad.com/pricing",
+     "says": "10% + $0.50 per direct sale; 30% via Discover."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1532978/000153297826000003/primary_doc.xml",
+     "says": "Form C-AR for period ending 31 Dec 2025: Gumroad, Inc., Delaware, incorporated 22 Sept 2011, 548 Market St, San Francisco; revenue $17,785,730 (prior $18,951,308), net income $3,792,179 (prior $4,290,423), total assets $11.9M, 2 employees."
+    }
+   ]
+  },
+  {
+   "category": "news publisher",
+   "how_it_earns": "Advertisers pay through a long ads.txt that is mostly resellers, plus affiliate commerce (Amazon can be a third of revenue), subscriptions or memberships, and for a TV brand, carriage fees.",
+   "insider_point": "A membership often buys an ad-free view rather than access, the owner domain in ads.txt names the parent, and a founder or new buyer can hold majority votes.",
+   "sources": [
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/1828972/000182897225000073/bzfd-20241231.htm",
+     "says": "FY2024 10-K: Nasdaq BZFD; flagship brands BuzzFeed, HuffPost, Tasty; revenue categories advertising (programmatic and direct), content, commerce and other (affiliate commissions from shopping content; Amazon the vast majority); HuffPost acquired February 2021; 2024 revenue USD 189.9m vs 230.4m."
+    },
+    {
+     "url": "https://www.huffpost.com/membership",
+     "says": "Silver $5/month, Gold $10/month (ad-free on web or app), Platinum $20/month (ad-free on both, focus group); one-time 'Support Now' contributions; annual billing saves 16%."
+    },
+    {
+     "url": "https://www.sec.gov/Archives/edgar/data/2026478/000202647826000026/nmax-20251231.htm",
+     "says": "Ruddy 81.5% of votes; advertising $120.3 million, affiliate fees $30.6 million, subscriptions $27.5 million."
+    },
+    {
+     "url": "https://mediadaten.heise.de/en/produkte/digital/branding-1st-party-heise-user",
+     "says": "Media kit: advertisers can target about 72,000 heise+ subscribers in an ad-reduced environment at EUR 130-150 CPM."
+    }
+   ]
+  },
+  {
+   "category": "retailer product page",
+   "how_it_earns": "Customers pay for goods; in a franchise system the company named in the copyright line (the brand owner) is not the company selling to you, and it takes a fee on net sales.",
+   "insider_point": "Check the privacy policy or terms for the operating entity; the footer copyright can name a different group.",
+   "sources": [
+    {
+     "url": "https://www.inter.ikea.com/en/performance/fy25-financial-results",
+     "says": "Franchisees pay Inter IKEA Group an annual fee of 3% of net sales; franchise fee income EUR 1,320 million in FY25; group revenue EUR 26,306 million."
+    },
+    {
+     "url": "https://www.ikea.com/us/en/customer-service/privacy-policy/",
+     "says": "Policy covers IKEA North America Services, LLC (Conshohocken, PA) and its US affiliates; lists IKEA US RETAIL LLC and IKEA HOME SERVICES LLC as controller entities; names Inter IKEA Systems B.V. as the franchisor."
+    }
+   ]
+  },
+  {
+   "category": "intergovernmental organisation",
+   "how_it_earns": "Member states pay assessed dues, and voluntary contributions from governments, foundations and UN bodies make up the larger share, most of it earmarked by the giver.",
+   "insider_point": "The organisation's own funding page gives the earmarked share; the pages carry no ads or donation buttons.",
+   "sources": [
+    {
+     "url": "https://www.who.int/about/funding",
+     "says": "Assessed dues under a quarter; 87% of voluntary contributions earmarked in 2022-2023."
+    }
+   ]
+  }
+ ]
+}

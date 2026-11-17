@@ -1,0 +1,35 @@
+{
+  "name": "subtext",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Browser extension that flags the persuasion, dark-pattern, rhetorical, emotional, data-visualization and ownership tricks a web page uses on you, and explains the psychology behind each.",
+  "scripts": {
+    "test": "node scripts/validate-rules.js && node test/run.js && node test/fingerprint.js && node test/regex.js && node test/regress.js && npm run test:readings && npm run test:investigations && npm run test:inquiry && node test/context-data.js && node test/context-nonprofit.js && node test/context-sec.js && node test/context-stats.js && node test/context-fec.js && node test/context-chart.js && node test/context-worker.js",
+    "demo": "node scripts/demo.js",
+    "demo:real": "node scripts/demo.js --real",
+    "demo:ai": "node scripts/demo.js --ai",
+    "ai:check": "node scripts/ai-check.js",
+    "test:screens": "node test/run.js --screens",
+    "test:readings": "node test/outlet-context.js && node test/claim-context.js && node test/readings.js",
+    "test:ui": "node test/ui/scenarios.js && node test/ui/actions.js",
+    "validate": "node scripts/validate-rules.js",
+    "icons": "node scripts/make-icons.js",
+    "package": "bash scripts/package.sh",
+    "calibrate": "node eval/calibrate.js",
+    "eval:readings": "node eval/readings.js",
+    "eval:ai": "node eval/run-ai.js",
+    "eval:compare": "node eval/compare.js",
+    "eval:real": "node eval/real-pages.js",
+    "corpus:record": "node eval/corpus-record.js",
+    "corpus:run": "node eval/corpus-run.js",
+    "lists": "node scripts/update-known-bad.js",
+    "demo:investigate": "node scripts/investigation-demo.js",
+    "test:investigations": "node test/public-records.js && node test/investigations.js",
+    "test:inquiry": "node test/inquiry-sources.js && node test/inquiry.js && node test/inquiry-access.js && node test/inquiry-ui.js && node test/investigation-depth.js && node test/evidence-book.js && node test/casebook-ui.js",
+    "eval:inquiry": "node eval/inquiry.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0"
+  },
+  "license": "AGPL-3.0-or-later"
+}

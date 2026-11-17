@@ -1,0 +1,34 @@
+/* Popup chrome only (header, toolbar, footer). Tokens, type sizes and the report body come from ui/view.js (SubtextView.CSS),
+   the same system the in-page panel uses: 12 / 13 / 15 px, weights 400 and 600, spacing 4/8/12/16/24, radius 6. */
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; width: 400px; background: var(--bg); color: var(--fg); font: 13px/19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+body { display: flex; flex-direction: column; max-height: 600px; }
+@media (max-width: 399px) { html, body { width: 100%; } main { overflow-x: hidden; } } /* the report window can be narrower than the toolbar popup: fit it rather than scroll sideways */
+a { color: var(--accent); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hdr { display: flex; align-items: center; gap: 8px; padding: 12px 10px 4px 16px; }
+.hdr__text { flex: 1; min-width: 0; }
+.hdr__site { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hdr__label { color: var(--fg); }
+.hdr__label:empty, .hdr__meta:empty { display: none; }
+.hdr__meta { color: var(--fg2); font-size: 12px; line-height: 17px; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--fg2); cursor: pointer; }
+.icon-btn:hover { background: var(--card); color: var(--fg); }
+.icon-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 16px 12px; border-bottom: 1px solid var(--line); }
+.tb { flex: 1 1 auto; min-height: 32px; padding: 6px 12px; border: 1px solid var(--line2); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; font-weight: 600; line-height: 18px; cursor: pointer; }
+.tb:hover { background: var(--card); border-color: var(--muted); }
+.tb.is-on { background: var(--card); border-color: var(--muted); } /* the panel is open: a pressed state, never a warning colour */
+/* the one primary button; with no AI key it only opens Settings, so it is secondary until a key exists */
+.tb--primary { flex-basis: 60%; background: var(--fill); border-color: var(--fill); color: #fff; }
+.tb--primary:hover { background: var(--fill-hover); border-color: var(--fill-hover); }
+.tb--primary.tb--setup { background: var(--bg); border-color: var(--line2); color: var(--fg); }
+.tb--primary.tb--setup:hover { background: var(--card); border-color: var(--muted); }
+.tb:disabled { cursor: progress; } /* no dimming while it works: white progress text keeps its contrast on the fill */
+.toolbar .ai-cancel { min-height: 32px; margin-left: 0; }
+main { overflow-y: auto; flex: 1; padding: 0 16px 16px; scrollbar-width: thin; scrollbar-color: var(--line2) transparent; }
+.notice { margin: 12px 0 0; padding: 8px 12px; border-radius: 6px; background: var(--card); color: var(--fg); }
+.notice.err { box-shadow: inset 2px 0 0 var(--err); }
+#report > .tb { flex: none; margin-top: 12px; }
+.ftr { border-top: 1px solid var(--line); padding: 8px 16px; color: var(--fg2); font-size: 12px; line-height: 17px; }

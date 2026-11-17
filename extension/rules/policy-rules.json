@@ -1,0 +1,303 @@
+{
+  "version": "0.1.0",
+  "notes": "Clauses scanned in privacy policies and terms. `pattern` is matched against the policy text; `negation` (if present) matched in the same sentence flips the finding into a positive signal (`positiveLabel`) or suppresses it. Severity 0 rows are informational. Keep patterns conservative; policies are long and repetitive.",
+  "linkWords": {
+    "privacy": [
+      "privacy policy",
+      "privacy notice",
+      "privacy statement",
+      "privacy"
+    ],
+    "terms": [
+      "terms of service",
+      "terms of use",
+      "terms and conditions",
+      "terms & conditions",
+      "user agreement",
+      "terms"
+    ]
+  },
+  "rules": [
+    {
+      "id": "policy.sells_personal_info",
+      "name": "Sells personal information",
+      "label": "Sells your data",
+      "why": "The policy says personal information may be sold.",
+      "severity": 3,
+      "pattern": "\\b(we|the company|our company|us)\\b(?: [a-z]+){0,3}? (sell|sells|sold|rent|rents)\\b[^.]{0,100}\\b(personal (information|data)|your (information|data)|user data|information about you)\\b|\\b(personal (information|data)|your (information|data))\\b[^.]{0,60}\\b(may be|is|are|will be|was|were) (sold|rented)\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|\\bno sale of\\b|\\b(sale of (all|substantially|some|our|its|the|a) |merger|acquisition|bankruptcy|insolvency|receivership|we mean|is defined|definition|right to|residents? (have|has)|purpose of|categories of|request)\\b"
+    },
+    {
+      "id": "policy.shares_or_sells_ccpa",
+      "name": "'Share or sell' (CCPA definition)",
+      "label": "Shares data for ads",
+      "why": "Admits 'sharing' data for cross-context advertising (a sale under California law).",
+      "severity": 1,
+      "pattern": "\\bwe\\b(?: [a-z]+){0,3}? (sell(s|ing)? (or|and) shar(e|es|ing)|shar(e|es|ing) (or|and) sell(s|ing)?)\\b[^.]{0,80}\\b(personal (information|data)|cross[- ]context|behaviou?ral advertising)\\b|\\b(sell|share)\\b[^.]{0,40}\\bfor cross[- ]context behaviou?ral advertising\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|\\b(we mean|is defined|definition|right to|request|purpose of)\\b|\\bcategories of (third parties|sources)\\b[^.]{0,20}\\b(with|from) (whom|which)\\b"
+    },
+    {
+      "id": "policy.third_party_marketing",
+      "name": "Shares data with third parties for their marketing",
+      "label": "Shared with partners",
+      "why": "Your data goes to third parties for their own marketing.",
+      "severity": 1,
+      "pattern": "\\bwe\\b(?: [a-z]+){0,3}? (share|disclose|provide|transfer|make available)\\b[^.]{0,100}\\b(third[- ]part(y|ies)|partners|affiliates|advertisers|data brokers)\\b[^.]{0,120}\\b(their own (marketing|purposes|advertising)|marketing purposes|to market|for (direct )?(advertising|marketing))\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|\\bask for your consent\\b"
+    },
+    {
+      "id": "policy.data_brokers",
+      "name": "Data brokers or data enrichment",
+      "label": "Data brokers",
+      "why": "Adds data bought from brokers to what it knows.",
+      "severity": 3,
+      "pattern": "\\b(data brokers?|data (aggregators?|resellers?))\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b"
+    },
+    {
+      "id": "policy.combine_sources",
+      "name": "Combines data from other sources",
+      "label": "Profile building",
+      "why": "Combines what you do here with data bought elsewhere.",
+      "severity": 2,
+      "pattern": "\\b(combine|merge|link|supplement|augment)\\b[^.]{0,80}\\b(information|data)\\b[^.]{0,80}\\b(from (other|third[- ]party|public|offline|external) sources|obtained from|we receive from)\\b"
+    },
+    {
+      "id": "policy.precise_location",
+      "name": "Precise geolocation",
+      "label": "Precise location",
+      "why": "Collects GPS-level location.",
+      "severity": 2,
+      "pattern": "\\b(precise (geo)?location|exact location|gps (data|location|coordinates)|real[- ]time location|precise geolocation)\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|ip address|mobile app|our app|in the app|if you (enable|allow|choose|opt)|with your (consent|permission)|such as|categories|does not include"
+    },
+    {
+      "id": "policy.biometric_sensitive",
+      "name": "Biometric or sensitive data",
+      "label": "Sensitive data",
+      "why": "Collects biometric, health, or similarly sensitive data.",
+      "severity": 2,
+      "pattern": "\\b(we|us)\\b[^.]{0,25}\\b(collect|process|receive|obtain|use|capture)\\b[^.]{0,90}\\b(biometric|face(print| geometry| recognition)|fingerprint(s)? (data|scan)|voiceprint|genetic (data|information)|health (data|information|condition)s?)\\b|\\b(biometric|face(print| geometry)|voiceprint|genetic) (data|information|identifiers?)\\b[^.]{0,60}\\b(collect|process|will process|may process)",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|\\bprotected health information\\b|\\bhipaa\\b|\\bnotice of privacy practices\\b|\\bcomply with\\b"
+    },
+    {
+      "id": "policy.cross_device",
+      "name": "Cross-device tracking",
+      "label": "Cross-device tracking",
+      "why": "Links your phone, laptop and TV into one profile.",
+      "severity": 2,
+      "pattern": "\\b(cross[- ]device (tracking|linking|identification|advertising|data)|device graph|link(ing)? (your )?devices|across (your )?devices\\b[^.]{0,60}\\b(track|identif|link|recogni[sz]e|advertis)|(track|identif|link|recogni[sz]|advertis)\\w*\\b[^.]{0,40}\\bacross (your |multiple |different |all )?(devices|browsers)\\b)",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage|link|track|identify|recogni[sz]e)\\b"
+    },
+    {
+      "id": "policy.indefinite_retention",
+      "name": "Vague or indefinite retention",
+      "label": "Keeps data indefinitely",
+      "why": "No concrete limit on how long data is kept.",
+      "severity": 0,
+      "pattern": "\\b(retain|keep|store|hold)\\b[^.]{0,80}\\b(indefinitely|no (fixed|specific) (period|retention)|until (you|we) (delete|decide))\\b",
+      "negation": "\\b(de-?personali[sz]ed|anonymi[sz]ed|aggregated?|de-?identified|non-personal|pseudonymi[sz]ed)\\b"
+    },
+    {
+      "id": "policy.arbitration_class_waiver",
+      "name": "Forced arbitration / class-action waiver",
+      "label": "No right to sue",
+      "why": "You waive courts and class actions by using the site.",
+      "severity": 2,
+      "pattern": "\\b(binding arbitration|mandatory arbitration|arbitration agreement|class[- ]action waiver|waive (your|the) right to (a )?(jury|class|trial)|individual basis only)\\b",
+      "anyVoice": true,
+      "negation": "data privacy framework|privacy shield|\\bdpf\\b|arbitration option|at your request",
+      "saleOnly": true
+    },
+    {
+      "id": "policy.unilateral_changes",
+      "name": "Terms can change on their say-so",
+      "label": "Can change terms",
+      "why": "They may change these terms on their own at any time.",
+      "severity": 0,
+      "pattern": "(\\b(may|reserves? the right to|can|is entitled to|has the right to)\\b[^.]{0,40}\\b(change|modify|update|amend|revise|alter|vary|replace)\\b[^.]{0,120}\\b(at any time|without (prior )?notice|at (our|its) (sole |absolute )?discretion|from time to time|periodically)|continued use[^.]{0,60}(constitutes|means|signifies|is deemed)[^.]{0,30}(acceptance|consent|agreement))",
+      "anyVoice": true
+    },
+    {
+      "id": "policy.children_data",
+      "name": "Collects data from children",
+      "label": "Children's data",
+      "why": "Knowingly collects data from users under 13/16.",
+      "severity": 2,
+      "pattern": "\\b(collect|process|use)\\b[^.]{0,60}\\b(information|data)\\b[^.]{0,60}\\b(from|about|of) (children|minors|kids|users under (13|16|18))\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|\\b(not (directed|intended|aimed)|under (13|16|18)[^.]{0,40}(not|prohibit))\\b"
+    },
+    {
+      "id": "policy.inferences_profiling",
+      "name": "Inferences and profiling",
+      "label": "Profiles you",
+      "why": "Draws inferences about your traits, interests or behaviour.",
+      "severity": 2,
+      "pattern": "\\b(inferences?|infer|profil(e|es|ing)|predict(ive|ions?)|propensity|segments?|audiences?)\\b[^.]{0,80}\\b(about you|your (preferences|characteristics|behaviou?r|interests|psycholog|attitudes|abilities|aptitudes))\\b"
+    },
+    {
+      "id": "policy.automated_decisions",
+      "name": "Automated decision-making",
+      "label": "Automated decisions",
+      "why": "Decisions about you may be made by algorithms alone.",
+      "severity": 2,
+      "pattern": "\\b(automated decision[- ]making|solely automated|algorithmic decisions?)\\b",
+      "negation": "\\b(do not|don'?t|never|will not|won'?t|not|have not|did not|no longer)\\b[^.]{0,50}\\b(sell|sold|share|rent|disclose|collect|use|engage)\\b|\\b(right to opt[- ]out|you (may|can|have the right)|afford(s)? (residents|you|users)|laws? (also )?(give|afford|grant))\\b|may refer to|some laws|\\bpermissible\\b|\\bpermitted (where|when|if)\\b|\\b(customi[sz]e|personali[sz]e|tailor)\\b[^.]{0,30}\\b(experience|content)\\b"
+    },
+    {
+      "id": "policy.email_tracking",
+      "name": "Tracks email opens",
+      "label": "Email tracking",
+      "why": "Pixels record when and where you open their emails.",
+      "severity": 0,
+      "pattern": "\\b(web beacons?|tracking pixels?|pixel tags?|clear gifs?)\\b[^.]{0,120}\\b(in|within|embedded in|opened?|our|from us)\\s+(our |your |the |these )?(e-?mails?|messages?|newsletters?)\\b|\\b(e-?mails?|newsletters?)\\b[^.]{0,80}\\b(web beacons?|tracking pixels?|pixel tags?|clear gifs?)\\b",
+      "anyVoice": true
+    },
+    {
+      "id": "policy.opt_out_friction",
+      "name": "Opt-out requires mail, call or form",
+      "label": "Hard opt-out",
+      "why": "Opting out needs a letter, call or separate form.",
+      "severity": 2,
+      "pattern": "\\b(to opt[- ]out|to exercise (your|these) rights|to unsubscribe|to delete your (account|data))\\b[^.]{0,100}\\b(by mail|postal|send a letter|fax|notarized|government[- ]issued id)\\b",
+      "anyVoice": true
+    },
+    {
+      "id": "policy.bankruptcy_transfer",
+      "name": "Data transferred in a sale or bankruptcy",
+      "label": "Sold with the company",
+      "why": "Your data is an asset transferred in any merger or bankruptcy.",
+      "severity": 0,
+      "pattern": "\\b(merger|acquisition|acquired|bankruptcy|insolvency|reorgani[sz]ation|dissolution|liquidation|sale of (all|substantially all|some|a portion|part) (of )?(our |its )?(assets|business)|change (of|in) (control|ownership)|transfer of ownership|(sell|buy|sold|merged)\\b[^.]{0,40}\\b(assets|business units?|subsidiaries|stores|company|business))\\b[^.]{0,160}\\b(transfer(red)?|disclosed?|shared?|assets?|sold|acquir\\w+|successor|buyer)\\b|\\b(information|data)\\b[^.]{0,60}\\b(one of the|among the|part of the|included in the)\\b[^.]{0,40}\\b(assets|business assets)\\b",
+      "anyVoice": true
+    },
+    {
+      "id": "policy.gpc_honoured",
+      "name": "Honours Global Privacy Control",
+      "label": "Honours GPC",
+      "why": "Respects the browser's Global Privacy Control signal.",
+      "severity": 0,
+      "pattern": "\\b(global privacy control|gpc signal|opt[- ]out preference signal)\\b",
+      "positive": true
+    },
+    {
+      "id": "policy.no_sale_statement",
+      "name": "States it does not sell data",
+      "label": "Does not sell data",
+      "why": "Explicit no-sale commitment.",
+      "severity": 0,
+      "pattern": "\\b(we )?(do not|don'?t|never|will not|won'?t) (sell|rent|trade)\\b[^.]{0,40}\\b(personal (information|data)|your (information|data))\\b",
+      "positive": true,
+      "negation": "\\b(do not|don'?t) sell (or share )?my\\b|\\brights? to\\b|\\bunder the ccpa\\b|\\bconstitutes a sale\\b|\\bbut we do\\b|\\bsensitive personal\\b",
+      "suppressedBy": [
+        "policy.sells_personal_info",
+        "policy.shares_or_sells_ccpa"
+      ]
+    },
+    {
+      "id": "policy.deletion_right",
+      "name": "Offers data deletion",
+      "label": "Deletion offered",
+      "why": "You can request deletion of your data.",
+      "severity": 0,
+      "pattern": "\\b(right to (deletion|erasure|delete)|delete your (personal )?(information|data|account)|request (that we )?delete)\\b",
+      "positive": true,
+      "negation": "\\b(reserves?|retains?) the right to (delete|remove)\\b"
+    },
+    {
+      "id": "policy.legitimate_interest",
+      "name": "Relies on 'legitimate interest' for ads",
+      "label": "'Legitimate interest'",
+      "why": "Uses the GDPR basis that skips asking your consent.",
+      "severity": 0,
+      "pattern": "\\blegitimate interests?\\b[^.]{0,120}\\b(advertis|marketing|personali[sz]|profil)\\w*"
+    },
+    {
+      "id": "policy.auto_renewal",
+      "name": "Subscription renews automatically",
+      "label": "Auto-renews",
+      "why": "The terms say the subscription renews unless you cancel first.",
+      "severity": 2,
+      "pattern": "\\b(automatically renew(s|ed|ing)?|auto[- ]?renew(s|al|ed|ing)?|renews? automatically|will (be )?renew(ed)? (automatically|for additional)|recurring (charge|billing))\\b",
+      "negation": "\\b(does not|do not|will not|won'?t|never) (automatically )?renew\\b|\\bdomains?\\b",
+      "anyVoice": true,
+      "saleOnly": true
+    },
+    {
+      "id": "policy.non_refundable",
+      "name": "Payments non-refundable",
+      "label": "Non-refundable",
+      "why": "Refunds only where the terms expressly allow them.",
+      "severity": 2,
+      "pattern": "\\b(non[- ]?refundable|not refundable|no refunds?|refunds? (are|is) not (available|provided|offered|given)|all (fees|payments|sales) are final)\\b",
+      "negation": "\\b(full refund|refund you|money[- ]back guarantee|\\d+[- ]day refund)\\b|placements?\\b|shipping|temporar|unavailab|interrupt|deposit|third[- ]party|delivery fee|\\bunless otherwise\\b|\\bafter (these|this|the) (period|periods|window)s?\\b|\\bexcept as\\b[^.]{0,80}\\bsection\\b|\\bviolat(ed|ion|ing)\\b|\\brefund policy\\b",
+      "anyVoice": true,
+      "saleOnly": true,
+      "suppressIfText": "money[- ]back guarantee|\\d+[- ]day (money[- ]back|refund|guarantee)|within \\d+ (\\(\\w+\\) )?(calendar )?days of (the date of )?purchase"
+    },
+    {
+      "id": "policy.termination_any_reason",
+      "name": "Can close your account at will",
+      "label": "Can close your account",
+      "why": "They may suspend or close your account at their discretion.",
+      "severity": 1,
+      "anyVoice": true,
+      "pattern": "\\b(may|can|will|reserves? the right to|has the right to|is entitled to)\\b[^.]{0,80}\\b(suspend|terminate|disable|close|deactivate|cancel|block|revoke|restrict)\\b[^.]{0,40}\\b(your|the|any)\\b[^.]{0,20}\\b(account|access|accounts|membership|subscription|use of|right to use|login)"
+    },
+    {
+      "id": "policy.content_removal",
+      "name": "Can remove your content at will",
+      "label": "Can remove your posts",
+      "why": "They may remove what you post at their discretion.",
+      "severity": 1,
+      "anyVoice": true,
+      "pattern": "\\b(may|can|reserves? the right to|has the right to|is entitled to)\\b[^.]{0,80}\\b(remove|delete|disable|take down|edit|block|refuse)\\b[^.]{0,60}\\b(content|posts?|materials?|submissions?|listings?|usernames?|reviews?|comments?|uploads?)"
+    },
+    {
+      "id": "policy.far_court",
+      "name": "Disputes go to a court they choose",
+      "label": "Their court",
+      "why": "Disputes must go to courts in a place they chose.",
+      "severity": 1,
+      "anyVoice": true,
+      "pattern": "(exclusive|personal|sole) (jurisdiction|venue)|submit to the (exclusive |non-exclusive )?jurisdiction|courts? (located |situated |sitting )?(in|of|within) (the )?(state|county|city|courts?|[a-z]+)[^.]{0,60}(shall|will|have) [^.]{0,30}jurisdiction|(claims?|disputes?|actions?)[^.]{0,120}(shall|must|will|may only) be (brought|filed|resolved|decided|heard|litigated) [^.]{0,40}(courts?|tribunals?) (located |of |in )"
+    },
+    {
+      "id": "policy.contract_by_using",
+      "name": "Using the site counts as agreeing",
+      "label": "Using = agreeing",
+      "why": "Simply using the site counts as accepting these terms.",
+      "severity": 0,
+      "anyVoice": true,
+      "pattern": "(by (using|accessing|visiting|browsing|registering|signing up|downloading|installing|creating an account|placing an order|continuing to use)|(your )?(continued )?use of (the|this|our|these)? ?(site|website|service|services|app|platform|application)s?)[^.]{0,140}(you (agree|accept|consent|acknowledge|confirm)|you are (agreeing|accepting|consenting)|(constitutes?|signifies|indicates|means|shall be deemed|is deemed)( (that )?you| your)? ?(acceptance|agreement|consent|agree|accept))"
+    },
+    {
+      "id": "policy.liability_cap",
+      "name": "Limits what they owe you",
+      "label": "Limits their liability",
+      "why": "They cap or exclude what they owe you if things go wrong.",
+      "severity": 0,
+      "anyVoice": true,
+      "pattern": "(in no event|under no circumstances)[^.]{0,120}\\b(liable|liability|responsible)|(liability|liable)[^.]{0,200}\\b(shall not exceed|will not exceed|is limited to|shall be limited to|limited to the (amount|greater|lesser|fees))|(not|no) (be )?(liable|responsible) for any (indirect|incidental|consequential|special|punitive|exemplary|loss)|to the (maximum|fullest) extent permitted by (applicable )?law[^.]{0,120}(disclaim|exclude|not (be )?liable)|\\bas is\\b[^.]{0,40}\\bas available\\b"
+    },
+    {
+      "id": "policy.foreign_law",
+      "name": "Governed by the law they chose",
+      "label": "Their law",
+      "why": "The terms are governed by the law of a place they chose.",
+      "severity": 0,
+      "anyVoice": true,
+      "pattern": "(governed|construed|interpreted)( in all respects| exclusively)?( by| in accordance with| under)( and in accordance with)?,? (the )?(substantive |applicable )?(laws?|legislation) of|(the )?laws? of (the )?(state|commonwealth|province|republic|kingdom)? ?(of )?[a-z][\\w.,' -]{1,40}[^.]{0,80}\\b(will|shall) (govern|apply)|(subject to|under) [a-z]+ law\\b|\\bgoverning law\\b[^.]{0,20}[a-z]+ law\\b|\\blegislation of [^.]{3,60} shall govern"
+    },
+    {
+      "id": "policy.dnt_ignored",
+      "name": "Ignores Do Not Track",
+      "label": "Ignores Do Not Track",
+      "why": "It ignores your browser's Do Not Track setting.",
+      "severity": 0,
+      "anyVoice": true,
+      "pattern": "\\b(do not|does not|don't|doesn't|not currently|currently do not|currently does not|cannot|are not able to|is not able to|unable to)\\b[^.]{0,60}\\b(respond|honou?r|recogni[sz]e|support|take (any )?action|alter|change)\\b[^.]{0,80}\\b(do[- ]not[- ]track|dnt)\\b|\\b(do[- ]not[- ]track|dnt)\\b[^.]{0,120}\\b(not (currently )?(respond|honou?r|recogni[sz]e|support)|no (uniform )?(standard|protocol)[^.]{0,40}(not|no)\\b|has not (yet )?been finali[sz]ed)"
+    }
+  ],
+  "legalFrame": "\\b(shine the light|if we (sell|sold|share|shared|disclose)|you (may|can) request|two (separate )?lists|right to (know|request|opt|delete|access|correct|object|limit)|you (have|may have) (the|a) right|residents? (have|has|may)|\" means\\b|means any\\b|is defined as|definition of|digital advertising alliance|\\bDAA\\b|employees?\\b|co-?workers?|job applicants?|law enforcement|hipaa|right to appeal)\\b"
+}

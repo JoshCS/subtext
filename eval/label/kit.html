@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Subtext flag labelling</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1b1b1a;--mute:#5f5f5b;--line:#d9d9d4;--accent:#1f5fbf}
+@media (prefers-color-scheme:dark){:root{--bg:#191917;--card:#232321;--ink:#eee;--mute:#a9a9a3;--line:#3a3a36;--accent:#7fb0ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,system-ui,sans-serif}
+header{display:flex;gap:16px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--card);flex-wrap:wrap}header b{font-size:15px}
+main{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:16px;padding:16px;align-items:start}@media (max-width:900px){main{grid-template-columns:1fr}}
+.shot{width:100%;border:1px solid var(--line);background:#fff;display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:12px}
+h2{font-size:16px;margin:0 0 6px}.mute{color:var(--mute);font-size:13px}q{display:block;margin:8px 0;padding:8px;border-left:3px solid var(--line);quotes:none;font-size:14px;overflow-wrap:anywhere}
+button{font:inherit;display:block;width:100%;text-align:left;padding:9px 11px;margin:6px 0;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);cursor:pointer}button:hover,button:focus-visible{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:1px}button.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,transparent)}
+kbd{border:1px solid var(--line);border-radius:3px;padding:0 5px;font-size:12px;margin-right:6px}textarea{width:100%;font:inherit;min-height:52px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px}
+nav{display:flex;gap:8px}nav button{width:auto;margin:0}a{color:var(--accent)}details{margin-top:6px}input{font:inherit;padding:5px 8px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px}
+</style></head><body>
+<header><b>Subtext flag labelling</b><label>Your initials <input id="who" size="5"></label><span id="pos" class="mute"></span>
+<nav><button id="prev">Back</button><button id="next">Next unlabelled</button><button id="save">Save my labels to a file</button></nav></header>
+<main><div><img id="shot" class="shot" alt="Screenshot of the page when it was recorded"><p class="mute" id="where"></p></div>
+<div><div class="card"><div class="mute" id="lead">Subtext told the reader:</div><h2 id="label"></h2><div id="why"></div><div id="ev"></div></div>
+<div class="card"><b id="q">Is this flag right?</b><div id="opts"></div><label class="mute">Note, if you want one<textarea id="note"></textarea></label>
+<details><summary class="mute">How to decide</summary><div class="mute" id="defs"></div></details></div></div></main>
+<script src="flags.js"></script>
+<script>
+const OPTS=[['useful','Right, and worth telling a friend','The flag is true of this page and a reasonable person would want to know it.'],['ordinary','Right, but ordinary','The flag is true, but nearly every similar page does this, so it tells the reader nothing.'],['wrong','Wrong','The flag says something untrue about this page, misreads it, or points at text that is not doing what the flag claims.'],['cant_tell',"Can't tell",'The screenshot and evidence are not enough, or the page has changed. Use the live link if it helps. Use this honestly; do not guess.']];
+const LINE_OPTS=[['accurate_new','Accurate, and tells me something I could not see','Every part is true of this page, and it says something a reader would not get from just looking at it.'],['accurate_plain','Accurate, but nothing I could not see','True, but it only describes what is on the page.'],['partly','Partly accurate','Some of it is true; something in it is wrong or misleading.'],['wrong','Wrong','The main thing it says is untrue of this page.'],['cant_tell',"Can't tell",'The screenshot is not enough to judge. Use the live link if it helps.']];
+const optsFor=(f)=>f.kind==='line'?LINE_OPTS:OPTS;
+const $=(i)=>document.getElementById(i); const KEY='subtext-labels-'+(window.KIT_ID||'kit');
+let S={}; try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){} S.labels=S.labels||{}; S.who=S.who||'';
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+let order=FLAGS.map((f)=>f.id),i=0;
+function seedOrder(){let h=0;for(const c of S.who)h=(h*31+c.charCodeAt(0))>>>0;const a=FLAGS.map((f)=>f.id);for(let k=a.length-1;k>0;k--){h=(h*1664525+1013904223)>>>0;const j=h%(k+1);[a[k],a[j]]=[a[j],a[k]]}order=a}
+function text(el,t){el.textContent=t}
+function show(){const f=FLAGS.find((x)=>x.id===order[i]);const done=order.filter((x)=>S.labels[x]).length;text($('pos'),(i+1)+' of '+order.length+', '+done+' labelled');$('shot').src=f.shot;const w=$('where');w.textContent='';const a=document.createElement('a');a.href=f.url;a.target='_blank';a.rel='noreferrer noopener';a.textContent=f.url;w.append('Recorded page: ',a);$('lead').textContent=f.kind==='line'?'The one line Subtext showed at the top of its panel:':'Subtext told the reader:';$('q').textContent=f.kind==='line'?'Is this line right?':'Is this flag right?';text($('label'),f.label);text($('why'),f.why||'');const ev=$('ev');ev.textContent='';(f.evidence||[]).forEach((q)=>{const n=document.createElement('q');n.textContent=q;ev.append(n)});const o=$('opts');o.textContent='';optsFor(f).forEach((x,k)=>{const b=document.createElement('button');const kb=document.createElement('kbd');kb.textContent=k+1;b.append(kb,x[1]);b.className=(S.labels[f.id]||{}).label===x[0]?'on':'';b.onclick=()=>pick(x[0]);o.append(b)});$('note').value=(S.labels[f.id]||{}).note||''}
+function pick(v){const id=order[i];S.labels[id]={label:v,note:$('note').value,at:new Date().toISOString()};persist();nextOpen()}
+function nextOpen(){const k=order.findIndex((x,j)=>j>i&&!S.labels[x]);const any=order.findIndex((x)=>!S.labels[x]);i=k>=0?k:any>=0?any:i;show()}
+$('note').addEventListener('change',()=>{const id=order[i];if(S.labels[id]){S.labels[id].note=$('note').value;persist()}});
+$('prev').onclick=()=>{i=Math.max(0,i-1);show()};$('next').onclick=nextOpen;
+$('who').value=S.who;$('who').addEventListener('change',()=>{S.who=$('who').value.trim();persist();seedOrder();i=-1;nextOpen()});
+$('save').onclick=()=>{const b=new Blob([JSON.stringify({who:S.who,kit:window.KIT_ID,saved:new Date().toISOString(),labels:S.labels},null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='labels-'+(S.who||'unnamed')+'.json';a.click()};
+document.addEventListener('keydown',(e)=>{if(/TEXTAREA|INPUT/.test(e.target.tagName))return;const n=+e.key;const cur=optsFor(FLAGS.find((x)=>x.id===order[i]));if(n>=1&&n<=cur.length){e.preventDefault();pick(cur[n-1][0])}else if(e.key==='ArrowLeft'){i=Math.max(0,i-1);show()}else if(e.key==='ArrowRight'){i=Math.min(order.length-1,i+1);show()}});
+const D=$('defs');OPTS.concat(LINE_OPTS.slice(0,4)).forEach((x)=>{const p=document.createElement('p');const b=document.createElement('b');b.textContent=x[1]+': ';p.append(b,x[2]);D.append(p)});
+seedOrder();i=-1;nextOpen();
+</script></body></html>

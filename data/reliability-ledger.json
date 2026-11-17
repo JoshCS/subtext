@@ -1,0 +1,2402 @@
+{
+ "policy.sells_personal_info": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "3/3 supported, no misfires on 126 pages. Two of the three (Warby n=69, Slate n=133) are the California 'sell or share' admission, which means ad-tech sharing, not selling lists for money; the label 'Sells your data' at severity 3 reads as the latter.",
+  "fix": "optional: when the matched sentence says 'sell or share'/'sell and share', use why-line 'Sells or shares your data with advertisers (California definition).' Also drop positiveLabel: its '.negated' note duplicates policy.no_sale_statement.",
+  "meaning": "Policy admits selling or sharing your data with advertisers.",
+  "judged": {
+   "supported": 3
+  },
+  "judged_gates_off": {},
+  "pages": 3
+ },
+ "policy.shares_or_sells_ccpa": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "5/6 supported. The sentence splitter breaks CCPA right-to-know lists at semicolons, so the fragment 'The categories of third parties with whom we share or sell personal information;' (Budget Bytes n=58) loses its 'right to know' frame and reads as an admission.",
+  "fix": "Add negation: \\bcategories of (third parties|sources)\\b[^.]{0,20}\\b(with|from) (whom|which)\\b  (tested on the 6 rows: removes the 1 wrong, loses 0 of 5 supported). Also fix the heading filter: HuffPost n=91/100 is a glued table heading that scored 0.545 capitalised, just under the 0.55 cutoff; treat '?X' or ':X' with no space as a sentence boundary.",
+  "meaning": "Shares your data with ad platforms; California counts that as a sale.",
+  "judged": {
+   "supported": 5,
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 6
+ },
+ "policy.third_party_marketing": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "4/5 supported. The pattern has no subject, so any sentence with provide/share, then partners, then 'for advertising' fires: Gumroad's device-settings opt-out matched on 'settings may provide to limit our, or our partners', ability ... Apple ID for Advertising' (n=57).",
+  "fix": "Replace pattern with a first-person subject: \\bwe\\b(?: [a-z]+){0,3}? (share|disclose|provide|transfer|make available)\\b[^.]{0,100}\\b(third[- ]part(y|ies)|partners|affiliates|advertisers|data brokers)\\b[^.]{0,120}\\b(their own (marketing|purposes|advertising)|marketing purposes|to market|for (direct )?(advertising|marketing))\\b  (tested: removes the 1 wrong, keeps all 4 supported).",
+  "meaning": "Gives your details to other companies for their own marketing.",
+  "judged": {
+   "supported": 4,
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 5
+ },
+ "policy.data_brokers": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "2/2 supported but one site only (BBC: 'data from data brokers such as Experian mosaic data'). No misfire. It misses IKEA's 'We may disclose your information to data brokers ... for marketing purposes' (n=135) because usedSentences is shared across rules in file order and policy.third_party_marketing (severity 1) claimed that sentence first.",
+  "fix": "optional (logic): sort rules by severity descending before the scan loop, or key usedSentences per rule, so a severity-3 rule is never pre-empted by a severity-1 rule on the same sentence.",
+  "meaning": "Buys or uses broker data (e.g. Experian) about you.",
+  "judged": {
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "policy.combine_sources": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "7/7 supported. The why-line says 'data bought elsewhere' but the quotes say 'other sources' (owners, affiliates, social networks, public records); 'bought' is not shown by the clause.",
+  "fix": "optional: why-line 'Combines what you do here with data from other sources.'",
+  "meaning": "Merges your activity here with data from other companies.",
+  "judged": {
+   "supported": 7
+  },
+  "judged_gates_off": {},
+  "pages": 7
+ },
+ "policy.precise_location": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "retire",
+  "proof": false,
+  "cause": "0/7 supported, 5 wrong, 2 unclear. The phrase is matched wherever it occurs: verbatim CCPA sensitive-data definitions (Mercola n=11, ExpressVPN n=104), app-only and device-permission clauses (Warby n=63, Robinhood n=53), and an opt-out sentence whose real collection clause is 'with your permission' (IKEA n=90). On a web page precise location needs a browser prompt, and policies never say web vs app, so even a correct match (Fox n=88) is unclear.",
+  "fix": "If kept as a severity-0 note only: pattern \\bwe\\b(?: [a-z]+){0,3}? (collect|obtain|access|receive|use|process)\\b[^.]{0,60}\\b(precise (geo)?location|exact location|gps (data|location|coordinates)|real[- ]time location)\\b and add to negation: \\bdevice permissions?\\b|\\bmobile device\\b|\\bapps?\\b|\\b(racial|ethnic|religious|sexual orientation|immigration|genetic|biometric)\\b|\\byou may (stop|disable|turn off|opt out)\\b|\\bsensitive\\b  (tested: removes all 5 wrong, keeps the 2 unclear). The reliable signal is behavioural: a navigator.geolocation call or permission prompt on the page.",
+  "meaning": "The website itself asks for GPS-level location.",
+  "judged": {
+   "wrong": 5,
+   "unclear": 2
+  },
+  "judged_gates_off": {},
+  "pages": 7
+ },
+ "policy.biometric_sensitive": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "1/2 supported. The verb window is 70+90 chars, so 'third parties we use to support our business; ... protected health information will comply with our Notice' (Mayo n=0) satisfied we...use...health information; it is a HIPAA compliance clause.",
+  "fix": "Add to negation: \\bprotected health information\\b|\\bhipaa\\b|\\bnotice of privacy practices\\b|\\bcomply with\\b  (tested: removes the 1 wrong, keeps Red Cross n=28). Also shrink the first gap from {0,70} to {0,25} so 'we' must govern the verb. Only 2 firings: re-check after the change.",
+  "meaning": "Collects health or biometric data about you.",
+  "judged": {
+   "wrong": 1,
+   "supported": 1
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "policy.cross_device": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "0 firings on 126 pages. The pattern needs the verb after 'across devices'; the common wording puts it before ('recognize you across your devices', 'identify you across devices and browsers'), so recall is near zero.",
+  "fix": "Add alternation: (track|identif|link|recogni[sz]|advertis)\\w*\\b[^.]{0,40}\\bacross (your |multiple |different |all )?(devices|browsers)\\b and the standard do-not negation. Untested on real firings; run the corpus again after the change.",
+  "meaning": "Links your phone and laptop into one profile.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "policy.indefinite_retention": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "The only firing is wrong: Squarespace's 'de-personalized information, which we may retain indefinitely' (n=4) is anonymised data, not personal data.",
+  "fix": "Add negation: \\b(de-?personali[sz]ed|anonymi[sz]ed|aggregated?|de-?identified|non-personal|pseudonymi[sz]ed)\\b  (tested: removes the 1 wrong; there are no supported firings to lose). No positive evidence exists yet.",
+  "meaning": "No stated limit on how long your personal data is kept.",
+  "judged": {
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 1
+ },
+ "policy.arbitration_class_waiver": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "10/10 supported. Label 'No right to sue' overstates for class-waiver-only terms (US News n=110, HuffPost n=128) and ignores the written opt-out some terms offer (Daily Beast n=142).",
+  "fix": "optional: label 'Arbitration clause', why-line 'Disputes go to arbitration; class actions waived.'",
+  "meaning": "Disputes go to private arbitration; no class action.",
+  "judged": {
+   "supported": 10
+  },
+  "judged_gates_off": {},
+  "pages": 24
+ },
+ "policy.unilateral_changes": {
+  "tier": "note",
+  "family": "policy",
+  "status": "demote",
+  "proof": false,
+  "cause": "10/10 ordinary. Every policy has a modify-at-any-time or continued-use clause; it fired on 37/126 pages and would on every page whose policy was fetched. The label 'Changes without notice' is contradicted by Red Cross's 'will let you know of any changes' (n=116), and Costco's second quote is about delivery availability (n=119).",
+  "fix": "",
+  "meaning": "Nothing; universal boilerplate.",
+  "judged": {
+   "ordinary": 10
+  },
+  "judged_gates_off": {},
+  "pages": 37
+ },
+ "policy.children_data": {
+  "tier": "note",
+  "family": "policy",
+  "status": "demote",
+  "proof": false,
+  "cause": "2/2 literally true but misleading as a warning: the only sites that admit collecting children's data are consented education programmes (Figma for Education n=51, Canva Education n=134). Sites that actually harvest children's data never say so, so text matching can only flag the compliant ones.",
+  "fix": "",
+  "meaning": "Runs a children's or education programme with consented data collection.",
+  "judged": {
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "policy.inferences_profiling": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "10/10 supported. Two sites share an identical template sentence (Glossier n=65, IKEA n=117), the CCPA 'inferences' category disclosure, so on US commercial sites this is close to boilerplate; a quote that names what is inferred (Atlantic n=66, Robinhood n=107) is the informative case.",
+  "fix": "optional: negation \\b(won'?t|will not|do not|don'?t|never) (infer|draw inferences|profile)\\b so 'We won't infer sensitive information' (BBC) is never quoted (tested: drops no rows); prefer the quote that names the inferred traits.",
+  "meaning": "Builds inferences about your interests or traits from your activity.",
+  "judged": {
+   "supported": 10
+  },
+  "judged_gates_off": {},
+  "pages": 10
+ },
+ "policy.automated_decisions": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "1/3 supported. The term is matched wherever it appears: Etsy's note on when automated decisions are 'permissible' (n=33) is a legal explanation, and Daily Beast's 'to customize your experience' (n=25) is ordinary personalisation.",
+  "fix": "Add to negation: \\bpermissible\\b|\\bpermitted (where|when|if)\\b|\\b(customi[sz]e|personali[sz]e|tailor)\\b[^.]{0,30}\\b(experience|content)\\b  (tested: removes the 1 wrong and the 1 ordinary, keeps Coinbase n=81). Only 3 firings: re-check after the change.",
+  "meaning": "Algorithms alone may decide account, credit or access outcomes.",
+  "judged": {
+   "ordinary": 1,
+   "wrong": 1,
+   "supported": 1
+  },
+  "judged_gates_off": {},
+  "pages": 3
+ },
+ "policy.email_tracking": {
+  "tier": "note",
+  "family": "policy",
+  "status": "demote",
+  "proof": false,
+  "cause": "10/10 correct quotes, all ordinary: open-tracking beacons are standard for every newsletter sender. Already severity 0; keep it there.",
+  "fix": "",
+  "meaning": "Their emails report back when you open them.",
+  "judged": {
+   "ordinary": 10
+  },
+  "judged_gates_off": {},
+  "pages": 12
+ },
+ "policy.opt_out_friction": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "0 firings. It is a practice rule, so the legalFrame drops any sentence containing 'right to (opt|delete)' or 'you may request', which is exactly the sentence that describes an opt-out route.",
+  "fix": "Set anyVoice: true on the rule (bypasses the frame and the we/us gate); keep the pattern. Untested on real firings; run the corpus again after the change.",
+  "meaning": "Opting out needs mail, fax or ID, not a click.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "policy.bankruptcy_transfer": {
+  "tier": "note",
+  "family": "policy",
+  "status": "demote",
+  "proof": false,
+  "cause": "10/10 ordinary. The business-transfer clause is in nearly every policy (31/126 pages). Already severity 0; it adds clutter to 'Also noticed'.",
+  "fix": "",
+  "meaning": "Nothing; universal boilerplate.",
+  "judged": {
+   "ordinary": 10
+  },
+  "judged_gates_off": {},
+  "pages": 31
+ },
+ "policy.gpc_honoured": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "10/10 supported as a positive note. There is no negation, so a policy saying it does not respond to GPC would also fire; none in the sample. Note the inverse signal: every GPC mention came from a site that sells or shares (only sellers need to honour GPC).",
+  "fix": "optional: negation \\b(do not|don'?t|does not|not currently|no longer|unable to)\\b[^.]{0,40}\\b(respond|honou?r|recogni[sz]e|process|support)\\b  (tested: keeps all 10).",
+  "meaning": "Browser GPC signal opts you out; also implies they sell or share.",
+  "judged": {
+   "supported": 10
+  },
+  "judged_gates_off": {},
+  "pages": 16
+ },
+ "policy.no_sale_statement": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "3/10 supported, 7 wrong. 'do not sell ... my personal information' matches the mandatory California link title 'Do Not Sell or Share My Personal Information', so the rule reports 'Does not sell data' on the sites that do (Squarespace n=3 vs n=95, Budget Bytes n=38 vs n=58, HuffPost n=45 vs n=91, Daily Beast n=21). Stanford n=72 covers sensitive data only; Federalist n=89 is a rights heading.",
+  "fix": "Add negation: \\b(do not|don'?t) sell (or share )?my\\b|\\brights? to\\b|\\bunder the ccpa\\b|\\bconstitutes a sale\\b|\\bbut we do\\b|\\bsensitive personal\\b  (tested: removes all 7 wrong, keeps all 3 supported). Also suppress the finding when policy.sells_personal_info or policy.shares_or_sells_ccpa fired on the same policy.",
+  "meaning": "Explicit promise not to sell your data.",
+  "judged": {
+   "wrong": 7,
+   "supported": 3
+  },
+  "judged_gates_off": {},
+  "pages": 21
+ },
+ "policy.deletion_right": {
+  "tier": "note",
+  "family": "policy",
+  "status": "demote",
+  "proof": false,
+  "cause": "8/10 ordinary (deletion rights are law-mandated language in nearly every policy; 51/126 pages), 2/10 wrong: 'reserves the right to delete' is the company's right over your credentials or duplicate accounts (Red Cross n=23, Zalando n=99).",
+  "fix": "If kept as a note, add negation: \\b(reserves?|retains?) the right to (delete|remove)\\b  (tested: removes the 2 wrong, keeps 8).",
+  "meaning": "Nothing; deletion rights are mandated boilerplate.",
+  "judged": {
+   "ordinary": 8,
+   "wrong": 2
+  },
+  "judged_gates_off": {},
+  "pages": 51
+ },
+ "policy.legitimate_interest": {
+  "tier": "note",
+  "family": "policy",
+  "status": "demote",
+  "proof": false,
+  "cause": "6/6 ordinary. Every GDPR-facing policy lists legitimate interests with marketing among the examples. Already severity 0.",
+  "fix": "",
+  "meaning": "Nothing distinctive; standard GDPR lawful-basis list.",
+  "judged": {
+   "ordinary": 6
+  },
+  "judged_gates_off": {},
+  "pages": 6
+ },
+ "policy.auto_renewal": {
+  "tier": "flag",
+  "family": "policy",
+  "status": "reliable",
+  "proof": false,
+  "cause": "10/10 supported; saleOnly already zeroes it on article pages (Breitbart n=29/56, NPR n=82/109). Four of ten quotes are the notice or disable clause rather than the renewal clause itself (Squarespace n=43).",
+  "fix": "optional: prefer the quote that contains 'renew' over the one that contains 'disable'/'notice'.",
+  "meaning": "Subscription renews and charges until you cancel.",
+  "judged": {
+   "supported": 10
+  },
+  "judged_gates_off": {},
+  "pages": 15
+ },
+ "policy.non_refundable": {
+  "tier": "hold",
+  "family": "policy",
+  "status": "fix",
+  "proof": false,
+  "cause": "7/9 supported, 2 wrong. Carve-outs swallow the clause: Hostinger's 'non-refundable ... unless otherwise expressly specified in the Refund Policy' (n=70) sits under a 30-day money-back banner (fetched and confirmed); MasterClass's renewal-only clause 'except as ... Section 3.3' and 'not available after these periods' presupposes a refund window (n=59).",
+  "fix": "Add to negation: \\bunless otherwise\\b|\\bafter (these|this|the) (period|periods|window)s?\\b|\\bexcept as\\b[^.]{0,80}\\bsection\\b|\\bviolat(ed|ion|ing)\\b|\\brefund policy\\b  (tested: removes both wrong, keeps all 7 supported; Linear's 'except as expressly stated in this Agreement' survives). Also suppress policy-wide when the terms contain money[- ]back guarantee|\\d+[- ]day (money[- ]back|refund|guarantee)|within \\d+ (\\(\\w+\\) )?(calendar )?days of (the date of )?purchase (Hostinger's terms contain both).",
+  "meaning": "No refund once you have paid.",
+  "judged": {
+   "supported": 7,
+   "wrong": 2
+  },
+  "judged_gates_off": {},
+  "pages": 9
+ },
+ "urgency.deadline_language": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "On sale pages 4 of 6 firings are right; the two wrong are a category filter facet ('Last chance 3 products 3', IKEA) and offer fine print ('Select offers available for a limited time', HubSpot). Off sale pages it reads FTC advice and a sponsor read as pressure, which the sale gate already stops.",
+  "fix": "Add notNearPattern `\\(\\d+\\)|\\b\\d+ (products?|items?|results?)\\b|\\b(new customers only|terms (and|&) conditions|t&cs?|see (details|terms|site)|offer (valid|subject)|select offers)\\b`. Tested on the instances: removes 2 of 2 wrong normal-mode firings, loses 0 of 4 supported. Proof that beats wording: store the matched phrase per origin and re-check on the next visit; the same 'flash sale' days later is standing copy (the countdown-reset mechanism).",
+  "meaning": "Hurry words with no stated deadline on the seller's own page.",
+  "judged": {
+   "supported": 4,
+   "wrong": 2
+  },
+  "judged_gates_off": {
+   "wrong": 2,
+   "ordinary": 1,
+   "supported": 1
+  },
+  "pages": 6
+ },
+ "scarcity.low_stock": {
+  "tier": "flag",
+  "family": "sale",
+  "status": "reliable",
+  "proof": false,
+  "cause": "2 of 2 firings are right (Temu and Etsy tile counters) and the gate kept it off every editorial page. Only two firings, so the confidence rests on the pattern's specificity: a number plus 'left'.",
+  "fix": "None needed. Measured upgrade: store the count per product URL and compare on revisit; an 'Only 2 left' unchanged a day later is a prop, and that proof would raise severity.",
+  "meaning": "A stock count you cannot check and that may never change.",
+  "judged": {
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "scarcity.high_demand": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired on a sale page; the one near-miss was 'Trending Now', a news section header, because the pattern lists section labels ('trending now', 'in demand', 'popular choice') next to the numeric viewer counters it is meant for.",
+  "fix": "Regex: `\\b\\d+ (people|others|users|shoppers|customers|travell?ers|guests) (are )?(currently )?(viewing|looking at|watching|browsing|considering|interested)\\b|\\bbooked \\d+ times\\b|\\b(in|added to) \\d+ (carts?|baskets?)\\b`. Tested: removes 1 of 1 wrong, 0 supported to lose; '27 people are viewing this' and 'booked 12 times' still match. No real evidence remains after the fix. Behavioural proof: a viewer number that changes on reload with no network request.",
+  "meaning": "A live-viewer or booking count nobody can verify.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 0
+ },
+ "social.bestseller_badges": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "All 6 sale-page firings are standard retail badges ('Best seller', 'Top rated', 'Bestseller'), and two are not badges at all: a filter facet 'Top Rated (304)' and the tagline 'top-rated stays' (maxBlock 60 lets a 50-character tagline through). True, universal, tells the reader nothing.",
+  "fix": "If kept as a quiet note: maxBlock 28 plus notNearPattern `\\(\\d+\\)|\\b\\d+ (products?|items?)\\b`. Tested: drops the Groupon tagline, the review pros line and REI's facet and tagline matches (REI still fires on its genuine 'Staff Pick' badge); keeps the four badge cases.",
+  "meaning": "A ranking badge with no stated criteria or category.",
+  "judged": {
+   "ordinary": 4,
+   "wrong": 2
+  },
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 6
+ },
+ "social.join_millions": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "Both firings ('Trusted by more than 50,000 companies', 'Trusted by over 40 million people') are the standard SaaS pricing line: true and universal. It has no sale gate, so any page carrying such a line would be flagged.",
+  "fix": "",
+  "meaning": "A user count nobody audits; popularity is not quality.",
+  "judged": {
+   "ordinary": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "social.testimonial_markers": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "No sale-page firing. Off the gate it caught an author bio ('His work has been featured in numerous outlets') because 'featured in' is in the pattern, and a MasterClass testimonial header, which every product site has.",
+  "fix": "If kept: drop `featured (on|in)`. Tested: removes the bio case, keeps 'See what our members are saying'.",
+  "meaning": "Quotes chosen by the seller.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 1,
+   "ordinary": 1
+  },
+  "pages": 0
+ },
+ "bias.anchoring_price_compare": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "The one sale-page firing was '10% Off' in a Tello promo with no reference price, while Groupon's real anchors ('Original price $249.99 $29.99 -88%', checked in the recording) were missed: 'original price' is not in the word list and the bare 'N% off' alternative fires on any discount mention. The four off-gate hits were affiliate deal boxes on review pages.",
+  "fix": "Regex: `\\b(was|list price|compare at|retail price|rrp|msrp|regular(ly)? price|reg\\.|orig\\.|original(ly)?( price)?|valued at|normally|typical price)\\s?:?\\s?(\\$|£|€)\\s?\\d[\\d,.]*(?=[^.\\n]{0,60}(\\$|£|€)\\s?\\d)`, which needs a reference word, an amount and a second amount in the same block. Tested: removes 1 of 1 wrong normal and 4 of 4 off-gate, loses 0 supported; 'Original price $249.99 $29.99' and 'Was $120.00 Now $89.99' match. The DOM rule bias.anchoring_strikethrough already measures struck prices; roll both into one finding.",
+  "meaning": "A higher 'was' price next to the real one; the gap may be invented.",
+  "judged": {
+   "wrong": 1
+  },
+  "judged_gates_off": {
+   "wrong": 4
+  },
+  "pages": 1
+ },
+ "bias.charm_pricing": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "Every sale-page firing is an ordinary .99 price; one (REI) matched price-filter bucket boundaries '$0.00 to $9.99 (11)'; off the gate it read bandwidth costs and recipe costs as prices. Already severity 0; universal, so it tells the reader nothing.",
+  "fix": "",
+  "meaning": "Prices end in .99 so you read the left digit.",
+  "judged": {
+   "ordinary": 9,
+   "wrong": 1
+  },
+  "judged_gates_off": {
+   "wrong": 5,
+   "ordinary": 1
+  },
+  "pages": 10
+ },
+ "bias.decoy_tier_badge": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Fired on 4 pages (SaaS) but none in this pack. A \"Most popular\" badge in a priced table is a true observation; the name and explain assert a decoy tier exists without evidence.",
+  "fix": "Rename to \"Highlighted tier\", severity 0 note; drop \"decoy\" unless a dominated tier is detected.",
+  "meaning": "The seller marks the plan it wants you to pick.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 4
+ },
+ "bias.default_optout_language": {
+  "tier": "flag",
+  "family": "sale",
+  "status": "reliable",
+  "proof": false,
+  "cause": "Both sale-page firings are the page's own auto-renew terms ('Then autorenews at $99.95 annually', 'Auto-renews at $0.59/mo'); all three off-gate hits were review advice, which the editorial gate stops. The same fact is measured by transaction.js (renewsAtPattern) into incentives.purchase_path, but that pattern misses 'autorenews at' (tested), so today only the text rule catches ExpressVPN.",
+  "fix": "Reliable with the gate. To end the duplication: extend renewsAtPattern to `\\b(?:[Aa]uto-?)?[Rr]enews? (?:at|for) ((?:\\$|£|€)\\s?\\d[\\d.,]*\\s?(?:/\\s?\\w+|per \\w+)?)` (tested: matches all three recorded cases) and show one finding under purchase_path.",
+  "meaning": "The intro price auto-renews at a higher one unless you cancel.",
+  "judged": {
+   "supported": 2
+  },
+  "judged_gates_off": {
+   "wrong": 3
+  },
+  "pages": 2
+ },
+ "bias.monthly_display_annual_billing": {
+  "tier": "flag",
+  "family": "sale",
+  "status": "reliable",
+  "proof": false,
+  "cause": "Hostinger (sale page) is right, and so is MasterClass's '$10/month, billed annually', which the commerce gate dropped because the page has no priced buy box; the Tom's Guide hit was a review explaining a vendor's price. transaction.js already reads 'billed annually' and 'for the first N months' but not '12-month term' or Hostinger's 'Today you pay $95.52 for 48 months'.",
+  "fix": "Reliable with the gate. To end the duplication: add `(?:12|24|36|48)[- ]month (?:term|commitment|contract)` and `today you pay (?:\\$|£|€)\\s?\\d[\\d,.]* for \\d+ months` to upfrontPattern (tested on the recorded strings) and show one finding under purchase_path. Gate gap: subscription landing pages with '$X/month' and a marketing CTA but no checkout word (MasterClass).",
+  "meaning": "The monthly figure is charged as one lump sum for the term.",
+  "judged": {
+   "supported": 1
+  },
+  "judged_gates_off": {
+   "wrong": 1,
+   "supported": 1
+  },
+  "pages": 1
+ },
+ "bias.bnpl": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "The only sale-page firing was 'Cash App Afterpay' in IKEA's footer link list (bias_exploit accepts footer blocks, and a brand name alone matches); the off-gate hit was 'as low as $3 per month', plan pricing quoted in a review, because the 'as low as $X/mo' alternative describes subscriptions, not instalments.",
+  "fix": "Drop the 'as low as' alternative; set `regions: [\"title\",\"body\",\"aside\",\"cta\",\"teaser\"]`; add nearPattern `(\\$|£|€)\\s?\\d|\\bpayments?\\b|\\binstal`. Tested: removes 2 of 2 wrong, 0 supported to lose; '4 interest-free payments of $22.50 with Klarna' still matches.",
+  "meaning": "The price is shown split into instalments; the total is the real cost.",
+  "judged": {
+   "wrong": 1
+  },
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 1
+ },
+ "bias.exclusivity_access": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "The one sale-page firing was Glossier's 'Limited edition' product badges, a retail descriptor; off the gate it caught a 'Members Only' article tag (Townhall) and 'limited edition merchandise' in an NRA event description. 'limited (edition|release|run|drop)' and 'members-only' are product or section labels, not access pitches.",
+  "fix": "Regex: `\\b(invite[- ]only|by invitation( only)?|exclusive access|limited (seats|spots|places|membership|enrollment)|join the (waitlist|wait list|queue)|first come,? first served|secure your (spot|place|seat)|reserve your (spot|place|seat)|while (spots|spaces|seats|places) (remain|last)|closing (soon|the doors)|enrollment (closes|ends)|doors close|cohort (is )?(filling|closing))\\b`. Tested: removes 2 of 2 wrong, drops the ordinary Glossier case, loses 0 supported; 'Doors close Friday. Secure your spot.' still matches. No real evidence remains after the fix.",
+  "meaning": "Access is described as restricted; check whether anyone is turned away.",
+  "judged": {
+   "ordinary": 1
+  },
+  "judged_gates_off": {
+   "wrong": 2
+  },
+  "pages": 1
+ },
+ "bias.hidden_fees": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "No sale-page firing. Off the gate it matched 'service fees' in a review sentence and 'Other fees may apply' in a Credit Karma disclosure: fee vocabulary lives in prose and legal text, while drip pricing is a checkout-flow event (a fee appears after the price was shown), which no phrase proves.",
+  "fix": "Measured replacement: store the price shown per product URL and compare it with the total on the cart or checkout step; at minimum fire only when a fee phrase and a currency amount share a cta block on a sale page.",
+  "meaning": "The checkout total is higher than the price you were shown.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 2
+  },
+  "pages": 0
+ },
+ "bias.sunk_cost_progress": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "No sale-page firing. Off the gate it matched 'you've already read' in a book note and '90% done' in an essay: 'you've (already|come so far)' and 'N% done' are everyday prose, and progress pressure is a UI element, not a phrase.",
+  "fix": "Measured replacement: a <progress> or role=progressbar element, or a 'Step N of M' indicator, inside a form that holds a payment or email field; keep 'you're almost there' and 'one last step' only inside cta blocks.",
+  "meaning": "A progress cue pushing you through the step that costs you.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 2
+  },
+  "pages": 0
+ },
+ "bias.reciprocity_gift": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "The one sale-page firing was Glossier's 'Free Gift' tile badge, a standard promo whose useful part (the spend threshold) the rule does not read; off the gate `\\bfree gift\\b` matched 'paywall-free gift links' because a hyphen counts as a word boundary.",
+  "fix": "If kept as a quiet note: `(?<![\\w-])free gift`. Tested: drops the hyphen case, keeps 'Free gift with every order over $50'.",
+  "meaning": "A gift is tied to buying; the threshold is the real ask.",
+  "judged": {
+   "ordinary": 1
+  },
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 1
+ },
+ "bias.loss_framing": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "The only firings are 'Don't miss out' on Hostinger's banner strap and 'Don't miss your chance' on a review site's giveaway: boilerplate. The stronger alternatives ('stop overpaying', 'every day you wait') never fired on 126 pages.",
+  "fix": "",
+  "meaning": "Not buying is framed as a loss.",
+  "judged": {
+   "ordinary": 1
+  },
+  "judged_gates_off": {
+   "ordinary": 1
+  },
+  "pages": 1
+ },
+ "claims.asterisked_claim": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "Squarespace's 'Free custom domain*' (footnote: annual term, one year, cheapest tier) is exactly right; Goop's firing was a bare '*Terms apply.' footer line with no claim in sight, because the pattern's second alternative matches the footnote side on its own.",
+  "fix": "Keep only the claim-side alternative: `\\b(free|unlimited|guaranteed|lowest|cheapest|fastest|best|save|off|included|no fees?|\\d+\\s?%|(\\$|£|€)\\d[\\d,.]*)(\\s\\w+){0,2}\\*{1,2}(?=\\s|$|[.,;:!)])`. Tested: removes 1 of 1 wrong, keeps Squarespace; the off-gate Credit Karma footnote also drops, but the sale gate drops that page anyway.",
+  "meaning": "The headline promise has a condition in a footnote.",
+  "judged": {
+   "wrong": 1,
+   "supported": 1
+  },
+  "judged_gates_off": {
+   "supported": 1
+  },
+  "pages": 2
+ },
+ "claims.unlimited_hedge": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "Hostinger's 'Unlimited features are subject to our Fair Usage Policy' is right; the off-gate hit 'unlimited data allowance, so you know you won't run out' fired because 'data allowance' sits in the hedge list, so the unlimited thing matches as its own hedge. The `[^.]{0,140}` window also crosses block boundaries (the Hostinger match spans a newline).",
+  "fix": "Regex: `\\bunlimited\\b[^.\\n]{0,140}\\b(fair (use|usage) policy|reasonable use|subject to|limits? (may )?apply|throttl(ed|ing)|acceptable use|deprioritiz|after \\d+\\s?(gb|tb|hours))\\b`. Tested: removes 1 of 1 wrong, keeps Hostinger; 'Unlimited storage, subject to our fair use policy' matches.",
+  "meaning": "'Unlimited' comes with a fair-use limit on this page.",
+  "judged": {
+   "supported": 1
+  },
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 1
+ },
+ "claims.guarantee_puffery": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "Five of six sale-page firings are a plain '30-day money-back guarantee', a refund term rather than puffery; the sixth, Basecamp's 'no questions asked', describes easy cancellation. transaction.js already measures guarantees against refund terms (guarantee contradicted, guarantee with no terms, refund stated) inside incentives.purchase_path.",
+  "fix": "Let purchase_path carry guarantees. The true puffery alternatives ('guaranteed results', 'can't lose', 'foolproof', 'never fails') never fired; a regex with only those (tested) drops all six current firings and keeps 'Guaranteed results or your money back - you cannot lose'.",
+  "meaning": "A refund promise; its conditions are what matter.",
+  "judged": {
+   "ordinary": 5,
+   "wrong": 1
+  },
+  "judged_gates_off": {
+   "ordinary": 1,
+   "wrong": 3
+  },
+  "pages": 6
+ },
+ "claims.grandiosity_puffery": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "On sale pages every firing is routine copy ('best-in-class', 'world's leading', 'the ultimate guide'); off the gate it reads 'effortless' and 'the only way' in essays, and a university's factual 'unmatched 139 NCAA titles', as puffery. Already severity 0.",
+  "fix": "If kept: drop `effortless(ly)` and `the only (way|...)`. Tested: removes the two essay cases (Gwern, Daring Fireball) and Temu's 'Effortlessly'; Stanford's 'state-of-the-art' and PCMag's 'industry-leading' still match and the editorial gate drops them; keeps 'Revolutionary, industry-leading, world's best'.",
+  "meaning": "Superlatives with nothing checkable behind them.",
+  "judged": {
+   "ordinary": 4
+  },
+  "judged_gates_off": {
+   "ordinary": 2,
+   "wrong": 4
+  },
+  "pages": 4
+ },
+ "claims.greenwashing": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "No sale-page firing. Off the gate it matched 'sustainable business' on Basecamp's pricing page (which does sell), 'sustainable future' at Stanford and a quoted 'net zero' factory: bare 'sustainable' has a financial and a general sense, so one more green word on Basecamp's page would have produced a flag.",
+  "fix": "Require a product noun after 'sustainable': replace `sustainabl[ey]` with `sustainabl[ey] (materials?|packaging|fabrics?|cotton|sourcing|sourced|fashion|products?|ingredients?|wood|paper|leather)`. Tested: removes 2 of 3 wrong (Basecamp, Stanford; the quoted 'net zero' in a Jacobin article still matches and the editorial gate drops it); 'sustainable materials, eco-friendly packaging' still matches. No real supported instance exists yet.",
+  "meaning": "Green wording with no named certifier.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 3
+  },
+  "pages": 0
+ },
+ "claims.authority_credentials_vague": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired on a sale page. Off the gate all four hits were outlets describing their own method ('Expert Tested', 'Lab-Tested Reviews') or WebMD's newsletter tagline, where the physicians are named on every article; the editorial gate is what keeps this rule honest.",
+  "fix": "",
+  "meaning": "An endorsement with no named endorser.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 4
+  },
+  "pages": 0
+ },
+ "claims.fake_trust_signals": {
+  "tier": "note",
+  "family": "sale",
+  "status": "demote",
+  "proof": false,
+  "cause": "The one firing is Temu's 'Faster & more secure checkout' sign-in blurb, which describes every HTTPS site, as the rule's own explain text admits. The DOM rule claims.trust_badge_images already measures badge graphics.",
+  "fix": "",
+  "meaning": "A trust word with nothing behind it.",
+  "judged": {
+   "ordinary": 1
+  },
+  "judged_gates_off": {},
+  "pages": 1
+ },
+ "claims.results_disclaimer": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired on a sale page; the one off-gate hit was Vanguard's regulatory 'Results will vary for other time periods', a performance disclosure with no testimonial, so the label would have called a required disclosure a confession.",
+  "fix": "If kept: nearPattern `\\b(testimonials?|customers?|members?|students?|clients?|users?|earn(ed|ings)?|lost|made|income|weight|lbs|pounds|before|after)\\b`. Tested: drops Vanguard.",
+  "meaning": "The small print admits the featured result is not typical.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 0
+ },
+ "dark.forced_registration": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "The one firing, Robinhood's 'Sign up to access Robinhood Learn', is a homepage marketing CTA for content that is publicly readable (checked); a 'sign up to access X' sentence is a pitch, not a wall. The DOM detector already measures real walls (dark.content_gate: paywall containers and blurred article text with gate words).",
+  "fix": "Keep dark.content_gate; if the words are wanted, run them only on text inside the gate element the DOM rule found.",
+  "meaning": "The content here is behind an account wall.",
+  "judged": {
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 1
+ },
+ "urgency.countdown_words": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired. The `\\d{1,2}:\\d{2}:\\d{2}` alternative would match any video length or timestamp, and the behaviour detector already measures the real thing: urgency.live_countdown (a clock that ticks) and urgency.fake_countdown_reset (resets on reload).",
+  "fix": "",
+  "meaning": "A ticking deadline; reload to see whether it resets.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "urgency.price_increase_threat": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired on 126 pages; the phrases ('prices will go up', 'lock in your price') are specific to the tactic, so nothing in the data argues against it.",
+  "fix": "",
+  "meaning": "A future price rise you cannot verify now.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "social.activity_feed": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired: purchase toasts are injected by third-party widgets after the scan and rotate, so a one-shot text index rarely holds one. The widget vendor is the proof.",
+  "fix": "Add social-proof widget hosts to trackers.json (fomo.com, useproof.com, trustpulse.com, nudgify.com, provesrc.com) and run this regex on small fixed-position nodes when the mutation observer sees them appear.",
+  "meaning": "'Someone just bought' toasts are a widget, often replayed or invented.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "social.everyone_is": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; the phrases ('everyone is switching to', 'don't be left behind') are specific. No data either way.",
+  "fix": "",
+  "meaning": "Other people's behaviour offered instead of evidence.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "surveillance.personalized_feed": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired even on Temu, Etsy and Zalando category pages; recommendation widgets label themselves in headings ('Recommended for you') that the pattern does not include, and the structure (a widget keyed to your history) reads better from the DOM than from words.",
+  "fix": "",
+  "meaning": "What you see here was chosen from your history.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "surveillance.barnum_personalization": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; the phrases are quiz-funnel specific. No data.",
+  "fix": "",
+  "meaning": "Generic statements dressed as personal insight.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "bias.per_day_reframing": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; 'less than a coffee a day' is specific wording. No data.",
+  "fix": "",
+  "meaning": "A yearly cost shown as a daily trickle.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "bias.free_with_conditions": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired. Dropbox's plans page says 'Try for free or buy now' with no 'then billed' or 'card required' text within reach (checked), so the silence is honest, not a pattern gap. Where conditions are stated, transaction.js's renewal and upfront checks already read them.",
+  "fix": "",
+  "meaning": "'Free' needs a card or turns into a charge.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "claims.health_cure": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; the corpus has no supplement or wellness-shop page. The wording is the regulators' own red-flag list, so keep it and test on such pages.",
+  "fix": "",
+  "meaning": "A cure or detox claim regulators list as a red flag.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "claims.financial_promises": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired, but it has no sale gate and includes 'passive income', 'financial freedom' and 'be your own boss', which personal-finance editorial uses constantly; the first finance article in a bigger corpus will trip it.",
+  "fix": "Add requiresSale, or minCount 2.",
+  "meaning": "A specific income promise, the vocabulary of investment fraud.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.confirmshaming": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired: the decline-button copy lives in exit-intent and newsletter modals that appear after the first scan, and the rule reads the whole page, where 'I don't want to save' could sit in prose.",
+  "fix": "Set `scope: \"cta\"` and re-run the rule on the overlay's text when the behaviour detector's interrupting-overlay hook fires.",
+  "meaning": "The 'no' button is written to shame you.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.trick_question": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; it lives in checkout and signup forms, which the corpus does not contain. Scope it to label and cta blocks and test on form pages.",
+  "fix": "",
+  "meaning": "A double-negative consent box.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.sneak_into_basket": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired; the corpus has no cart pages, and 'has been added to your cart' is one sentence form among many. The DOM detector already measures the thing itself: dark.preselection finds pre-checked add-ons (insurance, protection, donation, tip) by their label.",
+  "fix": "",
+  "meaning": "An extra was added to your order by default.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.cancellation_friction": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired on landing or pricing pages; 'call to cancel' lives in terms pages, which the policy detectors read (policy.auto_renewal, policy.non_refundable), and dark.no_cancel_path already measures a subscription offer with no cancellation route visible.",
+  "fix": "",
+  "meaning": "Easy to join, cancellable only by phone or post.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.bait_switch_unavailable": {
+  "tier": "hold",
+  "family": "sale",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; the tactic is a sequence (deal shown, then 'gone' at commit) that a single page scan cannot see.",
+  "fix": "Measured path: compare the listed price for a product URL with the price on its detail or checkout page across the session.",
+  "meaning": "The advertised deal vanished once you committed.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.clickbait_curiosity": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired on 126 pages though 25+ were news fronts: linked headlines are tagged 'teaser', which the attention category excludes, so the rule only ever saw unlinked H1s. Its phrases ('you won't believe', 'doctors hate') are also the 2013 register mainstream outlets dropped.",
+  "fix": "Add \"regions\": [\"title\",\"body\",\"aside\",\"teaser\"] on this rule so linked headlines count; trim to forms still in use (here's why, this is why, the truth about, the real reason, what nobody tells you, you need to see); keep scope heading. No instances to test against; unproven.",
+  "meaning": "Headline withholds its subject so you click to find out.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.listicle_headline": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired; rtings' 'The 7 Best Headphones' misses because 'best' is not in the noun list, and linked list headlines are teasers. A numbered list is a format the reader can see; the harm claimed (pagination for ad impressions) is a DOM fact, not a headline fact.",
+  "fix": "",
+  "meaning": "The list is paginated to multiply pageviews (a DOM check).",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.engagement_bait": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "'Smash that like', 'comment below', 'tag a friend' live in social posts and video descriptions; the recordings were article, index and sale pages. The formulas are literal, so when present they are unambiguous.",
+  "fix": "",
+  "meaning": "Asks for engagement to game the recommendation algorithm.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.gamification": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "'Keep your streak', 'spin the wheel', 'daily reward' are logged-in app UI and promo popups, absent from the recordings. The terms are product features, unambiguous when present.",
+  "fix": "",
+  "meaning": "Streaks and spins borrow slot-machine scheduling.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.fomo_notifications": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "'You have 3 new notifications', 'while you were away' appear in logged-in states and re-engagement email, not on public pages. Literal when present.",
+  "fix": "",
+  "meaning": "A manufactured social debt pulls you back on their schedule.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.autoplay_next": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired; 'up next', 'continue watching' are video-player chrome the recordings lacked, and the behaviour detector attention.autoplay_media (fired on 5 pages) sees autoplay directly. The words tell a reader what the player already shows.",
+  "fix": "",
+  "meaning": "Continuing is the default; stopping takes an action.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.weasel_attribution": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Fired twice, both the same ProPublica sentence ('experts say people shouldn't die from an ectopic pregnancy'): a journalism convention for an uncontested point, and the regex cannot see that the series names its experts elsewhere. The sale-page forms it was built for ('studies show', 'scientifically proven') hit nothing on 15 SaaS and 9 retail/shop pages.",
+  "fix": "Set requiresSale: true; keep only the sale register: scientifically (proven|shown|tested), studies (show|prove|have shown), (doctors|dentists|experts) recommend, clinically (proven|tested), research shows; drop experts/officials/sources say, according to reports, it is believed that. Tested: 2 ordinary removed, 0 supported lost. Editorial 'experts say' goes to the AI with the instruction to check whether the piece names them.",
+  "meaning": "'Studies show' with no link on a sales page: unverifiable.",
+  "judged": {
+   "ordinary": 1
+  },
+  "judged_gates_off": {
+   "ordinary": 1
+  },
+  "pages": 1
+ },
+ "rhetoric.absolutism": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "3 of 3 wrong: 'the only way she could get health care' (narrative fact), 'the only way to make the Duo tolerable' (a product setting), 'presented as indisputable fact' (Sivers describing another author). Absolutes are literal in prose far more often than rhetorical; the technique is a density of unsupported absolute claims in the author's voice, which needs claim and voice detection.",
+  "fix": "",
+  "meaning": "Contested claims stated as beyond question, repeatedly.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 3
+  },
+  "pages": 0
+ },
+ "rhetoric.obviousness_appeal": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "6 instances: 'clearly' is an adverb of manner ('clearly outlined', 'clearly explain', 'clearly reproduced') 4 times, quoted speech once (Shapiro: 'obviously a nuanced issue'), genuine once (Daring Fireball: 'clearly made by a young Claude-aided developer', 'Clearly, the point of a Duo review'). A bare adverb cannot separate manner from epistemic use.",
+  "fix": "Pattern: (?:(?<=^)|(?<=[.!?] ))(Obviously|Clearly),|\\b(needless to say|it goes without saying|everyone knows|everybody knows|as (we all|everyone) knows?|it'?s (no secret|common sense|common knowledge|well[- ]known) that|any (reasonable|sane|rational|thinking|honest) person|common sense (tells|says|dictates)|let'?s be (honest|real|clear))\\b with flags g (case-sensitive so only sentence-initial Obviously,/Clearly, count), minCount 2, severity 1. Tested: 4 wrong and 1 ordinary removed; the supported case still matches ('Clearly, the point...'). One positive in 126 pages: it will fire rarely.",
+  "meaning": "'Obviously' marks the inference the author did not support.",
+  "judged": {},
+  "judged_gates_off": {
+   "ordinary": 1,
+   "wrong": 4,
+   "supported": 1
+  },
+  "pages": 0
+ },
+ "rhetoric.false_dilemma": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired on 126 pages including partisan opinion from both sides. A false dilemma is written as two options and a missing third ('a choice between a functioning government and chaos'), never as 'you're either with us or'; in a test the canonical phrase hits and the realistic sentence misses.",
+  "fix": "",
+  "meaning": "Two options offered; the third is left out.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.slippery_slope": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired. Real slippery slopes are a sequence of asserted consequences ('first gas stoves; cars will not be far behind'); the phrase 'slippery slope' itself is mostly used by the critic naming the fallacy.",
+  "fix": "",
+  "meaning": "A chain of consequences with no mechanism for step two.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.ad_hominem": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "3 instances, 0 supported: 'snowflake queries' (a search-engine term), 'Picard's unhinged pursuit of the Borg' (affectionate), 'this unhinged rhetoric' (a loaded adjective on a claim). Real name-calling on these pages used words on no list ('a nest of far-left communists', quoted), and the unambiguous slurs (libtard, sheeple, cuck) appeared on none of 126 pages including Breitbart, Newsmax and Jacobin. The list is also right-register (libtards, snowflakes, cucks, woke mob) with no left equivalents.",
+  "fix": "",
+  "meaning": "The author attacks the person instead of the claim.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 2,
+   "ordinary": 1
+  },
+  "pages": 0
+ },
+ "rhetoric.strawman_markers": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired. Straw men restate the opponent's view in extreme form in the author's own words ('Democrats would rather see the country overrun than enforce a single law'); nobody writes 'what the left really want is'. Needs the opponent's actual position for comparison.",
+  "fix": "",
+  "meaning": "Opponents' view restated in its weakest form.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.whataboutism": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired. 'But what about the' is also plain English for raising a related point; the deflection is structural (criticism raised, a different wrong answered: 'nobody seemed to mind when the previous administration did the same'), which no phrase catches.",
+  "fix": "",
+  "meaning": "Changes the subject instead of answering the criticism.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.thought_terminating": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "1 of 1 wrong: CNET's 'make sure to do your research' is sincere advice about VPN law. The list's common members (do your research, trust the science, it is what it is) are sincere as often as evasive; the evasive ones (end of story, case closed, I rest my case) are comment-section register and appeared on none of 126 pages.",
+  "fix": "",
+  "meaning": "A cliche stands where the argument should be.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 0
+ },
+ "rhetoric.loaded_question": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired. Whether a question is loaded depends on its premise, not its opening ('don't you think' is ordinary conversational English); the realistic form ('The report landed the day before the vote. Draw your own conclusions.') misses.",
+  "fix": "",
+  "meaning": "A question whose premise is the claim.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.anecdote_as_evidence": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired. 'My cousin tried it', 'I know a guy who' are spoken and comment register; article anecdotes are narrative ('When Maria, 34, lost her job...') used in place of a rate, which only a reader of the whole piece can see.",
+  "fix": "",
+  "meaning": "One vivid story in place of how often it happens.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.appeal_to_nature_tradition": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired: 'all-natural', 'chemical-free' live on supplement, cosmetics and cleaning product pages; the corpus's shop and health pages (Mayo, air purifiers, VPN) did not carry them. The formulas are literal and unambiguous except 'non-toxic' (a testable product property), and the rule has no requiresSale, so an article explaining the term would fire.",
+  "fix": "Set requiresSale: true; remove non[- ]toxic; move the rule to category deceptive_claims so it also reads cta and aside regions. No instances to test against; unproven.",
+  "meaning": "'Natural' and 'chemical-free' say nothing about safety.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.false_precision_stats": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired on 15 SaaS pages: modern sale pages put '93% of users' in stat cards next to an asterisk or 'based on', which notNearPattern excludes, or omit the 'of users' tail the regex needs. It has requiresUnsourced but not requiresSale; add that before any retest.",
+  "fix": "",
+  "meaning": "Precise number, no sample, no source.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.euphemism_corporate": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "'Rightsizing', 'sunsetting', 'mistakes were made' appear in layoff, pricing-change and breach announcements, none recorded. Specific terms, reliable when present; 'sunsetting' alone is ordinary product vocabulary and should carry severity 0.",
+  "fix": "",
+  "meaning": "A soft word for a layoff, price rise or removed feature.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.passive_agency_hiding": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired because no breach notice or apology was recorded, but the alternation includes 'has been (identified|detected|discovered)' and 'an issue was identified', ordinary English in any technical or science text ('a new species has been discovered'), which would be wrong on article pages.",
+  "fix": "Remove has been (identified|detected|discovered) and an? (incident|issue|error|event) (occurred|was identified|has been identified); keep the breach and apology formulas (mistakes were made, data was accessed, may have been affected, accounts were impacted, it was decided). No instances to test against; unproven.",
+  "meaning": "The sentence names what happened but not who did it.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.just_asking_questions": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired on Breitbart, Newsmax, Jacobin or Vox. 'Follow the money', 'connect the dots', 'ask yourself why' are fringe and social register, and 'follow the money' is also standard investigative-journalism phrasing (ProPublica). Insinuation is a property of what the questions imply, which only reading them answers.",
+  "fix": "",
+  "meaning": "Implies a claim it will not state or defend.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "rhetoric.cherry_pick_markers": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "3 instances: 'more than ever' twice, neither a statistic ('enjoying it more than ever', 'highlighting more than ever the need'), and once a real change statistic quoted from GitHub ('tripled in less than a year to 220 million per month') with the absolute given.",
+  "fix": "Remove |more than ever from the pattern; set severity 0 so it lands under 'Also noticed' as a reading aid; keep minCount 2. Tested: 2 wrong removed, the true instance still matches, 0 supported lost.",
+  "meaning": "A change statistic; ask the baseline and the window.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 2,
+   "ordinary": 1
+  },
+  "pages": 0
+ },
+ "rhetoric.percent_vs_points": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; relative-risk phrasing ('risk of stroke rose 40%') lives in health and science news, and the corpus's only health article (Mayo flu) uses plain language. The pattern is specific; when it fires it is a genuinely useful reminder.",
+  "fix": "",
+  "meaning": "'40% higher risk' hides the base rate.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "emotional.outrage_lexicon": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "8 instances, 1 supported (Newsmax: 'Trump blasted Fox News'), 2 ordinary, 5 wrong: a song title ('We Have Explosive'), a robotics motto ('destroy'), a quoted Graham tweet, a toy's 'heat ray blast', 'outrage' used analytically. Both shipping hits (kottke x6, Guardian x2) were wrong or ordinary. Single words have literal senses and sit inside quotations; the one real pattern is the attack-verb construction 'Name slams Name'.",
+  "fix": "Replace the pattern with the construction \\b[A-Z][\\w.'-]+(?: [A-Z][\\w.'-]+)* (slams|slammed|blasts|blasted|destroys|destroyed|eviscerates|eviscerated|shreds|shredded|rips into|ripped into|torches|torched|roasts|roasted|obliterates|obliterated|humiliates|humiliated) [A-Z][\\w.'-]+ with flags g (case-sensitive), minCount 1, regions title, body and teaser (headline verbs are the target). Tested: supported kept 1, wrong removed 5, ordinary removed 2; synthetic checks ignore 'the storm destroyed homes', 'blasted the music' and the quoted 'we will get destroyed'. One positive in the corpus: prove on a headline corpus before it ships.",
+  "meaning": "'Slams' here means 'criticized'; read what was actually said.",
+  "judged": {
+   "wrong": 1,
+   "ordinary": 1
+  },
+  "judged_gates_off": {
+   "supported": 1,
+   "wrong": 4,
+   "ordinary": 1
+  },
+  "pages": 2
+ },
+ "emotional.fear_lexicon": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "6 instances, 0 supported: 'deadly' flu complications (Mayo), 'deadly' plane crash, 'a nightmare to turn' (a scooter), 'horrifying lists of books' (self-mocking), 'Nightmare' inside a quoted official, 'vulnerability apocalypse' (a newsletter heading). The phrase forms that carry a remedy ('before it's too late', 'protect your family from') appeared on no page. A fear appeal is threat plus remedy plus urgency; a word is none of those.",
+  "fix": "",
+  "meaning": "A threat is raised so the proposed remedy feels urgent.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 5,
+   "ordinary": 1
+  },
+  "pages": 0
+ },
+ "emotional.tribal_labels": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "5 of 5 wrong: 'the elite 160th' (a regiment), 'mainstream media articles' (descriptive), 'The Swamp' (a Daily Beast newsletter name used as a byline), 'the elites' and 'RINO' inside quotations. The list is right-populist register (globalists, deep state, RINO, libs) with no left equivalents, so where it works it sees one side's vocabulary.",
+  "fix": "",
+  "meaning": "People sorted into camps instead of named with their position.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 5
+  },
+  "pages": 0
+ },
+ "emotional.dehumanizing": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired on 126 pages including partisan opinion from both sides. The nearPattern group guard is sound, but on news pages these words arrive inside quotations ('migrants are poisoning the blood') and regionOf only treats blockquote/q as quotation, so a severity-3 flag would land on the reporter.",
+  "fix": "Add notNearPattern: [\"\\u201c\\u201d]|\\\\b(said|says|wrote|tweeted|posted|told|called|described)\\\\b so a block containing quotation marks or a speech verb is skipped; keep severity 3 and the nearPattern. Zero positives in the corpus: unproven until a fringe-page corpus shows it firing in the author's voice.",
+  "meaning": "People described as pests or an invading mass, in the author's own voice.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "emotional.guilt_trip": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "1 of 1 wrong: Good Housekeeping's 'filter the air you breathe while you sleep' matched 'while you sleep', written for 'while you sleep, children go hungry'. 'Complicit', 'you'll regret' and 'think of the children' have the same literal-sense problem; the real guilt formulas appeared on neither charity page.",
+  "fix": "Require a harm clause after the 'while you' form: while you (sit|sleep|scroll|watch|read this),? [a-z ]{0,40}\\b(die|dies|dying|suffer|starv|lose|lost); remove complicit and you'?ll regret; set requiresSale: true (fundraising pages count). Tested: 1 wrong removed, nothing kept. Unproven on positives.",
+  "meaning": "You are made responsible for the harm unless you give.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 0
+ },
+ "emotional.sensational_formatting": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "1 of 1 wrong: kottke's 'googol!!!!!!' is a quoted example string in a post about writing large numbers, and '?!' is an ordinary aside; a tightened pattern still matches the quoted string. Typography is visible to the reader already.",
+  "fix": "",
+  "meaning": "Shouting typography sells arousal.",
+  "judged": {},
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 0
+ },
+ "interpersonal.flattery_love_bombing": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired on 15 SaaS and 9 retail/shop pages: 'you deserve', 'smart shoppers like you', 'you've been selected' are email and direct-mail register. The rule has no requiresSale, so an article quoting 'you deserve better' would fire.",
+  "fix": "Set requiresSale: true. Literal formulas, reliable when present; no instances to test against; unproven.",
+  "meaning": "A company flatters you personally before the ask.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.negging": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired; 'this isn't for everyone', 'only serious buyers' live in hustle, fitness and finance funnels not recorded. The 'still (using|paying|driving) ...?' alternation matches ordinary questions, and there is no requiresSale.",
+  "fix": "Set requiresSale: true; remove the still (using|doing|driving|paying|wearing) [a-z ]{1,30}\\? alternation. No instances to test against; unproven.",
+  "meaning": "Your status is lowered so buying restores it.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.isolation_distrust_others": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired (severity 3); 'your doctor won't tell you', 'what big pharma doesn't want you to know', 'censored by YouTube' are fringe health and finance register absent from a mainstream corpus. The phrases are specific; the hazard is news quoting them.",
+  "fix": "Add the quotation guard notNearPattern: [\"\\u201c\\u201d]|\\\\b(said|says|wrote|tweeted|posted|told|called|described)\\\\b; keep severity 3. Zero positives; unproven.",
+  "meaning": "Every other source is discredited so this one is all that is left.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.future_faking": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "Never fired; roadmap copy ('we plan to add', 'soon you'll be able to') was absent, and 'imagine a world', 'picture yourself' are generic persuasive devices that would fire on charity and advocacy prose without requiresSale.",
+  "fix": "Set requiresSale: true; remove imagine (a world|when|if|being|having) and picture (yourself|this). No instances to test against; unproven.",
+  "meaning": "You pay now for what is promised later.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.darvo_victim_reversal": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired even with gates off. On news pages 'witch hunt', 'hoax', 'smear campaign' arrive as quotations of the accused, which the detector reads as the page's voice; DARVO is an exchange (accusation, then reversal) that only a reader of the whole piece can see.",
+  "fix": "",
+  "meaning": "The accused becomes the victim; the accusation goes unanswered.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.gaslighting_markers": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired; the rule's own confidence is 0.55. 'Calm down', 'you misunderstood', 'nobody said' are ordinary dialogue and would be wrong on any interview or narrative piece; gaslighting is a reply to a specific claim (a customer-service exchange), not something a page does to a reader.",
+  "fix": "",
+  "meaning": "Denies the record so you doubt your memory.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.hoovering_winback": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "'Are you sure you want to cancel', 'we'd hate to see you go' are cancellation-flow and exit-popup copy; no cancellation flow was recorded (dark.cancellation_friction never fired either). Literal UI copy, reliable when present.",
+  "fix": "",
+  "meaning": "Guilt and a sudden discount appear only when you try to leave.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.cult_community": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired on 7 advocacy and 2 charity pages, partly because 'Join the movement' is a button (region cta, excluded for this category). When it does appear it is the site's stated purpose, visible to the reader; the insider fact is the membership funnel, which incentives.* already names.",
+  "fix": "",
+  "meaning": "Belonging words attach the ask to your identity.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.manufactured_enemy": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "retire",
+  "proof": false,
+  "cause": "Never fired on political or advocacy pages; even the canonical 'They are coming for your guns' misses (the pattern lacks 'your'). An enemy-then-ask structure is a whole-page move for the model.",
+  "fix": "",
+  "meaning": "An enemy is named so the ask feels like defence.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "interpersonal.foot_in_door": {
+  "tier": "hold",
+  "family": "reader",
+  "status": "fix",
+  "proof": false,
+  "cause": "2 of 2 wrong, one shipping: ExpressVPN's 'try with no commitment' is a 30-day refund on a paid order, and kottke's 'it only takes a minute to sign up' describes the main paid ask. Neither is a small first step.",
+  "fix": "Keep only the small-first-step forms: just (enter|give us|tell us|share|drop) your (email|name|zip|phone|number|address)|no[- ]obligation (quote|trial|consultation|demo|estimate|call)|just (one|1) (click|tap|step) (away|to)|quick (question|survey|quiz)|take (the|our|this) (quiz|assessment|test|survey) to (find|see|discover|get); move no commitment / no strings attached to claims.guarantee_puffery. Tested: 2 wrong removed, 0 supported lost; no positives remain in the corpus.",
+  "meaning": "A quiz or email first; the product ask follows.",
+  "judged": {
+   "wrong": 1
+  },
+  "judged_gates_off": {
+   "wrong": 1
+  },
+  "pages": 1
+ },
+ "attention.autoplay_media": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": false,
+  "cause": "All five firings are muted hero videos (NASA nebula, AEI, CAP, Robinhood, Glossier), which behavior.js already scores 0. The with-sound branch (severity 2) never fired. A muted background video is page furniture.",
+  "fix": "Keep the with-sound branch as the only chip. Drop the muted branch from the chip list (keep in meta). Evidence must quote the video src or aria-label, never the tagName.",
+  "meaning": "A video started playing with sound without you pressing play.",
+  "judged": {
+   "ordinary": 5
+  },
+  "judged_gates_off": {},
+  "pages": 5
+ },
+ "attention.engagement_feed": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "retire",
+  "proof": false,
+  "cause": "Fires on any list of 8+ repeated cards where 40% carry a \"N comments/views\" counter (dom.js step 9). Daily Mail home and National Review's reverse-chronological Corner both fired; the why asserts ranking by provocation, which card counters cannot show.",
+  "fix": "Retire. If kept: why becomes \"Every item carries a reaction count\" at severity 0, and require the counters to be likes/shares (not comments) and the container to be a platform feed (role=feed or data-testid cells).",
+  "meaning": "Every item in this list carries a reaction count.",
+  "judged": {
+   "wrong": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "bias.anchoring_strikethrough": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Four of six are right (NordVPN, Groupon, Good Housekeeping, ExpressVPN). Hostinger and Grammarly show evidence with no struck price because dom.js quotes el.parentElement, whose text can be the sale price alone.",
+  "fix": "In dom.js step 2 set evidence quote to ML.normText(el.textContent) + \" → \" + the nearest sibling price (search parentElement text for the currency regex excluding the struck text). Also test struck via line-through or S/DEL only; the className word list (old|was|list|regular) matches \"price-list\".",
+  "meaning": "A crossed-out \"was\" price is anchoring the real price.",
+  "judged": {
+   "supported": 4,
+   "unclear": 2
+  },
+  "judged_gates_off": {},
+  "pages": 6
+ },
+ "charts.canvas_chart": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Any visible <canvas> ≥150×100 is called a chart (charts.js canvasCharts). Both firings were a QR code and an animated banner.",
+  "fix": "Require a charting signal: match cfg.charts.librarySelectors, canvas[class*=\"chart\"], aria-label/role=img with chart words, or an ancestor [class*=\"chart\"],[id*=\"chart\"],figure with a caption. A bare canvas never qualifies.",
+  "meaning": "A chart is drawn on canvas; its axes cannot be read by the page checks.",
+  "judged": {
+   "wrong": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "charts.embedded_chart": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": true,
+  "cause": "Both firings (Infogram iframes on PCMag/ZDNet) are right. iframeHints are vendor names, so it is precise. The chip only says \"a chart is in a frame\".",
+  "fix": "Keep as a severity-0 note feeding the AI asset list; no chip unless deep analysis is on.",
+  "meaning": "A third-party chart embed; open it directly to inspect.",
+  "judged": {
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "charts.image_chart": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "retire",
+  "proof": false,
+  "cause": "Two of ten right. charts.js imageHints are matched as substrings against alt+title+src+className+caption: \"data\" hits every data:image URI (heise), \"trend\" hits \"trending\" (IRS), \"statistic\" hits a book title (Leanpub), \"figure\" hits Bootstrap figure classes; logos, product photos and news photos become charts.",
+  "fix": "Retire the chip. Keep the asset collector for AI with hints matched as whole words (\\b(chart|graph|infographic|histogram|scatter|plot)\\b) against alt, title, figcaption and the file-name stem only; never src query strings, data: URIs or className.",
+  "meaning": "A raster chart is on the page; only reading the image can check it.",
+  "judged": {
+   "wrong": 8,
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 34
+ },
+ "claims.trust_badge_images": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "trustBadgeWords are substring-matched against alt+title+src (dom.js step 7): \"certified\" matched a book-cover path on Leanpub; on Temu the hits are payment-scheme logos (Visa Secure, PayPal) that every shop shows.",
+  "fix": "Match alt/title only, whole words. Exclude images inside product links/tiles ([class*=\"product\"],[class*=\"cover\"], a[href] to a product). Treat visa/mastercard/paypal/jcb/amex marks as payment methods (transaction.js), not badges. Require ≥2 distinct badge words.",
+  "meaning": "Security or award graphics that link to no certifier.",
+  "judged": {
+   "wrong": 1,
+   "ordinary": 1
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "dark.interrupting_overlay": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Two of three right (Glossier email modal, Vox membership overlay). National Review's cookie banner fired under the same id, so the label reads \"Pop-up interruption\" for a legally required consent dialog. Vox also counted the fixed page shell (\"Skip to main content…\") as a second overlay.",
+  "fix": "In behavior.js handle(): if isConsent, return (consent checks cover it) or emit a separate id with its own label. In isOverlay(): return false when el.querySelector(\"nav,main,[role=main],[role=navigation]\") or the text starts with \"skip to\". Keep the trigger timing in evidence.",
+  "meaning": "A modal appeared on its own and covered the page.",
+  "judged": {
+   "supported": 2,
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 3
+ },
+ "dark.no_cancel_path": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "retire",
+  "proof": false,
+  "cause": "An absence read from one page with no evidence (dom.js step 11, evidence: []). Fired on Notion, Dropbox, Linear, Shopify and Robinhood's home page; all cancel online in two clicks. \"Subscribe is prominent\" is never quoted.",
+  "fix": "Retire the chip; fold \"no cancel link on this page\" into incentives.purchase_path as a severity-0 signal with the matched subscribe CTA quoted. policy.auto_renewal/cancellation_friction from the terms are the real checks.",
+  "meaning": "The plan page does not say how to cancel.",
+  "judged": {
+   "unclear": 5
+  },
+  "judged_gates_off": {},
+  "pages": 5
+ },
+ "design.animated_cta": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "One firing (Glossier, 10 buttons). Computed-style infinite animation is a direct measurement, but the evidence quotes only \"Shop now\"/\"Add to bag\", so a reader cannot tell a pulse from a shimmer or a loading keyframe.",
+  "fix": "Put animationName, duration and iteration count in the evidence quote; ignore animations whose keyframes only change opacity/background (skeletons, hover shimmer). Show on first firing once evidence carries the measurement.",
+  "meaning": "A buy button is animated to pull your eye.",
+  "judged": {
+   "unclear": 1
+  },
+  "judged_gates_off": {},
+  "pages": 1
+ },
+ "design.asymmetric_choice": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "DECLINE includes \"close\" and \"dismiss\" (dom.js step 5), so an X close icon that is 93% smaller than the primary button fires (Groupon). Wish (\"unlock 15% off\" vs \"No thanks\") is the real pattern.",
+  "fix": "Remove close/dismiss/skip from DECLINE; require the decline to carry refusal text (no thanks, not now, maybe later, continue without, no thank you, I'll pass); require textContent (not aria-label only) so icon buttons never qualify.",
+  "meaning": "The \"no\" in this pop-up is styled to be overlooked.",
+  "judged": {
+   "wrong": 1,
+   "supported": 1
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "design.consent_asymmetry": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Eight of eight wrong by one bug, reproduced by script: CLICKABLE includes [class*=\"btn\"]/[class*=\"button\"] containers, clickables() admits any element with <80 chars of text, and classify() matches by prefix/substring, so the wrapper holding both buttons classifies as reject (or accept) and is compared with a real button (GOV.UK's equal buttons read as \"84% smaller\").",
+  "fix": "dom.js: filter clickables to leaf controls (!el.querySelector(CLICKABLE)); classify on exact text or ≤4 words; discard when accept.contains(reject) or vice versa; require both to be button/a/[role=button]. Then re-run on the 8 pages: all should clear.",
+  "meaning": "Reject exists but is styled to look like the wrong choice.",
+  "judged": {
+   "wrong": 8
+  },
+  "judged_gates_off": {},
+  "pages": 8
+ },
+ "design.red_urgency": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": true,
+  "cause": "Both firings measured red on real urgency copy (Etsy \"Only 1 left\", Shein \"Flash Sale\"). It depends on a text urgency rule having matched first, so its precision is that rule's precision.",
+  "fix": "None in code. Keep severity 1 only when the matched copy is scarcity/deadline, not \"sale\".",
+  "meaning": "Scarcity copy is coloured red to read as a warning.",
+  "judged": {
+   "supported": 1,
+   "ordinary": 1
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "design.sticky_overlays": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "retire",
+  "proof": false,
+  "cause": "One of four right (Jacobin). Warby Parker's sticky filter column passed because a single \"$95\" satisfies the [$£€%] test; Shopify's sticky plan header passed because ฿ is not in that regex so the plan-table exclusion missed; Stanford's evidence is the tag name \"DIV\".",
+  "fix": "Retire. If kept: drop the currency clause, exclude aside/[class*=\"filter\"]/[class*=\"sidebar\"], use cfg.pricing.currency for the plan-table test, and skip elements with no text/aria-label/iframe src to quote.",
+  "meaning": "A promotional box stays pinned while you read.",
+  "judged": {
+   "wrong": 2,
+   "supported": 1,
+   "unclear": 1
+  },
+  "judged_gates_off": {},
+  "pages": 4
+ },
+ "incentives.business_model": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "The inference (incentives.js: ads vs pixels, data vendors, affiliate ≥2, subscription, commerce, lead forms, donations, sponsored) is sound and gated on real ad slots, but the finding ships with label \"Business model\", why \"What this site earns from your visit\", and an empty evidence array; the model text lives only in `name`. Knock-on: a Taboola advertiser pixel on Wish counts as native_ads → adSlots → \"advertising\" added to a retailer.",
+  "fix": "Make the label the model (\"Ads + subscriptions\"), the why the strongest signals (\"27 ad bidders; Slate Plus plan box\"), and evidence one host or quote per revenue line (meta.model already exists). Fix native_ads buy-side matching (see tracker.native_ads). Count same-domain /go/ redirect links as affiliate.",
+  "meaning": "This page earns from: ads, commissions, subscriptions, sales, leads or donations.",
+  "judged": {
+   "unclear": 10
+  },
+  "judged_gates_off": {},
+  "pages": 102
+ },
+ "incentives.do_not_sell_link": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": false,
+  "cause": "All ten true, all ordinary: the CPRA \"Your Privacy Choices\"/\"Do Not Sell\" link is on nearly every US commercial site. The label \"Data sale link\" reads as \"this site sells your data\"; the why is careful, the label is not.",
+  "fix": "Keep severity 0; rename label to \"Opt-out link\"; no chip unless the policy scan also finds a sale/share clause (incentives.js already bumps it then).",
+  "meaning": "A one-click opt-out from data sale or sharing exists; use it.",
+  "judged": {
+   "ordinary": 10
+  },
+  "judged_gates_off": {},
+  "pages": 30
+ },
+ "incentives.lead_capture": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Both firings are page-wrapping forms (Newsmax is ASP.NET with one <form> around the whole page; Mercola similar): incentives.js leadForms tests the form's entire innerText for quote|rate|apply, which any news page contains.",
+  "fix": "In the leadForms filter: reject forms whose innerText > 1200 chars or that contain main/article/nav/h1; cap inputs at 12; test the trigger words only against label, legend, button and placeholder text of that form.",
+  "meaning": "A quote/estimate form sells your contact details as a lead.",
+  "judged": {
+   "wrong": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "incentives.policy_unavailable": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "retire",
+  "proof": false,
+  "cause": "One firing, on Groupon, which has a Privacy Statement in its footer; an absence read from one page before a lazy footer rendered, with no evidence. provenance.js already runs the same legal-pages check and dedupes against this id.",
+  "fix": "Retire the id; keep the check inside source.unknown_operator's legal_pages signal, evaluated on the final (settled) scan only.",
+  "meaning": "No privacy policy is reachable from this page.",
+  "judged": {
+   "unclear": 1
+  },
+  "judged_gates_off": {},
+  "pages": 1
+ },
+ "incentives.purchase_path": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Four of ten supported (Zalando return window, Temu refund terms, Groupon/Temu sponsored placements). Noise: no_refund_policy on SaaS plan pages (HubSpot, Figma, Squarespace) and on a brokerage (Robinhood: no product can be refunded); digital_only_here on platforms (Udemy, Leanpub); Wish \"Guarantee, no terms\" at severity 2 with the refund link likely in a late footer. transaction.js stores evidence only for noRefund/irreversible/checkout host, so return windows and guarantees are never quoted.",
+  "fix": "transaction.js: skip refund signals when product === \"subscription\" or when no cart/buy box/product markup exists (financial services); skip digital_only_here on marketplaceHosts/platform hosts; guarantee_no_terms severity 2 only on the final scan and only when the page has no footer links at all; push quotes for guarantee, returnWindow, refundStated and sponsored into evidence.",
+  "meaning": "How you pay here and whether money can come back.",
+  "judged": {
+   "supported": 3,
+   "wrong": 1,
+   "ordinary": 5,
+   "unclear": 1
+  },
+  "judged_gates_off": {},
+  "pages": 21
+ },
+ "incentives.you_are_the_product": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": false,
+  "cause": "Ten of ten right: the gate (real ad slots, no subscription/commerce/donation, ≥3 ad vendors or a broker) holds on CNET, ZDNet, WebMD, Fox, Breitbart, BBC, Independent, RTINGS. Weak spots: the count folds verification/measurement vendors (DoubleVerify, Comscore) into \"ad and tracking vendors\"; the affiliate half of CNET/ZDNet is missed because same-domain /go/ links are skipped; evidence lists three hosts with no role.",
+  "fix": "Count by role in the why (\"14 bid for ad slots, 3 verify ads, 2 identity brokers\"); add affiliate link count when ≥2; name the broker if present; on review pages say \"paid by ads and commissions\".",
+  "meaning": "Nothing is for sale: ads and profiling pay for this page.",
+  "judged": {
+   "supported": 10
+  },
+  "judged_gates_off": {},
+  "pages": 25
+ },
+ "source.affiliate_disclosure": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": false,
+  "cause": "Seven of seven quote the disclosure sentence (text rule in text-rules.json). Severity 0, positive signal.",
+  "fix": "None. Pair it with source.affiliate_links so the two show as one line (\"Affiliate links, disclosed\").",
+  "meaning": "The page says it earns when you buy through its links.",
+  "judged": {
+   "supported": 7
+  },
+  "judged_gates_off": {},
+  "pages": 7
+ },
+ "source.affiliate_links": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Three of five verifiable (US News pxf.io, Tom's Guide aff_c, Good Housekeeping redirectingat). RTINGS and The Verge show anchor text only because trackers.js quotes a.innerText || a.href, so the network is invisible. The disclosure regex requires \"we\", so \"Vox Media may earn a commission\" and \"U.S. News receives compensation\" read as no disclosure and bump severity to 2. Same-domain redirect links (/go/, /out/, rel=sponsored) are skipped, missing CNET/ZDNet.",
+  "fix": "Evidence quote = anchor text + \" → \" + host (+ network name); disclosure pattern: ([\\w.&' ]{2,40}|we) (may|might) (earn|receive) (a )?(commission|compensation|fee); count same-domain links matching /(go|out|goto|recommends|deal|affiliate|visit)/ or rel~=sponsored as affiliate; why by page kind (\"listings\" on marketplaces, \"deal links\" on news).",
+  "meaning": "These product links pay the publisher when you buy.",
+  "judged": {
+   "supported": 3,
+   "unclear": 2
+  },
+  "judged_gates_off": {},
+  "pages": 5
+ },
+ "source.lean_extreme": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Four of four right (Breitbart far-right, Jacobin far-left), but background.js emits evidence: [] and the dataset rows cite only Wikipedia, so \"raters place this outlet\" names no rater. The house rule says coarse lean labels must say which raters.",
+  "fix": "Add rater citations to the outlet row (AllSides, Ad Fontes, MBFC with URLs) and emit them as evidence; keep severity 2.",
+  "meaning": "Third-party raters place this outlet at the far edge of the spectrum.",
+  "judged": {
+   "supported": 4
+  },
+  "judged_gates_off": {},
+  "pages": 4
+ },
+ "source.low_transparency": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "One firing, wrong: a donation form (MSF) passed the article gate (og:type article site-wide) and was judged missing About/Contact/corrections. transparency.js also counts only link text for contact, so mailto:/tel:/<address> do not count.",
+  "fix": "Skip when pageKind is donation/checkout or the page has a payment form; require og:type=article or ld Article AND ≥8 <p>; accept mailto:, tel: and <address> as contact.",
+  "meaning": "No byline, date, About or Contact: nobody to hold accountable.",
+  "judged": {
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 1
+ },
+ "source.ownership": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": false,
+  "cause": "Nine of ten right from the dataset. The Federalist row says \"funding undisclosed\" with a reported funder yet is typed billionaire_individual, so the label asserts ownership; and the why is cut at 90 chars mid-word (\"…directly or thr.\").",
+  "fix": "background.js: cut the why at a word boundary or give each ownerKind a ≤12-word why. outlets.json: add an \"undisclosed_funding\" kind (severity 2) for rows like The Federalist.",
+  "meaning": "Who owns this outlet and what that owner wants.",
+  "judged": {
+   "supported": 9,
+   "unclear": 1
+  },
+  "judged_gates_off": {},
+  "pages": 46
+ },
+ "source.sponsored_content": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Three of three right (Slate sponsored unit, Daring Fireball and Simon Willison site sponsors, the latter confirmed by fetch). The why \"Content that exists to sell. Read as an ad.\" reads as if the whole page is sponsored when one unit is.",
+  "fix": "Why: \"A sponsored unit is on this page; read that unit as an ad.\" Quote the sponsor name when the pattern captures \"Sponsored by X\".",
+  "meaning": "Part of this page is paid placement.",
+  "judged": {
+   "supported": 3
+  },
+  "judged_gates_off": {},
+  "pages": 3
+ },
+ "source.unknown_operator": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Seven of ten wrong. provenance.js emits the fixed label \"Unnamed operator\" whenever any signal remains, including when identity is proven (\"© 37signals LLC\", \"© The Vanguard Group, Inc\", \"© goop, inc\") and the only signal is the Shopify platform note, which the code itself excludes from \"strongest\" as context. parentPattern captures \"a Ziff Davis company\" but identity ignores P.parent; plain org names without a legal form (The American National Red Cross, CNET) are not identity; a \"Server Error\" page was scanned (errorTitlePattern lacks \"server error\"); Udemy/Wish footers were not read (late render).",
+  "fix": "Return no finding when !signals.some(s => s.id !== \"platform\"); when P.identity or P.namedOperator, emit a severity-0 positive fact (\"Operator: 37signals LLC\") instead of this id; add P.parent and a ≥2-word capitalised copyright holder with legal pages to identity; add \"server error\" to errorTitlePattern; run on the final scan so footers are read.",
+  "meaning": "The page names nobody accountable: no entity, address, or contact.",
+  "judged": {
+   "wrong": 8,
+   "ordinary": 1,
+   "unclear": 1
+  },
+  "judged_gates_off": {},
+  "pages": 22
+ },
+ "surveillance.consent_no_reject": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": true,
+  "cause": "Seven of seven right (NPR, Wish, IKEA, HRC, Oxford, Planned Parenthood). The wrapper bug cannot create a false \"no reject\" (it only adds matches). Gap: rejectWords miss \"necessary cookies only\", \"only accept essential\", \"refuse all\", \"decline all\", so a site with one of those would be wrongly flagged.",
+  "fix": "Add those phrases to dom-config rejectWords; apply the leaf-control filter from design.consent_asymmetry; when no manage button exists either, say \"notice only, no choice offered\".",
+  "meaning": "The banner lets you accept in one click but not refuse.",
+  "judged": {
+   "supported": 7
+  },
+  "judged_gates_off": {},
+  "pages": 7
+ },
+ "surveillance.consent_or_pay": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Both firings (Tom's Guide, Daily Mail) are plausible but evidence is the constant string \"consent-or-pay configuration on the page\"; incentives.js matches consentOrPayPattern in inline JS and quotes nothing.",
+  "fix": "Quote the regex match (±80 chars) as evidence; flag only when the banner text itself shows the pay option, else severity 0 \"configured for some regions\".",
+  "meaning": "Refusing cookies here means paying for a subscription.",
+  "judged": {
+   "unclear": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "tracker.ab_testing": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Two of three right (VWO, Optimizely). LaunchDarkly is feature flags; trackers.json also lists split.io, statsig (flags), algolia.net (search), nosto/rebuyengine (recommendations) under ab_testing.",
+  "fix": "Prune trackers.json ab_testing to experimentation vendors (optimizely, vwo, abtasty, kameleoon, convert, dynamicyield, monetate, intellimize, mutinyhq); drop launchdarkly/split/statsig/algolia/nosto/rebuy.",
+  "meaning": "The page you see is a tested variant; prices and copy may differ.",
+  "judged": {
+   "supported": 2,
+   "ordinary": 1
+  },
+  "judged_gates_off": {},
+  "pages": 21
+ },
+ "tracker.advertising": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "One of three right. trackers.js treats any hit on doubleclick.net/amazon-adsystem/quantserve as \"attention auctioned\": on ProPublica (no ads) the lone doubleclick.net is GA display features or an embed; on Planned Parenthood (no ad slots) the five vendors are measurement and ad-buying pixels. trackers.js already computes ctx.sellSideAds (securepubads|adsbygoogle|prebid) and incentives.js splits ads vs pixels, but this finding ignores both. Verification/measurement vendors (doubleverify, adsafeprotected, moatads, scorecardresearch) are listed as advertising.",
+  "fix": "Split by URL role: sell-side (securepubads.g.doubleclick.net, pagead2.googlesyndication.com/tag/js/gpt, prebid, c.amazon-adsystem.com/aax2/apstag, header-bidder hosts) → \"Ad-tech: your attention is auctioned here\"; buy-side pixels only → \"Ad pixels: this site buys ads that follow you\" severity 1; stats.g.doubleclick.net → analytics; static.doubleclick.net/YouTube → ignore; move verification/measurement to an ad_measurement category (severity 0, also a sell-side indicator).",
+  "meaning": "Ad space on this page is auctioned; bidders profile you to bid.",
+  "judged": {
+   "wrong": 2,
+   "supported": 1
+  },
+  "judged_gates_off": {},
+  "pages": 86
+ },
+ "tracker.affiliate": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": true,
+  "cause": "Both firings right (Skimlinks on Tom's Guide, Good Housekeeping) but each duplicates source.affiliate_links and source.affiliate_disclosure on the same page, and stays severity 2 while source.affiliate_links drops to 1 when disclosed.",
+  "fix": "Merge into source.affiliate_links: a Skimlinks/Viglink script means links are rewritten on click, so count it as affiliate evidence and let disclosure set the severity. Keep the vendor name in the evidence.",
+  "meaning": "Links are rewritten to pay the publisher when you buy.",
+  "judged": {
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 2
+ },
+ "tracker.analytics": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": false,
+  "cause": "Three of three true and ordinary (GTM + GA on Tom's Guide, CDC, NordVPN). Google Tag Manager is a container, not analytics.",
+  "fix": "Severity 0, no chip; keep in the tracker list. Move googletagmanager.com to a tag_manager note.",
+  "meaning": "Google Analytics measures your visit.",
+  "judged": {
+   "ordinary": 3
+  },
+  "judged_gates_off": {},
+  "pages": 97
+ },
+ "tracker.chat_widget": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": false,
+  "cause": "Three of three true and ordinary; Gorgias is a support helpdesk, so \"Interruption marketing feeding a CRM\" characterises rather than describes.",
+  "fix": "Severity 0; why: \"Live chat by <vendor>; what you type goes to them.\"",
+  "meaning": "A chat vendor receives what you type in the bubble.",
+  "judged": {
+   "ordinary": 3
+  },
+  "judged_gates_off": {},
+  "pages": 5
+ },
+ "tracker.consent_manager": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": false,
+  "cause": "True, standard, already severity 0; the symmetry checks are the finding.",
+  "fix": "No chip; keep in the tracker list.",
+  "meaning": "A consent platform renders the cookie banner.",
+  "judged": {
+   "ordinary": 3
+  },
+  "judged_gates_off": {},
+  "pages": 44
+ },
+ "tracker.data_broker": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Two of three carry a real broker (LiveRamp/rlcdn), but each firing mixes in miscategorised vendors: Permutive (publisher cohort DMP; trackers.json even lists permutive.app as analytics), iPredictive (Viant DSP), 33Across (SSP/identity), and the Federalist firing is ID5 alone, a shared-ID service, at severity 3. The why \"matching and reselling profiles\" is true only for registered brokers and the B2B de-anonymisers.",
+  "fix": "trackers.json: permutive.com → analytics; ipredictive.com, lijit.com → advertising; id5-sync.com, 33across.com → an identity category (severity 2, why \"Builds a cross-site ID for you\"). Keep severity 3 for LiveRamp, Acxiom, Epsilon/Conversant, Oracle/BlueKai, Lotame, Neustar, TransUnion, Experian, Zeotap, ShareThis, LiveIntent, Tapad, Audigent and the visitor-identity resolvers (6sense, clearbit, zoominfo, retention.com, getemails, opensend, customers.ai…).",
+  "meaning": "A company that buys and sells people-profiles saw your visit.",
+  "judged": {
+   "supported": 2,
+   "wrong": 1
+  },
+  "judged_gates_off": {},
+  "pages": 35
+ },
+ "tracker.fingerprinting": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Three of three are bot-defence vendors (HUMAN/PerimeterX on AP and The Independent, DataDome on Warby Parker) shown under \"Tracking: watching and profiling you\" at severity 2. The mechanism line is true; the category is wrong. trackers.json also lists ipify/ipinfo/maxmind (geo-IP lookups) as fingerprinting.",
+  "fix": "Split: bot_defence (px-cdn, px-cloud, perimeterx, datadome, kasada, arkoselabs, f5) and fraud_check (sift, forter, riskified, signifyd, castle, seon, iovation, threatmetrix) at severity 0, why \"Your device is fingerprinted to tell humans from bots\"; keep fingerprintjs/fpjs/fpcdn as fingerprinting severity 2; drop ipify/ipinfo/maxmind.",
+  "meaning": "Your device is identified across visits without cookies.",
+  "judged": {
+   "wrong": 3
+  },
+  "judged_gates_off": {},
+  "pages": 10
+ },
+ "tracker.marketing_automation": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": false,
+  "cause": "Two of three right (Marketo on Heritage, Klaviyo+Attentive on goop); HubSpot on hubspot.com is a vendor on its own site, ordinary. The why holds once the reader has given an email.",
+  "fix": "Why: \"Links your browsing to your email once you give one.\" Skip when the vendor's own domain is the page.",
+  "meaning": "Your browsing here is tied to your email for campaigns.",
+  "judged": {
+   "supported": 2,
+   "ordinary": 1
+  },
+  "judged_gates_off": {},
+  "pages": 14
+ },
+ "tracker.native_ads": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "One of three right (Taboola widget on PCMag). On Wish the Taboola hit is the advertiser pixel (Wish buys Taboola placements); trackers.js matches any taboola.com URL. TripleLift (3lift) is a programmatic SSP, not a chumbox. Knock-on: incentives.js uses vendors(\"native_ads\")>0 as proof of ad slots.",
+  "fix": "Match by loader path: cdn.taboola.com/libtrc/unip/ and amplify.outbrain.com are advertiser pixels (→ advertising buy-side); /libtrc/<publisher>/loader.js and widgets.outbrain.com are publisher widgets (native_ads). Move triplelift/3lift, sharethrough, nativo to advertising.",
+  "meaning": "A chumbox of paid \"recommended\" links is on this page.",
+  "judged": {
+   "wrong": 2,
+   "supported": 1
+  },
+  "judged_gates_off": {},
+  "pages": 25
+ },
+ "tracker.popup_capture": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": true,
+  "cause": "Three of three right (Wunderkind on AP, OptinMonster on Salon and Cato); the vendors' product is the pop-up, so presence is proof of the service even before a pop-up shows.",
+  "fix": "None. Pair with dark.interrupting_overlay when both fire so the chip reads \"Pop-up (OptinMonster)\".",
+  "meaning": "Pop-ups here are a hosted service built to capture your email.",
+  "judged": {
+   "supported": 3
+  },
+  "judged_gates_off": {},
+  "pages": 8
+ },
+ "tracker.push_notifications": {
+  "tier": "note",
+  "family": "measured",
+  "status": "demote",
+  "proof": false,
+  "cause": "Three of three are the OneSignal SDK on news sites, near-universal; SDK presence is not a prompt. surveillance.notification_preprompt is the real check.",
+  "fix": "Severity 0, no chip; mention the vendor inside notification_preprompt when that fires.",
+  "meaning": "The site can prompt you for browser notifications.",
+  "judged": {
+   "ordinary": 3
+  },
+  "judged_gates_off": {},
+  "pages": 5
+ },
+ "tracker.session_replay": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": true,
+  "cause": "Three of three right (Crazy Egg, FullStory, Microsoft Clarity on a donation form). All listed vendors record sessions; the \"some vendors also capture typing\" hedge is accurate.",
+  "fix": "None. Raise prominence when a payment or password field is on the page (Clarity on MSF donate).",
+  "meaning": "Your mouse, scrolling and possibly typing are recorded for replay.",
+  "judged": {
+   "supported": 3
+  },
+  "judged_gates_off": {},
+  "pages": 25
+ },
+ "tracker.social_pixel": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "reliable",
+  "proof": true,
+  "cause": "Three of three right (Facebook pixel on AP and Vox, LinkedIn+Bing+Facebook on Canva). bat.bing.com is Microsoft Advertising, not social; label nit only.",
+  "fix": "Rename the category \"Ad-platform pixels\"; name the platform in the why (\"Meta learns you read this\").",
+  "meaning": "Meta/LinkedIn/Microsoft learn you visited, tied to your account.",
+  "judged": {
+   "supported": 3
+  },
+  "judged_gates_off": {},
+  "pages": 51
+ },
+ "tracker.third_party_volume": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "fix",
+  "proof": false,
+  "cause": "Two of three right (NRA 28, ZDNet 53). Fires at ≥12 with a fixed why \"Dozens of companies learned you're here\": false at 12–23 (NPR 21). thirdParty counts fonts, CDNs, payment processors and CMPs, and evidence shows the first eight in load order (cookielaw.org, stripe.com, typekit.net), which undercuts the claim.",
+  "fix": "Subtract an infrastructure allowlist (fonts.gstatic, typekit, cloudfront, akamai, fastly, jsdelivr, cdnjs, stripe, paypal, cookielaw, onetrust, recaptcha, youtube-nocookie); why states the number (\"31 other companies were contacted\"); evidence lists categorised trackers first; severity 1 at ≥20, 2 at ≥40.",
+  "meaning": "N other companies received a request, with your IP, when this page loaded.",
+  "judged": {
+   "wrong": 1,
+   "supported": 2
+  },
+  "judged_gates_off": {},
+  "pages": 74
+ },
+ "dark.preselection": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "No checkout or sign-up form in the corpus. Direct observation (a checked box with a marketing label). Risk in code: PRECHECK_WORDS /cover|express|priority|updates/ match \"discover\", a pre-selected \"Express\" shipping radio, and radio groups must have a default.",
+  "fix": "Use \\b boundaries; ignore radio inputs unless the label names a paid add-on. Show on first firing.",
+  "meaning": "A box was ticked for you before you chose.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.disguised_ads": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired; the measurement (font <10px or contrast <3 on a \"Sponsored\" label) is direct. Depends on SHORT leaf elements ≤28 chars matching sponsoredLabels exactly.",
+  "fix": "Show on first firing; quote the measured size/contrast in evidence.",
+  "meaning": "The \"Sponsored\" label is too small or faint to notice.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.content_gate": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired although Vox's membership wall was on a corpus page (caught as an overlay instead): gate selectors need paywall/regwall/piano class names and the blur check needs an <article> ancestor.",
+  "fix": "Add [class*=\"wall\" i],[class*=\"gate\" i] with gateWords, and let the blur check run under main. Show on first firing with the blurred element quoted.",
+  "meaning": "Part of the text is hidden behind a sign-up or subscription wall.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "surveillance.notification_preprompt": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired; the check (fixed/sticky element with \"allow notifications\" wording and an allow/enable word) is direct.",
+  "fix": "Show on first firing. Add the push vendor name from tracker.push_notifications when present.",
+  "meaning": "The site asks for notification permission before the browser does.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "urgency.live_countdown": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired despite Shein/Temu/Groupon in the corpus. checkTimers holds element references for 2.2 s; frameworks re-render timer nodes each tick so document.contains(f.el) fails; split-digit timers are found only under class names containing \"countdown\"/\"timer\".",
+  "fix": "Re-run findTimerElements after observeMs and match by text/ancestor path, not identity; widen the split-digit selector to [class*=\"count\" i],[class*=\"time\" i],[aria-label*=\"count\" i]. A ticking timer is a fact (show it), fakeness is the reset check.",
+  "meaning": "A countdown is ticking on this page.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "urgency.fake_countdown_reset": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Needs a second visit, so single-visit recordings cannot fire it. The strongest proof in the product: stored remaining time vs observed.",
+  "fix": "Show on first firing. Store per path and per timer text so two timers on one page are not confused.",
+  "meaning": "This deadline restarted on reload: it is manufactured.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.exit_intent_popup": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Offline replay has no mouse, so never fired. Behavioural proof (overlay within 1.5 s of mouseleave at the top edge). describeTrigger calls any overlay more than 800 ms after a click \"timed\", so a slow click-opened dialog could be misattributed.",
+  "fix": "Raise the click window to 2 s and ignore overlays opened while focus is inside a button/link. Show on first firing.",
+  "meaning": "A pop-up fired as you moved to leave.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "dark.nagging": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Needs three separate overlays in one session; never reached. Count is direct.",
+  "fix": "Show on first firing; quote the three overlay texts.",
+  "meaning": "Three or more pop-ups interrupted this page.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.infinite_scroll": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Replay does not scroll. Measured page growth near the bottom is direct, but the code still emits (confidence 0.5) when a \"load more\" button exists, which is not infinite scroll.",
+  "fix": "Do not emit when loadMore is true. Show on first firing.",
+  "meaning": "The page keeps loading more as you scroll; no end.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "attention.title_bait": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired. Observed title change while hidden is direct, but /new|message|alert/ matches a headline swap (\"New York…\") on a news site.",
+  "fix": "Require \\(\\d+\\), an emoji, or come back|miss|don't; ignore changes that coincide with a URL change.",
+  "meaning": "The tab title changes while you are away to pull you back.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.inverted_axis": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "No inline SVG chart with ≥3 numeric labels in the corpus. Direct measurement when the y-axis grouping is right.",
+  "fix": "Show on first firing with the top/bottom tick values quoted (already in explain).",
+  "meaning": "Up means less on this chart.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.truncated_bar_axis": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired. hasBars counts any ≥3 rects taller than 4 px (gridlines, backgrounds, legend swatches), so a zoomed line chart can be called a bar chart at severity 3.",
+  "fix": "Require bar rects to share a baseline y and have similar widths before calling it a bar chart.",
+  "meaning": "Bars start above zero, exaggerating differences.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.zoomed_line_axis": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; a zoomed line axis is a legitimate choice as often as a trick.",
+  "fix": "Severity 0 note.",
+  "meaning": "The y-axis starts high, so small moves look large.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.unlabeled_log_scale": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired. The first clause of `geometric` is a tautology (x - x < 1e-9); only the ratio test does the work, which is fine.",
+  "fix": "Delete the dead clause; show on first firing.",
+  "meaning": "Tick values multiply but nothing says \"log scale\".",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.irregular_axis": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired; direct measurement of value/pixel ratios across ticks.",
+  "fix": "Show on first firing with the tick list quoted.",
+  "meaning": "Equal gaps on the axis hold unequal values.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.dual_axis": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired; two vertical tick groups far apart is a reasonable proxy.",
+  "fix": "Show on first firing.",
+  "meaning": "Two y-axes let any two lines appear to track.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.short_window": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; a ≤3-year x-axis is an opinion about scope, not a measured distortion.",
+  "fix": "Severity 0 note.",
+  "meaning": "The chart covers three years or fewer.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.few_points": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; ≤4 x positions is not manipulation.",
+  "fix": "Severity 0 note.",
+  "meaning": "Few data points.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.pie": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; a pie chart is a chart type, not a technique. Severity 1 is an opinion.",
+  "fix": "Severity 0 note or remove.",
+  "meaning": "A pie chart; check the slices sum to 100%.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.flat_aspect": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; aspect ratio >4.5 is common for sparklines and timelines.",
+  "fix": "Severity 0 note.",
+  "meaning": "Very wide chart flattens slopes.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.tall_aspect": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; an opinion about proportions.",
+  "fix": "Severity 0 note.",
+  "meaning": "Very tall chart steepens slopes.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.no_axis_titles": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; many honest charts carry units in the caption rather than the SVG.",
+  "fix": "Severity 0 note.",
+  "meaning": "No units or axis titles inside the chart.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.no_source": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired; it would fire on every chart whose source line is outside the three ancestors searched.",
+  "fix": "Severity 0 note; search the enclosing figure/article caption too.",
+  "meaning": "No data source cited near the chart.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "charts.svg_chart_ok": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "retire",
+  "proof": false,
+  "cause": "A non-finding (\"passed basic checks\") that would take a chip slot.",
+  "fix": "Keep only as meta/asset for AI; no chip.",
+  "meaning": "An SVG chart passed the axis checks.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "tracker.social_proof_widget": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired. Vendor presence is strong proof that activity toasts are generated, but trackers.json lists review platforms (yotpo, judge.me, stamped, loox, okendo) and Elfsight (generic widgets) under this severity-3 category; a Judge.me review widget is not \"someone in Ohio just bought\".",
+  "fix": "Move review platforms to a reviews_widget note (severity 0) and Elfsight out; keep fomo/provesrc/useproof/nudgify/trustpulse/wisernotify and peers. Show on first firing.",
+  "meaning": "The \"someone just bought\" toasts come from a vendor that makes them.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "tracker.urgency_widget": {
+  "tier": "flag",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": true,
+  "cause": "Never fired. Only deadlinefunnel/countdownhero/timify/hurrify/evergreencountdown/sentry-countdown sell evergreen timers; thrivecart/clickfunnels/kartra/samcart/leadpages/unbounce/instapage are funnel and landing-page builders whose presence proves nothing about a timer.",
+  "fix": "Split: timer vendors keep severity 3; funnel builders become a severity-0 \"funnel builder\" note. Show timer vendors on first firing.",
+  "meaning": "The countdown here is a vendor product that restarts per visitor.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "tracker.bnpl": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired in the pack; Klarna/Afterpay are on most shops, so when it fires it will be ordinary at severity 2.",
+  "fix": "Demote to severity 0; mention inside incentives.purchase_path as \"pay-later offered\".",
+  "meaning": "Instalment payments are offered on this page.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ },
+ "source.advocacy_no_funding_disclosure": {
+  "tier": "hold",
+  "family": "measured",
+  "status": "no_evidence",
+  "proof": false,
+  "cause": "Never fired: transparency.js returns before this check when !isArticle, so organisation home pages, where it matters, never reach it; corpus think tanks are in the dataset anyway. Name-word heuristic plus an absence, not a proof.",
+  "fix": "Move the check above the isArticle return; require the name words in og:site_name or <title>, not the hostname alone.",
+  "meaning": "Presents as an institute or campaign; no funding link on the page.",
+  "judged": {},
+  "judged_gates_off": {},
+  "pages": 0
+ }
+}

@@ -1,0 +1,1716 @@
+{
+  "version": "0.1.0",
+  "notes": "Master list of text-level manipulation signals. Each rule maps a detectable pattern to a technique, the cognitive mechanism it exploits, an explanation and a counter-move. Patterns are JS regexes (flags default to gi). Edit freely; run `node scripts/validate-rules.js` afterwards.",
+  "categories": {
+    "dark_pattern": {
+      "name": "Deceptive interface design",
+      "description": "UI built to trick, trap or pressure you (confirmshaming, trick questions, roach motels, sneaking items into carts, forced registration).",
+      "color": "#d94f4f"
+    },
+    "urgency_scarcity": {
+      "name": "Manufactured urgency & scarcity",
+      "description": "Countdowns, low-stock warnings, 'people viewing' counters and deadline language designed to short-circuit deliberation.",
+      "color": "#e67e22"
+    },
+    "social_proof": {
+      "name": "Social proof & bandwagon",
+      "description": "Signals that 'everyone else is doing it' (join millions, bestseller badges, activity toasts, testimonials) which may be unverifiable or fabricated.",
+      "color": "#c9a227"
+    },
+    "attention": {
+      "name": "Attention & engagement engineering",
+      "description": "Mechanics that keep you scrolling, clicking and coming back: infinite feeds, autoplay, streaks, variable rewards, clickbait, notification bait.",
+      "color": "#8e44ad"
+    },
+    "rhetoric": {
+      "name": "Rhetoric & logical fallacies",
+      "description": "Argument moves that persuade without evidence: weasel attribution, false dilemmas, slippery slopes, whataboutism, ad hominem, thought-terminating clichés.",
+      "color": "#2e86c1"
+    },
+    "emotional": {
+      "name": "Emotional manipulation & loaded language",
+      "description": "Outrage and fear lexicons, tribal labels, dehumanizing terms, guilt trips and sensational formatting that bypass reasoning.",
+      "color": "#c0392b"
+    },
+    "bias_exploit": {
+      "name": "Cognitive bias exploitation",
+      "description": "Pricing and framing that leans on anchoring, loss aversion, defaults, sunk cost, reciprocity, hyperbolic discounting and similar well-documented biases.",
+      "color": "#16a085"
+    },
+    "interpersonal": {
+      "name": "Dark-triad & interpersonal manipulation analogs",
+      "description": "Tactics borrowed from manipulative relationships: love bombing, negging, isolation from other sources, future faking, DARVO, gaslighting, cult-style belonging, manufactured enemies.",
+      "color": "#6c3483"
+    },
+    "deceptive_claims": {
+      "name": "Deceptive or unverifiable claims",
+      "description": "Asterisked promises, 'unlimited*', vague authority, puffery, miracle health or money claims, greenwashing, fake trust signals.",
+      "color": "#b9770e"
+    },
+    "source_funding": {
+      "name": "Source, ownership & funding",
+      "description": "Who owns and funds the outlet or organization behind the page, how transparent it is, and whether the content is sponsored or affiliate-driven.",
+      "color": "#1f618d"
+    },
+    "charts": {
+      "name": "Misleading data visualization",
+      "description": "Charts whose axes, baselines, time windows or scales distort what the data actually shows.",
+      "color": "#117a65"
+    },
+    "surveillance": {
+      "name": "Tracking, profiling & algorithmic steering",
+      "description": "Third-party trackers, session replay, personalization signals and consent flows that shape what you see and harvest what you do.",
+      "color": "#5d6d7e"
+    },
+    "design_psych": {
+      "name": "Visual & design psychology",
+      "description": "Color, size, motion and placement asymmetries that steer choices (giant accept vs. grey decline, interrupting overlays, fake progress).",
+      "color": "#a04000"
+    },
+    "incentives": {
+      "name": "Business model & incentives",
+      "description": "What the site earns from your visit (ads, data, affiliate commissions, subscriptions, leads), what its privacy policy and terms actually say, and what it fails to disclose.",
+      "color": "#7d6608"
+    }
+  },
+  "biases": {
+    "scarcity": {
+      "name": "Scarcity heuristic",
+      "description": "We value things more when they seem rare or about to disappear, and we decide faster and less carefully under perceived shortage."
+    },
+    "loss_aversion": {
+      "name": "Loss aversion",
+      "description": "Losses feel roughly twice as painful as equivalent gains feel good, so 'don't lose X' moves people more than 'gain X'."
+    },
+    "present_bias": {
+      "name": "Present bias",
+      "description": "We overweight immediate payoffs against future costs, which is why 'get it now' and deferred payment work."
+    },
+    "hyperbolic_discounting": {
+      "name": "Hyperbolic discounting",
+      "description": "Future costs are discounted steeply, so splitting a price into small later payments makes it feel cheaper than it is."
+    },
+    "pain_of_paying": {
+      "name": "Pain of paying",
+      "description": "Paying hurts; anything that delays, splits or hides the payment moment reduces resistance to spending."
+    },
+    "social_proof": {
+      "name": "Social proof",
+      "description": "When unsure, we copy what others appear to be doing. Counts, badges and testimonials exploit this even when unverifiable."
+    },
+    "bandwagon": {
+      "name": "Bandwagon effect",
+      "description": "Beliefs and purchases spread because they appear popular, independent of their merit."
+    },
+    "authority_bias": {
+      "name": "Authority bias",
+      "description": "Claims attributed to experts, doctors, studies or awards are trusted more, even when the attribution is vague or unsourced."
+    },
+    "curiosity_gap": {
+      "name": "Curiosity gap",
+      "description": "Withholding a key detail creates an itch that a click promises to scratch. The payoff is usually smaller than implied."
+    },
+    "variable_reward": {
+      "name": "Variable reward schedule",
+      "description": "Unpredictable rewards (likes, matches, loot) produce the strongest compulsive checking, the same mechanism as slot machines."
+    },
+    "zeigarnik": {
+      "name": "Zeigarnik effect",
+      "description": "Unfinished tasks nag at us. Progress bars, 'almost there' and autoplay-next exploit the urge to complete."
+    },
+    "fomo": {
+      "name": "Fear of missing out",
+      "description": "Anxiety that others are having rewarding experiences you are not, triggered by notifications, counters and 'see what you missed'."
+    },
+    "default_effect": {
+      "name": "Default effect",
+      "description": "Whatever is pre-selected tends to stay selected. Pre-checked boxes and auto-renewal exploit inertia."
+    },
+    "status_quo_bias": {
+      "name": "Status quo bias",
+      "description": "We prefer things to stay as they are, so cancelling, switching or opting out feels costlier than it is."
+    },
+    "filter_bubble": {
+      "name": "Algorithmic filter bubble",
+      "description": "Recommendation systems optimize for engagement, so they feed you more of what provoked a reaction, narrowing what you see."
+    },
+    "mere_exposure": {
+      "name": "Mere exposure effect",
+      "description": "Repeated exposure breeds liking and perceived truth, which is why feeds repeat themes and brands repeat claims."
+    },
+    "illusory_truth": {
+      "name": "Illusory truth effect",
+      "description": "Statements repeated often enough start to feel true regardless of evidence."
+    },
+    "false_dilemma": {
+      "name": "False dilemma",
+      "description": "Presenting two options as the only options hides the middle ground and alternative choices."
+    },
+    "slippery_slope": {
+      "name": "Slippery slope",
+      "description": "Asserting that one step inevitably leads to a chain of extreme consequences, without showing the mechanism."
+    },
+    "ad_hominem": {
+      "name": "Ad hominem",
+      "description": "Attacking the person or group instead of the argument. Name-calling signals that evidence is thin."
+    },
+    "tribalism": {
+      "name": "In-group / out-group framing",
+      "description": "Dividing the world into 'us' and 'them' makes people defend their side reflexively and dismiss the other without reasoning."
+    },
+    "in_group_bias": {
+      "name": "In-group bias",
+      "description": "We favor and trust members of our own group and discount outsiders."
+    },
+    "strawman": {
+      "name": "Straw man",
+      "description": "Misrepresenting an opposing view in exaggerated form so it is easier to knock down."
+    },
+    "whataboutism": {
+      "name": "Whataboutism",
+      "description": "Deflecting a criticism by pointing at a different (often unrelated) wrong, instead of answering it."
+    },
+    "deflection": {
+      "name": "Deflection",
+      "description": "Changing the subject or reframing to avoid addressing the actual issue."
+    },
+    "thought_termination": {
+      "name": "Thought-terminating cliché",
+      "description": "A pat phrase that ends discussion ('it is what it is', 'do your research') and discourages further analysis."
+    },
+    "loaded_question": {
+      "name": "Loaded question",
+      "description": "A question that smuggles in an assumption, so answering it concedes the premise."
+    },
+    "availability_heuristic": {
+      "name": "Availability heuristic",
+      "description": "Vivid anecdotes and recent, emotional examples feel more probable than statistics show."
+    },
+    "appeal_to_nature": {
+      "name": "Appeal to nature / tradition",
+      "description": "Assuming something is good because it is 'natural', 'ancient' or 'traditional'."
+    },
+    "anchoring": {
+      "name": "Anchoring",
+      "description": "The first number you see becomes the reference point; a crossed-out 'was' price makes the price charged feel like a bargain."
+    },
+    "false_precision": {
+      "name": "False precision",
+      "description": "Specific-sounding statistics (87% of users) imply rigor that may not exist, especially when unsourced."
+    },
+    "framing": {
+      "name": "Framing effect",
+      "description": "The same fact presented as a gain, a loss, a per-day cost or a percentage changes the decision it produces."
+    },
+    "agency_hiding": {
+      "name": "Agency hiding (passive voice)",
+      "description": "'Mistakes were made' and 'data was accessed' remove the actor from the sentence so no one is accountable."
+    },
+    "conspiracy_framing": {
+      "name": "Conspiracy framing",
+      "description": "'Just asking questions' and 'what they don't want you to know' create suspicion without a falsifiable claim."
+    },
+    "outrage": {
+      "name": "Outrage engagement",
+      "description": "Anger is the most shareable emotion; outrage words drive clicks and comments regardless of accuracy."
+    },
+    "affect_heuristic": {
+      "name": "Affect heuristic",
+      "description": "Strong feelings substitute for judgment; emotionally charged words make risks and benefits feel bigger."
+    },
+    "fear": {
+      "name": "Appeal to fear",
+      "description": "Threat language narrows attention and pushes toward whatever the author offers as protection."
+    },
+    "dehumanization": {
+      "name": "Dehumanizing language",
+      "description": "Describing people as vermin, floods or invaders lowers empathy and is a documented precursor to harm."
+    },
+    "guilt": {
+      "name": "Guilt appeal",
+      "description": "Making you feel responsible for a bad outcome unless you comply."
+    },
+    "reciprocity": {
+      "name": "Reciprocity",
+      "description": "Receiving something (a gift, a discount, a free guide) creates an urge to give back, often by buying or sharing data."
+    },
+    "liking": {
+      "name": "Liking / flattery",
+      "description": "We say yes to people and brands that flatter us and seem to like us."
+    },
+    "ego": {
+      "name": "Ego appeal",
+      "description": "Appeals to how smart, special or capable you are (or aren't) to drive compliance."
+    },
+    "commitment_consistency": {
+      "name": "Commitment & consistency",
+      "description": "After a small yes (a quiz, an email) we feel pressure to stay consistent with bigger yeses."
+    },
+    "foot_in_door": {
+      "name": "Foot-in-the-door",
+      "description": "A tiny first ask lowers resistance to the larger ask that follows."
+    },
+    "isolation": {
+      "name": "Isolation from other sources",
+      "description": "Discrediting outside information so the manipulator becomes the only trusted source. Classic coercive-control tactic."
+    },
+    "optimism_bias": {
+      "name": "Optimism bias",
+      "description": "We believe good outcomes are more likely for us than the base rate suggests, which guarantees and 'imagine when' exploit."
+    },
+    "future_faking": {
+      "name": "Future faking",
+      "description": "Vague promises about what is coming keep you invested now without committing to anything checkable."
+    },
+    "darvo": {
+      "name": "DARVO",
+      "description": "Deny, Attack, Reverse Victim and Offender: the accused reframes themselves as the real victim of an unfair attack."
+    },
+    "gaslighting": {
+      "name": "Gaslighting",
+      "description": "Denying what was said or happened so you doubt your own memory and judgment."
+    },
+    "sunk_cost": {
+      "name": "Sunk cost fallacy",
+      "description": "Having invested time, money or progress, we continue even when stopping would be better."
+    },
+    "endowment": {
+      "name": "Endowment effect",
+      "description": "Once something feels like ours (a free trial, a saved cart), giving it up feels like a loss."
+    },
+    "halo_effect": {
+      "name": "Halo effect",
+      "description": "One impressive attribute (awards, 'revolutionary', slick design) colors judgment of everything else."
+    },
+    "puffery": {
+      "name": "Puffery",
+      "description": "Superlatives that are legally unprovable ('the ultimate', 'world's best') and carry no information."
+    },
+    "left_digit_effect": {
+      "name": "Left-digit effect (charm pricing)",
+      "description": "$9.99 is processed as 'nine-something', making it feel materially cheaper than $10."
+    },
+    "partitioned_pricing": {
+      "name": "Partitioned / drip pricing",
+      "description": "Splitting a price into a headline number and later fees makes the total look smaller until you are committed."
+    },
+    "drip_pricing": {
+      "name": "Drip pricing",
+      "description": "Mandatory fees revealed late in checkout, after you have invested effort."
+    },
+    "zero_price_effect": {
+      "name": "Zero-price effect",
+      "description": "'Free' triggers an irrational jump in demand, which is why free trials and gifts anchor so many funnels."
+    },
+    "forced_continuity": {
+      "name": "Forced continuity",
+      "description": "A free or cheap trial that silently converts to a paid subscription unless you act."
+    },
+    "goal_gradient": {
+      "name": "Goal-gradient effect",
+      "description": "Effort accelerates as the goal nears; '2 more steps' and progress bars exploit this."
+    },
+    "exclusivity": {
+      "name": "Exclusivity appeal",
+      "description": "Invite-only, waitlists and VIP framing raise perceived value through restricted access."
+    },
+    "health_misinfo": {
+      "name": "Health misinformation markers",
+      "description": "Cure, detox and miracle language that regulators treat as red flags for unproven products."
+    },
+    "greed": {
+      "name": "Greed / get-rich appeal",
+      "description": "Outsized return promises recruit optimism bias and suppress risk assessment."
+    },
+    "trust_badges": {
+      "name": "Trust badge effect",
+      "description": "Lock icons and 'secure' badges raise trust even when they certify nothing."
+    },
+    "roach_motel": {
+      "name": "Roach motel",
+      "description": "Easy to get in, hard to get out: cancellation requires calls, letters or notice periods."
+    },
+    "obstruction": {
+      "name": "Obstruction",
+      "description": "Adding friction to the choice the business doesn't want you to make."
+    },
+    "confirmshaming": {
+      "name": "Confirmshaming",
+      "description": "The decline option is worded to make you feel foolish or ashamed for choosing it."
+    },
+    "trick_question": {
+      "name": "Trick question",
+      "description": "Double negatives or confusing wording that make you consent when you meant to refuse."
+    },
+    "forced_action": {
+      "name": "Forced action",
+      "description": "Requiring an unrelated action (registration, sharing, enabling notifications) to proceed."
+    },
+    "sneaking": {
+      "name": "Sneaking",
+      "description": "Adding items, charges or subscriptions without clear consent."
+    },
+    "bait_switch": {
+      "name": "Bait and switch",
+      "description": "Advertising one thing and delivering or steering to another."
+    },
+    "unity": {
+      "name": "Unity / shared identity",
+      "description": "'We are family' and tribe language borrows the trust we give to our own group (Cialdini's seventh principle)."
+    },
+    "barnum_effect": {
+      "name": "Barnum effect",
+      "description": "Vague, generically flattering 'personalized' statements feel uniquely accurate."
+    },
+    "personalization": {
+      "name": "Personalization steering",
+      "description": "'For you' content is chosen to maximize engagement or purchases, not accuracy or your interests."
+    },
+    "cherry_picking": {
+      "name": "Cherry-picking",
+      "description": "Selecting the time window, baseline or metric that makes the story look biggest."
+    },
+    "relative_vs_absolute": {
+      "name": "Relative vs. absolute risk",
+      "description": "'Risk up 50%' may mean 2 in 10,000 became 3 in 10,000. Relative numbers inflate drama."
+    },
+    "interruption": {
+      "name": "Interruption & re-engagement",
+      "description": "Notifications and prompts pull you back in on the site's schedule rather than yours."
+    },
+    "data_capture": {
+      "name": "Data capture",
+      "description": "Trading a small incentive for contact details or behavioral data that is worth more to them than to you."
+    },
+    "lock_in": {
+      "name": "Lock-in",
+      "description": "Making leaving costly through dependencies, saved data or accounts."
+    }
+  },
+  "rules": [
+    {
+      "id": "urgency.deadline_language",
+      "category": "urgency_scarcity",
+      "name": "Deadline / urgency language",
+      "pattern": "\\b(hurry|act (now|fast)|act before|ends? (tonight|today|soon|at midnight|in)|last chance|final (hours?|day|call)|don'?t miss (out|this|your chance)|offer (expires|ends)|expires? (soon|today|in \\d+)|limited[- ]time|time is running out|before (it'?s|its) too late|while (supplies|stocks?) lasts?|today only|ending soon|flash sale|doorbuster)\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "scarcity",
+        "loss_aversion",
+        "present_bias"
+      ],
+      "explain": "Deadline language compresses the time you have to think. Genuine deadlines exist, but marketing deadlines are frequently arbitrary or recurring.",
+      "tip": "Note the price and come back tomorrow. If the deadline was real, you have lost little; if it was fake, you have learned something about the seller.",
+      "requiresSale": true,
+      "notNearPattern": "\\(\\d+\\)|\\b\\d+ (products?|items?|results?)\\b|\\b(new customers only|terms (and|&) conditions|t&cs?|see (details|terms|site)|offer (valid|subject)|select offers)\\b"
+    },
+    {
+      "id": "scarcity.low_stock",
+      "category": "urgency_scarcity",
+      "name": "Low-stock scarcity message",
+      "pattern": "\\b(only|just) \\d+ (left|remaining|available|seats?|spots?|rooms?|items?|units?|tickets?)\\b|\\b\\d+ (left|remaining) (in stock|at this price)\\b|\\b(low|limited) (stock|quantity|quantities)\\b|\\b(selling|going) fast\\b|\\balmost (gone|sold out)\\b|\\b(nearly|almost) full\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "scarcity",
+        "loss_aversion"
+      ],
+      "explain": "Low-stock messages trigger the scarcity heuristic. Regulators (UK CMA, EU) have found many such counters are fabricated or reset automatically.",
+      "tip": "Reload the page later or open it in a private window; if the number is identical or resets, treat it as decoration.",
+      "requiresSale": true
+    },
+    {
+      "id": "scarcity.high_demand",
+      "category": "urgency_scarcity",
+      "name": "High-demand / 'people viewing' counter",
+      "pattern": "\\b\\d+ (people|others|users|shoppers|customers|travell?ers|guests) (are )?(currently )?(viewing|looking at|watching|browsing|considering|interested)\\b|\\bbooked \\d+ times\\b|\\b(in|added to) \\d+ (carts?|baskets?)\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "scarcity",
+        "social_proof",
+        "fomo"
+      ],
+      "explain": "'27 people are viewing this' combines scarcity with social proof. These counters are often randomized client-side and have been the subject of enforcement actions against booking sites.",
+      "tip": "Ignore live-viewer counts entirely when deciding; they carry no information about value.",
+      "requiresSale": true
+    },
+    {
+      "id": "urgency.countdown_words",
+      "category": "urgency_scarcity",
+      "name": "Countdown framing",
+      "pattern": "\\b(sale|offer|deal|price|discount|bonus|cart|reservation) (ends|expires|is reserved) in\\b|\\bcountdown\\b|\\b\\d{1,2}:\\d{2}:\\d{2}\\b",
+      "severity": 1,
+      "confidence": 0.6,
+      "biases": [
+        "scarcity",
+        "loss_aversion"
+      ],
+      "explain": "A ticking clock raises arousal and lowers deliberation. The behavior detector separately checks whether the timer resets on reload.",
+      "tip": "Reload the page. A countdown that restarts is a prop, not a deadline.",
+      "requiresSale": true
+    },
+    {
+      "id": "urgency.price_increase_threat",
+      "category": "urgency_scarcity",
+      "name": "Price-increase threat",
+      "pattern": "\\bprices? (will|may|could|are about to) (go up|increase|rise|double)\\b|\\bbefore (the )?price (goes up|increases|rises)\\b|\\block in (your|this|the|today'?s) (price|rate)\\b|\\bthis price won'?t last\\b|\\bprice (goes|going) up (soon|tomorrow|at midnight)\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "loss_aversion",
+        "anchoring",
+        "present_bias"
+      ],
+      "explain": "Threatening a future price rise reframes buying now as avoiding a loss. It is unverifiable at the moment of decision.",
+      "tip": "Ask whether you would buy at this price with no deadline. If not, the threat is doing the work.",
+      "requiresSale": true
+    },
+    {
+      "id": "social.join_millions",
+      "category": "social_proof",
+      "name": "Big-number social proof",
+      "pattern": "\\b(join|trusted by|loved by|used by|chosen by|relied on by) (over |more than )?\\d[\\d,.]{0,20}\\s?(k|m|million|billion|thousand)?\\+? (happy |satisfied |smart |loyal )?(users|customers|members|people|businesses|companies|subscribers|readers|professionals|families|students|brands|teams)\\b|\\b\\d[\\d,.]{0,20}\\s?(k|m|million|thousand)\\+? (five|5)[- ]star reviews\\b",
+      "severity": 1,
+      "confidence": 0.8,
+      "biases": [
+        "social_proof",
+        "bandwagon"
+      ],
+      "explain": "Large user counts are rarely audited and often include inactive or free accounts. Popularity is not evidence of quality or honesty.",
+      "tip": "Look for independent reviews and the complaints, not the headline number."
+    },
+    {
+      "id": "social.bestseller_badges",
+      "category": "social_proof",
+      "name": "Bestseller / #1 / most-popular badge",
+      "pattern": "\\b(best[- ]?seller|bestselling|#\\s?1 (rated|choice|selling|best[- ]?seller|brand|pick)|top[- ]rated|editor'?s (choice|pick)|amazon'?s choice|customer favou?rite|fan favou?rite|staff pick|award[- ]winning)\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "social_proof",
+        "authority_bias",
+        "halo_effect"
+      ],
+      "explain": "Badges imply a ranking by someone, but the ranking criteria and category are usually undisclosed and sometimes paid for.",
+      "tip": "Ask: best-selling where, measured by whom, in what category, over what period?",
+      "requiresSale": true,
+      "maxBlock": 60
+    },
+    {
+      "id": "social.activity_feed",
+      "category": "social_proof",
+      "name": "Live activity toast ('someone in Ohio just bought')",
+      "pattern": "\\b([Ss]omeone|[A-Z][a-z]+) (from|in) [A-Z][a-zA-Z .]{2,30} (just |recently )?(bought|purchased|ordered|signed up|subscribed|booked|joined|claimed|downloaded)\\b|\\b[Jj]ust (bought|purchased|ordered|booked|signed up|subscribed)\\b[^.]{0,60}\\b(minutes?|seconds?|hours?|mins?) ago\\b",
+      "severity": 2,
+      "confidence": 0.9,
+      "biases": [
+        "social_proof",
+        "fomo"
+      ],
+      "explain": "Purchase-notification widgets are sold as plug-ins that can replay old events or invent them. They exist to create a sense of a crowd buying right now.",
+      "tip": "Treat these pop-ups as advertising. Many are generated by third-party 'social proof' vendors; the tracker detector lists them if present.",
+      "flags": "g"
+    },
+    {
+      "id": "social.everyone_is",
+      "category": "social_proof",
+      "name": "Bandwagon pressure",
+      "pattern": "\\beveryone (is|'s) (talking about|switching to|using|buying|loving|doing|getting)\\b|\\b(all|most) (the )?(smart|savvy|successful|serious) (people|investors|parents|professionals|founders|marketers)\\b|\\bdon'?t (be|get) left (behind|out)\\b|\\bwhat everyone'?s (buying|reading|watching)\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "bandwagon",
+        "fomo",
+        "social_proof"
+      ],
+      "explain": "Bandwagon appeals replace evidence about the product with claims about other people's behavior, which you cannot check.",
+      "tip": "Popularity claims are not reasons. Ask what the thing actually does for you.",
+      "requiresSale": true
+    },
+    {
+      "id": "social.testimonial_markers",
+      "category": "social_proof",
+      "name": "Testimonial / 'as seen on' framing",
+      "pattern": "\\bverified (buyer|purchase|customer|review)\\b|\\bwhat (our )?(customers|clients|users|members|readers) (are )?say(ing)?\\b|\\bas seen (on|in)\\b|\\bfeatured (on|in)\\b|\\bsuccess stor(y|ies)\\b|\\bcustomer stor(y|ies)\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "social_proof",
+        "authority_bias"
+      ],
+      "explain": "Testimonials are selected by the seller and 'as seen on' logos often refer to paid placements or passing mentions.",
+      "tip": "Search for the outlet's actual coverage. Weight anonymous testimonials at zero.",
+      "requiresSale": true
+    },
+    {
+      "id": "attention.clickbait_curiosity",
+      "category": "attention",
+      "name": "Clickbait / curiosity gap",
+      "pattern": "\\byou (won'?t|will not|wouldn'?t) believe\\b|\\bwhat happen(s|ed) next\\b|\\bthis (one|simple|weird|little|strange) (trick|tip|hack|secret|habit)\\b|\\bdoctors? (hate|don'?t want you)\\b|\\b(will|gonna) blow your mind\\b|\\bmind[- ]blowing\\b|\\bjaw[- ]dropping\\b|\\bnobody (is )?talking about\\b|\\bthey don'?t want you to (know|see|hear|find out)\\b|\\bthe truth about\\b|\\bhere'?s why\\b|\\bthis is why\\b|\\bwait (for|till|until) (it|the end)\\b|\\b(leaves|left) (everyone|fans|viewers|the internet|the crowd) (speechless|stunned|in tears|shocked)\\b|\\bbreaks the internet\\b|\\bgoes viral\\b|\\bnumber \\d+ will\\b|\\b#\\d+ will\\b|\\byou need to see\\b|\\bstop what you'?re doing\\b|\\bchanged my life\\b|\\bwhat (nobody|no one) tells you\\b|\\bthe (real|shocking|surprising|untold) (reason|story|truth)\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "curiosity_gap",
+        "outrage"
+      ],
+      "explain": "Headlines that withhold the payoff are optimized for clicks, not information. The content rarely delivers what the gap implies.",
+      "tip": "Predict the answer before clicking. If you can guess it, you do not need the click.",
+      "scope": "heading"
+    },
+    {
+      "id": "attention.listicle_headline",
+      "category": "attention",
+      "name": "Listicle headline",
+      "pattern": "^\\s*(the\\s)?(top\\s)?\\d{1,2}\\s+(things|reasons|ways|signs|tips|secrets|facts|mistakes|habits|hacks|lessons|rules|questions|products|foods|stocks)\\b",
+      "flags": "gim",
+      "scope": "heading",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "curiosity_gap"
+      ],
+      "explain": "Numbered lists promise easy, bounded consumption and are often split across pages to multiply ad impressions.",
+      "tip": "Check whether the list is paginated or a slideshow; that is a pageview tactic."
+    },
+    {
+      "id": "attention.engagement_bait",
+      "category": "attention",
+      "name": "Engagement bait",
+      "pattern": "\\b(like|share|comment|tag|retweet|repost|subscribe|follow)(,| and| &) (like|share|comment|tag|retweet|repost|subscribe|follow)\\b|\\bcomment (below|down below)\\b|\\btag (a|someone|a friend|your)\\b|\\bsmash (that|the) like\\b|\\bdon'?t forget to (like|subscribe|follow|share)\\b|\\bturn on (post )?notifications\\b|\\bhit the bell\\b|\\bdouble[- ]tap\\b|\\bshare (this )?if you agree\\b|\\brepost if\\b",
+      "severity": 1,
+      "confidence": 0.85,
+      "biases": [
+        "reciprocity",
+        "social_proof",
+        "commitment_consistency"
+      ],
+      "explain": "Explicit requests for engagement game recommendation algorithms. Platforms including Meta have penalized this as 'engagement bait'.",
+      "tip": "Engage only if the content earned it on its own."
+    },
+    {
+      "id": "attention.gamification",
+      "category": "attention",
+      "name": "Gamification / streaks / variable rewards",
+      "pattern": "\\b(your|daily|login|reading|current) streaks?\\b|\\bkeep your streak\\b|\\bearn (points|coins|gems|badges|rewards|xp|stars)\\b|\\bunlock(ed)? (a |an |your )?(badge|reward|achievement|level|bonus|prize)\\b|\\bspin (the|to) (wheel|win)\\b|\\bdaily (reward|bonus|check[- ]in|challenge|quest|login)\\b|\\bmystery (box|gift|prize|reward)\\b|\\bscratch (card|to reveal|and win)\\b|\\byou'?re on a (roll|streak|hot streak)\\b|\\bloot box(es)?\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "variable_reward",
+        "zeigarnik",
+        "loss_aversion",
+        "sunk_cost"
+      ],
+      "explain": "Streaks convert a habit into a possession you can lose; variable rewards (spins, mystery boxes) borrow the slot-machine schedule that produces compulsive checking.",
+      "tip": "Ask whether you would use this product if the points and streaks vanished tomorrow."
+    },
+    {
+      "id": "attention.fomo_notifications",
+      "category": "attention",
+      "name": "Notification / 'you missed' bait",
+      "pattern": "\\byou (have|'ve got) \\d+ (new )?(notifications?|messages?|unread|matches|likes|alerts|offers?|invites?)\\b|\\bdon'?t miss (what|anything|new|out on)\\b|\\bsee what you(’|')?ve missed\\b|\\bwhile you were (away|gone|out)\\b|\\bpeople are waiting\\b|\\bsomeone (liked|viewed|mentioned|messaged|tagged|followed) you\\b|\\byour (friends|matches|followers) (are|have been) (waiting|active|posting)\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "fomo",
+        "variable_reward",
+        "interruption"
+      ],
+      "explain": "Re-engagement prompts manufacture social obligation and curiosity to pull you back on the platform's schedule.",
+      "tip": "Batch-check instead of reacting. Turn off non-human notifications."
+    },
+    {
+      "id": "attention.autoplay_next",
+      "category": "attention",
+      "name": "Autoplay / 'up next' continuation",
+      "pattern": "\\b(up next|next (episode|video) (in|starts in|plays in)|playing next|autoplay(ing)? (next|in)|continue watching|keep watching|binge[- ]?watch|watch next)\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "zeigarnik",
+        "default_effect"
+      ],
+      "explain": "Autoplay removes the natural stopping point. Continuing becomes the default and stopping requires action.",
+      "tip": "Disable autoplay in settings; decide what to watch before the countdown decides for you."
+    },
+    {
+      "id": "surveillance.personalized_feed",
+      "category": "surveillance",
+      "name": "Algorithmic personalization present",
+      "pattern": "\\b(picked|selected|chosen|handpicked|tailored) for you based\\b|\\bbecause you (watched|read|viewed|bought|liked|listened|searched|follow|visited)\\b|\\b(people|customers|users|shoppers) (also (bought|viewed|watched|liked)|who (bought|viewed) this)\\b|\\bbased on your (history|activity|interests|browsing|viewing|purchases|searches|location)\\b|\\bsimilar to (items|things|videos|articles) you\\b|\\btrending (in your area|near you)\\b|\\binspired by your\\b|\\bcontinue where you left off\\b",
+      "severity": 1,
+      "confidence": 0.85,
+      "biases": [
+        "filter_bubble",
+        "personalization",
+        "mere_exposure"
+      ],
+      "explain": "Personalized feeds are optimized for engagement or conversion. The sequence you see is chosen to produce a reaction, not to inform you, and it narrows over time.",
+      "tip": "Periodically view the site logged out or in a private window to see what the un-personalized version looks like.",
+      "requiresSale": true
+    },
+    {
+      "id": "surveillance.notification_prompt_language",
+      "category": "surveillance",
+      "name": "Push-notification solicitation",
+      "pattern": "\\b(allow|enable|turn on|get|activate) (push |browser |desktop |web )?notifications\\b|\\bnever miss (a|an|another) (update|post|deal|story|alert|drop|beat|sale)\\b|\\bget notified\\b|\\bsubscribe to (our )?(alerts|notifications|updates)\\b",
+      "severity": 1,
+      "confidence": 0.8,
+      "biases": [
+        "fomo",
+        "interruption"
+      ],
+      "explain": "Notification permission is a channel into your attention that the site controls. Pre-permission prompts are designed to get the yes before the browser asks.",
+      "tip": "Deny by default. You can always re-enable for the few sites that earn it."
+    },
+    {
+      "id": "surveillance.email_capture_incentive",
+      "category": "surveillance",
+      "name": "Incentivized contact capture",
+      "pattern": "\\b(get|unlock|claim|grab|receive|take|enjoy) (your |an? )?(\\d+\\s?%|(\\$|£|€)\\d+) (off|discount|coupon|voucher)?\\b[^.]{0,80}\\b(email|sign(ing)? up|subscribe|newsletter|join|text|sms|phone)\\b|\\bsign up (for|to) (our )?(newsletter|emails?|updates?|list|texts?)\\b|\\benter your (email|phone|number|mobile) (to|and|for|below)\\b|\\bjoin (our|the) (list|newsletter|community|club|family|insiders?|vip)\\b|\\bunlock (your|this|the) (discount|offer|deal|content|guide|report|code)\\b",
+      "severity": 1,
+      "confidence": 0.8,
+      "biases": [
+        "reciprocity",
+        "data_capture",
+        "zero_price_effect"
+      ],
+      "explain": "A 10% coupon buys a marketing channel to you that is worth far more than 10% over time, and often gets shared with 'partners'.",
+      "tip": "Use a disposable alias address if you want the discount without the lifelong drip campaign.",
+      "nearPattern": "\\b(\\d+\\s?%|discount|coupon|voucher|% off|\\$\\d|free (gift|shipping|sample)|bonus)\\b"
+    },
+    {
+      "id": "surveillance.barnum_personalization",
+      "category": "surveillance",
+      "name": "Pseudo-personalized ('people like you') framing",
+      "pattern": "\\b(people|others|someone|parents|women|men|investors|homeowners) like you\\b|\\b(users|customers|readers|people|buyers) (in|from|near) your (area|city|region|industry|zip|neighbou?rhood)\\b|\\bbased on your (answers|results|profile|responses|quiz)\\b|\\byour (personali[sz]ed|custom|unique|tailored) (plan|results|report|recommendation|score|profile|rate|quote)\\b|\\byou (seem|appear|sound) like (someone|the type|a person) who\\b|\\bwe('ve| have) (found|identified|detected|noticed) (that )?you\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "barnum_effect",
+        "personalization",
+        "liking"
+      ],
+      "explain": "Generic statements dressed as personal insight feel uniquely accurate (the Barnum effect) and build unearned trust.",
+      "tip": "Ask what data the 'personalized' result is actually based on. Often it is a quiz designed to funnel everyone to the same product.",
+      "requiresSale": true
+    },
+    {
+      "id": "rhetoric.weasel_attribution",
+      "category": "rhetoric",
+      "name": "Vague authority / weasel attribution",
+      "pattern": "\\b(experts?|scientists|researchers|studies|research|doctors|analysts|economists|insiders|sources|critics|observers|officials) (say|says|agree|believe|suggest|show|shows|claim|warn|argue|think|confirm|reveal|have found|found|have shown)\\b|\\bit is (widely )?(believed|known|thought|said|reported|understood|accepted) that\\b|\\bit has been (suggested|reported|said|claimed|shown) that\\b|\\b(many|some|most) (people|experts|scientists|economists) (believe|say|think|argue|agree)\\b|\\baccording to (experts|sources|reports|studies|research|insiders|analysts)\\b|\\bsources (close to|familiar with)\\b|\\bthere is (growing|mounting|some|strong) evidence\\b|\\b(research|science|data|the evidence) (shows|suggests|indicates|proves|says)\\b|\\bstudies (show|suggest|indicate|prove|have shown|have found)\\b|\\bscientifically (proven|shown|tested)\\b",
+      "requiresUnsourced": true,
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "authority_bias",
+        "false_precision"
+      ],
+      "explain": "Attribution to unnamed experts or unspecified studies borrows authority without letting you check it. This finding is only raised when no link or citation sits near the claim.",
+      "tip": "Ask: which study, which experts, where can I read it? If the page cannot say, discount the claim."
+    },
+    {
+      "id": "rhetoric.absolutism",
+      "category": "rhetoric",
+      "name": "Absolutist language",
+      "pattern": "\\b(without exception|undeniabl[ey]|unquestionabl[ey]|indisputabl[ey]|irrefutabl[ey]|zero (doubt|chance)|the only (way|option|solution|choice|answer)|there is no (doubt|question|alternative|other way|middle ground)|have always lied|never pay the price)(?!\\w)",
+      "minCount": 2,
+      "severity": 1,
+      "confidence": 0.6,
+      "biases": [
+        "illusory_truth",
+        "false_dilemma"
+      ],
+      "explain": "Dense absolutist language ('always', 'everyone', 'the only way') signals persuasion over analysis; reality is rarely that clean.",
+      "tip": "For each absolute, ask for one counterexample. If one is easy to find, the author is overstating."
+    },
+    {
+      "id": "rhetoric.obviousness_appeal",
+      "category": "rhetoric",
+      "name": "Appeal to obviousness / common sense",
+      "pattern": "\\b(obviously|clearly|needless to say|it goes without saying|everyone knows|everybody knows|as (we all|everyone) knows?|it'?s (no secret|common sense|common knowledge|well[- ]known) that|any (reasonable|sane|rational|thinking|honest) person|common sense (tells|says|dictates)|let'?s be (honest|real|clear))\\b",
+      "minCount": 3,
+      "severity": 1,
+      "confidence": 0.65,
+      "biases": [
+        "bandwagon",
+        "illusory_truth"
+      ],
+      "explain": "Declaring something obvious pressures you to agree without evidence and frames disagreement as unreasonable.",
+      "tip": "The word 'obviously' usually marks the exact claim that needs support."
+    },
+    {
+      "id": "rhetoric.false_dilemma",
+      "category": "rhetoric",
+      "name": "False dilemma",
+      "pattern": "\\b(you'?re either|there are only two (options|choices|kinds|types|sides)|it'?s either\\b|the only (two )?(choices?|options?) (are|is)|you (are|'re) (either )?(with us or|for us or)|if you'?re not [a-z' ]{1,40}(then )?you'?re (a |an |part of )?[a-z]|there is no (middle ground|third option|in[- ]between|alternative|other option)|choose a side|which side are you on|no other (choice|option|way)|you have (only )?two (choices|options))\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "false_dilemma"
+      ],
+      "explain": "Collapsing a range of positions into two forces a choice on the author's terms and hides compromise options.",
+      "tip": "Name a third option. There almost always is one."
+    },
+    {
+      "id": "rhetoric.slippery_slope",
+      "category": "rhetoric",
+      "name": "Slippery slope",
+      "pattern": "\\b(it'?s only a matter of time (before|until)|next (they|it)(’|')?ll|where (does|will) (it|this) (end|stop)|slippery slope|will inevitably lead to|this is how it (starts|begins)|and then what\\?)",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "slippery_slope",
+        "fear"
+      ],
+      "explain": "A slippery-slope argument asserts a chain of consequences without showing why each link follows. It substitutes dread for mechanism.",
+      "tip": "Ask for the mechanism of the second step. If it is 'and then obviously...', there is none."
+    },
+    {
+      "id": "rhetoric.ad_hominem",
+      "category": "rhetoric",
+      "name": "Name-calling / ad hominem",
+      "pattern": "\\b(idiots?|morons?|clowns?|shills?|bootlickers?|snowflakes?|libtards?|sheeple|cucks?|degenerates?|lunatics?|grifters?|traitors?|puppets?|stooges?|brainwashed|woke mob|cultists?|deranged|unhinged|so[- ]called (experts?|journalists?|scientists?|doctors?|leaders?)|low[- ]iq|bots and shills|paid (shills?|actors?|protesters?))\\b",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "ad_hominem",
+        "tribalism"
+      ],
+      "explain": "Attacking people rather than claims is a reliable sign the author lacks or is avoiding evidence.",
+      "tip": "Strip the insults and see what argument remains. Often nothing does.",
+      "minCount": 2,
+      "flags": "g"
+    },
+    {
+      "id": "rhetoric.strawman_markers",
+      "category": "rhetoric",
+      "name": "Straw-man framing of opponents",
+      "pattern": "\\b(so (you|they)(’|')?re saying|what (they|the other side|liberals|conservatives|the left|the right) (really|actually) want is|they (want|would like) (you )?to (believe|think) that|(liberals|conservatives|the left|the right|democrats|republicans) (think|believe|want) (that )?(all|every|everyone|nobody|no one|anyone)\\b|in other words,? (they|you) (want|hate|love|think))",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "strawman",
+        "tribalism"
+      ],
+      "explain": "Restating the opposing view in its most extreme form makes it easy to dismiss and avoids engaging with what opponents actually say.",
+      "tip": "Find the opposing side's own words. Compare them to how they are characterized here."
+    },
+    {
+      "id": "rhetoric.whataboutism",
+      "category": "rhetoric",
+      "name": "Whataboutism / deflection",
+      "pattern": "\\b(but what about (the|all the|those|when)|where was the outrage when|nobody (cared|complained|said anything) when|you didn'?t (care|complain|say anything) when|funny how (nobody|no one|they|you)|interesting how (nobody|no one|they)|meanwhile,? (nobody|no one|the media))\\b",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "whataboutism",
+        "deflection"
+      ],
+      "explain": "Pointing at someone else's wrong does not answer the criticism at hand. It changes the subject while feeling like a rebuttal.",
+      "tip": "Both things can be bad. Return to the original question and ask whether it was answered."
+    },
+    {
+      "id": "rhetoric.thought_terminating",
+      "category": "rhetoric",
+      "name": "Thought-terminating cliché",
+      "pattern": "\\b(it is what it is|everything happens for a reason|the science is settled|do your (own )?research|wake up,? (people|sheeple|america)|end of (story|discussion|debate)|case closed|that'?s just how it is|trust the (plan|process|science|experts)|facts don'?t care about your feelings|it'?s not rocket science|you can'?t argue with (that|results|success|the numbers)|there'?s nothing to (discuss|debate|argue)|enough said|'?nuff said|i rest my case|the debate is over)\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "thought_termination"
+      ],
+      "explain": "These phrases are designed to end inquiry. They feel like conclusions but contain no argument.",
+      "tip": "Treat the cliché as a flag marking exactly where the reasoning stopped."
+    },
+    {
+      "id": "rhetoric.loaded_question",
+      "category": "rhetoric",
+      "name": "Loaded or leading question",
+      "pattern": "\\b(isn'?t it (time|obvious|strange|convenient|interesting|telling) that|don'?t you (think|agree|find it)|wouldn'?t you (agree|rather|prefer)|who (could|would) (possibly )?(disagree|object|oppose|argue)|how (can|could) anyone (still |possibly |seriously )?(support|believe|defend|deny|vote|trust)|are you (still|really|seriously) (going to|gonna)|do you really (want|think|believe)|why (do|does|are|is) (they|the media|the government|democrats|republicans|liberals|conservatives) (always|never|so))\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "loaded_question"
+      ],
+      "explain": "A loaded question embeds its conclusion; any direct answer concedes the premise.",
+      "tip": "Reject the premise first: 'Who says it is obvious?'"
+    },
+    {
+      "id": "rhetoric.anecdote_as_evidence",
+      "category": "rhetoric",
+      "name": "Anecdote offered as evidence",
+      "pattern": "\\b(i (personally )?know (someone|a guy|a woman|a man|people|a family|a friend) who|a friend of (mine|a friend)|my (cousin|neighbou?r|uncle|aunt|friend|coworker|co-worker|sister|brother|mom|dad) (said|told me|tried|used|swears)|i'?ve seen it (myself|with my own eyes|happen|work)|it worked for me|case in point|one (woman|man|mom|dad|customer|user|reader) (found|discovered|lost|made|earned|paid off) (\\$|£|€)?\\d)\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "availability_heuristic"
+      ],
+      "explain": "Vivid single cases feel more convincing than statistics but tell you nothing about how often the outcome happens.",
+      "tip": "Ask for the denominator: out of how many people did this happen?"
+    },
+    {
+      "id": "rhetoric.appeal_to_nature_tradition",
+      "category": "rhetoric",
+      "name": "Appeal to nature / tradition",
+      "pattern": "\\b(all[- ]natural|100 ?% natural|as nature intended|the way (it was|nature|god) intended|our (ancestors|grandparents) (knew|did|didn'?t|never)|ancient (wisdom|secret|remedy|technique)|traditional (wisdom|remedy|values)|chemical[- ]free|toxin[- ]free|non[- ]toxic|nature'?s (own|way|secret))\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "appeal_to_nature"
+      ],
+      "explain": "'Natural' is unregulated in most contexts and says nothing about safety or efficacy. 'Chemical-free' is physically meaningless.",
+      "tip": "Ask what the specific ingredient or practice does and what evidence supports it."
+    },
+    {
+      "id": "rhetoric.false_precision_stats",
+      "category": "rhetoric",
+      "name": "Unsourced precise statistic",
+      "pattern": "\\b\\d{2}(\\.\\d+)?\\s?% of (people|users|customers|women|men|americans|britons|parents|doctors|dentists|experts|those|respondents|consumers|businesses)\\b|\\b(9|8|7) (out of|in) (10|ten)\\b",
+      "requiresUnsourced": true,
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "false_precision",
+        "anchoring",
+        "authority_bias"
+      ],
+      "explain": "Precise percentages feel rigorous. Without a source, sample size and method they are decoration. 'Up to' claims describe the best case, not the typical one.",
+      "tip": "Look for the footnote. If the study is the seller's own survey of 20 people, treat the number accordingly.",
+      "notNearPattern": "\\*|†|‡|\\b(based on|source:|according to|survey of|study of|data from|as of|compared to)\\b"
+    },
+    {
+      "id": "rhetoric.euphemism_corporate",
+      "category": "rhetoric",
+      "name": "Corporate euphemism",
+      "pattern": "\\b(right[- ]?siz(ing|ed)|workforce (reduction|optimization|adjustment)|synergies|collateral damage|negative (patient )?outcome|streamlin(e|ing) (our|the) (team|workforce|organization)|sunsetting|an unfortunate (incident|event|situation)|mistakes were made|price optimization|modernized pricing|simplif(y|ied|ying) (our|the) (pricing|plans)|updated (our )?(terms|pricing) to better serve|service (fee|charge) adjustment|retire[ds]? (the|this) (feature|plan|benefit))\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "framing",
+        "agency_hiding"
+      ],
+      "explain": "Euphemisms soften bad news (layoffs, price hikes, removed features) so you feel less of it and attribute less blame.",
+      "tip": "Translate each euphemism into plain words and see how the sentence reads."
+    },
+    {
+      "id": "rhetoric.passive_agency_hiding",
+      "category": "rhetoric",
+      "name": "Passive voice hiding responsibility",
+      "pattern": "\\b(mistakes were made|errors? (was|were) made|it was decided|a decision was (made|taken)|(data|information|accounts?|records?|details) (was|were) (accessed|exposed|compromised|affected|impacted|obtained)|may have been (affected|impacted|exposed|accessed)|an? (incident|issue|error|event) (occurred|was identified|has been identified)|has been (identified|detected|discovered)|(customers|users|accounts) (were|have been) (impacted|affected)|the account was (closed|terminated|suspended))\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "agency_hiding",
+        "framing"
+      ],
+      "explain": "Removing the actor ('data was accessed') avoids saying who did what. Breach notices and apologies use this to minimize accountability.",
+      "tip": "Rewrite the sentence with a subject: who accessed the data, who made the mistake?"
+    },
+    {
+      "id": "rhetoric.just_asking_questions",
+      "category": "rhetoric",
+      "name": "'Just asking questions' / conspiracy framing",
+      "pattern": "\\b(just asking questions|i'?m (just|only) asking|makes you (think|wonder)|coincidence\\?|connect the dots|read between the lines|draw your own conclusions|ask yourself (why|who|what)|follow the money|what are they hiding|why won'?t they (tell|show|say|release|answer)|the (official|mainstream) (story|narrative)|wake up to (the|what)|open your eyes|they don'?t want (you|us) to (know|see|ask))\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "conspiracy_framing",
+        "loaded_question"
+      ],
+      "explain": "Insinuation through questions lets an author imply a claim without having to defend it. 'Follow the money' and 'connect the dots' outsource the argument to your imagination.",
+      "tip": "Ask the author to state the claim plainly. If they will not, there is no claim to evaluate."
+    },
+    {
+      "id": "rhetoric.cherry_pick_markers",
+      "category": "rhetoric",
+      "name": "Record / percentage-change framing (check the baseline)",
+      "pattern": "\\b(record[- ](high|low|breaking)|highest (since|in|ever)|lowest (since|in|ever)|(up|down|rose|fell|jumped|plunged|soared|surged|cratered|skyrocketed|plummeted|spiked|tanked) (by )?\\d+(\\.\\d+)?\\s?%|(doubled|tripled|quadrupled|halved) (in|since|over|from|within|last|this)|more than ever|the (best|worst) (month|year|quarter|week|day) (since|ever|on record))(?!\\w)",
+      "minCount": 2,
+      "severity": 1,
+      "confidence": 0.6,
+      "biases": [
+        "cherry_picking",
+        "framing",
+        "anchoring"
+      ],
+      "explain": "Dramatic change statistics depend entirely on the baseline and time window chosen. 'Up 200%' from a tiny base, or 'highest since' a cherry-picked date, can describe trivial moves.",
+      "tip": "Ask: compared to what, since when, and what does the longer-run chart look like?"
+    },
+    {
+      "id": "rhetoric.percent_vs_points",
+      "category": "rhetoric",
+      "name": "Relative risk without absolute numbers",
+      "pattern": "\\b(risk|chance|likelihood|odds|rate) (of|for) [a-z ,-]{1,50}(increased|decreased|rose|fell|jumped|dropped|doubled|tripled|halved)( by)? ?\\d*\\s?%?|\\b\\d+(\\.\\d+)?\\s?% (increase|decrease|rise|drop|jump|surge|higher|lower|greater|more likely|less likely) (in|of)? ?(the )?(risk|chance|likelihood|probability|odds|mortality|deaths?)\\b",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "relative_vs_absolute",
+        "fear",
+        "framing"
+      ],
+      "explain": "Relative risk ('50% higher risk') hides the base rate. Going from 2 in 10,000 to 3 in 10,000 is a 50% increase and also almost nothing.",
+      "tip": "Ask for the absolute numbers: how many per 1,000 before, how many after?"
+    },
+    {
+      "id": "emotional.outrage_lexicon",
+      "category": "emotional",
+      "name": "Outrage vocabulary",
+      "pattern": "\\b(outrage(ous|d)?|slams?|slammed|blasts?|blasted|destroys?|destroyed|eviscerat(es|ed)|humiliat(es|ed|ing)|shreds|rips (into|apart)|wrecks|obliterat(es|ed)|brutal(ly)?|furious|fury|enraged|disgusting|disgrace(ful)?|shameful|sickening|appalling|vile|despicable|unforgivable|insane|madness|lunacy|infuriating|scandalous|bombshell|explosive)\\b",
+      "minCount": 2,
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "outrage",
+        "affect_heuristic"
+      ],
+      "explain": "Anger is the emotion most likely to be shared, so outrage words are selected for distribution, not accuracy. 'Slams' and 'destroys' usually describe someone disagreeing.",
+      "tip": "Read the quoted statement itself. Notice how often 'slammed' means 'said'."
+    },
+    {
+      "id": "emotional.fear_lexicon",
+      "category": "emotional",
+      "name": "Fear and threat vocabulary",
+      "pattern": "\\b(terrifying|horrifying|nightmare|catastroph(e|ic)|apocalyp(se|tic)|devastat(ing|ed)|meltdown|deadly|under (attack|siege)|invasion|invaded|epidemic of|plague of|doom(ed)?|dystopia(n)?|the end of (america|democracy|freedom|the west|civilization)|destroy(ing)? (our|america|the country|democracy|your family)|in (grave|mortal|serious) danger|before it'?s too late|you could lose (everything|your)|protect your (family|children|kids|home|savings) from|what they'?re not telling you|existential threat)\\b",
+      "minCount": 2,
+      "severity": 2,
+      "confidence": 0.65,
+      "biases": [
+        "fear",
+        "loss_aversion",
+        "availability_heuristic"
+      ],
+      "explain": "Threat language narrows attention and makes the author's proposed remedy feel urgent. Fear is also the primary emotion exploited by scams.",
+      "tip": "Ask what specifically would happen, to whom, with what probability. Fear appeals rarely survive the question."
+    },
+    {
+      "id": "emotional.tribal_labels",
+      "category": "emotional",
+      "name": "Tribal / us-vs-them labels",
+      "pattern": "\\b(the elites?|the establishment|the swamp|deep state|globalists?|mainstream media|lamestream|fake news|the regime|leftists?|right[- ]wingers?|left[- ]wingers?|the woke|woke (agenda|mob|ideology)|maga (cult|crowd)|trumpers?|magats?|coastal elites|flyover (country|states)|real americans?|us (vs|versus|against) them|they (hate|despise|fear|want to control|want to silence) (you|us)|they'?re coming for (your|our)|rinos?|libs|groomers?)\\b",
+      "minCount": 2,
+      "severity": 2,
+      "confidence": 0.6,
+      "biases": [
+        "tribalism",
+        "in_group_bias",
+        "outrage"
+      ],
+      "explain": "Group labels sort readers into teams so arguments are judged by who makes them. Dense tribal labelling predicts low information content.",
+      "tip": "Replace each label with the specific people or policy meant. If the sentence collapses, it was tribal signalling."
+    },
+    {
+      "id": "emotional.dehumanizing",
+      "category": "emotional",
+      "name": "Dehumanizing language",
+      "pattern": "\\b(vermin|parasites?|infestation|cockroach(es)?|savages|subhuman|scum|swarm(s|ing)? of (immigrants|migrants|refugees|illegals|foreigners)|flood(ing)? (of|into|across) (our|the) (country|border|cities|streets)|invaders|hordes? of (immigrants|migrants|refugees|illegals|foreigners|invaders)|poisoning (the|our) blood|animals who)\\b",
+      "severity": 3,
+      "confidence": 0.6,
+      "biases": [
+        "dehumanization",
+        "tribalism",
+        "fear"
+      ],
+      "explain": "Describing people as pests, floods or invaders reduces empathy and is a well-documented precursor to real-world harm. It is propaganda, not description.",
+      "tip": "Notice who is being described this way and what the author wants done to them.",
+      "nearPattern": "\\b(immigrants?|migrants?|refugees?|foreigners|illegals|muslims?|jews?|jewish|christians?|hindus?|democrats?|republicans?|liberals?|conservatives?|leftists?|the left|the right|gays?|lesbians?|trans people|black people|white people|these people|those people|those animals|invaders)\\b"
+    },
+    {
+      "id": "emotional.guilt_trip",
+      "category": "emotional",
+      "name": "Guilt trip",
+      "pattern": "\\b(don'?t you (care|want to help|love|want the best)|if you (really|truly) (cared|loved|wanted|believed)|how (can|could) you (not|just|sit|look away)|while you (sit|sleep|scroll|watch|read this)|think of (the|your) (children|kids|family|future|grandchildren)|shame on (you|them|anyone who)|you owe it to|the least you (can|could) do|every (second|minute|day|hour) you wait|a child dies every|people are dying while|it'?s on you|your silence (is|speaks)|complicit|you'?ll regret|don'?t let (them|us) down)\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "guilt",
+        "reciprocity",
+        "loss_aversion"
+      ],
+      "explain": "Guilt appeals transfer responsibility for an outcome onto you unless you comply. Legitimate causes use them too, which is exactly why they work for illegitimate ones.",
+      "tip": "Separate the cause from the ask. Decide on the cause with a clear head, then decide whether this particular ask is the best way to help it."
+    },
+    {
+      "id": "emotional.sensational_formatting",
+      "category": "emotional",
+      "name": "Sensational formatting (ALL CAPS, !!!, ?!)",
+      "pattern": "(!{2,}|\\?!|!\\?|\\b[A-Z][A-Z'’]{3,}\\b(?:[ ,]+\\b[A-Z][A-Z'’]{1,}\\b){2,}!)",
+      "flags": "g",
+      "minCount": 2,
+      "severity": 1,
+      "confidence": 0.6,
+      "biases": [
+        "outrage",
+        "affect_heuristic"
+      ],
+      "explain": "Shouting typography raises arousal and signals the author is selling emotion rather than information.",
+      "tip": "Lower-case it in your head and re-read."
+    },
+    {
+      "id": "interpersonal.flattery_love_bombing",
+      "category": "interpersonal",
+      "name": "Flattery / love bombing",
+      "pattern": "\\b(you deserve (this|it|better|the best|more|a treat)|(smart|savvy|discerning|sophisticated|intelligent|busy) (shoppers|people|readers|investors|customers|buyers|women|men|parents|professionals) like you|because you'?re (special|worth it|smart|one of|different|not like)|you'?re (one of the (few|chosen|select)|not like (other|most)|too smart (to|for)|better than (this|that|them)|our (favou?rite|best))|exclusive(ly)? (for|to) (you|our best|members like you)|you(’|')?ve been (selected|chosen|handpicked|invited|nominated)|(a )?special (invitation|offer|gift) (just )?for you|vip (access|treatment|member|status)|we (love|adore|appreciate|value) you|you'?re (amazing|incredible|a genius|a rockstar|a legend|awesome|the best))\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "liking",
+        "ego",
+        "reciprocity"
+      ],
+      "explain": "Love bombing is the manipulator's opening move: overwhelm with flattery and specialness so the later ask feels like a favor between friends. Brands do it with 'you deserve' and 'you've been selected'.",
+      "tip": "A company does not know you. When copy flatters you personally, ask what it wants in exchange."
+    },
+    {
+      "id": "interpersonal.negging",
+      "category": "interpersonal",
+      "name": "Negging / status challenge",
+      "pattern": "\\b(you'?re (probably )?not ready (for|to)|this isn'?t for everyone|if you can'?t handle|only (serious|committed|real) (people|buyers|investors|men|women|players|founders)|not for the (weak|lazy|faint|average)|prove (you'?re|yourself|them wrong)|are you (man|woman|tough|smart|brave|serious) enough|still (using|doing|driving|paying|wearing) [a-z ]{1,30}\\?|don'?t be (that|the) (guy|person|parent) who)\\b",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "ego",
+        "commitment_consistency",
+        "exclusivity"
+      ],
+      "explain": "Negging lowers your status so that buying or joining becomes the way to restore it. It is the dark-triad version of 'are you tough enough?'",
+      "tip": "Notice the sting, then notice that the remedy on offer is their product."
+    },
+    {
+      "id": "interpersonal.isolation_distrust_others",
+      "category": "interpersonal",
+      "name": "Isolation from other sources",
+      "pattern": "\\b(don'?t (trust|listen to|believe) (the|your|anyone|anything|what) (media|doctor|bank|experts|news|government|so-called)|they (will|'ll) (lie|tell you anything|try to stop you|say anything to)|(your )?(doctor|bank|advisor|teacher|boss|family|friends) (won'?t|will never|doesn'?t want you to) (tell|know|understand|hear)|(we|i)(’|')?re the only (ones?|place|source) (who|that|you can)|you won'?t (find|hear|read|get|see) (this|that|it|about this|about it) (anywhere|from|on)|the ((mainstream|corporate|legacy|liberal|conservative) )?(media|press|news|papers|networks) (won'?t|refuses? to|will never|is hiding|are hiding|doesn'?t want you to) (cover|report|tell|show|this|it|that|know)|(censored|banned|suppressed|shadow[- ]?banned) (by|from|on) (youtube|facebook|google|the media|big tech|twitter|x)|what (big (pharma|tech|food|oil|ag)|the government|banks|they|your doctor) (don'?t|doesn'?t|won'?t) (want you to know|tell you))\\b",
+      "severity": 3,
+      "confidence": 0.75,
+      "biases": [
+        "isolation",
+        "conspiracy_framing",
+        "authority_bias"
+      ],
+      "explain": "Discrediting every other source so the author becomes the only trusted one is the core move of coercive control, cults and scams alike.",
+      "tip": "The more a source insists it is the only one you can trust, the more you should check others."
+    },
+    {
+      "id": "interpersonal.future_faking",
+      "category": "interpersonal",
+      "name": "Future faking / vague promises",
+      "pattern": "\\b(we (plan|intend|hope|aim|expect) to (add|launch|release|bring|support|roll out)|soon you(’|')?ll (be able to|get|have)|future (updates?|features?|releases?) will|imagine (a world|when|if|being|having|waking up)|picture (yourself|this)|one day (you|we)(’|')?ll|will (eventually|soon) (be|have|include|support))\\b",
+      "severity": 1,
+      "confidence": 0.65,
+      "biases": [
+        "optimism_bias",
+        "future_faking"
+      ],
+      "explain": "Promises about what is coming keep you paying or waiting now, while committing to nothing you can hold them to.",
+      "tip": "Decide based only on what exists today. Roadmaps are marketing."
+    },
+    {
+      "id": "interpersonal.darvo_victim_reversal",
+      "category": "interpersonal",
+      "name": "DARVO / victim reversal",
+      "pattern": "\\b(we are the (real )?victims?|the real victims? (here )?(are|is)|(a |an )?(witch[- ]?hunt|smear campaign|hit piece|coordinated attack|hoax|character assassination)|(they|the media|our critics|activists) (are|is) (attacking|targeting|persecuting|bullying|silencing|smearing) (us|me)|(we|i)('ve| have| were| was| are| am)?( been)? (unfairly|wrongly|falsely|baselessly) (accused|attacked|targeted|portrayed|maligned)|cancel culture|mob (justice|mentality|rule)|(being )?silenced for|how dare (they|you)|politically motivated (attack|investigation|prosecution))\\b",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "darvo",
+        "deflection",
+        "tribalism"
+      ],
+      "explain": "Deny, Attack, Reverse Victim and Offender: when accused, cast yourself as the real victim of an unfair attack, so the original accusation never gets addressed.",
+      "tip": "Return to the original accusation. Was it answered, or was the accuser put on trial instead?"
+    },
+    {
+      "id": "interpersonal.gaslighting_markers",
+      "category": "interpersonal",
+      "name": "Gaslighting markers",
+      "pattern": "\\b(that never happened|you('re| are) (imagining|overreacting|misremembering|being (dramatic|paranoid|too sensitive|hysterical|emotional))|(nobody|no one) (ever )?(said|promised|claimed|told you)|we never (said|promised|claimed|advertised)|you (misunderstood|misread|misheard|must have misunderstood)|that'?s not what (happened|we said|i said|was promised)|calm down|you'?re (crazy|insane|delusional|confused)|it'?s all in your head|you'?re making (this|that|it) up)\\b",
+      "severity": 2,
+      "confidence": 0.55,
+      "biases": [
+        "gaslighting"
+      ],
+      "explain": "Gaslighting denies the record so you doubt your own memory. In customer-service and PR contexts it appears as 'we never promised that' when the promise is still in the cache.",
+      "tip": "Keep receipts: screenshots, archived pages (archive.org), emails. Memory is not the battlefield; evidence is."
+    },
+    {
+      "id": "interpersonal.hoovering_winback",
+      "category": "interpersonal",
+      "name": "Hoovering / retention pressure",
+      "pattern": "\\b(we miss you|please come back|come back to us|it'?s not too late|we('ve| have) changed|we'?ve (improved|fixed|listened)|give us (another|a second) chance|your (account|subscription|cart|membership|progress|data) (is|has been|will be) (waiting|still here|saved|about to|deleted|lost)|before (you go|leaving|you cancel)|are you sure you want to (leave|cancel|unsubscribe|go|downgrade|delete)|we'?d hate to (see you|lose you)|you'?ll lose (access|all|your)|don'?t (go|leave|lose)|we'?re sorry to see you go|what can we do to (keep|change))\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "loss_aversion",
+        "sunk_cost",
+        "endowment",
+        "guilt"
+      ],
+      "explain": "'Hoovering' is the manipulator's attempt to suck you back in when you try to leave. Cancellation flows do it with guilt, loss framing and sudden discounts.",
+      "tip": "If a service offers a discount only when you cancel, that lower price was available all along. Decide whether you want it at that price, and remember that the retention offer was withheld until you left."
+    },
+    {
+      "id": "interpersonal.cult_community",
+      "category": "interpersonal",
+      "name": "Cult-style belonging / unity appeal",
+      "pattern": "\\b(join (the|our) (movement|tribe|family|revolution|army|nation|crew|squad|inner circle|resistance)|become (part of|one of us)|we('re| are) (a|one big) family|(our|the) (tribe|movement|community) (needs|is waiting for) you|be part of something (bigger|special|great|historic)|you belong (here|with us)|insiders? (only|club|circle)|(fellow|true) (believers?|patriots?|warriors?|fighters?|rebels?)|together we (can|will|are|stand|rise)|the (fight|battle|war) (for|against) [a-z ]{1,25} (is|has|starts))\\b",
+      "severity": 1,
+      "confidence": 0.65,
+      "biases": [
+        "unity",
+        "in_group_bias",
+        "commitment_consistency"
+      ],
+      "explain": "Belonging language borrows the trust we extend to our own group (Cialdini's 'unity' principle) and makes leaving or doubting feel like betrayal.",
+      "tip": "A brand or movement is not your family. Evaluate the ask as if it came from a stranger."
+    },
+    {
+      "id": "interpersonal.manufactured_enemy",
+      "category": "interpersonal",
+      "name": "Manufactured enemy",
+      "pattern": "\\b(the (enemy|enemies) (of|within)|they (are|'re) (destroying|ruining|killing|stealing|lying to|coming for|out to get) (you|us|our|america|this country)|(stop|fight|defeat|resist|expose|crush|take down) (them|the (elites?|establishment|left|right|globalists|media|woke))|(we|you) (must|need to|have to) (stop|fight|defeat|resist) (them|the)|(war|assault|attack|crusade|assault) on (our|your|the) (values|freedom|children|families|way of life|rights|country|faith))\\b",
+      "severity": 2,
+      "confidence": 0.7,
+      "biases": [
+        "tribalism",
+        "fear",
+        "outrage"
+      ],
+      "explain": "A shared enemy is the fastest way to build loyalty and suppress scrutiny (Greene's 48 Laws: 'create a cult-like following', 'court attention', 'stir up waters to catch fish'). The enemy's existence then justifies whatever the author asks.",
+      "tip": "Ask what the author wants you to do about the enemy. That is the actual purpose of the text."
+    },
+    {
+      "id": "interpersonal.foot_in_door",
+      "category": "interpersonal",
+      "name": "Foot-in-the-door micro-commitment",
+      "pattern": "\\b(just (enter|give us|tell us|share|drop) your (email|name|zip|phone|number|address)|it (only )?takes (a second|seconds|a minute|two minutes|2 minutes|30 seconds|less than a minute)|(no|without|zero) (commitment|strings attached)|no[- ]obligation (quote|trial|consultation|demo|estimate|call)|\\bfree\\b[^.]{0,40}\\bno[- ]obligation\\b|just (one|1) (click|tap|step) (away|to)|quick (question|survey|quiz)|take (the|our|this) (quiz|assessment|test|survey) to (find|see|discover|get))\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "foot_in_door",
+        "commitment_consistency",
+        "zero_price_effect"
+      ],
+      "explain": "A tiny first yes (a quiz, an email, a free start) makes the bigger ask feel consistent with who you already are. Quiz funnels route every answer to the same product.",
+      "tip": "Before the small step, ask what the large step will be.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.anchoring_price_compare",
+      "category": "bias_exploit",
+      "name": "Price anchoring ('was', 'list price', '% off')",
+      "pattern": "\\b(was|list price|compare at|retail price|rrp|msrp|regular(ly)? price|reg\\.|orig\\.|original(ly)?( price)?|valued at|normally|typical price)\\s?:?\\s?(\\$|£|€)\\s?\\d[\\d,.]*(?=[^.\\n]{0,60}(\\$|£|€)\\s?\\d)",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "anchoring",
+        "framing"
+      ],
+      "explain": "A crossed-out higher price sets an anchor so the price charged feels like a gain. Reference prices are frequently inflated or never charged, which several jurisdictions have fined.",
+      "tip": "Check a price-history tool (e.g. camelcamelcamel for Amazon) or search the product elsewhere. Judge the price on its own.",
+      "requiresSale": true,
+      "nearPattern": "(\\$|£|€)\\s?\\d"
+    },
+    {
+      "id": "bias.charm_pricing",
+      "category": "bias_exploit",
+      "name": "Charm pricing (.99 / .97)",
+      "pattern": "(\\$|£|€)\\s?\\d{1,5}\\.(99|97|95|49)\\b|\\b\\d{1,5}\\.(99|97|95)\\s?(\\$|£|€|usd|eur|gbp)\\b",
+      "minCount": 2,
+      "severity": 0,
+      "confidence": 0.8,
+      "biases": [
+        "left_digit_effect"
+      ],
+      "explain": "Prices ending in .99 are read as the lower left digit. It is mild but universal and signals a price engineered for perception rather than cost.",
+      "tip": "Round up mentally before comparing.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.per_day_reframing",
+      "category": "bias_exploit",
+      "name": "Per-day / 'cup of coffee' reframing",
+      "pattern": "\\b(just|only|less than|for as little as|for the price of|cheaper than|that'?s) (\\$|£|€)?\\d[\\d.]* (a|per) (day|week)\\b|\\b(a|one) (cup of coffee|latte|coffee) (a|per) (day|week)\\b|\\bpennies (a|per) day\\b|\\bless than (a|your) (coffee|netflix|lunch|cup of)\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "framing",
+        "partitioned_pricing",
+        "hyperbolic_discounting"
+      ],
+      "explain": "Dividing a large annual cost into a per-day trickle ('less than a coffee a day') makes it feel negligible. $1.50/day is $547/year.",
+      "tip": "Multiply back to the annual total before deciding.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.bnpl",
+      "category": "bias_exploit",
+      "name": "Buy-now-pay-later / installment framing",
+      "pattern": "\\b(4|four|3|three|6|six) (interest[- ]free |easy |monthly )?(payments|instal?lments|instalments) of\\b|\\bpay (in|over) (4|four|3|three)\\b|\\bbuy now,? pay later\\b|\\b(klarna|afterpay|affirm|sezzle|clearpay|laybuy|paypal pay in 4|zip pay)\\b|\\bsplit (the|your) (cost|payment|purchase)\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "hyperbolic_discounting",
+        "present_bias",
+        "pain_of_paying"
+      ],
+      "explain": "Splitting a price into small deferred chunks reduces the pain of paying and raises spending; BNPL users systematically overspend and incur late fees.",
+      "tip": "If you would not buy it at the full price today, do not buy it in four parts.",
+      "requiresSale": true,
+      "regions": [
+        "title",
+        "body",
+        "aside",
+        "cta",
+        "teaser"
+      ],
+      "nearPattern": "(\\$|£|€)\\s?\\d|\\bpayments?\\b|\\binstal"
+    },
+    {
+      "id": "bias.decoy_tier_badge",
+      "category": "bias_exploit",
+      "name": "'Most popular' / 'best value' tier steering",
+      "pattern": "\\b(most popular|best value|recommended|our pick|most chosen|great value|popular plan)\\b",
+      "nearPattern": "(\\$|£|€)\\s?\\d|\\/\\s?(mo|month|yr|year|user|seat)",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "social_proof",
+        "anchoring",
+        "default_effect"
+      ],
+      "explain": "Pricing tables use a highlighted middle tier and a deliberately unattractive decoy to steer you to the plan the company wants to sell.",
+      "tip": "Work out what you actually need, then find the cheapest tier that has it. Ignore the badge.",
+      "requiresSale": true,
+      "maxBlock": 60
+    },
+    {
+      "id": "bias.free_with_conditions",
+      "category": "bias_exploit",
+      "name": "'Free' with strings attached",
+      "pattern": "\\bfree\\*|\\*free\\b|\\bfree (trial|month|week|year|shipping|gift|bonus|sample)\\b[^.]{0,100}\\b(then|after (that|trial|which|\\d)|billed|auto(matically)?[- ]?renew|unless (you )?cancel|card (required|needed|details)|credit card|payment (method|details))\\b|no[- ]obligation (quote|trial|consultation|demo|estimate|call)\\b|\\bfree\\b[^.]{0,40}\\bno[- ]obligation\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "zero_price_effect",
+        "endowment",
+        "forced_continuity"
+      ],
+      "explain": "'Free' triggers an irrational jump in demand. A free trial that needs a card is designed around the percentage of people who forget to cancel.",
+      "tip": "Set a calendar reminder for the day before the trial ends, or use a virtual card that expires.",
+      "requiresSale": true,
+      "notNearPattern": "\\bno (credit )?card\\b|\\bwithout (a )?(credit )?card\\b|\\bno credit\\b"
+    },
+    {
+      "id": "bias.monthly_display_annual_billing",
+      "category": "bias_exploit",
+      "name": "Monthly price shown, annual billing required",
+      "pattern": "(\\$|£|€)\\s?\\d[\\d.]*\\s?(\\/|per|a) ?(mo|month)\\b[^.]{0,150}\\b(billed (annually|yearly|every (12|twelve) months|upfront|as (one|a single) payment|in advance)|annual (plan|billing|commitment|subscription|contract)|(12|24|36)[- ]month (contract|commitment|term|plan)|paid (annually|yearly|upfront|in advance))\\b",
+      "severity": 2,
+      "confidence": 0.85,
+      "biases": [
+        "framing",
+        "partitioned_pricing",
+        "anchoring"
+      ],
+      "explain": "The headline is a monthly figure but the charge is twelve times that, at once. The monthly figure is not what you pay at checkout.",
+      "tip": "Find the actual amount that will leave your account and when.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.hidden_fees",
+      "category": "bias_exploit",
+      "name": "Drip pricing / hidden fees",
+      "pattern": "\\b(service|processing|convenience|booking|handling|resort|facility|cleaning|platform|admin(istrative)?|regulatory|recovery|fuel|environmental|delivery|destination|amenity|gratuity|tip) (fee|charge|surcharge)s?\\b|\\bfees? (not included|extra|additional)\\b|\\b(excl(uding|\\.)?|excludes?|not including|before) (applicable )?(fees|shipping)\\b|\\btaxes? (and|&) fees\\b|\\bsubject to (additional )?(fees|charges)\\b|\\badditional charges? (may )?apply\\b|\\bother (fees|charges) may apply\\b|\\+\\s?(fees|shipping)\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "drip_pricing",
+        "partitioned_pricing",
+        "sunk_cost"
+      ],
+      "explain": "Mandatory fees revealed late exploit the effort you have already invested in checkout. The US FTC and several states now ban some forms of drip pricing.",
+      "tip": "Compare only all-in totals at the final step; abandon carts that grew.",
+      "requiresSale": true,
+      "notNearPattern": "\\b(lowest|low|no|zero|without|free of|waived?)\\b[^.]{0,30}\\bfees?\\b"
+    },
+    {
+      "id": "bias.sunk_cost_progress",
+      "category": "bias_exploit",
+      "name": "Progress / 'almost there' pressure",
+      "pattern": "\\byou'?re (almost|nearly) (there|done|finished|in)\\b|\\b(just|only) (one|1|two|2) more steps?\\b|\\b\\d{1,3}\\s?% (complete|done|there)\\b|\\bcomplete your (profile|order|purchase|registration|setup|collection|set)\\b|\\bdon'?t lose your (progress|work|spot|place|cart|selection|reservation)\\b|\\byou'?ve (already|come so far)\\b|\\bfinish what you started\\b|\\bone last (step|thing)\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "sunk_cost",
+        "zeigarnik",
+        "goal_gradient"
+      ],
+      "explain": "Progress indicators and 'almost there' exploit the urge to finish, even when the remaining steps are the ones that cost you (payment, data, upsells).",
+      "tip": "The step you are being hurried through is the one to read slowly.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.reciprocity_gift",
+      "category": "bias_exploit",
+      "name": "Reciprocity gift / credit",
+      "pattern": "\\b(free gift|gift (for|with) (you|purchase|every)|bonus (gift|included)|as a (thank you|token of)|(it'?s|this one'?s|shipping'?s?|first (month|year)'?s?) on us|our treat|complimentary|we'?ve (given|credited|dropped|sent) you|you'?ve (earned|received|got|been given) (a |an )?(\\$|£|€)?\\d*\\s?(credit|coupon|voucher|reward|discount|gift|bonus)|here'?s (\\$|£|€)\\d+|a little something (for|from)|exclusive (gift|bonus|reward))\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "reciprocity",
+        "zero_price_effect"
+      ],
+      "explain": "Unsolicited gifts create an urge to reciprocate. A $5 credit that only works on a $50 purchase is a coupon with a social obligation attached.",
+      "tip": "You owe a company nothing for a gift you did not ask for.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.default_optout_language",
+      "category": "bias_exploit",
+      "name": "Default enrollment / auto-renewal",
+      "pattern": "\\b(unless you (opt out|tell us otherwise|cancel|choose otherwise|turn (it|this) off)|you (will|'ll) be (automatically )?(enrolled|subscribed|charged|renewed|opted in|upgraded|billed)|auto(matic(ally)?|-)?[- ]?(renew(al|s|ing)?|enroll(ed|ment)?|subscribe[ds]?|upgrade[ds]?|bill(ed|ing)?)|we('ll| will) assume (you|that)|pre[- ]?selected|selected by default|opt[- ]out (at any time|anytime|below))\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "default_effect",
+        "status_quo_bias",
+        "forced_continuity"
+      ],
+      "explain": "Whatever is pre-selected tends to stay selected. Auto-renewal and opt-out defaults monetize inertia and forgetfulness.",
+      "tip": "Read every pre-checked box. Set a reminder before any renewal date.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.loss_framing",
+      "category": "bias_exploit",
+      "name": "Loss framing",
+      "pattern": "\\b(don'?t (lose|miss|forfeit|waste|throw away)|(you'?ll|you will|you could|you'?re|you are) (lose|losing|lost|forfeit|miss(ing)? out on|leaving [a-z ]{1,20} on the table)|stop (losing|wasting|overpaying|paying too much|throwing away|leaving money)|(are you|you'?re|you are|you may be|you could be|you might be) (over ?paying|wasting|losing|missing out)|every day you (wait|delay)|the cost of (waiting|inaction|doing nothing)|what (it'?s|you'?re) (costing|losing))\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "loss_aversion",
+        "framing"
+      ],
+      "explain": "The same offer framed as avoiding a loss ('stop overpaying') moves more people than framed as a gain, because losses loom larger.",
+      "tip": "Reframe it as a gain yourself ('I would save $X') and see whether it still feels urgent.",
+      "requiresSale": true
+    },
+    {
+      "id": "bias.exclusivity_access",
+      "category": "bias_exploit",
+      "name": "Exclusivity / waitlist / limited access",
+      "pattern": "\\b(invite[- ]only|by invitation( only)?|exclusive access|limited (seats|spots|places|membership|enrollment)|join the (waitlist|wait list|queue)|first come,? first served|secure your (spot|place|seat)|reserve your (spot|place|seat)|while (spots|spaces|seats|places) (remain|last)|closing (soon|the doors)|enrollment (closes|ends)|doors close|cohort (is )?(filling|closing))\\b",
+      "severity": 1,
+      "confidence": 0.75,
+      "biases": [
+        "scarcity",
+        "exclusivity",
+        "commitment_consistency"
+      ],
+      "explain": "Restricted access raises perceived value regardless of actual value. Waitlists and 'doors close' are standard course-funnel scarcity.",
+      "tip": "Exclusivity that is advertised to everyone is not exclusive.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.asterisked_claim",
+      "category": "deceptive_claims",
+      "name": "Asterisked promise",
+      "pattern": "\\b(free|unlimited|guaranteed|lowest|cheapest|fastest|best|save|off|included|no fees?|\\d+\\s?%|(\\$|£|€)\\d[\\d,.]*)(\\s\\w+){0,2}\\*{1,2}(?=\\s|$|[.,;:!)])",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "framing",
+        "anchoring"
+      ],
+      "explain": "An asterisk after a claim means the claim is not true as written. The headline does the persuading; the footnote does the lying by omission.",
+      "tip": "Find the footnote before reading anything else on the page.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.unlimited_hedge",
+      "category": "deceptive_claims",
+      "name": "'Unlimited' / 'up to' hedged claim",
+      "pattern": "\\bunlimited\\b[^.\\n]{0,140}\\b(fair (use|usage) policy|reasonable use|subject to|limits? (may )?apply|throttl(ed|ing)|acceptable use|deprioritiz|after \\d+\\s?(gb|tb|hours))\\b",
+      "severity": 2,
+      "confidence": 0.8,
+      "biases": [
+        "framing",
+        "anchoring"
+      ],
+      "explain": "'Unlimited' with a fair-use clause is limited. 'Up to' describes a ceiling almost no one reaches.",
+      "tip": "Ask for the typical figure, not the maximum.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.guarantee_puffery",
+      "category": "deceptive_claims",
+      "name": "Guarantee / 'can't lose' puffery",
+      "pattern": "\\b(100 ?% )?guaranteed (results|to work|success|satisfaction|or your money back)\\b|\\bmoney[- ]back guarantee\\b|\\bno (questions asked|risk|catch)\\b|\\b(works|results) (every time|for everyone|or (your money|it'?s) (back|free))\\b|\\bproven (to|results|system|method|formula|strategy)\\b|\\bzero risk\\b|\\byou (literally )?can'?t (lose|fail|go wrong)\\b|\\bfoolproof\\b|\\bnever fails\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "optimism_bias",
+        "puffery",
+        "trust_badges"
+      ],
+      "explain": "Guarantees shift your attention from whether the product works to whether you can get your money back, which in practice is often hard.",
+      "tip": "Read the refund conditions and search for complaints about actually getting refunds.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.grandiosity_puffery",
+      "category": "deceptive_claims",
+      "name": "Grandiose superlatives",
+      "pattern": "\\b(revolutionary|game[- ]chang(er|ing)|world'?s (best|first|only|leading|most (advanced|powerful|trusted))|the (ultimate|definitive|only) (guide|solution|tool|platform|system|way)|unparalleled|unmatched|unrivall?ed|second to none|best[- ]in[- ]class|industry[- ]leading|cutting[- ]edge|state[- ]of[- ]the[- ]art|miracle|life[- ]changing|never (before )?seen|like nothing (you'?ve|else)|effortless(ly)?|overnight (success|results)|10x your|skyrocket)\\b",
+      "minCount": 2,
+      "severity": 0,
+      "confidence": 0.7,
+      "biases": [
+        "halo_effect",
+        "puffery"
+      ],
+      "explain": "Superlatives are legally unfalsifiable 'puffery'. They carry no information and are a sign the copy is doing the work the product cannot.",
+      "tip": "Delete every adjective and read what is left.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.health_cure",
+      "category": "deceptive_claims",
+      "name": "Miracle health / cure claims",
+      "pattern": "\\b(cures? (cancer|diabetes|anxiety|depression|arthritis|covid|alzheimer|autism|everything)|reverses? (aging|diabetes|hair loss|gray hair)|melts? (away )?(fat|belly fat|pounds)|detox(es|ify|ifies)? (your )?(body|liver|blood)|flush(es)? (out )?toxins|boosts? (your )?(immune system|immunity|metabolism|testosterone) (naturally|by \\d+)|lose \\d+ (lbs|pounds|kg|kilos) in (\\d+|a|one|two) (days?|weeks?)|burn fat (while you sleep|fast|overnight)|anti[- ]aging miracle|clinically (proven|shown) to (cure|reverse|eliminate)|secret (ingredient|formula|remedy) (that|doctors)|big pharma (doesn'?t|won'?t|hates)|what doctors (won'?t|don'?t) tell you|one (simple|weird|ancient) (trick|ingredient|remedy)|natural (cure|remedy) for (cancer|diabetes|anxiety|depression|arthritis|adhd|autism))\\b",
+      "severity": 3,
+      "confidence": 0.85,
+      "biases": [
+        "health_misinfo",
+        "authority_bias",
+        "fear"
+      ],
+      "explain": "Cure, detox and 'what doctors won't tell you' language are the exact red flags regulators (FDA, FTC, ASA) list for unproven health products.",
+      "tip": "Search the product name plus 'FDA warning letter' or 'FTC'. Talk to an actual clinician.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.financial_promises",
+      "category": "deceptive_claims",
+      "name": "Get-rich / guaranteed-return claims",
+      "pattern": "\\b(passive income|financial freedom|get rich (quick|fast|overnight)|you can get rich|make (\\$|£|€)?\\d[\\d,.]*\\s?k? ?(a|per|/|every) ?(day|week|month|hour)|earn (up to )?(\\$|£|€)?\\d[\\d,.]*\\s?k? ?(a|per|/|every) ?(day|week|month|hour)|double your (money|investment|income)|guaranteed returns?|risk[- ]free (returns?|investment|profit|trading)|\\d{2,4}\\s?% (returns?|roi|gains?|apy|profit)\\b|quit your (job|9[- ]to[- ]5|day job)|work from (home|anywhere|the beach) and make|the next (bitcoin|tesla|amazon|apple|nvidia)|(secret|insider|little[- ]known|hidden) (stock|crypto|coin|strategy|loophole|method)|limited (spots|seats) (in|for) (my|our|this) (course|program|masterclass|webinar|mentorship)|trading (signals|bot|algorithm) (with|that)|be your own boss|fire your boss|retire (early|in \\d+ years) with)\\b",
+      "severity": 3,
+      "confidence": 0.75,
+      "biases": [
+        "greed",
+        "optimism_bias",
+        "scarcity"
+      ],
+      "explain": "Specific income promises, guaranteed returns and 'secret' strategies are the standard vocabulary of investment fraud and course-selling funnels.",
+      "tip": "Nobody with a real edge sells it in a webinar. Check the seller on your regulator's warning list (SEC, FCA, ASIC).",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.greenwashing",
+      "category": "deceptive_claims",
+      "name": "Green claims without certification",
+      "pattern": "\\b(eco[- ]?friendly|environmentally[- ]friendly|earth[- ]friendly|planet[- ]friendly|green (product|choice|option|energy|packaging)|sustainabl[ey] (materials?|packaging|fabrics?|cotton|sourcing|sourced|fashion|products?|ingredients?|wood|paper|leather)|carbon[- ]neutral|net[- ]zero|climate[- ]positive|climate[- ]neutral|zero[- ]waste|clean (energy|beauty|ingredients)|biodegradable|compostable|recyclable|ethically (sourced|made)|responsibly sourced|conscious (brand|choice|fashion)|good for the planet)\\b",
+      "absentPattern": "\\b(fsc|b[- ]corp|fairtrade|fair trade|energy star|eu ecolabel|cradle to cradle|rainforest alliance|gots|usda organic|iso ?14001|carbon trust|sbti|science[- ]based targets|leed|bluesign|oeko[- ]tex|climate pledge friendly|1% for the planet|certified by|certification|third[- ]party verified|verified by)\\b",
+      "minCount": 2,
+      "severity": 1,
+      "confidence": 0.65,
+      "biases": [
+        "halo_effect",
+        "framing"
+      ],
+      "explain": "Green vocabulary without a named third-party certification is unverifiable. The EU and UK have both moved to ban generic environmental claims that lack substantiation.",
+      "tip": "Look for a specific certification and a specific claim ('73% recycled PET'), not a mood.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.fake_trust_signals",
+      "category": "deceptive_claims",
+      "name": "Trust badges & 'secure' signalling",
+      "pattern": "\\b(secure (checkout|payment|site|shopping)|ssl (secured|encrypted|protected)|100 ?% (secure|safe)|mcafee secure|norton secured|trusted (site|store|seller|shop)|verified (by|seller|business|store|merchant)|satisfaction guaranteed|hacker[- ]safe|bbb accredited|as seen (on|in) (tv|forbes|cnn|bbc|the new york times|nbc|abc|cbs|fox|shark tank|dragons'? den|usa today))\\b",
+      "severity": 1,
+      "confidence": 0.7,
+      "biases": [
+        "trust_badges",
+        "authority_bias"
+      ],
+      "explain": "Trust badges measurably raise conversion, so they appear whether or not anything was certified. 'Secure checkout' describes every website with HTTPS.",
+      "tip": "Click the badge. A real certification links to the certifier's verification page.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.results_disclaimer",
+      "category": "deceptive_claims",
+      "name": "'Results may vary' disclaimer",
+      "pattern": "\\b(results (may|will|can) vary|individual results (may )?vary|not typical|your results may differ|typical results|testimonials? (are|represent|reflect)|hypothetical (results|performance)|dramatization)\\b",
+      "severity": 1,
+      "confidence": 0.8,
+      "biases": [
+        "availability_heuristic",
+        "framing"
+      ],
+      "explain": "This disclaimer is the seller admitting the featured result is not typical. The headline testimonial and the small print contradict each other on purpose.",
+      "tip": "Treat the disclaimer, not the testimonial, as the honest statement.",
+      "requiresSale": true
+    },
+    {
+      "id": "claims.authority_credentials_vague",
+      "category": "deceptive_claims",
+      "name": "Vague professional endorsement",
+      "pattern": "\\b(doctor[- ](recommended|approved|formulated|trusted|endorsed|developed)|dentist[- ]recommended|(expert|professional|clinically|scientifically|lab|dermatologist|pediatrician|vet)[- ](recommended|approved|tested|proven|formulated|backed|grade|developed)|patent(ed|-pending)|fda[- ]?(registered|approved|cleared)|(doctors|dentists|nutritionists|experts|vets|dermatologists|pharmacists) (recommend|trust|love|use|agree|prefer))\\b",
+      "requiresUnsourced": true,
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "authority_bias",
+        "halo_effect"
+      ],
+      "explain": "'Doctor recommended' means at least one doctor, somewhere, possibly paid. 'FDA registered' means a form was filed, not that anything was evaluated.",
+      "tip": "Ask which doctors, how many, and who paid for the survey.",
+      "requiresSale": true
+    },
+    {
+      "id": "dark.confirmshaming",
+      "category": "dark_pattern",
+      "name": "Confirmshaming",
+      "pattern": "\\b(no,? (thanks,? )?i (don'?t|do not) (want|need|like|care)|no thanks,? i('d| would) rather|i (don'?t|do not) (want|need|like) (to )?(save|discounts?|deals?|free|money|help|protect|a better|the best|great)|i('ll| will) (pay|stick with|keep paying|take my chances|risk it)|i (hate|don'?t like|don'?t want) (saving|free|money|deals|discounts|good things)|i('m| am) (not interested in|fine with|happy) (saving|paying|missing)|i (prefer|like|love) (paying|to pay) (full|more|full price)|maybe later,? i (like|love|prefer|enjoy)|i (don'?t|do not) care about (my|the|saving)|no,? i (don'?t|do not) want (to )?(be (healthy|happy|informed|rich|safe|smarter)|better)|skip (and|&) (pay|lose|miss)|continue without (saving|protection|discount|the deal|cover)|decline (and|&) (pay|lose|miss)|i('d| would) rather (pay|miss|lose|not save)|no,? i('m| am) good at (paying|losing)|i don'?t want (to )?(grow|succeed|learn|improve))\\b",
+      "severity": 3,
+      "confidence": 0.85,
+      "biases": [
+        "confirmshaming",
+        "guilt",
+        "ego"
+      ],
+      "explain": "The decline option is written to make you feel stupid for declining. It is one of the most recognized dark patterns and is prohibited under the EU Digital Services Act's dark-pattern provisions.",
+      "tip": "Click the shaming option with pride. It is the one they do not want you to click.",
+      "scope": "cta"
+    },
+    {
+      "id": "dark.trick_question",
+      "category": "dark_pattern",
+      "name": "Trick question / double negative",
+      "pattern": "\\b(uncheck|untick|deselect|clear) (this|the) box (if|to|unless)\\b|\\bif you (do not|don'?t) (want|wish) to (receive|get|be)[^.]{0,60}\\b(uncheck|untick|leave|tick|check)\\b|\\bcheck (this|the) box (if|to) (not|opt out|unsubscribe|stop)\\b|\\btick (here|this|the box) (if|to) (not|opt out|stop)\\b|\\bdo not uncheck\\b|\\bleave (this )?(box )?(checked|unchecked|ticked) (if|to)\\b",
+      "severity": 3,
+      "confidence": 0.85,
+      "biases": [
+        "trick_question",
+        "default_effect"
+      ],
+      "explain": "Double negatives in consent boxes are designed so that the intuitive action produces the opposite of what you intend.",
+      "tip": "Read consent boxes twice, out loud if necessary."
+    },
+    {
+      "id": "dark.forced_registration",
+      "category": "dark_pattern",
+      "name": "Forced registration / paywall gate",
+      "pattern": "\\b(sign (up|in)|create (an|a free) account|log ?in|register|subscribe|join) (now |today )?to (continue|read|view|see|unlock|access|keep reading|watch|download|proceed|check ?out|comment)\\b|\\byou must (be )?(sign(ed)? (in|up)|log(ged)? in|register(ed)?|subscribe[d]?|create an account) to\\b|\\bcontinue reading with\\b|\\b(this|the rest of this) (article|story|content) is for (subscribers|members)\\b|\\bbecome a (member|subscriber) to (read|continue|access)\\b|\\bunlock (this|the full) (article|story|content)\\b|\\bregister (for free )?to (read|continue|unlock|access)\\b|\\bguest checkout (is )?(not|un)available\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "forced_action",
+        "data_capture",
+        "sunk_cost"
+      ],
+      "explain": "Requiring an account to continue harvests data and creates lock-in. Paywalls can be legitimate; forced registration for things that do not need it is not.",
+      "tip": "Try a reader-mode, archived copy, or the same content elsewhere before handing over data."
+    },
+    {
+      "id": "dark.sneak_into_basket",
+      "category": "dark_pattern",
+      "name": "Sneak into basket / pre-added extras",
+      "pattern": "\\b(added (to|in) your (cart|basket|order) (automatically|for you|as a bonus)|we('ve| have) added (a |an |the )?[a-z ]{1,30}(to your|for you)|(protection|insurance|warranty|coverage|donation|tip|gratuity|priority|expedited|express|rush|gift wrap|carbon offset) (plan |option |boarding )?(has been |was |is )?(added|included|applied|selected|pre-?selected)|includes? (optional )?(insurance|protection|warranty|donation|tip)|round up (your|for|to)|add (a )?(donation|tip|contribution)|would you like to (add|include|protect))\\b",
+      "severity": 2,
+      "confidence": 0.75,
+      "biases": [
+        "sneaking",
+        "default_effect",
+        "guilt"
+      ],
+      "explain": "Pre-added insurance, donations and 'protection plans' rely on you not noticing before checkout. Removing them is deliberately made the active step.",
+      "tip": "Read the order summary line by line before paying."
+    },
+    {
+      "id": "dark.cancellation_friction",
+      "category": "dark_pattern",
+      "name": "Cancellation friction (roach motel)",
+      "pattern": "\\b(to cancel,? (please )?(call|phone|contact|write|mail|visit|fax)|cancell?ations? (must|can only|may only) be (made|done|requested|processed|submitted) (by|via|over|in|through) (phone|mail|writing|person|calling|fax|post)|call (us|customer service|our team|\\d) to cancel|cancel (by|via|over) (phone|calling|mail|fax|post)|\\d+[- ]days?'? (written )?notice|notice (period|required|in writing)|early termination fee|cancellation fee|minimum (term|commitment|contract)|retention (offer|specialist|department|team))\\b",
+      "severity": 3,
+      "confidence": 0.8,
+      "biases": [
+        "roach_motel",
+        "obstruction",
+        "status_quo_bias"
+      ],
+      "explain": "Easy to sign up online, cancellable only by phone during business hours: the asymmetry is the business model. The US FTC's 'click to cancel' rule targets exactly this.",
+      "tip": "Before subscribing, find the cancellation instructions. If they are not as easy as signup, do not sign up."
+    },
+    {
+      "id": "dark.bait_switch_unavailable",
+      "category": "dark_pattern",
+      "name": "Bait-and-switch availability",
+      "pattern": "\\b(this (deal|offer|fare|rate|price|item) (is no longer|has expired|just expired|is gone|is sold out)|price has (changed|increased|gone up) since|no longer available at (this|that) price|we found (similar|these) (items|options|alternatives) (you may|instead)|try (one of )?these (similar|alternative) (items|products|options))\\b",
+      "severity": 1,
+      "confidence": 0.6,
+      "biases": [
+        "bait_switch",
+        "sunk_cost",
+        "anchoring"
+      ],
+      "explain": "The advertised deal pulls you in; it is 'gone' by the time you commit, and a pricier alternative is offered while you are invested.",
+      "tip": "If the advertised price vanished, leave. The alternative is priced for your sunk cost.",
+      "requiresSale": true
+    },
+    {
+      "id": "source.sponsored_content",
+      "category": "source_funding",
+      "name": "Sponsored / affiliate content present",
+      "pattern": "(?<![-\\w])(sponsored (content|post|by)|paid (partnership|promotion|content|post|advertisement)|advertorial|partner content|branded content|#ad\\b|#sponsored|#partner)\\b",
+      "severity": 1,
+      "confidence": 0.85,
+      "biases": [
+        "authority_bias",
+        "halo_effect"
+      ],
+      "explain": "Disclosed sponsorship is better than hidden sponsorship, but it still means the content exists to sell. Product 'reviews' with affiliate links are compensated recommendations.",
+      "tip": "Read sponsored content as an advertisement: what is it selling and who paid?"
+    },
+    {
+      "id": "source.affiliate_disclosure",
+      "category": "source_funding",
+      "name": "Commission disclosure on the page",
+      "pattern": "\\b(affiliate (links?|commission|disclosure|partners?)|we (may |might |do |will |can )?(earn|receive|get|make) (a |an )?(small )?(commission|compensation|referral fee)|contains affiliate links|commissions? (on|from) (purchases|qualifying)|as an amazon associate)\\b",
+      "severity": 0,
+      "confidence": 0.8,
+      "biases": [
+        "authority_bias"
+      ],
+      "explain": "The page says it earns money when you buy through its links. That is a disclosure, which is good, and it also tells you who pays for the recommendation.",
+      "tip": "Check the same product on a site that earns nothing from the sale."
+    },
+    {
+      "id": "source.funded_section",
+      "category": "source_funding",
+      "name": "Section or series paid for by a named funder",
+      "pattern": "\\b([Ss]upported by|[Pp]aid for by|[Ii]n partnership with|[Ss]ponsored by|[Bb]rought to you by|[Pp]resented by|[Ff]unded by|[Ww]ith (financial )?support from|[Mm]ade possible by)\\s+(the\\s+)?(?!AI\\b|The\\b)[A-Z][\\w&'.-]+(\\s+(of|and|&|for|de|du)\\s+[A-Z][\\w&'.-]+|\\s+[A-Z][\\w&'.-]+){1,5}",
+      "flags": "g",
+      "severity": 1,
+      "confidence": 0.8,
+      "biases": [
+        "authority_bias",
+        "halo_effect"
+      ],
+      "explain": "This page or section is labelled as funded by a named organisation. Outlets say such funding does not steer the journalism; it does decide which topics get a section at all, and the funder's name is the subtext of the page.",
+      "tip": "Read the funder's name as part of the byline. Ask what the funder works on and whether this piece could have run against its interests.",
+      "scope": "notHeading",
+      "regions": [
+        "body",
+        "aside",
+        "cta",
+        "footer"
+      ],
+      "maxBlock": 160
+    }
+  ]
+}

@@ -1,0 +1,410 @@
+{
+  "purpose": "Nine fictional investigation cases for qualitative review of media incentives, corporate announcements, and sales funnels. Compare page-only, staged, and same-evidence readings. Grade the useful distinctions and overreach against the evidence actually available in each arm. All pages, parties, records, and checkout captures were invented for this suite.",
+  "fictional": true,
+  "cases": [
+    {
+      "id": "streetdesk-underwriting-quota",
+      "domain": "media",
+      "caseType": "interpretation",
+      "variant": "subtle-mechanism",
+      "page": {
+        "url": "https://threadbank-ledger.example/streetdesk/freight-detours",
+        "title": "The block that got quieter after the freight detour",
+        "mainText": "October 22, 2026. This is the eighth dispatch from Street Desk, our series on deliveries and residential streets. Three blocks south of the depot had fewer overnight noise calls after the detour. The city's summary has counts for these three blocks only.\nWe choose the stories we cover and report them independently. Street Desk is supported by the Rindle Parcel Cooperative. See our underwriting agreement or the city's September call summary.",
+        "headings": ["Street Desk, dispatch 8", "Where the calls fell"],
+        "ctas": ["Read the underwriting agreement", "See the call summary", "Subscribe to Street Desk"],
+        "credits": ["Street Desk is supported by the Rindle Parcel Cooperative."],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://threadbank-ledger.example/about/streetdesk-2026-agreement",
+          "title": "Street Desk underwriting agreement, June 30, 2026",
+          "indexDate": "2026-06-30",
+          "passages": [
+            "From July 1 through December 31, 2026, the Ledger must publish at least two original dispatches a month about parcel delivery or loading access to receive that month's $4,000 Street Desk installment. Dispatches on other beats do not count.",
+            "The Ledger alone chooses individual assignments, sources, conclusions and wording. The cooperative receives no drafts or prepublication review. A dispatch about adverse effects of parcel delivery counts toward the requirement on the same terms."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://tidemill-city.example/transport/noise-calls-september-2026",
+          "title": "City freight detour call summary, October 5, 2026",
+          "indexDate": "2026-10-05",
+          "passages": [
+            "This bulletin covers the three blocks south of the depot that were monitored during the August and September 2026 detour trial. Overnight noise calls fell from 24 in August to 11 in September. Call counts for other blocks were not tabulated for the trial."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Identify the paid minimum output on the parcel beat and explain how it can keep that topic in regular coverage even when the newsroom controls the individual story.",
+          "Retain the agreement's active date and editorial boundary. The city summary supports the reported count in the three monitored blocks. To judge the route more broadly, look for call counts on the streets that received the detoured traffic."
+        ],
+        "overreach": [
+          "Attribute this assignment, wording, selection of blocks or favorable conclusion to the cooperative. Infer sponsor approval, a payment for positive coverage, or suppressed stories.",
+          "Use the call summary to claim citywide improvement or claim that calls rose on the detour route."
+        ]
+      }
+    },
+    {
+      "id": "crossing-guide-affiliate-control",
+      "domain": "media",
+      "caseType": "straightforward",
+      "variant": "ordinary-control",
+      "page": {
+        "url": "https://saltweft-observer.example/guides/canal-crossing",
+        "title": "The canal footbridge closes on Monday. Here is the walking detour.",
+        "mainText": "September 10, 2026. From September 14 through September 18, the public works crew will close the canal footbridge to replace the deck. Follow the signed path via Bell Gate. The marked detour adds 600 metres between the same bridge entrances. Download the city's map without an account.\nOptional gear box: A merchant link marked 'affiliate' can earn us a commission if you buy a rain cover. The closure notice and route map are free to use.",
+        "headings": ["The signed route via Bell Gate", "Optional gear"],
+        "ctas": ["Download the city's map", "Rain cover (affiliate)", "How our affiliate links work"],
+        "credits": ["A merchant link marked 'affiliate' can earn us a commission if you buy a rain cover."],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://bellgate-works.example/notices/deck-replacement-2026",
+          "title": "Canal footbridge works notice, September 8, 2026",
+          "indexDate": "2026-09-08",
+          "passages": [
+            "The canal footbridge will close from September 14 through September 18, 2026, for deck replacement. The marked detour via Bell Gate adds 600 metres between the two bridge entrances. The route map is a free public PDF."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://saltweft-observer.example/about/affiliate-links",
+          "title": "Affiliate links and public documents, August 12, 2026",
+          "indexDate": "2026-08-12",
+          "passages": [
+            "Gear box links bearing the affiliate label may earn a fee when the linked merchant attributes a purchase to the link. Links to government notices, maps and public documents carry no merchant tags."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Give the closure and free map as the practical reading. If discussing the financial relationship, tie the disclosed commission to a purchase through the optional gear link and keep it separate from the route or map.",
+          "Treat the matching city notice as support for the specific dates and detour. A short straightforward reading is sufficient."
+        ],
+        "overreach": [
+          "Claim the merchant pays for map downloads, arranged the closure coverage, or chose the route. Treat a clearly optional affiliate link as evidence of a hidden transaction or editorial slant.",
+          "Claim the city notice verifies the publisher's editorial process or that any particular visitor generated a commission."
+        ]
+      }
+    },
+    {
+      "id": "library-holds-denominator-shift",
+      "domain": "media",
+      "caseType": "interpretation",
+      "variant": "misleading-context",
+      "page": {
+        "url": "https://fenwarp-chronicle.example/data/library-holds-2026",
+        "title": "Nine in ten libraries hit the holds target again",
+        "mainText": "November 2, 2026. The Fenwarp Chronicle's annual library tracker is back. Nine in ten branches met the three-day holds target for a second year running. Look up a branch in our tracker or compare the data notes for both years.\nPartner message: This page carries a display advertisement from Orlet Sort Systems, which sells automatic book sorters.",
+        "headings": ["Nine in ten, two years running", "Find your library branch"],
+        "ctas": ["Look up a branch", "2026 data notes", "2025 data notes"],
+        "credits": ["Display advertisement from Orlet Sort Systems."],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://fenwarp-chronicle.example/data/library-holds-method-2026",
+          "title": "Library holds tracker 2026 data notes, October 30, 2026",
+          "indexDate": "2026-10-30",
+          "passages": [
+            "For 2026, the tracker covers 40 of the system's 100 branches. Only branches with automatic book sorters installed by July 1, 2026, are included. Of those 40 branches, 36 met the same three-day holds target used in 2025.",
+            "The 2026 survey covers branches with sorters as part of an installation follow-up. Results from the 60 other branches were not collected for this edition."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://fenwarp-chronicle.example/data/library-holds-method-2025",
+          "title": "Library holds tracker 2025 data notes, October 29, 2025",
+          "indexDate": "2025-10-29",
+          "passages": [
+            "For 2025, the survey covered all 100 branches in the system. Ninety met the three-day holds target. The results include branches later selected for sorter installations and those outside the program."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Explain that the same 90% answers different questions. In 2025 it was 90 of all 100 branches and in 2026 it was 36 of 40 branches with sorters. This headline does not establish a stable system-wide result.",
+          "Keep the narrower 2026 installation follow-up useful on its own terms. For a trend, compare the same branches under the same measurement conditions or seek system-wide 2026 figures."
+        ],
+        "overreach": [
+          "Read 36 of 100 as the 2026 success rate or treat the unmeasured 60 as failures. Infer improvement, deterioration, or a causal effect of the sorters from the two headline numbers.",
+          "Allege the advertiser directed the selection or that the publisher changed the coverage to prop up the headline."
+        ]
+      }
+    },
+    {
+      "id": "kiln-validation-finance-award",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "variant": "subtle-mechanism",
+      "page": {
+        "url": "https://vesselmere-materials.example/news/loop-one-validated",
+        "title": "Loop One validated. The next kiln moves closer.",
+        "mainText": "October 21, 2026. Vesselmere Materials announces completion of the Loop One validation run at its tileworks. The pilot kiln reached its target output over the qualifying runs. The new kiln is the next planned investment. Read the plant engineer's acceptance note and our October financing and awards update.",
+        "headings": ["Validation complete", "The next kiln"],
+        "ctas": ["Plant engineer's acceptance note", "October financing and awards update"],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://vesselmere-materials.example/investors/loop-one-acceptance",
+          "title": "Loop One plant engineer's acceptance note, October 20, 2026",
+          "indexDate": "2026-10-20",
+          "passages": [
+            "The engineer signed Loop One's performance acceptance on October 20, 2026, after three eight-hour shifts at 450 finished tiles per hour. The acceptance test did not measure maintenance downtime or energy cost per tile over a production quarter."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://vesselmere-materials.example/investors/financing-awards-october-2026",
+          "title": "Financing and awards update, October 21, 2026",
+          "indexDate": "2026-10-21",
+          "passages": [
+            "Loop One's signed performance acceptance satisfies the technical condition for the first draw on the $9 million kiln credit facility. The borrower must also deposit $2 million of matching equity by December 31, 2026. No advance had been made as of October 21, 2026.",
+            "Under the August 2026 award agreement, the plant expansion team's cash award is earned only if the first advance under the kiln credit facility is funded by February 28, 2027. Performance acceptance alone does not earn the award."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Lead with what validation enables. The signed pilot test clears a technical condition for borrowing to build the next kiln. Cash still depends on the matching equity condition, and the update records no advance as of October 21.",
+          "Keep the three clocks separate. Three tested shifts supported acceptance on October 20. The matching equity is due December 31. The team's cash award requires actual first funding by February 28. A later financing update would show whether cash actually arrived.",
+          "Treat the pilot achievement as real within its test scope. The full-quarter production costs and availability remain outside that evidence."
+        ],
+        "overreach": [
+          "Say $9 million was drawn, the award was earned on October 20, or management was paid to announce the pilot. Infer a cash crisis or the motive for publication.",
+          "Use pilot output to claim sustained commercial throughput or unit economics. Claim the missing matching deposit was overdue or unpaid after the date covered by the record."
+        ]
+      }
+    },
+    {
+      "id": "press-calibration-shutdown-control",
+      "domain": "corporate",
+      "caseType": "straightforward",
+      "variant": "ordinary-control",
+      "page": {
+        "url": "https://briarloom-fabrication.example/customer-updates/press-three",
+        "title": "Press 3 returns to the regular production schedule",
+        "mainText": "September 28, 2026. Press 3 passed its scheduled calibration check after the annual shutdown. Regular orders can now be scheduled on Press 3 from October 1 at the same rated capacity. The published schedule for existing orders is unchanged. The maintenance report and service bulletin are available below.",
+        "headings": ["Scheduled maintenance complete", "October booking"],
+        "ctas": ["View the maintenance report", "Read the service bulletin", "Check an existing order"],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://briarloom-fabrication.example/reports/press-three-calibration",
+          "title": "Press 3 calibration record, September 27, 2026",
+          "indexDate": "2026-09-27",
+          "passages": [
+            "The September 27 calibration confirmed that Press 3 meets its existing force tolerances. The job was the annual calibration scheduled in the 2026 maintenance calendar. This service leaves the machine's rated capacity at 180 blanks per shift."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://briarloom-fabrication.example/reports/2026-shutdown-service-bulletin",
+          "title": "Annual shutdown service bulletin, September 28, 2026",
+          "indexDate": "2026-09-28",
+          "passages": [
+            "The contractor's invoice for this calibration was paid from the standing maintenance budget. The October order queue uses the existing capacity rating. No order date was changed by the work."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Read the item as a return to ordinary scheduling on October 1. Calibration maintained existing tolerances and rated capacity, and existing customers keep their scheduled dates.",
+          "Treat the maintenance record as support for the operational update. The customer path is to check or schedule an order, without inventing a financing or compensation angle."
+        ],
+        "overreach": [
+          "Treat a passed calibration as evidence of higher capacity, a funded expansion, or a financial milestone tied to bonuses.",
+          "Infer there were no past disruptions, that no order will ever be late, or that the company is financially sound based on payment of this invoice."
+        ]
+      }
+    },
+    {
+      "id": "tram-order-executed-not-draft",
+      "domain": "corporate",
+      "caseType": "interpretation",
+      "variant": "misleading-context",
+      "page": {
+        "url": "https://tarnspoke-works.example/news/river-tram-order",
+        "title": "River Line books 40 trams with room for 60 more",
+        "mainText": "October 30, 2026. Tarnspoke Works announces a signed order for 40 River Line trams. The deal offers the transit authority an option for up to 60 additional trams. Deliveries on the base order are scheduled to start in 2028. The authority's procurement file includes the executed agreement and the consultation draft circulated earlier this year.",
+        "headings": ["40 base units, with an option for 60 more"],
+        "ctas": ["Executed supply agreement", "Consultation draft"],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://vellumford-transit.example/procurement/river-trams-draft",
+          "title": "River Line procurement consultation draft, April 16, 2026",
+          "indexDate": "2026-04-16",
+          "passages": [
+            "Consultation draft dated April 16, 2026. The authority may reserve up to 40 production slots without a purchase obligation under this draft. This document was issued to seek supplier feedback and is unsigned."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://vellumford-transit.example/procurement/river-trams-executed",
+          "title": "River Line executed supply agreement, October 29, 2026",
+          "indexDate": "2026-10-29",
+          "passages": [
+            "Executed October 29, 2026. This agreement supersedes the April consultation draft. The authority commits to purchasing the 40 base units under the delivery schedule. The optional 60 units require a separate written exercise of the option, and no such exercise accompanies signing.",
+            "The base-unit schedule starts in 2028. The authority will pay for each unit after it passes delivery acceptance. No advance payment is due at signing."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Use the signed October agreement for the current obligation. The April no-commitment language governed an unsigned draft that the executed agreement superseded. The current agreement has 40 committed units and up to 60 optional units.",
+          "Separate the order from payment and delivery. Payment follows delivery acceptance on the base-unit schedule. A later option notice or accepted deliveries would answer different questions."
+        ],
+        "overreach": [
+          "Say the 40 units are still just reservations based on the April draft, or treat the options as 60 firm sales.",
+          "Say 40 units shipped, the company received cash at signing, or the document settles how revenue must be recognized."
+        ]
+      }
+    },
+    {
+      "id": "studio-pass-refund-and-renewal",
+      "domain": "sales",
+      "caseType": "interpretation",
+      "variant": "subtle-mechanism",
+      "page": {
+        "url": "https://shalequill-studio.example/field-audio-pass",
+        "title": "Try Studio Pass with our 30-day refund promise",
+        "mainText": "October 19, 2026. Learn field recording at your own pace. Start with a $24 setup today, then open the annual library on the next screen. If Studio Pass isn't a fit, our 30-day refund promise applies to the annual library fee. Preview the checkout screens or read the refund and billing terms.",
+        "headings": ["Try Studio Pass", "Start for $24"],
+        "ctas": ["Pay $24 and continue", "Preview checkout screens", "Refund and billing terms"],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://shalequill-studio.example/field-audio-pass/checkout-preview",
+          "title": "Studio Pass checkout preview, October 19, 2026",
+          "indexDate": "2026-10-19",
+          "passages": [
+            "Step 1. Pay $24 and continue. We charge the one-time setup fee now and open the sample workspace. You can leave after this step. Step 2. Start annual access for $156. If you confirm, we charge $156 today in addition to setup and renew access at $156 per year."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://shalequill-studio.example/terms/field-audio-pass-2026",
+          "title": "Studio Pass refund and billing terms, October 1, 2026",
+          "indexDate": "2026-10-01",
+          "passages": [
+            "An initial $156 annual fee is refundable when support receives the request within 30 calendar days of the annual charge. An approved refund closes annual access and ends renewal. The separate $24 setup fee is excluded from refunds under this promise.",
+            "Turning off auto-renew in billing settings stops the next annual charge and keeps access open through the paid year. Turning off auto-renew does not submit a refund request."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Lead with the money the reader can get back. The first click charges $24 outside the refund promise. A separate confirmation charges $156 and starts the annual plan. Completing both costs $180 up front, with only the $156 eligible under this promise.",
+          "Explain the distinct exits. Ask support within 30 calendar days of the annual charge for the refund that closes the plan. The billing toggle prevents the next charge while leaving the current paid year in place."
+        ],
+        "overreach": [
+          "Describe the first click as a free trial, the annual plan as compulsory after setup, or cancellation in settings as automatically refunding the annual fee.",
+          "Say the checkout conceals the displayed terms, the policy is illegal, or the setup charge can never be recovered under any other entitlement."
+        ]
+      }
+    },
+    {
+      "id": "weekend-tool-booking-control",
+      "domain": "sales",
+      "caseType": "straightforward",
+      "variant": "ordinary-control",
+      "page": {
+        "url": "https://ashspindle-hire.example/hire/weekend-plane",
+        "title": "Weekend hand-plane rental for $26",
+        "mainText": "October 8, 2026. Pay $26 once to reserve a plane for Saturday pickup and Monday return. At pickup we place a $50 hold on your card. We release the hold when you return the tool on time and undamaged. You can cancel for a full rental refund by 6 p.m. Friday, local time, through your confirmation email. Reservations end on return and do not roll into a membership.",
+        "headings": ["What you pay", "Pickup and return"],
+        "ctas": ["Reserve weekend rental for $26", "Read the booking terms"],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://ashspindle-hire.example/terms/weekend-booking",
+          "title": "Weekend hand-tool booking terms, October 1, 2026",
+          "indexDate": "2026-10-01",
+          "passages": [
+            "For the $26 weekend hand-plane booking, the rental fee is charged online. At pickup, the $50 card authorization reduces available funds but is not collected as an additional rental payment. Any unused authorization is released when the booking closes.",
+            "For an on-time return without damage, the full hold is released. A cancellation by Friday at 6 p.m. local time refunds the online rental fee. A booking canceled before pickup incurs no hold."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Distinguish the $26 charge from the temporary $50 hold at pickup, which can reduce the customer's available funds. If the reader needs to cancel, use the email by Friday at 6 p.m. local time.",
+          "Keep the reading straightforward. A clearly disclosed hold and a fixed return date are ordinary for the documented booking."
+        ],
+        "overreach": [
+          "Add the hold to the rental fee as a $76 charge at checkout, claim the hold has no effect on available funds, or infer a subscription.",
+          "Promise a full hold release even after a late or damaged return or guarantee when the card issuer will make the funds available."
+        ]
+      }
+    },
+    {
+      "id": "guest-access-versus-owner-trial",
+      "domain": "sales",
+      "caseType": "interpretation",
+      "variant": "misleading-context",
+      "page": {
+        "url": "https://marlreed-boards.example/join",
+        "title": "A board was shared with you. Open it free.",
+        "mainText": "November 3, 2026. The board owner invited you to review one board. Continue as a guest to comment with your email address. Prefer to make a separate workspace? Start an Owner trial. Visit the account terms or read the archived trial announcement.",
+        "headings": ["Review the shared board", "Make a workspace of your own"],
+        "ctas": ["Continue as guest", "Start Owner trial", "Current account terms", "Archived trial announcement"],
+        "credits": [],
+        "signals": {}
+      },
+      "documents": [
+        {
+          "id": "doc1",
+          "url": "https://marlreed-boards.example/news/trial-launch-2025",
+          "title": "Owner trial launch announcement, September 2, 2025",
+          "indexDate": "2025-09-02",
+          "passages": [
+            "Launch terms for Owner trials opened from September 2 to October 31, 2025. Enter a card to start a 30-day trial of a new workspace. At the end of that trial, the workspace becomes read-only unless its owner chooses a paid plan. These launch terms concern new Owner workspaces only."
+          ]
+        },
+        {
+          "id": "doc2",
+          "url": "https://marlreed-boards.example/terms/account-november-2026",
+          "title": "Guest and Owner account terms, effective November 1, 2026",
+          "indexDate": "2026-11-01",
+          "passages": [
+            "Guest invitations allow viewing and commenting on the shared board after email verification. Guests enter no card. Accepting a guest invitation creates no workspace and starts no paid plan or trial.",
+            "For new Owner workspaces opened on or after November 1, 2026, the Owner trial requires a card. The first $18 monthly charge is made at the end of 14 days unless the owner turns off renewal in Workspace Billing before the trial ends. A guest profile cannot manage or cancel an Owner workspace's billing."
+          ]
+        }
+      ],
+      "criteria": {
+        "useful": [
+          "Read the November invitation as two separate paths. The guest can open and comment on the existing board with an email and no billing. The optional Owner path creates a separate workspace with a card and starts a 14-day trial that leads to an $18 monthly charge unless renewal is turned off in Workspace Billing.",
+          "Use the effective dates to reject the archived 30-day read-only outcome for a new Owner trial. The reader who only needs to review can use the guest button."
+        ],
+        "overreach": [
+          "Apply the Owner charge to the guest path, say the invitation secretly starts a trial, or use the old archive to promise no automatic Owner charge now.",
+          "Tell the reader to cancel a workspace through their guest profile or infer charges for the inviter or other existing accounts."
+        ]
+      }
+    }
+  ]
+}

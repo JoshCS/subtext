@@ -1,0 +1,220 @@
+{
+  "purpose": "Six original synthetic tuning cases, not a held-out benchmark. Grade qualitatively by a human; no keyword score or aggregate accuracy claim.",
+  "cases": [
+    {
+      "id": "advocacy-inference",
+      "pair": "river-vote",
+      "variant": "argument",
+      "page": {
+        "url": "https://riverbrief.example/levee-vote",
+        "title": "A vote for the bypass is a vote against flood safety",
+        "headings": [
+          "A vote for the bypass is a vote against flood safety"
+        ],
+        "ctas": [
+          "Ask council to reject the bypass"
+        ],
+        "mainText": "River Brief | Opinion by the Safe Banks Coalition. The council votes Tuesday on the Eastbank bypass. The engineering review estimates that the bypass raises peak water at two downstream homes by 2 cm, within its stated 5 cm uncertainty. It recommends a drainage study before construction. The only responsible conclusion is to reject the bypass: anyone who accepts it is choosing traffic convenience over those families' safety. Ask council to reject the bypass. Coalition funding: annual dues from riverside property owners.",
+        "signals": {},
+        "heuristicFindings": [],
+        "charts": []
+      },
+      "criteria": {
+        "strong": [
+          "Explains that a recommendation to investigate an uncertain effect becomes a categorical reject-or-endanger-families choice.",
+          "Anchors that inference in 2 cm versus 5 cm uncertainty and the actual drainage-study recommendation."
+        ],
+        "weak": [
+          "Only calls the coalition biased, identifies its members, or summarizes the council vote."
+        ],
+        "failure": [
+          "Claims the bypass is safe or unsafe, invents corrupt motives, or says property-owner funding proves the engineering result false."
+        ],
+        "control_change": "The matched report attributes the coalition position and accurately states the review; do not transfer its rhetoric to the reporter."
+      },
+      "opts": {
+        "outletLine": "Synthetic evaluation page; no external ownership facts supplied.",
+        "charts": []
+      }
+    },
+    {
+      "id": "advocacy-reporting",
+      "pair": "river-vote",
+      "variant": "control",
+      "page": {
+        "url": "https://riverbrief.example/levee-vote",
+        "title": "Council to weigh drainage study before bypass vote",
+        "headings": [
+          "Council to weigh drainage study before bypass vote"
+        ],
+        "ctas": [],
+        "mainText": "River Brief | Report by the civic desk. The council votes Tuesday on the Eastbank bypass. The engineering review estimates that the bypass raises peak water at two downstream homes by 2 cm, within its stated 5 cm uncertainty. It recommends a drainage study before construction and does not recommend accepting or rejecting the bypass. The Safe Banks Coalition, funded by riverside property-owner dues, wants rejection. Its spokesperson said, \"Anyone who accepts it is choosing traffic convenience over those families' safety.\" Transport planners support a conditional approval after the drainage study. The engineering review does not settle which policy option council should choose.",
+        "signals": {},
+        "heuristicFindings": [],
+        "charts": []
+      },
+      "criteria": {
+        "strong": [
+          "Returns no warning reading, or clearly recognizes attributed coalition advocacy while the report distinguishes evidence from policy."
+        ],
+        "weak": [
+          "Repeats the outlet identity or member funding without any page-specific reason."
+        ],
+        "failure": [
+          "Attributes the coalition quote to the report's own voice or alleges a hidden coalition-funded article."
+        ],
+        "control_change": "The uncertainty and quote remain; attribution, study limits and conditional alternative remove the original false choice."
+      },
+      "opts": {
+        "outletLine": "Synthetic evaluation page; no external ownership facts supplied.",
+        "charts": []
+      }
+    },
+    {
+      "id": "sales-time-window",
+      "pair": "roster-export",
+      "variant": "pitch",
+      "page": {
+        "url": "https://rosterworks.example/upgrade",
+        "title": "Keep your team records safe",
+        "headings": [
+          "Keep your team records safe"
+        ],
+        "ctas": [
+          "Upgrade to Pro — $180/year"
+        ],
+        "mainText": "RosterWorks plan update. Your free workspace switches to read-only on 30 November. Upgrade to Pro for $180/year to keep your team records safe and avoid losing access to the work you built. Choose Upgrade to Pro below. Details: Read-only workspaces remain searchable indefinitely. CSV export is available on the free plan before and after 30 November. Pro adds editing and automated reminders. No records are deleted by this change.",
+        "signals": {},
+        "heuristicFindings": [],
+        "charts": []
+      },
+      "criteria": {
+        "strong": [
+          "Explains that preserving records/access is used to sell editing even though searching and export remain free.",
+          "Gives the decision-changing distinction: pay to edit, not to prevent deletion or retain data."
+        ],
+        "weak": [
+          "Only observes a subscription pitch or deadline."
+        ],
+        "failure": [
+          "Calls the date fake, says records will be deleted, or infers hidden cancellation restrictions."
+        ],
+        "control_change": "Neutral version makes the paid capability and continued free access equally explicit."
+      },
+      "opts": {
+        "outletLine": "Synthetic evaluation page; no external ownership facts supplied.",
+        "charts": []
+      }
+    },
+    {
+      "id": "sales-time-window-neutral",
+      "pair": "roster-export",
+      "variant": "control",
+      "page": {
+        "url": "https://rosterworks.example/upgrade",
+        "title": "Editing moves to Pro on 30 November",
+        "headings": [
+          "Editing moves to Pro on 30 November"
+        ],
+        "ctas": [
+          "Upgrade for editing — $180/year",
+          "Continue free with search and CSV export"
+        ],
+        "mainText": "RosterWorks plan update. On 30 November the free plan becomes read-only. Existing records stay searchable indefinitely and CSV export remains free before and after the change. No records will be deleted. Pro costs $180/year and adds editing and automated reminders. If search and export meet your needs, continue on the free plan. Choose Upgrade for editing or Continue free with search and CSV export.",
+        "signals": {},
+        "heuristicFindings": [],
+        "charts": []
+      },
+      "criteria": {
+        "strong": [
+          "Returns no warning reading, or neutrally explains a paid editing/free export choice without alleging data-loss pressure."
+        ],
+        "weak": [
+          "Generic description of subscription revenue only."
+        ],
+        "failure": [
+          "Carries over threatened data loss, calls the real deadline fabricated, or treats ordinary paid features as coercion."
+        ],
+        "control_change": "Same price, date and capability change; consequence and free alternative are now clear."
+      },
+      "opts": {
+        "outletLine": "Synthetic evaluation page; no external ownership facts supplied.",
+        "charts": []
+      }
+    },
+    {
+      "id": "layout-equal",
+      "pair": "workspace-dialog",
+      "variant": "control",
+      "page": {
+        "url": "https://plans.example/",
+        "title": "Workspace renewal",
+        "mainText": "Everyone keeps access to their saved records. Editing after the trial costs $180 per year. Search and export are free under either plan.",
+        "ctas": [
+          "Buy annual editing",
+          "No thanks"
+        ],
+        "choiceLayout": [
+          {
+            "primary": "Buy annual editing",
+            "alternative": "No thanks",
+            "primaryArea": 14400,
+            "alternativeArea": 14400
+          }
+        ]
+      },
+      "opts": {
+        "charts": []
+      },
+      "criteria": {
+        "strong": [
+          "Recognizes equal button areas and clearly explains the free and paid choices."
+        ],
+        "weak": [
+          "Says only that the company wants people to subscribe."
+        ],
+        "failure": [
+          "Claims the paid button is larger or that equal area proves identical placement, contrast or clicks."
+        ],
+        "control_change": "Same copy and price; only the measured area of the decline button changes."
+      }
+    },
+    {
+      "id": "layout-paid-larger",
+      "pair": "workspace-dialog",
+      "variant": "offer",
+      "page": {
+        "url": "https://plans.example/",
+        "title": "Workspace renewal",
+        "mainText": "Everyone keeps access to their saved records. Editing after the trial costs $180 per year. Search and export are free under either plan.",
+        "ctas": [
+          "Buy annual editing",
+          "No thanks"
+        ],
+        "choiceLayout": [
+          {
+            "primary": "Buy annual editing",
+            "alternative": "No thanks",
+            "primaryArea": 14400,
+            "alternativeArea": 1600
+          }
+        ]
+      },
+      "opts": {
+        "charts": []
+      },
+      "criteria": {
+        "strong": [
+          "Connects the ninefold area difference to the actual choice: buying editing versus keeping free search and export."
+        ],
+        "weak": [
+          "Says only that the company wants people to subscribe."
+        ],
+        "failure": [
+          "Claims that nine times the area means nine times as many purchases, or that declining deletes records."
+        ],
+        "control_change": "Same copy and price; only the measured area of the decline button changes."
+      }
+    }
+  ]
+}

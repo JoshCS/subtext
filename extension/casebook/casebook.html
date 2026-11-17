@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subtext — Casebook</title>
+  <link rel="stylesheet" href="casebook.css">
+  <script src="casebook.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Subtext</p>
+        <h1>Casebook</h1>
+        <p class="sub">Keep dated evidence. Compare the pages and steps you choose to save.</p>
+      </div>
+      <a href="../options/options.html">Settings</a>
+    </header>
+
+    <p id="status" class="notice" role="status" hidden></p>
+    <p id="error" class="notice error" role="alert" hidden></p>
+
+    <div class="workspace">
+      <aside class="cases" aria-labelledby="cases-heading">
+        <h2 id="cases-heading">Your cases</h2>
+        <div id="case-list" class="case-list"></div>
+        <form id="create-form">
+          <label for="case-title">New case</label>
+          <input id="case-title" name="title" type="text" maxlength="120" placeholder="What are you looking into?" required>
+          <button type="submit" class="secondary">Create case</button>
+        </form>
+        <p class="small muted">Saved in this browser profile. Nothing is captured automatically.</p>
+      </aside>
+
+      <main id="case-content">
+        <section id="welcome" class="empty">
+          <h2>Start with a question</h2>
+          <p>Create a case, then save the evidence you want to revisit.</p>
+        </section>
+
+        <div id="case-detail" hidden>
+          <header class="case-header">
+            <div><h2 id="current-title"></h2><p id="current-meta" class="small muted"></p></div>
+            <button id="delete-case" type="button" class="quiet danger">Delete case</button>
+          </header>
+
+          <section class="capture card" aria-labelledby="capture-heading">
+            <h3 id="capture-heading">Add a captured step</h3>
+            <p id="source-note" class="small muted"></p>
+            <form id="capture-form" hidden>
+              <label for="step-label">Step label <span class="muted optional">(optional)</span></label>
+              <div class="capture-row">
+                <input id="step-label" type="text" maxlength="100" placeholder="For example, offer or checkout">
+                <button type="submit" class="secondary">Save current source page</button>
+              </div>
+            </form>
+            <p class="small muted capture-help">Each save records visible evidence at that moment, up to a text limit. It may cover only part of the page. Saved steps do not show what happened between them.</p>
+          </section>
+
+          <section aria-labelledby="steps-heading">
+            <div class="section-heading"><h3 id="steps-heading">Captured evidence</h3><span id="step-count" class="small muted"></span></div>
+            <p id="selection-help" class="small muted">Select two or three saved steps to compare.</p>
+            <div id="steps" class="steps"></div>
+          </section>
+
+          <section id="comparison" class="comparison" aria-labelledby="comparison-heading" hidden>
+            <div class="section-heading"><h3 id="comparison-heading">Selected evidence</h3><span id="selection-count" class="small muted"></span></div>
+            <p class="small muted">These are captured excerpts, not a record of a completed journey.</p>
+            <div id="comparison-grid" class="comparison-grid" tabindex="0" role="region" aria-label="Selected evidence, side by side"></div>
+            <div class="analyze-action">
+              <button id="analyze" type="button">Analyze selected evidence</button>
+              <p id="analyze-key" class="small" hidden>Needs an AI key. <a id="open-settings" href="../options/options.html" target="_blank" rel="noopener">Open Settings</a></p>
+              <p id="analyze-error" class="small inline-error" role="alert" tabindex="-1" hidden></p>
+              <p id="ai-disclosure" class="small muted">Only when you click: the selected saved excerpts are sent to your configured AI provider. The text limit in Settings applies across the selection.</p>
+            </div>
+            <section id="reading" class="reading card" aria-label="AI reading" hidden></section>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,3393 @@
+{
+  "version": "0.1.0",
+  "lastUpdated": "2026-11-16",
+  "notes": "Seed dataset of outlet / organization ownership and funding. Every entry records only publicly documented facts (owner, corporate parent, funding model) plus a coarse editorial-lean label that summarizes third-party raters (AllSides, Ad Fontes, Media Bias/Fact Check, Wikipedia). 'lean' is a convenience, not our judgment; the UI links to the raters. Entries with confidence 'medium' have not been re-verified and may be out of date or wrong. Long-term plan: generate this from Wikidata (P127 'owned by', P112 founder, P8402 funder) + OpenSecrets + ProPublica Nonprofit Explorer; see docs/DATA-SOURCES.md. Optional per-outlet `funders`: [{name, what, source, verified}], each with a public primary source (the outlet's own disclosure page, a filing or a regulator), added 2026-11-04.",
+  "ownerKinds": {
+    "billionaire_individual": {
+      "name": "Owned by a billionaire / wealthy individual",
+      "severity": 2,
+      "why": "One person's interests, business holdings and politics can shape coverage, directly or through self-censorship. Watch coverage of the owner's other businesses, regulators and political allies."
+    },
+    "public_company": {
+      "name": "Publicly traded company",
+      "severity": 1,
+      "why": "Accountable to shareholders and quarterly results. Incentive toward engagement, cost-cutting and advertiser-friendly coverage; dual-class shares can still give a family control."
+    },
+    "family_controlled": {
+      "name": "Family-controlled",
+      "severity": 1,
+      "why": "A founding family holds voting control (often via dual-class shares). Stability, but also a single family's values and interests."
+    },
+    "private_equity_hedge_fund": {
+      "name": "Private equity / hedge fund",
+      "severity": 3,
+      "why": "Financial owners optimize for extraction: cutting newsrooms, consolidating content, selling real estate. Local coverage usually shrinks. Alden Global Capital is the canonical example."
+    },
+    "private_company": {
+      "name": "Privately held company",
+      "severity": 1,
+      "why": "No public disclosure obligations. Funding and ownership chains may be opaque."
+    },
+    "state_funded": {
+      "name": "Publicly / state funded, editorially independent",
+      "severity": 1,
+      "why": "Funded by taxpayers or licence fees under a charter that protects editorial independence (BBC, NPR, CBC, DW). Pressure can still come via budgets and board appointments."
+    },
+    "state_controlled": {
+      "name": "State-controlled media",
+      "severity": 3,
+      "why": "Editorial line set by a government (RT, CGTN, Sputnik). Output serves state interests; treat as official messaging, not journalism."
+    },
+    "nonprofit_foundation": {
+      "name": "Nonprofit / foundation-funded",
+      "severity": 1,
+      "why": "Mission-driven and donor-funded. Check who the major donors are; foundations and wealthy donors have agendas too. US 990 filings list revenue but not usually individual donors."
+    },
+    "reader_funded": {
+      "name": "Reader / subscriber funded",
+      "severity": 0,
+      "why": "Incentive is to please subscribers, which can mean telling an audience what it wants to hear, but it is the most transparent incentive structure."
+    },
+    "religious_org": {
+      "name": "Affiliated with a religious organization",
+      "severity": 2,
+      "why": "Funding or ownership tied to a church or movement whose doctrine may shape coverage."
+    },
+    "political_affiliated": {
+      "name": "Politically affiliated funding",
+      "severity": 2,
+      "why": "Backed by political donors, party-aligned groups or campaign-adjacent nonprofits. Advocacy, not neutral reporting."
+    },
+    "cooperative": {
+      "name": "Cooperative / member-owned",
+      "severity": 0,
+      "why": "Owned by its members (e.g. AP is owned by US newspapers and broadcasters). Incentive toward broadly acceptable, non-partisan output."
+    },
+    "trust": {
+      "name": "Owned by a trust protecting independence",
+      "severity": 0,
+      "why": "A trust whose stated purpose is editorial independence (Scott Trust / The Guardian). Still has an institutional culture and worldview."
+    },
+    "platform": {
+      "name": "Technology platform / aggregator",
+      "severity": 1,
+      "why": "Selects and ranks others' content algorithmically for engagement. Ask what the ranking optimizes for."
+    },
+    "advocacy": {
+      "name": "Advocacy organization / think tank",
+      "severity": 2,
+      "why": "Exists to advance a position. Research and 'reports' are produced to support it. Funding disclosure is often partial."
+    },
+    "satire": {
+      "name": "Satire",
+      "severity": 0,
+      "why": "Intentionally fictional. Problems arise when shared out of context."
+    },
+    "fact_check": {
+      "name": "Fact-checking organization",
+      "severity": 0,
+      "why": "Checks claims; has its own funding and selection biases worth knowing."
+    },
+    "undisclosed_funding": {
+      "name": "Funding undisclosed",
+      "severity": 2,
+      "why": "The outlet does not publish its donors. Reporting may name a funder; check the sources on this row."
+    }
+  },
+  "leanScale": [
+    "far-left",
+    "left",
+    "lean-left",
+    "center",
+    "lean-right",
+    "right",
+    "far-right",
+    "state",
+    "n/a"
+  ],
+  "outlets": [
+    {
+      "domains": [
+        "nytimes.com"
+      ],
+      "name": "The New York Times",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The New York Times Company (NYSE: NYT); Ochs-Sulzberger family controls via Class B shares",
+          "kind": "family_controlled"
+        },
+        {
+          "name": "Public shareholders",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "subscriptions (majority of revenue)",
+        "advertising"
+      ],
+      "lean": "lean-left",
+      "notes": "Family voting control has lasted since 1896. Opinion section is distinct from the newsroom.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_New_York_Times_Company"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "washingtonpost.com"
+      ],
+      "name": "The Washington Post",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Nash Holdings LLC, owned by Jeff Bezos (Amazon founder) since 2013",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising",
+        "owner capital"
+      ],
+      "lean": "lean-left",
+      "notes": "",
+      "context": {
+        "ownership": {
+          "text": "Jeff Bezos owns The Washington Post",
+          "source": "https://company.washingtonpost.com/about"
+        },
+        "policy": {
+          "date": "2025-02-26",
+          "section": "opinions",
+          "text": "On February 26, 2025, Bezos said opposing views on personal liberties and free markets would be left to other opinion pages",
+          "source": "https://www.washingtonpost.com/style/media/2025/02/26/washington-post-bezos-opinions-section/"
+        }
+      },
+      "sources": [
+        "https://company.washingtonpost.com/about"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "wsj.com"
+      ],
+      "name": "The Wall Street Journal",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Dow Jones & Company → News Corp (Murdoch Family Trust holds voting control)",
+          "kind": "family_controlled"
+        },
+        {
+          "name": "News Corp public shareholders",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "center",
+      "notes": "News pages are generally rated center; the editorial page is reliably conservative. Owned by the Murdoch family since 2007.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Wall_Street_Journal"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "nypost.com"
+      ],
+      "name": "New York Post",
+      "type": "tabloid",
+      "country": "US",
+      "owners": [
+        {
+          "name": "News Corp (Murdoch Family Trust)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions",
+        "subsidized by parent"
+      ],
+      "lean": "right",
+      "notes": "Historically loss-making; sustained by News Corp.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/New_York_Post"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "foxnews.com",
+        "foxbusiness.com"
+      ],
+      "name": "Fox News",
+      "type": "cable_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Fox News Media → Fox Corporation (Murdoch Family Trust holds voting control)",
+          "kind": "family_controlled"
+        },
+        {
+          "name": "Fox Corp public shareholders",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "cable carriage fees",
+        "advertising"
+      ],
+      "lean": "right",
+      "notes": "Paid $787.5M to settle Dominion's defamation suit in 2023 over false election claims.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Fox_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "cnn.com"
+      ],
+      "name": "CNN",
+      "type": "cable_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Skydance Corporation (formed when Paramount Skydance completed its merger with Warner Bros. Discovery on 6 October 2026); controlled by the Ellison family (David Ellison, CEO; financed by Larry Ellison)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "cable carriage fees",
+        "advertising",
+        "subscriptions (CNN streaming)"
+      ],
+      "lean": "lean-left",
+      "notes": "Owners since 2022: AT&T, then Warner Bros. Discovery, then Skydance (October 2026), which also owns CBS News.",
+      "sources": [
+        "https://www.aljazeera.com/economy/2026/10/6/cnn-cbs-news-now-under-one-roof-as-paramount-warner-bros-merger-closes",
+        "https://en.wikipedia.org/wiki/CNN"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "ms.now",
+        "msnow.com",
+        "msnbc.com"
+      ],
+      "name": "MS NOW (formerly MSNBC)",
+      "type": "cable_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Versant Media Group (public; spun off from Comcast, effective January 2026)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "cable carriage fees",
+        "advertising"
+      ],
+      "lean": "left",
+      "notes": "Rebranded from MSNBC to MS NOW on 15 Nov 2025 as part of the Comcast spin-off of its cable networks.",
+      "sources": [
+        "https://www.adweek.com/tvnewser/msnbc-rebrand-to-ms-now-taking-place-on-nov-15/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "nbcnews.com",
+        "today.com"
+      ],
+      "name": "NBC News",
+      "type": "broadcast_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "NBCUniversal → Comcast (public; Roberts family holds ~33% voting power via Class B shares)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "affiliate fees"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/NBC_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "abcnews.go.com",
+        "abcnews.com"
+      ],
+      "name": "ABC News",
+      "type": "broadcast_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Walt Disney Company (public)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "affiliate fees"
+      ],
+      "lean": "lean-left",
+      "notes": "Disney paid $15M in Dec 2024 to settle a defamation suit brought by Donald Trump.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/ABC_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "cbsnews.com"
+      ],
+      "name": "CBS News",
+      "type": "broadcast_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Skydance Corporation (Paramount Skydance, which merged with Warner Bros. Discovery on 6 October 2026); controlled by the Ellison family (David Ellison, CEO; financed by Larry Ellison)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "affiliate fees"
+      ],
+      "lean": "center",
+      "notes": "Bari Weiss (founder of The Free Press) became editor-in-chief of CBS News in October 2025. Paramount paid $16M in 2025 to settle a Trump lawsuit over a '60 Minutes' edit.",
+      "sources": [
+        "https://www.cbsnews.com/news/bari-weiss-editor-in-chief-cbs-news-paramount-the-free-press",
+        "https://www.aljazeera.com/economy/2026/10/6/cnn-cbs-news-now-under-one-roof-as-paramount-warner-bros-merger-closes"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thefp.com"
+      ],
+      "name": "The Free Press",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Skydance Corporation (Paramount Skydance bought it in October 2025; merged with Warner Bros. Discovery on 6 October 2026); controlled by the Ellison family",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "parent company"
+      ],
+      "lean": "lean-right",
+      "notes": "Founded by Bari Weiss in 2021 as a Substack. Often described as 'heterodox' / center-right.",
+      "sources": [
+        "https://www.thewrap.com/paramount-bari-weiss-the-free-press-purchase",
+        "https://www.aljazeera.com/economy/2026/10/6/cnn-cbs-news-now-under-one-roof-as-paramount-warner-bros-merger-closes"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "npr.org"
+      ],
+      "name": "NPR",
+      "type": "public_radio",
+      "country": "US",
+      "owners": [
+        {
+          "name": "National Public Radio, Inc. (nonprofit)",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "member-station fees",
+        "corporate sponsorship (underwriting)",
+        "foundations and donors",
+        "federal funding via CPB ended after the 2025 rescission"
+      ],
+      "lean": "lean-left",
+      "notes": "Congress rescinded CPB funding in July 2025; CPB began winding down. NPR's direct federal share was small, but member stations relied on it heavily.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/NPR"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "pbs.org"
+      ],
+      "name": "PBS",
+      "type": "public_tv",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Public Broadcasting Service (nonprofit)",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "member stations",
+        "viewer donations",
+        "corporate sponsors",
+        "foundations",
+        "federal funding via CPB ended 2025"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/PBS"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "bbc.com",
+        "bbc.co.uk"
+      ],
+      "name": "BBC",
+      "type": "public_broadcaster",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "British Broadcasting Corporation (public corporation under Royal Charter)",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "advertising on bbc.com outside the UK",
+        "BBC Studios commercial revenue",
+        "TV licence fee (UK services)"
+      ],
+      "lean": "center",
+      "notes": "Editorial independence is protected by charter; government sets the licence fee and appoints the chair.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/BBC"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "theguardian.com"
+      ],
+      "name": "The Guardian",
+      "type": "newspaper",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Guardian Media Group, owned by the Scott Trust Limited",
+          "kind": "trust"
+        }
+      ],
+      "funding": [
+        "reader contributions and subscriptions",
+        "advertising",
+        "Scott Trust endowment (~£1bn)"
+      ],
+      "lean": "left",
+      "notes": "The Scott Trust's sole purpose is to secure the paper's financial and editorial independence. Some series are philanthropically funded through theguardian.org, a US foundation; the Guardian labels them \"Supported by\" and says the journalism stays editorially independent.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Guardian",
+        "https://www.theguardian.com/info/2016/jan/25/content-funding"
+      ],
+      "confidence": "high",
+      "funders": [
+        {
+          "name": "Gates Foundation (via theguardian.org)",
+          "what": "Global development series",
+          "source": "https://www.theguardian.com/global-development/2010/sep/14/about-this-site",
+          "verified": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "domains": [
+        "reuters.com"
+      ],
+      "name": "Reuters",
+      "type": "wire_service",
+      "country": "UK/Canada",
+      "owners": [
+        {
+          "name": "Thomson Reuters (public; Woodbridge Company / Thomson family holds a majority)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "news licensing to media",
+        "financial data and professional services (parent)"
+      ],
+      "lean": "center",
+      "notes": "Trust Principles (1941) require independence and freedom from bias.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Reuters"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "apnews.com",
+        "ap.org"
+      ],
+      "name": "Associated Press",
+      "type": "wire_service",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Not-for-profit cooperative owned by US newspapers and broadcasters",
+          "kind": "cooperative"
+        }
+      ],
+      "funding": [
+        "content licensing",
+        "philanthropic grants (increasing share)"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Associated_Press"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "bloomberg.com"
+      ],
+      "name": "Bloomberg News",
+      "type": "financial_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Bloomberg L.P., majority-owned by Michael Bloomberg",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "Bloomberg Terminal subscriptions subsidize the newsroom",
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "center",
+      "notes": "Newsroom policy historically avoided investigating Michael Bloomberg himself; suspended coverage of his 2020 campaign rivals' investigations.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Bloomberg_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "theatlantic.com"
+      ],
+      "name": "The Atlantic",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Emerson Collective (Laurene Powell Jobs) holds a majority stake since 2017",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising",
+        "events",
+        "owner capital"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Atlantic"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "time.com"
+      ],
+      "name": "TIME",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Marc and Lynne Benioff (Salesforce co-founder), purchased 2018 for $190M",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising",
+        "events",
+        "owner capital"
+      ],
+      "lean": "lean-left",
+      "notes": "Verify for any ownership change after 2025.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Time_(magazine)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "latimes.com"
+      ],
+      "name": "Los Angeles Times",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Patrick Soon-Shiong (biotech billionaire) via Nant Capital since 2018",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising",
+        "owner capital"
+      ],
+      "lean": "lean-left",
+      "notes": "Owner blocked a 2024 presidential endorsement and reshaped the editorial board; announced plans in 2025 to take the paper public.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Los_Angeles_Times"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "politico.com",
+        "politico.eu"
+      ],
+      "name": "Politico",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Axel Springer SE (German media group; controlled by CEO Mathias Döpfner and Friede Springer after the 2025 separation from KKR)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "Politico Pro subscriptions (majority)",
+        "advertising",
+        "events"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Politico"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "businessinsider.com",
+        "insider.com"
+      ],
+      "name": "Business Insider",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Axel Springer SE",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions",
+        "affiliate commerce"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Business_Insider"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "telegraph.co.uk"
+      ],
+      "name": "The Telegraph",
+      "type": "newspaper",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Axel Springer SE (£575M purchase agreed March 2026, completed 30 June 2026). Previously RedBird IMI (Abu Dhabi-backed, 2023–26) and the Barclay family.",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://www.thenationalnews.com/business/uk/2026/04/16/daily-telegraph-sold-to-axel-springer-in-profitable-redbird-imi-deal",
+        "https://videoweek.com/2026/06/30/the-telegraphs-long-takeover-saga-finally-ends-as-axel-springer-completes-takeover/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "dailymail.co.uk",
+        "mailonline.co.uk",
+        "dailymail.com",
+        "mailonline.com"
+      ],
+      "name": "Daily Mail / MailOnline",
+      "type": "tabloid",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "DMG Media → Daily Mail and General Trust, privately owned by Lord Rothermere (Jonathan Harmsworth)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "print sales"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Daily_Mail"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thesun.co.uk",
+        "the-sun.com"
+      ],
+      "name": "The Sun",
+      "type": "tabloid",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "News UK → News Corp (Murdoch Family Trust)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "print sales"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Sun_(United_Kingdom)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thetimes.com",
+        "thetimes.co.uk"
+      ],
+      "name": "The Times / The Sunday Times",
+      "type": "newspaper",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "News UK → News Corp (Murdoch Family Trust)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Times"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "economist.com"
+      ],
+      "name": "The Economist",
+      "type": "magazine",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "The Economist Group; largest shareholder Exor N.V. (Agnelli family, ~43%), plus the Cadbury, Rothschild and Schroder families and staff",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "center",
+      "notes": "Editorial independence overseen by independent trustees; classical-liberal house line.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Economist"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "ft.com"
+      ],
+      "name": "Financial Times",
+      "type": "newspaper",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Nikkei Inc. (Japanese media company) since 2015",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Financial_Times"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "independent.co.uk",
+        "the-independent.com"
+      ],
+      "name": "The Independent",
+      "type": "digital",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Independent Digital News & Media; Evgeny Lebedev (majority) and Saudi investor Sultan Muhammad Abuljadayel (~30%)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "affiliate commerce"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Independent"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "aljazeera.com",
+        "aljazeera.net"
+      ],
+      "name": "Al Jazeera",
+      "type": "broadcaster",
+      "country": "Qatar",
+      "owners": [
+        {
+          "name": "Al Jazeera Media Network, funded by the government of Qatar",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "Qatari state funding",
+        "advertising"
+      ],
+      "lean": "lean-left",
+      "notes": "Editorially independent on most topics by reputation, but coverage of Qatar and its Gulf rivals tracks state interests.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Al_Jazeera"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "rt.com"
+      ],
+      "name": "RT (Russia Today)",
+      "type": "state_media",
+      "country": "Russia",
+      "owners": [
+        {
+          "name": "ANO TV-Novosti, funded by the Russian federal budget",
+          "kind": "state_controlled"
+        }
+      ],
+      "funding": [
+        "Russian state"
+      ],
+      "lean": "state",
+      "notes": "Banned in the EU, UK and Canada; sanctioned by the US Treasury in 2024 for covert influence operations.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/RT_(TV_network)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "sputniknews.com",
+        "sputnikglobe.com"
+      ],
+      "name": "Sputnik",
+      "type": "state_media",
+      "country": "Russia",
+      "owners": [
+        {
+          "name": "Rossiya Segodnya (Russian state)",
+          "kind": "state_controlled"
+        }
+      ],
+      "funding": [
+        "Russian state"
+      ],
+      "lean": "state",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Sputnik_(news_agency)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "cgtn.com"
+      ],
+      "name": "CGTN",
+      "type": "state_media",
+      "country": "China",
+      "owners": [
+        {
+          "name": "China Media Group (Chinese state; under the CCP Central Propaganda Department)",
+          "kind": "state_controlled"
+        }
+      ],
+      "funding": [
+        "Chinese state"
+      ],
+      "lean": "state",
+      "notes": "UK licence revoked by Ofcom in 2021.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/China_Global_Television_Network"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "globaltimes.cn",
+        "xinhuanet.com",
+        "news.cn",
+        "chinadaily.com.cn"
+      ],
+      "name": "Global Times / Xinhua / China Daily",
+      "type": "state_media",
+      "country": "China",
+      "owners": [
+        {
+          "name": "People's Daily (Global Times), Xinhua News Agency, China Daily Group — all organs of the Chinese state / CCP",
+          "kind": "state_controlled"
+        }
+      ],
+      "funding": [
+        "Chinese state"
+      ],
+      "lean": "state",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Global_Times"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "theepochtimes.com",
+        "ntd.com"
+      ],
+      "name": "The Epoch Times",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Epoch Media Group, founded and run by Falun Gong practitioners (nonprofit)",
+          "kind": "religious_org"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "donations",
+        "advertising"
+      ],
+      "lean": "right",
+      "notes": "CFO indicted in 2024 on money-laundering charges. Heavy political ad spending since 2016.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Epoch_Times"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "breitbart.com"
+      ],
+      "name": "Breitbart News",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Breitbart News Network LLC (Larry Solov, Susie Breitbart); the Mercer family (hedge-fund billionaire Robert Mercer) held a major stake",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "investors"
+      ],
+      "lean": "far-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Breitbart_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "dailywire.com"
+      ],
+      "name": "The Daily Wire",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Bentkey Ventures; co-founded by Ben Shapiro and Jeremy Boreing; initial funding from Texas fracking billionaires Farris and Dan Wilks",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising",
+        "investors"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Daily_Wire"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "dailycaller.com"
+      ],
+      "name": "The Daily Caller",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Co-founded by Tucker Carlson (sold his stake in 2020) and Neil Patel; early funding from investor Foster Friess",
+          "kind": "political_affiliated"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "Daily Caller News Foundation (nonprofit) donors"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Daily_Caller"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "newsmax.com"
+      ],
+      "name": "Newsmax",
+      "type": "cable_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Newsmax Inc. (public since March 2025; founder Christopher Ruddy retains control)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "carriage fees"
+      ],
+      "lean": "right",
+      "notes": "Settled a Smartmatic defamation suit for $40M in 2024 over false election claims.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Newsmax"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "oann.com"
+      ],
+      "name": "One America News",
+      "type": "cable_news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Herring Networks, Inc. (Robert Herring Sr.)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "carriage fees",
+        "advertising"
+      ],
+      "lean": "far-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/One_America_News_Network"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thefederalist.com"
+      ],
+      "name": "The Federalist",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "FDRLST Media; funding undisclosed. Reporting has identified Uline billionaire Dick Uihlein as a funder.",
+          "kind": "undisclosed_funding"
+        }
+      ],
+      "funding": [
+        "donors",
+        "advertising"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Federalist_(website)"
+      ],
+      "confidence": "medium",
+      "notes": "The outlet does not publish its donors."
+    },
+    {
+      "domains": [
+        "washingtonexaminer.com"
+      ],
+      "name": "Washington Examiner",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "MediaDC / Clarity Media Group → Philip Anschutz",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "owner capital",
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Washington_Examiner"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "washingtontimes.com"
+      ],
+      "name": "The Washington Times",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Operations Holdings, affiliated with the Unification Church (founded 1982 by Sun Myung Moon)",
+          "kind": "religious_org"
+        }
+      ],
+      "funding": [
+        "owner subsidy",
+        "advertising"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Washington_Times"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "nationalreview.com"
+      ],
+      "name": "National Review",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "National Review, Inc.; supported by the nonprofit National Review Institute",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "donors"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/National_Review"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "reason.com"
+      ],
+      "name": "Reason",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Reason Foundation (nonprofit, libertarian); donors have included Koch-affiliated foundations",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "donors",
+        "subscriptions"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Reason_(magazine)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "freebeacon.com"
+      ],
+      "name": "Washington Free Beacon",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Founded 2012 with funding from hedge-fund billionaire Paul Singer",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "donors"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Washington_Free_Beacon"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "huffpost.com",
+        "huffingtonpost.com"
+      ],
+      "name": "HuffPost",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "BuzzFeed, Inc., majority-owned (about 51%) by Byron Allen's Allen Family Digital since 27 May 2026; Allen is chairman and CEO",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/HuffPost",
+        "https://en.wikipedia.org/wiki/BuzzFeed"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "buzzfeed.com"
+      ],
+      "name": "BuzzFeed",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "BuzzFeed, Inc., majority-owned (about 51%) by Byron Allen's Allen Family Digital since 27 May 2026; Allen is chairman and CEO",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "affiliate commerce"
+      ],
+      "lean": "lean-left",
+      "notes": "BuzzFeed News closed in 2023.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/BuzzFeed",
+        "https://en.wikipedia.org/wiki/BuzzFeed"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "vox.com",
+        "nymag.com",
+        "thecut.com",
+        "vulture.com"
+      ],
+      "name": "Vox and New York Magazine",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Lupa Systems (James Murdoch's firm), which bought Vox, New York Magazine and the podcast network from Vox Media in 2026",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions",
+        "affiliate commerce"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Vox_Media",
+        "https://talkingbiznews.com/media-news/the-verge-is-sold-to-penske-media/"
+      ],
+      "confidence": "medium",
+      "notes": "Vox Media was split in 2026: Penske Media bought The Verge and other brands (closed 18 June 2026); Lupa Systems bought Vox and New York Magazine (reported closed July 2026)."
+    },
+    {
+      "domains": [
+        "theverge.com",
+        "eater.com"
+      ],
+      "name": "The Verge and Eater",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Penske Media Corporation (Jay Penske), which bought The Verge, Eater and other Vox Media brands in June 2026",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions",
+        "affiliate commerce"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://talkingbiznews.com/media-news/the-verge-is-sold-to-penske-media/"
+      ],
+      "confidence": "high",
+      "notes": "Vox Media was split in 2026; Penske Media closed its purchase on 18 June 2026."
+    },
+    {
+      "domains": [
+        "theintercept.com"
+      ],
+      "name": "The Intercept",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Intercept (independent nonprofit since 2024); founded 2014 by First Look Media with funding from eBay founder Pierre Omidyar",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "donors",
+        "reader memberships"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Intercept"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "propublica.org"
+      ],
+      "name": "ProPublica",
+      "type": "nonprofit_newsroom",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Pro Publica, Inc. (nonprofit); founding funder Sandler Foundation; now many foundations and donors",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "individual donors"
+      ],
+      "lean": "lean-left",
+      "notes": "Publishes a full donor list; multiple Pulitzers.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/ProPublica"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "motherjones.com",
+        "revealnews.org"
+      ],
+      "name": "Mother Jones / Reveal",
+      "type": "nonprofit_newsroom",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Center for Investigative Reporting (nonprofit; merged with the Foundation for National Progress in 2024)",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "reader donations",
+        "foundations",
+        "subscriptions"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Mother_Jones_(magazine)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thenation.com"
+      ],
+      "name": "The Nation",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Nation Company, L.P. (Katrina vanden Heuvel and investors)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "donors"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Nation"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "jacobin.com"
+      ],
+      "name": "Jacobin",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Jacobin Foundation (Bhaskar Sunkara)",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "subscriptions"
+      ],
+      "lean": "far-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Jacobin_(magazine)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "salon.com"
+      ],
+      "name": "Salon",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Salon.com LLC (Chris Richmond and Drew Schoentrup, since 2019)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Salon_(website)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "slate.com"
+      ],
+      "name": "Slate",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Slate Group → Graham Holdings Company (public; Graham family)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "Slate Plus subscriptions"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Slate_(magazine)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "dailykos.com"
+      ],
+      "name": "Daily Kos",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Kos Media, LLC (Markos Moulitsas)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "reader donations"
+      ],
+      "lean": "far-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Daily_Kos"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "rawstory.com"
+      ],
+      "name": "Raw Story",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Raw Story Media, Inc. (John Byrne, Roxanne Cooper)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Raw_Story"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "thehill.com"
+      ],
+      "name": "The Hill",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Nexstar Media Group (public)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Hill_(newspaper)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "axios.com"
+      ],
+      "name": "Axios",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Cox Enterprises (private; Cox family) since 2022",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "Axios Pro subscriptions",
+        "events"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Axios_(website)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "semafor.com"
+      ],
+      "name": "Semafor",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Semafor (private; founders Justin B. Smith and Ben Smith; venture investors)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "sponsorships",
+        "events",
+        "investors"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Semafor_(website)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "forbes.com"
+      ],
+      "name": "Forbes",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Forbes Media; majority owned by Integrated Whale Media Investments (Hong Kong) since 2014, Forbes family minority",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "contributor network",
+        "licensing",
+        "affiliate commissions on forbes.com/advisor (Forbes Marketplace, a separate company licensing the Forbes name)"
+      ],
+      "lean": "center",
+      "notes": "Much of forbes.com is written by unpaid 'contributors'; treat bylines accordingly.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Forbes",
+        "https://www.axios.com/2022/11/15/forbes-sun-group-gsv-acquisition-talks"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "newsweek.com"
+      ],
+      "name": "Newsweek",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Newsweek Publishing LLC (Dev Pragad and Johnathan Davis; split from IBT Media in 2018)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "center",
+      "notes": "Ownership has been litigated between the co-owners; IBT Media had ties to Olivet University.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Newsweek"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "thedailybeast.com"
+      ],
+      "name": "The Daily Beast",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "People Inc. (formerly IAC Inc.; public; Barry Diller, chairman)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Daily_Beast",
+        "https://en.wikipedia.org/wiki/IAC_(company)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "newyorker.com",
+        "wired.com",
+        "vanityfair.com",
+        "gq.com",
+        "vogue.com",
+        "arstechnica.com"
+      ],
+      "name": "Condé Nast (New Yorker, Wired, Vanity Fair, Ars Technica)",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Condé Nast → Advance Publications (private; Newhouse family)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions",
+        "affiliate commerce"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Cond%C3%A9_Nast"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "usatoday.com"
+      ],
+      "name": "USA Today",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "USA TODAY Co., Inc. (public; named Gannett until November 2025)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "center",
+      "notes": "The company owns about 200 local US papers and has cut newsroom staff heavily.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/USA_Today",
+        "https://en.wikipedia.org/wiki/Gannett"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "chicagotribune.com",
+        "nydailynews.com",
+        "baltimoresun.com",
+        "orlandosentinel.com",
+        "sun-sentinel.com",
+        "denverpost.com",
+        "mercurynews.com",
+        "eastbaytimes.com",
+        "ocregister.com",
+        "bostonherald.com",
+        "twincities.com",
+        "dailycamera.com",
+        "sgvtribune.com",
+        "dailynews.com"
+      ],
+      "name": "Alden Global Capital papers (Tribune Publishing / MediaNews Group)",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Alden Global Capital (hedge fund) via Tribune Publishing and MediaNews Group / Digital First Media",
+          "kind": "private_equity_hedge_fund"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions",
+        "asset sales"
+      ],
+      "lean": "center",
+      "notes": "Alden is the second-largest US newspaper owner and is known for deep newsroom cuts and selling off buildings. Baltimore Sun was sold to David Smith (Sinclair) in 2024.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Alden_Global_Capital"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "nationalpost.com",
+        "torontosun.com",
+        "ottawacitizen.com",
+        "montrealgazette.com",
+        "vancouversun.com",
+        "calgaryherald.com",
+        "edmontonjournal.com",
+        "financialpost.com"
+      ],
+      "name": "Postmedia Network",
+      "type": "newspaper",
+      "country": "Canada",
+      "owners": [
+        {
+          "name": "Postmedia Network Canada Corp. (public); largest shareholder Chatham Asset Management (US hedge fund)",
+          "kind": "private_equity_hedge_fund"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Postmedia_Network"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "cbc.ca",
+        "radio-canada.ca"
+      ],
+      "name": "CBC / Radio-Canada",
+      "type": "public_broadcaster",
+      "country": "Canada",
+      "owners": [
+        {
+          "name": "Canadian Broadcasting Corporation (Crown corporation)",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "parliamentary appropriation",
+        "advertising"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/CBC/Radio-Canada"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "abc.net.au"
+      ],
+      "name": "ABC (Australia)",
+      "type": "public_broadcaster",
+      "country": "Australia",
+      "owners": [
+        {
+          "name": "Australian Broadcasting Corporation (statutory authority)",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "federal government appropriation"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Australian_Broadcasting_Corporation"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "news.com.au",
+        "theaustralian.com.au",
+        "heraldsun.com.au",
+        "dailytelegraph.com.au",
+        "couriermail.com.au",
+        "skynews.com.au"
+      ],
+      "name": "News Corp Australia",
+      "type": "newspaper",
+      "country": "Australia",
+      "owners": [
+        {
+          "name": "News Corp Australia → News Corp (Murdoch Family Trust)",
+          "kind": "family_controlled"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/News_Corp_Australia"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "smh.com.au",
+        "theage.com.au",
+        "afr.com"
+      ],
+      "name": "Nine newspapers (SMH, The Age, AFR)",
+      "type": "newspaper",
+      "country": "Australia",
+      "owners": [
+        {
+          "name": "Nine Entertainment Co. (public)",
+          "kind": "public_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Nine_Entertainment"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "dw.com"
+      ],
+      "name": "Deutsche Welle",
+      "type": "public_broadcaster",
+      "country": "Germany",
+      "owners": [
+        {
+          "name": "Deutsche Welle, funded from the German federal budget",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "German federal tax revenue"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Deutsche_Welle"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "france24.com",
+        "rfi.fr"
+      ],
+      "name": "France 24 / RFI",
+      "type": "public_broadcaster",
+      "country": "France",
+      "owners": [
+        {
+          "name": "France Médias Monde (French state)",
+          "kind": "state_funded"
+        }
+      ],
+      "funding": [
+        "French state"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/France_24"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "ndtv.com"
+      ],
+      "name": "NDTV",
+      "type": "broadcaster",
+      "country": "India",
+      "owners": [
+        {
+          "name": "Adani Group (Gautam Adani, billionaire) since December 2022",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "owner capital"
+      ],
+      "lean": "center",
+      "notes": "Several senior journalists resigned after the Adani takeover; watch coverage of Adani Group and the governing party.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/NDTV"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "republicworld.com"
+      ],
+      "name": "Republic TV / Republic World",
+      "type": "broadcaster",
+      "country": "India",
+      "owners": [
+        {
+          "name": "Republic Media Network (Arnab Goswami; early investor BJP politician Rajeev Chandrasekhar)",
+          "kind": "political_affiliated"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Republic_TV"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "zerohedge.com"
+      ],
+      "name": "ZeroHedge",
+      "type": "digital",
+      "country": "Bulgaria/US",
+      "owners": [
+        {
+          "name": "ABC Media Ltd (registered in Bulgaria); run by Daniel Ivandjiiski under the pseudonym 'Tyler Durden'",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "far-right",
+      "notes": "",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Zero_Hedge"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "infowars.com",
+        "banned.video"
+      ],
+      "name": "Infowars",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Free Speech Systems (Alex Jones); in bankruptcy proceedings since 2022 following ~$1.5bn Sandy Hook defamation judgments; ownership outcome contested",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "supplement sales",
+        "donations"
+      ],
+      "lean": "far-right",
+      "notes": "",
+      "sources": [
+        "https://en.wikipedia.org/wiki/InfoWars"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "thegatewaypundit.com"
+      ],
+      "name": "The Gateway Pundit",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "TGP Communications (Jim Hoft)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "donations"
+      ],
+      "lean": "far-right",
+      "notes": "Settled a defamation suit by two Georgia election workers in 2024; retracted related claims.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Gateway_Pundit"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "occupydemocrats.com"
+      ],
+      "name": "Occupy Democrats",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Omar Rivero (private)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "donations"
+      ],
+      "lean": "far-left",
+      "notes": "",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Occupy_Democrats"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "palmerreport.com"
+      ],
+      "name": "Palmer Report",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Bill Palmer (private)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "donations",
+        "advertising"
+      ],
+      "lean": "far-left",
+      "notes": "",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Palmer_Report"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "commondreams.org"
+      ],
+      "name": "Common Dreams",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Common Dreams (nonprofit)",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "reader donations"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Common_Dreams"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "truthout.org"
+      ],
+      "name": "Truthout",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Truthout (nonprofit)",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "reader donations",
+        "foundations"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Truthout"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "democracynow.org"
+      ],
+      "name": "Democracy Now!",
+      "type": "broadcaster",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Democracy Now! Productions (nonprofit); accepts no advertising, corporate underwriting or government funding",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "viewer and listener donations",
+        "foundations"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Democracy_Now!"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thegrayzone.com"
+      ],
+      "name": "The Grayzone",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Founded and run by Max Blumenthal",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "reader donations"
+      ],
+      "lean": "far-left",
+      "notes": "",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Grayzone"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "quillette.com"
+      ],
+      "name": "Quillette",
+      "type": "digital",
+      "country": "Australia",
+      "owners": [
+        {
+          "name": "Quillette Pty Ltd (Claire Lehmann)",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "donations"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Quillette"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "unherd.com"
+      ],
+      "name": "UnHerd",
+      "type": "digital",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Funded by hedge-fund founder Sir Paul Marshall (Marshall Wace)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "owner capital",
+        "subscriptions"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/UnHerd"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "spectator.co.uk",
+        "spectator.com"
+      ],
+      "name": "The Spectator",
+      "type": "magazine",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Sir Paul Marshall (purchased September 2024 for £100M)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Spectator"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "gbnews.com"
+      ],
+      "name": "GB News",
+      "type": "broadcaster",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "All Perspectives Ltd; owned by Sir Paul Marshall and Legatum (Dubai-based investment group founded by Christopher Chandler)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "owner capital (loss-making)",
+        "advertising"
+      ],
+      "lean": "right",
+      "notes": "Multiple Ofcom impartiality breaches.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/GB_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "novaramedia.com"
+      ],
+      "name": "Novara Media",
+      "type": "digital",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Novara Media (reader-funded cooperative-style organization)",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "reader donations"
+      ],
+      "lean": "far-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Novara_Media"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "theconversation.com"
+      ],
+      "name": "The Conversation",
+      "type": "nonprofit_newsroom",
+      "country": "Australia/Global",
+      "owners": [
+        {
+          "name": "The Conversation Media Group (nonprofit); funded by member universities and foundations",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "university memberships",
+        "foundations",
+        "donations"
+      ],
+      "lean": "lean-left",
+      "notes": "Articles are written by academics and edited by journalists; funding statements are disclosed per article.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Conversation_(website)"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "thebulwark.com"
+      ],
+      "name": "The Bulwark",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Bulwark (Sarah Longwell, publisher); launched 2018 by Defending Democracy Together",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "donors"
+      ],
+      "lean": "center",
+      "notes": "Anti-Trump conservative / center-right.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Bulwark_(website)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "theblaze.com",
+        "blazemedia.com"
+      ],
+      "name": "Blaze Media",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Blaze Media LLC (Glenn Beck; merged with CRTV in 2018)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Blaze_Media"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "townhall.com",
+        "pjmedia.com",
+        "redstate.com",
+        "hotair.com",
+        "twitchy.com",
+        "bearingarms.com"
+      ],
+      "name": "Salem Media (Townhall, PJ Media, RedState, HotAir)",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "WaterStone (The Christian Community Foundation), a Christian nonprofit; it took Salem Media Group private, closing in August 2026",
+          "kind": "religious_org"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "subscriptions"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Salem_Media_Group",
+        "https://radioink.com/?p=106412"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "westernjournal.com"
+      ],
+      "name": "The Western Journal",
+      "type": "digital",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Liftable Media (Floyd Brown)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "far-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Western_Journal"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "rebelnews.com"
+      ],
+      "name": "Rebel News",
+      "type": "digital",
+      "country": "Canada",
+      "owners": [
+        {
+          "name": "Rebel News Network Ltd. (Ezra Levant)",
+          "kind": "private_company"
+        }
+      ],
+      "funding": [
+        "crowdfunding",
+        "subscriptions"
+      ],
+      "lean": "far-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Rebel_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "prageru.com"
+      ],
+      "name": "PragerU",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Prager University Foundation (501(c)(3)); early major funding from Farris and Dan Wilks",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors"
+      ],
+      "lean": "right",
+      "notes": "Not a university. Produces short advocacy videos.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/PragerU"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "theamericanconservative.com"
+      ],
+      "name": "The American Conservative",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "American Ideas Institute (nonprofit)",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "donors",
+        "subscriptions"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_American_Conservative"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "currentaffairs.org"
+      ],
+      "name": "Current Affairs",
+      "type": "magazine",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Current Affairs (Nathan J. Robinson)",
+          "kind": "reader_funded"
+        }
+      ],
+      "funding": [
+        "subscriptions"
+      ],
+      "lean": "far-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Current_Affairs_(magazine)"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "wikipedia.org"
+      ],
+      "name": "Wikipedia",
+      "type": "encyclopedia",
+      "country": "Global",
+      "owners": [
+        {
+          "name": "Wikimedia Foundation (nonprofit)",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "small individual donations (majority)",
+        "grants"
+      ],
+      "lean": "center",
+      "notes": "Volunteer-edited; check article talk pages and sources. Good starting point for ownership facts in this dataset.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Wikimedia_Foundation"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "news.yahoo.com",
+        "yahoo.com"
+      ],
+      "name": "Yahoo News",
+      "type": "aggregator",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Yahoo Inc. — Apollo Global Management (private equity, ~90%) and Verizon (~10%)",
+          "kind": "private_equity_hedge_fund"
+        },
+        {
+          "name": "Aggregator of other outlets' content",
+          "kind": "platform"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "n/a",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Yahoo!_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "msn.com"
+      ],
+      "name": "MSN",
+      "type": "aggregator",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Microsoft (public)",
+          "kind": "platform"
+        }
+      ],
+      "funding": [
+        "advertising"
+      ],
+      "lean": "n/a",
+      "notes": "Algorithmic and AI-assisted curation of licensed articles.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/MSN"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "news.google.com"
+      ],
+      "name": "Google News",
+      "type": "aggregator",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Alphabet Inc. (public)",
+          "kind": "platform"
+        }
+      ],
+      "funding": [
+        "advertising (parent)"
+      ],
+      "lean": "n/a",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Google_News"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "theonion.com"
+      ],
+      "name": "The Onion",
+      "type": "satire",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Global Tetrahedron LLC (Jeff Lawson, former Twilio CEO) since 2024",
+          "kind": "satire"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "memberships"
+      ],
+      "lean": "n/a",
+      "notes": "Satire. Everything is fictional.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Onion"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "babylonbee.com"
+      ],
+      "name": "The Babylon Bee",
+      "type": "satire",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Seth Dillon (private)",
+          "kind": "satire"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "merchandise"
+      ],
+      "lean": "n/a",
+      "notes": "Conservative Christian satire. Fictional.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Babylon_Bee"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "snopes.com"
+      ],
+      "name": "Snopes",
+      "type": "fact_check",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Snopes Media Group (Chris Richmond, Drew Schoentrup)",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "memberships"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Snopes"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "politifact.com"
+      ],
+      "name": "PolitiFact",
+      "type": "fact_check",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Poynter Institute (nonprofit)",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "donors",
+        "fact-checking partnerships (Meta, TikTok)"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/PolitiFact"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "factcheck.org"
+      ],
+      "name": "FactCheck.org",
+      "type": "fact_check",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Annenberg Public Policy Center, University of Pennsylvania",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "Annenberg Foundation",
+        "donors"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/FactCheck.org"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "fullfact.org"
+      ],
+      "name": "Full Fact",
+      "type": "fact_check",
+      "country": "UK",
+      "owners": [
+        {
+          "name": "Full Fact (registered charity)",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "donations",
+        "grants (including from Google and Meta)"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Full_Fact"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "mediabiasfactcheck.com"
+      ],
+      "name": "Media Bias/Fact Check",
+      "type": "fact_check",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Dave Van Zandt (small private operation)",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "advertising",
+        "memberships"
+      ],
+      "lean": "center",
+      "notes": "Widely used but methodology is informal and has been criticized by academics.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Media_Bias/Fact_Check"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "allsides.com"
+      ],
+      "name": "AllSides",
+      "type": "fact_check",
+      "country": "US",
+      "owners": [
+        {
+          "name": "AllSides Technologies Inc. (private)",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "memberships",
+        "licensing",
+        "advertising"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/AllSides"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "ground.news"
+      ],
+      "name": "Ground News",
+      "type": "fact_check",
+      "country": "Canada",
+      "owners": [
+        {
+          "name": "Snapwise Inc. (private)",
+          "kind": "fact_check"
+        }
+      ],
+      "funding": [
+        "subscriptions"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://ground.news/about"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "heritage.org"
+      ],
+      "name": "The Heritage Foundation",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Heritage Foundation (501(c)(3)); donors have included the Scaife, Bradley and Koch foundations",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "individual donors",
+        "foundations",
+        "corporations"
+      ],
+      "lean": "right",
+      "notes": "Author of Project 2025. The Daily Signal, founded by Heritage, became a legally separate organisation in June 2024.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Heritage_Foundation"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "aei.org"
+      ],
+      "name": "American Enterprise Institute",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "AEI (501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors",
+        "foundations",
+        "corporations"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/American_Enterprise_Institute"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "cato.org"
+      ],
+      "name": "Cato Institute",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Cato Institute (501(c)(3)); co-founded 1977 with Charles Koch's funding",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors",
+        "foundations"
+      ],
+      "lean": "lean-right",
+      "notes": "Libertarian.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Cato_Institute"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "brookings.edu"
+      ],
+      "name": "Brookings Institution",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Brookings (501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "corporations",
+        "individual donors",
+        "historically foreign governments including Qatar"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Brookings_Institution"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "americanprogress.org",
+        "americanprogressaction.org"
+      ],
+      "name": "Center for American Progress",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "CAP (501(c)(3)) and CAP Action (501(c)(4))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "corporations",
+        "individual donors"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Center_for_American_Progress"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "epi.org"
+      ],
+      "name": "Economic Policy Institute",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "EPI (501(c)(3)); significant funding from labor unions",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "labor unions",
+        "donors"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Economic_Policy_Institute"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "manhattan.institute",
+        "manhattan-institute.org",
+        "city-journal.org"
+      ],
+      "name": "Manhattan Institute / City Journal",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Manhattan Institute for Policy Research (501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors",
+        "foundations"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Manhattan_Institute_for_Policy_Research"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "hoover.org"
+      ],
+      "name": "Hoover Institution",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Hoover Institution at Stanford University",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "endowment",
+        "donors"
+      ],
+      "lean": "lean-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Hoover_Institution"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "cfr.org",
+        "foreignaffairs.com"
+      ],
+      "name": "Council on Foreign Relations / Foreign Affairs",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Council on Foreign Relations (nonprofit membership organization)",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "membership dues",
+        "corporate members",
+        "foundations"
+      ],
+      "lean": "center",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Council_on_Foreign_Relations"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "atlanticcouncil.org"
+      ],
+      "name": "Atlantic Council",
+      "type": "think_tank",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Atlantic Council (501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "foreign governments",
+        "defense contractors",
+        "corporations",
+        "foundations"
+      ],
+      "lean": "center",
+      "notes": "Publishes an annual donor list; many government and defense-industry funders.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Atlantic_Council"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "tpusa.com",
+        "turningpointusa.com"
+      ],
+      "name": "Turning Point USA",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Turning Point USA (501(c)(3)); founded by Charlie Kirk",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors"
+      ],
+      "lean": "far-right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Turning_Point_USA"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "moveon.org"
+      ],
+      "name": "MoveOn",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "MoveOn.org Civic Action (501(c)(4)) and MoveOn Political Action (PAC)",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "small donors",
+        "major donors including George Soros (historically)"
+      ],
+      "lean": "left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/MoveOn"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "judicialwatch.org"
+      ],
+      "name": "Judicial Watch",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Judicial Watch (501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors",
+        "foundations"
+      ],
+      "lean": "right",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Judicial_Watch"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "aclu.org"
+      ],
+      "name": "ACLU",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "American Civil Liberties Union (501(c)(4)) and ACLU Foundation (501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "members",
+        "donors",
+        "foundations"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/American_Civil_Liberties_Union"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "splcenter.org"
+      ],
+      "name": "Southern Poverty Law Center",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "SPLC (501(c)(3)); large endowment (> $700M)",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors",
+        "endowment"
+      ],
+      "lean": "lean-left",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Southern_Poverty_Law_Center"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "influencewatch.org",
+        "capitalresearch.org"
+      ],
+      "name": "InfluenceWatch (Capital Research Center)",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Capital Research Center (conservative 501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "donors and foundations"
+      ],
+      "lean": "right",
+      "notes": "A 'who funds who' database with a conservative lens; useful on left-leaning groups, thinner on the right.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Capital_Research_Center"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "sourcewatch.org",
+        "prwatch.org",
+        "exposedbycmd.org"
+      ],
+      "name": "SourceWatch (Center for Media and Democracy)",
+      "type": "advocacy",
+      "country": "US",
+      "owners": [
+        {
+          "name": "Center for Media and Democracy (progressive 501(c)(3))",
+          "kind": "advocacy"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "donors"
+      ],
+      "lean": "left",
+      "notes": "A 'who funds who' wiki with a progressive lens; useful on right-leaning groups, thinner on the left.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Center_for_Media_and_Democracy"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "opensecrets.org"
+      ],
+      "name": "OpenSecrets",
+      "type": "fact_check",
+      "country": "US",
+      "owners": [
+        {
+          "name": "OpenSecrets (501(c)(3); merger of Center for Responsive Politics and National Institute on Money in Politics)",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "foundations",
+        "donors"
+      ],
+      "lean": "center",
+      "notes": "Primary source for US political money; a planned data source for this extension.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/OpenSecrets"
+      ],
+      "confidence": "high"
+    },
+    {
+      "domains": [
+        "dailysignal.com"
+      ],
+      "name": "The Daily Signal",
+      "type": "news",
+      "country": "US",
+      "owners": [
+        {
+          "name": "The Daily Signal (independent nonprofit since June 2024; founded and previously funded by The Heritage Foundation)",
+          "kind": "nonprofit_foundation"
+        }
+      ],
+      "funding": [
+        "donors",
+        "foundations"
+      ],
+      "lean": "right",
+      "notes": "Spun out of The Heritage Foundation in June 2024; editorial line unchanged at the split.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/The_Daily_Signal"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "domains": [
+        "bostonglobe.com"
+      ],
+      "name": "The Boston Globe",
+      "type": "newspaper",
+      "country": "US",
+      "owners": [
+        {
+          "name": "John W. Henry (principal owner since 2013, bought for $70 million in cash), also principal owner of Fenway Sports Group (Boston Red Sox, Liverpool F.C.)",
+          "kind": "billionaire_individual"
+        }
+      ],
+      "funding": [
+        "subscriptions",
+        "advertising"
+      ],
+      "lean": "n/a",
+      "notes": "",
+      "sources": [
+        "https://en.wikipedia.org/wiki/John_W._Henry",
+        "https://en.wikipedia.org/wiki/The_Boston_Globe"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

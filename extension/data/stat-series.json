@@ -1,0 +1,1468 @@
+{
+ "about": "Official statistical series that Subtext's 'Official statistics' card can draw (source official_statistic, extension/context-stats.js). A statistic applies only when the page itself is about it: its name is in the headline, or it appears at least three times in the main text with a number near it. 'statistics' holds the phrases that name each statistic; 'series' holds one official series per statistic and country, with what it measures and its limits. Every endpoint is keyless. Checked live on 2026-11-17.",
+ "updated": "2026-11-17",
+ "statistics": {
+  "inflation": {
+   "label": "consumer price inflation",
+   "names": [
+    "inflation",
+    "inflation rate",
+    "consumer price index",
+    "consumer prices",
+    "cpi",
+    "hicp",
+    "cost of living index"
+   ],
+   "near": [
+    "%",
+    "percent",
+    "per cent",
+    "prices",
+    "price",
+    "year",
+    "month",
+    "annual",
+    "rate"
+   ],
+   "exclude": [
+    "core inflation",
+    "core cpi",
+    "core consumer prices",
+    "core hicp",
+    "underlying inflation",
+    "wage inflation",
+    "food inflation",
+    "food price inflation",
+    "rent inflation",
+    "house price inflation",
+    "asset inflation",
+    "grade inflation",
+    "tire inflation",
+    "tyre inflation",
+    "inflation pressure",
+    "inflation valve",
+    "inflation kit",
+    "ego inflation",
+    "inflation of the ego",
+    "title inflation",
+    "score inflation",
+    "inflation reduction act",
+    "inflation-adjusted",
+    "adjusted for inflation",
+    "inflation adjusted",
+    "producer price",
+    "pce inflation",
+    "pce price",
+    "shrinkflation",
+    "inflation expectations",
+    "inflation target",
+    "inflation-linked",
+    "inflation-protected",
+    "wholesale inflation",
+    "wholesale prices",
+    "wholesale price",
+    "producer prices",
+    "producer price index",
+    "ppi",
+    "pce",
+    "personal consumption expenditures",
+    "corruption perceptions index",
+    "cost per install",
+    "communist party"
+   ],
+   "excludeBefore": [
+    "core",
+    "wage",
+    "food",
+    "rent",
+    "grocery",
+    "asset",
+    "grade",
+    "tire",
+    "tyre",
+    "ego",
+    "score",
+    "title",
+    "medical",
+    "tuition",
+    "services",
+    "goods",
+    "energy",
+    "youth",
+    "price-adjusted"
+   ]
+  },
+  "core_inflation": {
+   "label": "core consumer price inflation",
+   "names": [
+    "core inflation",
+    "core cpi",
+    "core consumer prices",
+    "excluding food and energy",
+    "less food and energy"
+   ],
+   "near": [
+    "%",
+    "percent",
+    "per cent",
+    "prices",
+    "year",
+    "month",
+    "annual"
+   ],
+   "exclude": [
+    "core pce",
+    "core goods",
+    "core services"
+   ],
+   "excludeBefore": []
+  },
+  "unemployment": {
+   "label": "unemployment rate",
+   "names": [
+    "unemployment rate",
+    "jobless rate",
+    "rate of unemployment",
+    "unemployment"
+   ],
+   "near": [
+    "%",
+    "percent",
+    "per cent",
+    "rate",
+    "rose",
+    "fell",
+    "jobs",
+    "labor",
+    "labour"
+   ],
+   "exclude": [
+    "youth unemployment",
+    "teen unemployment",
+    "graduate unemployment",
+    "black unemployment",
+    "hispanic unemployment",
+    "female unemployment",
+    "male unemployment",
+    "long-term unemployment",
+    "unemployment insurance",
+    "unemployment benefit",
+    "unemployment benefits",
+    "unemployment claims",
+    "unemployment claim",
+    "jobless claims",
+    "unemployment line",
+    "unemployment office",
+    "unemployment check",
+    "unemployment checks",
+    "unemployment compensation",
+    "unemployment fund",
+    "unemployment tax",
+    "unemployment protection",
+    "unemployment cover",
+    "unemployment pay",
+    "underemployment",
+    "u-6",
+    "file for unemployment",
+    "apply for unemployment",
+    "filing for unemployment",
+    "applying for unemployment",
+    "on unemployment",
+    "collect unemployment",
+    "collecting unemployment",
+    "unemployment pays",
+    "unemployment payments"
+   ],
+   "excludeBefore": [
+    "youth",
+    "teen",
+    "teenage",
+    "graduate",
+    "black",
+    "hispanic",
+    "latino",
+    "female",
+    "male",
+    "women's",
+    "men's",
+    "veteran",
+    "long-term",
+    "state",
+    "county",
+    "city",
+    "regional",
+    "sports",
+    "for",
+    "on",
+    "collect",
+    "collecting"
+   ]
+  },
+  "earnings": {
+   "label": "average hourly earnings",
+   "names": [
+    "average hourly earnings",
+    "hourly earnings",
+    "wage growth",
+    "hourly wages",
+    "hourly pay",
+    "average hourly pay"
+   ],
+   "near": [
+    "%",
+    "percent",
+    "per cent",
+    "year",
+    "month",
+    "rose",
+    "grew"
+   ],
+   "exclude": [
+    "minimum wage",
+    "real wage growth",
+    "real wages"
+   ],
+   "excludeBefore": [
+    "real",
+    "minimum"
+   ]
+  },
+  "gasoline": {
+   "label": "gasoline price",
+   "names": [
+    "gas prices",
+    "gasoline prices",
+    "gas price",
+    "gasoline price",
+    "price of gas",
+    "price of gasoline",
+    "pump prices",
+    "price at the pump",
+    "prices at the pump"
+   ],
+   "near": [
+    "gallon",
+    "$",
+    "cents",
+    "pump",
+    "regular"
+   ],
+   "exclude": [
+    "natural gas prices",
+    "natural gas price",
+    "price of natural gas",
+    "gas prices in europe",
+    "diesel prices"
+   ],
+   "excludeBefore": [
+    "natural",
+    "diesel",
+    "propane",
+    "european",
+    "uk",
+    "british"
+   ]
+  },
+  "mortgage30": {
+   "label": "30-year mortgage rate",
+   "names": [
+    "30-year mortgage rate",
+    "30-year fixed mortgage rate",
+    "30-year fixed rate",
+    "30-year fixed",
+    "30-year mortgage",
+    "mortgage rates",
+    "mortgage rate"
+   ],
+   "near": [
+    "%",
+    "percent",
+    "per cent",
+    "freddie mac",
+    "week",
+    "fixed"
+   ],
+   "exclude": [
+    "15-year",
+    "adjustable-rate",
+    "arm rates",
+    "mortgage rate lock",
+    "reverse mortgage"
+   ],
+   "excludeBefore": [
+    "15-year",
+    "jumbo",
+    "fha",
+    "va",
+    "adjustable",
+    "reverse",
+    "commercial"
+   ]
+  },
+  "policy_rate": {
+   "label": "federal funds rate",
+   "names": [
+    "federal funds rate",
+    "fed funds rate",
+    "federal funds target",
+    "fed's benchmark rate",
+    "fed's benchmark interest rate",
+    "fed's key rate",
+    "fed's policy rate",
+    "fed funds"
+   ],
+   "near": [
+    "%",
+    "percent",
+    "per cent",
+    "federal reserve",
+    "fed",
+    "fomc",
+    "basis points",
+    "quarter point",
+    "half point"
+   ],
+   "exclude": [
+    "fed funds futures"
+   ],
+   "excludeBefore": []
+  },
+  "gdp_growth": {
+   "label": "GDP growth",
+   "names": [
+    "gdp",
+    "gross domestic product",
+    "economic growth rate"
+   ],
+   "near": [
+    "grew",
+    "growth",
+    "expanded",
+    "contracted",
+    "shrank",
+    "annual rate",
+    "quarter",
+    "annualized",
+    "annualised",
+    "%",
+    "percent",
+    "per cent"
+   ],
+   "exclude": [
+    "gdp per capita",
+    "per capita gdp",
+    "debt-to-gdp",
+    "debt to gdp",
+    "% of gdp",
+    "percent of gdp",
+    "per cent of gdp",
+    "share of gdp",
+    "of gdp",
+    "gdp ratio",
+    "gdpnow",
+    "gdp-linked",
+    "nominal gdp"
+   ],
+   "excludeBefore": [
+    "nominal",
+    "per",
+    "state",
+    "metro",
+    "county"
+   ]
+  },
+  "median_income": {
+   "label": "median household income",
+   "names": [
+    "median household income",
+    "median income of households",
+    "typical household income"
+   ],
+   "near": [
+    "$",
+    "dollars",
+    "census",
+    "year",
+    "income"
+   ],
+   "exclude": [
+    "median family income",
+    "area median income",
+    "median household income in"
+   ],
+   "excludeBefore": [
+    "area",
+    "county",
+    "state",
+    "city",
+    "metro"
+   ]
+  }
+ },
+ "series": [
+  {
+   "id": "us_cpi",
+   "statistic": "inflation",
+   "countries": [
+    "US"
+   ],
+   "subject": "US consumer prices",
+   "title": "Consumer prices, change over 12 months: United States",
+   "name": "CPI-U, all items, US city average, not seasonally adjusted",
+   "short": "BLS, CPI-U, all items",
+   "measures": "The percent change in the Consumer Price Index for All Urban Consumers (all items) from the same month a year earlier. Subtext computes the change from the published index levels. It is the headline inflation figure in BLS releases. A positive figure means prices are higher than a year earlier; a smaller positive figure means prices rose more slowly, not that they fell.",
+   "wording": "change",
+   "transform": "pct12",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "not seasonally adjusted (BLS uses the unadjusted index for 12-month changes)",
+   "source": "bls",
+   "agency": "the US Bureau of Labor Statistics",
+   "code": "CUUR0000SA0",
+   "endpoint": "https://api.bls.gov/publicAPI/v2/timeseries/data/{code}?startyear={startyear}&endyear={endyear}",
+   "page": "https://data.bls.gov/timeseries/CUUR0000SA0",
+   "limits": "Covers urban consumers (more than 90% of the US population by BLS's description), not rural households. It is an average over a fixed basket; a household's own costs can rise faster or slower. October 2025 was not collected during the federal shutdown, so 12-month changes that need that month are missing.",
+   "note": "An average for urban consumers; a household's own costs can rise faster or slower."
+  },
+  {
+   "id": "us_core_cpi",
+   "statistic": "core_inflation",
+   "countries": [
+    "US"
+   ],
+   "subject": "US consumer prices excluding food and energy",
+   "title": "Core consumer prices, change over 12 months: United States",
+   "name": "CPI-U, all items less food and energy, US city average, not seasonally adjusted",
+   "short": "BLS, CPI-U, all items less food and energy",
+   "measures": "The percent change in the CPI-U for all items except food and energy from the same month a year earlier, computed by Subtext from the published index levels. This is the 'core' figure; it leaves out the two most volatile groups.",
+   "wording": "change",
+   "transform": "pct12",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "not seasonally adjusted",
+   "source": "bls",
+   "agency": "the US Bureau of Labor Statistics",
+   "code": "CUUR0000SA0L1E",
+   "endpoint": "https://api.bls.gov/publicAPI/v2/timeseries/data/{code}?startyear={startyear}&endyear={endyear}",
+   "page": "https://data.bls.gov/timeseries/CUUR0000SA0L1E",
+   "limits": "Leaves out food and energy, which households still pay for. It is not the Federal Reserve's preferred core measure (core PCE, from BEA). October 2025 is missing (federal shutdown).",
+   "note": "Leaves out food and energy; it is not the Federal Reserve's preferred core measure (core PCE)."
+  },
+  {
+   "id": "us_unemployment",
+   "statistic": "unemployment",
+   "countries": [
+    "US"
+   ],
+   "subject": "The US unemployment rate",
+   "title": "Unemployment rate: United States",
+   "name": "Unemployment rate, 16 years and over, seasonally adjusted (Current Population Survey, U-3)",
+   "short": "BLS, Current Population Survey, U-3",
+   "measures": "The share of the labor force (people aged 16 and over who have a job or looked for one in the last four weeks) who have no job. It is the official headline (U-3) rate from the monthly household survey.",
+   "wording": "rate",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "seasonally adjusted",
+   "source": "bls",
+   "agency": "the US Bureau of Labor Statistics",
+   "code": "LNS14000000",
+   "endpoint": "https://api.bls.gov/publicAPI/v2/timeseries/data/{code}?startyear={startyear}&endyear={endyear}",
+   "page": "https://data.bls.gov/timeseries/LNS14000000",
+   "limits": "Does not count people who stopped looking for work or who work part time but want more hours (those are in the broader U-6 rate). It is a survey estimate; a monthly change of 0.1 or 0.2 points is within its sampling error. October 2025 is missing (federal shutdown).",
+   "note": "Does not count people who stopped looking for work or who want more hours."
+  },
+  {
+   "id": "us_earnings",
+   "statistic": "earnings",
+   "countries": [
+    "US"
+   ],
+   "subject": "Average hourly earnings of US private-sector employees",
+   "title": "Average hourly earnings, change over 12 months: United States",
+   "name": "Average hourly earnings of all employees, total private, seasonally adjusted (Current Employment Statistics)",
+   "short": "BLS, average hourly earnings, total private",
+   "measures": "The percent change in average hourly pay of all private-sector employees from the same month a year earlier, computed by Subtext from the published dollar levels. It is in current dollars, not adjusted for inflation.",
+   "wording": "change",
+   "transform": "pct12",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "seasonally adjusted",
+   "source": "bls",
+   "agency": "the US Bureau of Labor Statistics",
+   "code": "CES0500000003",
+   "endpoint": "https://api.bls.gov/publicAPI/v2/timeseries/data/{code}?startyear={startyear}&endyear={endyear}",
+   "page": "https://data.bls.gov/timeseries/CES0500000003",
+   "limits": "An average over everyone employed, so it rises when low-paid jobs are lost even if no one's pay changes. Not adjusted for inflation. Excludes government workers and the self-employed. The latest two months are revised.",
+   "note": "Not adjusted for inflation; the average rises when low-paid jobs are lost."
+  },
+  {
+   "id": "us_gasoline",
+   "statistic": "gasoline",
+   "countries": [
+    "US"
+   ],
+   "subject": "The average US price of regular unleaded gasoline",
+   "title": "Price of regular gasoline, per gallon: United States",
+   "name": "Average price, gasoline, unleaded regular, per gallon, US city average",
+   "short": "BLS, average price data, unleaded regular",
+   "measures": "The average retail price of a gallon of regular unleaded gasoline across US cities in the month, from the prices BLS collects for the CPI.",
+   "wording": "level",
+   "transform": "level",
+   "unit": "US dollars a gallon",
+   "money": true,
+   "nominal": true,
+   "frequency": "monthly",
+   "seasonal": "not seasonally adjusted",
+   "source": "bls",
+   "agency": "the US Bureau of Labor Statistics",
+   "code": "APU000074714",
+   "endpoint": "https://api.bls.gov/publicAPI/v2/timeseries/data/{code}?startyear={startyear}&endyear={endyear}",
+   "page": "https://data.bls.gov/timeseries/APU000074714",
+   "limits": "A monthly average for cities, not today's price at a given station; daily figures from AAA or weekly figures from EIA can differ by several cents. Not adjusted for inflation.",
+   "note": "A monthly city average, not today's price at a station; not adjusted for inflation."
+  },
+  {
+   "id": "us_mortgage30",
+   "statistic": "mortgage30",
+   "countries": [
+    "US"
+   ],
+   "subject": "The average US 30-year fixed mortgage rate",
+   "title": "30-year fixed mortgage rate: United States",
+   "name": "Primary Mortgage Market Survey, 30-year fixed-rate mortgage average",
+   "short": "Freddie Mac, Primary Mortgage Market Survey",
+   "measures": "The average interest rate on 30-year fixed-rate home loans for well-qualified borrowers, from Freddie Mac's weekly survey. Published each Thursday.",
+   "wording": "rate",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "weekly",
+   "seasonal": "not seasonally adjusted",
+   "source": "freddie",
+   "agency": "Freddie Mac",
+   "code": "pmms30",
+   "endpoint": "https://www.freddiemac.com/pmms/docs/PMMS_history.csv",
+   "page": "https://www.freddiemac.com/pmms",
+   "limits": "A survey average for well-qualified borrowers; many borrowers are quoted higher rates. It excludes fees and points.",
+   "note": "An average for well-qualified borrowers; many are quoted higher rates.",
+   "maintenance": "The file is the whole history (about 100 KB); nothing about the page is sent."
+  },
+  {
+   "id": "us_policy_rate",
+   "statistic": "policy_rate",
+   "countries": [
+    "US"
+   ],
+   "subject": "The effective federal funds rate",
+   "title": "Effective federal funds rate, monthly average: United States",
+   "name": "Effective Federal Funds Rate (EFFR), daily, averaged by month",
+   "short": "New York Fed, EFFR",
+   "measures": "The volume-weighted median rate on overnight loans between banks, published each business day by the Federal Reserve Bank of New York. Subtext averages the daily figures by month. The Federal Reserve sets a target range for this rate; the sentence also states the latest target range.",
+   "wording": "rate",
+   "transform": "monthly_mean",
+   "unit": "percent",
+   "frequency": "daily (shown as a monthly average)",
+   "seasonal": "not seasonally adjusted",
+   "source": "nyfed",
+   "agency": "the Federal Reserve Bank of New York",
+   "code": "EFFR",
+   "endpoint": "https://markets.newyorkfed.org/api/rates/unsecured/effr/search.json?startDate={start}&endDate={end}",
+   "page": "https://www.newyorkfed.org/markets/reference-rates/effr",
+   "limits": "The rate banks actually paid, which sits inside the Fed's target range but is not the range itself. A month with a rate decision mixes days before and after it.",
+   "note": "The rate banks paid each day, averaged by month; not the Fed's target range itself."
+  },
+  {
+   "id": "us_gdp",
+   "statistic": "gdp_growth",
+   "countries": [
+    "US"
+   ],
+   "subject": "US real GDP",
+   "title": "Real GDP, change at an annual rate: United States",
+   "name": "Real gross domestic product, percent change from preceding quarter, seasonally adjusted annual rate (BEA series A191RL)",
+   "short": "BEA, real GDP, via FRED",
+   "measures": "How fast the US economy's output, adjusted for inflation, changed from the previous quarter, expressed as the rate it would reach if that pace continued for a year. This is the figure in BEA's quarterly GDP releases ('grew at a 2.8% annual rate').",
+   "wording": "growth_quarter",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "quarterly",
+   "seasonal": "seasonally adjusted annual rate",
+   "source": "fred",
+   "agency": "FRED (Federal Reserve Bank of St. Louis), which republishes BEA data",
+   "code": "A191RL1Q225SBEA",
+   "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv?id={code}&cosd={start}",
+   "page": "https://fred.stlouisfed.org/series/A191RL1Q225SBEA",
+   "limits": "An annualized quarterly rate, not the change from a year earlier; one quarter at 4% annualized is about 1% actual growth. The first estimate is revised twice in the following two months and again in annual revisions.",
+   "note": "A quarterly change at an annual rate, not the change from a year earlier.",
+   "maintenance": "BEA's own API needs a key; FRED's keyless graph file is the only keyless route found. FRED's terms restrict storing its data: Subtext never caches it.",
+   "fred": true
+  },
+  {
+   "id": "us_median_income",
+   "statistic": "median_income",
+   "countries": [
+    "US"
+   ],
+   "subject": "Real US median household income (adjusted for inflation)",
+   "title": "Median household income, adjusted for inflation: United States",
+   "name": "Real median household income in the United States (Census Bureau, Current Population Survey, Annual Social and Economic Supplement)",
+   "short": "Census Bureau, CPS ASEC, via FRED",
+   "measures": "The income of the household in the middle of the US distribution (half of households have more, half less), for each calendar year, adjusted by the Census Bureau for inflation to dollars of the latest year.",
+   "wording": "level",
+   "transform": "level",
+   "unit": "US dollars, adjusted for inflation",
+   "money": true,
+   "nominal": false,
+   "frequency": "annual",
+   "seasonal": "not applicable",
+   "source": "fred",
+   "agency": "FRED (Federal Reserve Bank of St. Louis), which republishes Census Bureau data",
+   "code": "MEHOINUSA672N",
+   "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv?id={code}&cosd={start}",
+   "page": "https://fred.stlouisfed.org/series/MEHOINUSA672N",
+   "limits": "Pre-tax cash income; it leaves out taxes, tax credits and non-cash benefits. Published each September for the previous calendar year. The Census Bureau changed the survey questions in 2013 and its processing system in 2017, so years on either side of those changes are not strictly comparable.",
+   "note": "Pre-tax cash income; taxes and non-cash benefits are left out.",
+   "maintenance": "The Census Bureau's API now returns a 'Missing Key' page without a key; FRED's keyless graph file is the only keyless route found. Subtext never caches it.",
+   "fred": true
+  },
+  {
+   "id": "gb_cpi",
+   "statistic": "inflation",
+   "countries": [
+    "GB"
+   ],
+   "subject": "UK consumer prices",
+   "title": "Consumer prices (CPI), change over 12 months: United Kingdom",
+   "name": "CPI annual rate, all items (ONS series D7G7)",
+   "short": "ONS, CPI, all items",
+   "measures": "The percent change in the UK Consumer Prices Index from the same month a year earlier, as published by the Office for National Statistics. It is the UK's headline inflation figure and the Bank of England's 2% target measure.",
+   "wording": "change",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "not seasonally adjusted",
+   "source": "ons",
+   "agency": "the UK Office for National Statistics",
+   "code": "D7G7",
+   "endpoint": "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7g7/mm23/data",
+   "page": "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7g7/mm23",
+   "limits": "Leaves out owner-occupiers' housing costs and council tax (the ONS's CPIH includes them). The UK's older RPI measure, still used for some contracts, usually runs higher.",
+   "note": "Leaves out owner-occupiers' housing costs and council tax (CPIH includes them)."
+  },
+  {
+   "id": "gb_unemployment",
+   "statistic": "unemployment",
+   "countries": [
+    "GB"
+   ],
+   "subject": "The UK unemployment rate",
+   "title": "Unemployment rate, three-month average: United Kingdom",
+   "name": "Unemployment rate, aged 16 and over, seasonally adjusted (ONS series MGSX, Labour Force Survey)",
+   "short": "ONS, Labour Force Survey",
+   "measures": "The share of economically active people aged 16 and over who have no job, are available and have looked for work, averaged over three months. ONS publishes it as 'the three months to' a month; Subtext dates each point by the last month of its three.",
+   "wording": "rate3m",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "monthly (rolling three-month average)",
+   "seasonal": "seasonally adjusted",
+   "source": "ons",
+   "agency": "the UK Office for National Statistics",
+   "code": "MGSX",
+   "endpoint": "https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms/data",
+   "page": "https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms",
+   "limits": "A survey estimate with sampling error; neighbouring three-month figures share two of their months, so one month's move is small evidence.",
+   "note": "A three-month survey average; neighbouring figures share two months."
+  },
+  {
+   "id": "eu_hicp",
+   "statistic": "inflation",
+   "countries": [
+    "EA",
+    "AT",
+    "BE",
+    "BG",
+    "HR",
+    "CY",
+    "CZ",
+    "DK",
+    "EE",
+    "FI",
+    "FR",
+    "DE",
+    "GR",
+    "HU",
+    "IE",
+    "IT",
+    "LV",
+    "LT",
+    "LU",
+    "MT",
+    "NL",
+    "PL",
+    "PT",
+    "RO",
+    "SK",
+    "SI",
+    "ES",
+    "SE"
+   ],
+   "subject": "Consumer prices",
+   "title": "Consumer prices (HICP), change over 12 months",
+   "name": "Harmonised Index of Consumer Prices, all items, annual rate of change (Eurostat prc_hicp_minr)",
+   "short": "Eurostat, HICP, all items",
+   "measures": "The percent change in the Harmonised Index of Consumer Prices from the same month a year earlier, computed the same way in every EU country. For the euro area it is the ECB's 2% target measure.",
+   "wording": "change",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "not seasonally adjusted",
+   "source": "eurostat",
+   "agency": "Eurostat",
+   "code": "prc_hicp_minr",
+   "endpoint": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_minr?geo={geo}&coicop18=TOTAL&unit=RCH_A&format=JSON&sinceTimePeriod={start}",
+   "page": "https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr/default/table",
+   "limits": "The harmonised index can differ from a country's own national CPI (for example Germany's VPI or France's IPC), which national news often quotes. The latest month may be an estimate.",
+   "geoCodes": {
+    "GR": "EL"
+   },
+   "note": "The harmonised index; a country's own national CPI, which local news often quotes, can differ.",
+   "maintenance": "The older dataset prc_hicp_manr stopped updating after December 2025 (checked 2026-11-17); this uses prc_hicp_minr with unit=RCH_A."
+  },
+  {
+   "id": "eu_unemployment",
+   "statistic": "unemployment",
+   "countries": [
+    "EA",
+    "AT",
+    "BE",
+    "BG",
+    "HR",
+    "CY",
+    "CZ",
+    "DK",
+    "EE",
+    "FI",
+    "FR",
+    "DE",
+    "GR",
+    "HU",
+    "IE",
+    "IT",
+    "LV",
+    "LT",
+    "LU",
+    "MT",
+    "NL",
+    "PL",
+    "PT",
+    "RO",
+    "SK",
+    "SI",
+    "ES",
+    "SE"
+   ],
+   "subject": "The unemployment rate",
+   "title": "Unemployment rate",
+   "name": "Unemployment rate, ages 15 to 74, percent of the labour force, seasonally adjusted (Eurostat une_rt_m)",
+   "short": "Eurostat, une_rt_m",
+   "measures": "The share of the labour force aged 15 to 74 who have no job, are available and looked for work, by the International Labour Organization definition, harmonised across EU countries.",
+   "wording": "rate",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "monthly",
+   "seasonal": "seasonally adjusted",
+   "source": "eurostat",
+   "agency": "Eurostat",
+   "code": "une_rt_m",
+   "endpoint": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_m?geo={geo}&s_adj=SA&age=TOTAL&sex=T&unit=PC_ACT&format=JSON&sinceTimePeriod={start}",
+   "page": "https://ec.europa.eu/eurostat/databrowser/view/une_rt_m/default/table",
+   "limits": "Differs from national registered-jobless counts (for example the German Federal Employment Agency's figure, which is higher).",
+   "geoCodes": {
+    "GR": "EL",
+    "EA": "EA21"
+   },
+   "note": "The EU-wide survey definition; national registered-jobless counts differ.",
+   "maintenance": "The euro-area figure uses Eurostat's code EA21 (21 members in 2026); the plain code EA returned no data on 2026-11-17. Change it when another country joins."
+  },
+  {
+   "id": "wb_inflation",
+   "statistic": "inflation",
+   "countries": [
+    "CA",
+    "MX",
+    "BR",
+    "CL",
+    "CO",
+    "AU",
+    "NZ",
+    "JP",
+    "KR",
+    "CN",
+    "IN",
+    "ID",
+    "PH",
+    "TH",
+    "VN",
+    "MY",
+    "SG",
+    "TR",
+    "ZA",
+    "NG",
+    "KE",
+    "EG",
+    "SA",
+    "IL",
+    "CH",
+    "NO",
+    "PK",
+    "BD"
+   ],
+   "subject": "Consumer prices",
+   "title": "Consumer prices, change by year",
+   "name": "Inflation, consumer prices (annual %), World Bank indicator FP.CPI.TOTL.ZG",
+   "short": "World Bank, FP.CPI.TOTL.ZG",
+   "measures": "The percent change in the average consumer price level over a calendar year compared with the year before, from each country's own CPI as reported to the IMF. Yearly averages, not the monthly 12-month figures news reports.",
+   "wording": "change_year",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "annual",
+   "seasonal": "not applicable",
+   "source": "worldbank",
+   "agency": "the World Bank",
+   "code": "FP.CPI.TOTL.ZG",
+   "endpoint": "https://api.worldbank.org/v2/country/{iso2}/indicator/{code}?format=json&date={start}:{end}",
+   "page": "https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG?locations={iso2}",
+   "limits": "An annual average, so it lags the monthly figure a news story quotes by up to a year; the current year is never in it. Countries define their CPI baskets differently.",
+   "maintenance": "The World Bank API sometimes takes longer than 12 seconds to answer; Subtext tries twice and then shows nothing. Argentina is left out: the indicator had only 7 of 16 years (2010-2025) on 2026-11-17.",
+   "note": "A yearly average; it lags the monthly figure a news story quotes."
+  },
+  {
+   "id": "wb_unemployment",
+   "statistic": "unemployment",
+   "countries": [
+    "CA",
+    "MX",
+    "BR",
+    "AR",
+    "CL",
+    "CO",
+    "AU",
+    "NZ",
+    "JP",
+    "KR",
+    "CN",
+    "IN",
+    "ID",
+    "PH",
+    "TH",
+    "VN",
+    "MY",
+    "SG",
+    "TR",
+    "ZA",
+    "NG",
+    "KE",
+    "EG",
+    "SA",
+    "IL",
+    "CH",
+    "NO",
+    "PK",
+    "BD"
+   ],
+   "subject": "The unemployment rate",
+   "title": "Unemployment rate, by year",
+   "name": "Unemployment, total (% of total labor force), national estimate, World Bank indicator SL.UEM.TOTL.NE.ZS; the ILO modelled estimate SL.UEM.TOTL.ZS when the national series is too short",
+   "short": "World Bank, SL.UEM.TOTL.NE.ZS",
+   "fallbackCode": "SL.UEM.TOTL.ZS",
+   "fallbackShort": "World Bank, ILO modelled estimate SL.UEM.TOTL.ZS",
+   "measures": "The share of the labour force without work that is available for and seeking work, by year, as each country's statistics office estimates it. When fewer than ten years are available, the ILO's modelled estimate is used instead and the sentence says so.",
+   "wording": "rate_year",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "annual",
+   "seasonal": "not applicable",
+   "source": "worldbank",
+   "agency": "the World Bank",
+   "code": "SL.UEM.TOTL.NE.ZS",
+   "endpoint": "https://api.worldbank.org/v2/country/{iso2}/indicator/{code}?format=json&date={start}:{end}",
+   "page": "https://data.worldbank.org/indicator/SL.UEM.TOTL.NE.ZS?locations={iso2}",
+   "limits": "Yearly averages that lag the monthly figure a story quotes. Definitions of 'looking for work' and survey coverage differ by country (urban-only surveys in some), so levels are not strictly comparable across countries.",
+   "maintenance": "The World Bank API sometimes takes longer than 12 seconds to answer; Subtext tries twice and then shows nothing.",
+   "note": "A yearly average; definitions differ by country."
+  },
+  {
+   "id": "wb_gdp",
+   "statistic": "gdp_growth",
+   "countries": [
+    "GB",
+    "EA",
+    "AT",
+    "BE",
+    "BG",
+    "HR",
+    "CY",
+    "CZ",
+    "DK",
+    "EE",
+    "FI",
+    "FR",
+    "DE",
+    "GR",
+    "HU",
+    "IE",
+    "IT",
+    "LV",
+    "LT",
+    "LU",
+    "MT",
+    "NL",
+    "PL",
+    "PT",
+    "RO",
+    "SK",
+    "SI",
+    "ES",
+    "SE",
+    "CA",
+    "MX",
+    "BR",
+    "AR",
+    "CL",
+    "CO",
+    "AU",
+    "NZ",
+    "JP",
+    "KR",
+    "CN",
+    "IN",
+    "ID",
+    "PH",
+    "TH",
+    "VN",
+    "MY",
+    "SG",
+    "TR",
+    "ZA",
+    "NG",
+    "KE",
+    "EG",
+    "SA",
+    "IL",
+    "CH",
+    "NO",
+    "PK",
+    "BD"
+   ],
+   "subject": "Real GDP",
+   "title": "Real GDP, change by year",
+   "name": "GDP growth (annual %), World Bank indicator NY.GDP.MKTP.KD.ZG",
+   "short": "World Bank, NY.GDP.MKTP.KD.ZG",
+   "measures": "The percent change in gross domestic product, adjusted for inflation, from one calendar year to the next, from national accounts. It is not the quarterly figure a news story about one quarter quotes.",
+   "wording": "growth_year",
+   "transform": "level",
+   "unit": "percent",
+   "frequency": "annual",
+   "seasonal": "not applicable",
+   "source": "worldbank",
+   "agency": "the World Bank",
+   "code": "NY.GDP.MKTP.KD.ZG",
+   "endpoint": "https://api.worldbank.org/v2/country/{iso2}/indicator/{code}?format=json&date={start}:{end}",
+   "page": "https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations={iso2}",
+   "limits": "Annual and published with a lag of several months; quarterly growth in a news story (often annualized in the US, quarter on quarter in Europe and the UK) is a different number. Ireland's GDP moves with multinational accounting and can swing by double digits.",
+   "maintenance": "The World Bank API sometimes takes longer than 12 seconds to answer; Subtext tries twice and then shows nothing.",
+   "note": "Yearly growth; a story about one quarter quotes a different number."
+  }
+ ],
+ "omitted": [
+  {
+   "statistic": "poverty rate (US)",
+   "why": "The Census Bureau's API returned a 'Missing Key' page without a key on 2026-11-17 (timeseries/poverty/histpov2 and saipe). No keyless source for the official CPS poverty rate was found. FRED carries only the model-based SAIPE rate, a different measure from the headline figure, so it is left out rather than shown under the wrong name."
+  },
+  {
+   "statistic": "murder or violent-crime rate (US)",
+   "why": "The FBI Crime Data Explorer API returned API_KEY_MISSING without an api.data.gov key on 2026-11-17. No official keyless series."
+  },
+  {
+   "statistic": "policy rates outside the US (Bank of England, ECB)",
+   "why": "Not added in this pass; the US federal funds rate comes from the New York Fed's keyless API."
+  },
+  {
+   "statistic": "core inflation outside the US, wage growth, gasoline, mortgage rates and median income outside the US",
+   "why": "No series in the registry yet; the card shows nothing for those pages."
+  }
+ ],
+ "places": {
+  "US": [
+   "US",
+   "U.S.",
+   "U.S",
+   "USA",
+   "United States",
+   "America",
+   "American",
+   "America's",
+   "New York Fed",
+   "Federal Reserve Bank of New York",
+   "St. Louis Fed"
+  ],
+  "GB": [
+   "UK",
+   "U.K.",
+   "United Kingdom",
+   "Britain",
+   "British",
+   "Britain's",
+   "Great Britain",
+   "Bank of England"
+  ],
+  "EA": [
+   "eurozone",
+   "euro zone",
+   "euro area",
+   "euro-area",
+   "eurozone's",
+   "single currency area"
+  ],
+  "AT": [
+   "Austria",
+   "Austrian"
+  ],
+  "BE": [
+   "Belgium",
+   "Belgian"
+  ],
+  "BG": [
+   "Bulgaria",
+   "Bulgarian"
+  ],
+  "HR": [
+   "Croatia",
+   "Croatian"
+  ],
+  "CY": [
+   "Cyprus",
+   "Cypriot"
+  ],
+  "CZ": [
+   "Czech Republic",
+   "Czechia",
+   "Czech"
+  ],
+  "DK": [
+   "Denmark",
+   "Danish"
+  ],
+  "EE": [
+   "Estonia",
+   "Estonian"
+  ],
+  "FI": [
+   "Finland",
+   "Finnish"
+  ],
+  "FR": [
+   "France",
+   "French"
+  ],
+  "DE": [
+   "Germany",
+   "German"
+  ],
+  "GR": [
+   "Greece",
+   "Greek"
+  ],
+  "HU": [
+   "Hungary",
+   "Hungarian"
+  ],
+  "IE": [
+   "Ireland",
+   "Irish"
+  ],
+  "IT": [
+   "Italy",
+   "Italian"
+  ],
+  "LV": [
+   "Latvia",
+   "Latvian"
+  ],
+  "LT": [
+   "Lithuania",
+   "Lithuanian"
+  ],
+  "LU": [
+   "Luxembourg"
+  ],
+  "MT": [
+   "Malta",
+   "Maltese"
+  ],
+  "NL": [
+   "Netherlands",
+   "Dutch"
+  ],
+  "PL": [
+   "Poland",
+   "Polish"
+  ],
+  "PT": [
+   "Portugal",
+   "Portuguese"
+  ],
+  "RO": [
+   "Romania",
+   "Romanian"
+  ],
+  "SK": [
+   "Slovakia",
+   "Slovak"
+  ],
+  "SI": [
+   "Slovenia",
+   "Slovenian"
+  ],
+  "ES": [
+   "Spain",
+   "Spanish"
+  ],
+  "SE": [
+   "Sweden",
+   "Swedish"
+  ],
+  "CA": [
+   "Canada",
+   "Canadian"
+  ],
+  "MX": [
+   "Mexico",
+   "Mexican"
+  ],
+  "BR": [
+   "Brazil",
+   "Brazilian"
+  ],
+  "AR": [
+   "Argentina",
+   "Argentine",
+   "Argentinian"
+  ],
+  "CL": [
+   "Chile",
+   "Chilean"
+  ],
+  "CO": [
+   "Colombia",
+   "Colombian"
+  ],
+  "AU": [
+   "Australia",
+   "Australian"
+  ],
+  "NZ": [
+   "New Zealand"
+  ],
+  "JP": [
+   "Japan",
+   "Japanese"
+  ],
+  "KR": [
+   "South Korea",
+   "Korea",
+   "Korean"
+  ],
+  "CN": [
+   "China",
+   "Chinese"
+  ],
+  "IN": [
+   "India",
+   "Indian"
+  ],
+  "ID": [
+   "Indonesia",
+   "Indonesian"
+  ],
+  "PH": [
+   "Philippines",
+   "Philippine"
+  ],
+  "TH": [
+   "Thailand",
+   "Thai"
+  ],
+  "VN": [
+   "Vietnam",
+   "Vietnamese"
+  ],
+  "MY": [
+   "Malaysia",
+   "Malaysian"
+  ],
+  "SG": [
+   "Singapore"
+  ],
+  "TR": [
+   "Turkey",
+   "Türkiye",
+   "Turkish"
+  ],
+  "ZA": [
+   "South Africa",
+   "South African"
+  ],
+  "NG": [
+   "Nigeria",
+   "Nigerian"
+  ],
+  "KE": [
+   "Kenya",
+   "Kenyan"
+  ],
+  "EG": [
+   "Egypt",
+   "Egyptian"
+  ],
+  "SA": [
+   "Saudi Arabia",
+   "Saudi"
+  ],
+  "IL": [
+   "Israel",
+   "Israeli"
+  ],
+  "CH": [
+   "Switzerland",
+   "Swiss"
+  ],
+  "NO": [
+   "Norway",
+   "Norwegian"
+  ],
+  "PK": [
+   "Pakistan",
+   "Pakistani"
+  ],
+  "BD": [
+   "Bangladesh"
+  ],
+  "_other": [
+   "Russia",
+   "Russian",
+   "Ukraine",
+   "Ukrainian",
+   "Venezuela",
+   "Venezuelan",
+   "Iran",
+   "Iranian",
+   "Peru",
+   "Peruvian",
+   "Ecuador",
+   "Bolivia",
+   "Uruguay",
+   "Paraguay",
+   "Cuba",
+   "Iceland",
+   "Lebanon",
+   "Lebanese",
+   "Sri Lanka",
+   "Ghana",
+   "Ethiopia",
+   "Zimbabwe",
+   "Morocco",
+   "Algeria",
+   "Taiwan",
+   "Taiwanese",
+   "Hong Kong",
+   "Qatar",
+   "Kuwait",
+   "UAE",
+   "Emirates",
+   "Iraq",
+   "Syria",
+   "Afghanistan",
+   "Nepal",
+   "Myanmar",
+   "Cambodia",
+   "Belarus",
+   "Serbia",
+   "Bosnia",
+   "Albania",
+   "Georgia's",
+   "Kazakhstan",
+   "Latin America",
+   "South America",
+   "North America",
+   "Central America",
+   "Latin American"
+  ],
+  "_subnational": [
+   "Alabama",
+   "Alaska",
+   "Arizona",
+   "Arkansas",
+   "California",
+   "Colorado",
+   "Connecticut",
+   "Delaware",
+   "Florida",
+   "Hawaii",
+   "Idaho",
+   "Illinois",
+   "Indiana",
+   "Iowa",
+   "Kansas",
+   "Kentucky",
+   "Louisiana",
+   "Maine",
+   "Maryland",
+   "Massachusetts",
+   "Michigan",
+   "Minnesota",
+   "Mississippi",
+   "Missouri",
+   "Montana",
+   "Nebraska",
+   "Nevada",
+   "New Hampshire",
+   "New Jersey",
+   "New Mexico",
+   "New York",
+   "North Carolina",
+   "North Dakota",
+   "Ohio",
+   "Oklahoma",
+   "Oregon",
+   "Pennsylvania",
+   "Rhode Island",
+   "South Carolina",
+   "South Dakota",
+   "Tennessee",
+   "Texas",
+   "Utah",
+   "Vermont",
+   "Virginia",
+   "Washington state",
+   "West Virginia",
+   "Wisconsin",
+   "Wyoming",
+   "state's",
+   "county",
+   "city's",
+   "metro",
+   "Ontario",
+   "Quebec",
+   "Alberta",
+   "British Columbia",
+   "Bavaria",
+   "Catalonia",
+   "London's",
+   "Northern Ireland",
+   "Puerto Rico's",
+   "Chicago",
+   "Los Angeles",
+   "Detroit",
+   "Houston",
+   "England",
+   "Scotland",
+   "Scottish",
+   "Wales",
+   "Welsh"
+  ],
+  "_unlisted": [
+   "African",
+   "Andorra",
+   "Angola",
+   "Armenia",
+   "Asia",
+   "Asian",
+   "Azerbaijan",
+   "Bahamas",
+   "Bahrain",
+   "Barbados",
+   "Belize",
+   "Benin",
+   "Bhutan",
+   "Botswana",
+   "Brunei",
+   "Burkina Faso",
+   "Burundi",
+   "Cameroon",
+   "Cape Verde",
+   "Chad",
+   "Comoros",
+   "Congo",
+   "Costa Rica",
+   "Djibouti",
+   "Dominica",
+   "Dominican Republic",
+   "El Salvador",
+   "Eritrea",
+   "Eswatini",
+   "Europe",
+   "European",
+   "Fiji",
+   "Gabon",
+   "Gambia",
+   "Gaza",
+   "Georgia",
+   "Guatemala",
+   "Guinea",
+   "Guyana",
+   "Haiti",
+   "Honduras",
+   "Ivory Coast",
+   "Jamaica",
+   "Jordan",
+   "Kosovo",
+   "Kyrgyzstan",
+   "Laos",
+   "Lesotho",
+   "Liberia",
+   "Libya",
+   "Liechtenstein",
+   "Madagascar",
+   "Malawi",
+   "Maldives",
+   "Mali",
+   "Mauritania",
+   "Mauritius",
+   "Middle East",
+   "Moldova",
+   "Monaco",
+   "Mongolia",
+   "Montenegro",
+   "Mozambique",
+   "Namibia",
+   "Nicaragua",
+   "Niger",
+   "North Korea",
+   "North Macedonia",
+   "Oman",
+   "Palestine",
+   "Palestinian",
+   "Panama",
+   "Papua New Guinea",
+   "Puerto Rico",
+   "Rwanda",
+   "Senegal",
+   "Sierra Leone",
+   "Somalia",
+   "South Sudan",
+   "Suriname",
+   "Tajikistan",
+   "Tanzania",
+   "Togo",
+   "Tunisia",
+   "Turkmenistan",
+   "Uganda",
+   "United Arab Emirates",
+   "Uzbekistan",
+   "West Bank",
+   "Yemen",
+   "Zambia"
+  ]
+ }
+}

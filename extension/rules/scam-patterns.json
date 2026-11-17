@@ -1,0 +1,135 @@
+{
+  "version": "0.1.0",
+  "notes": "Scam-pattern library (the owner, 2026-11-06: a flexible system for broader scam types, not one-off checks). A pattern fires only when every `required` regex matches the page text, at least `support.min` of `support.of` match, and no shared `exclusions` entry matches. Each finding states what the page says, quoting it, and never calls the page a scam. New patterns start held in rules/reliability.json and are promoted only with evidence: catch rate on archived scam pages (eval/scam-patterns-eval.js) and false alarms on ordinary and honest-shop pages. Signal sources: Double and Nothing (NDSS 2023) for crypto giveaways, Surveylance (IEEE S&P 2018) for survey and prize pages, Dial One for Scam (NDSS 2017) for tech-support pages, Netcraft and Silent Push 2025 for delivery and toll notices; the fixed-returns pattern was written from development pages of the Beyond Phish dataset.",
+  "exclusions": [
+    "\\b(scam|scams|fraud|fraudulent|phishing|beware|be careful|how to (spot|avoid|recognise|recognize|identify)|warning signs|red flags|report it|don't fall for|do not fall for|is it legit|is this legit)\\b"
+  ],
+  "patterns": [
+    {
+      "id": "scam.fixed_returns",
+      "family": "investment",
+      "label": "Fixed high returns",
+      "severity": 3,
+      "why": "Promises a fixed daily or short-term return on deposits.",
+      "explain": "This page promises a set return on money you deposit, for example a percentage every day or after a few days. Real investments do not promise fixed high returns; regulators list this as a common sign of investment fraud.",
+      "tip": "Check whether a financial regulator authorises this firm (for example the SEC, FCA, BaFin or ESMA registers) before sending money.",
+      "required": [
+        "\\d{1,4}(?:[.,]\\d{1,3})?\\s?%\\s?(?:daily(?! deals?)|per day|a day|every day|hourly|per hour|(?:in|after|every) \\d{1,3}\\s?(?:hours?|days?|h)\\b|weekly|per week|roi (?:daily|weekly|per (?:day|week)))[^.!?\\n]{0,160}\\b(deposit|invest\\w*|principal|withdraw\\w*|payout|plan)\\b|\\b(deposit|invest\\w*|principal|withdraw\\w*|payout|plan)\\b[^.!?\\n]{0,160}\\d{1,4}(?:[.,]\\d{1,3})?\\s?%\\s?(?:daily(?! deals?)|per day|a day|every day|hourly|per hour|(?:in|after|every) \\d{1,3}\\s?(?:hours?|days?|h)\\b|weekly|per week|roi (?:daily|weekly|per (?:day|week)))"
+      ],
+      "support": {
+        "min": 1,
+        "of": [
+          "\\b(minimum deposit|max(?:imum)? deposit|min\\.?\\s?deposit|principal (return|included)|instant (payout|payment|withdrawal)|withdraw(al)? (anytime|any time|instantly))\\b",
+          "\\b(basic|starter|silver|gold|platinum|premium|vip|standard|diamond)\\s+(plan|package|pack)\\b",
+          "\\b(bitcoin|btc|usdt|ethereum|crypto|mining|forex)\\b"
+        ]
+      },
+      "quote": 0
+    },
+    {
+      "id": "scam.crypto_doubling",
+      "family": "giveaway",
+      "label": "Send crypto, get double",
+      "severity": 3,
+      "why": "Asks you to send crypto and promises more sent back.",
+      "explain": "This page asks you to send cryptocurrency to an address and says you will receive a larger amount back, often in the name of a famous person or company. Researchers who studied over 10,000 such pages found the money is never returned.",
+      "tip": "Do not send anything. Payments in crypto cannot be reversed.",
+      "required": [
+        "\\b(send|deposit|transfer)\\b[^.]{0,80}\\b(btc|eth|bitcoin|ethereum|usdt|sol|xrp|doge|crypto)\\b",
+        "\\b(x2|2x|x3|3x)\\b|\\bdouble (your|the|it|back)\\b|\\b(send|get|receive|return)s? (back )?(twice|double|2x|x2)\\b|\\b(crypto|bitcoin|btc|eth) giveaway\\b|\\bairdrop\\b"
+      ],
+      "support": {
+        "min": 1,
+        "of": [
+          "\\b(bc1[a-z0-9]{20,60}|[13][a-km-zA-HJ-NP-Z1-9]{25,34}|0x[a-fA-F0-9]{40})\\b",
+          "\\b(participants?|limited time|first \\d+|only \\d+ (left|remaining)|live|event)\\b",
+          "\\b(elon musk|tesla|spacex|michael saylor|microstrategy|vitalik|binance|coinbase|ripple|cardano)\\b"
+        ]
+      },
+      "quote": 1
+    },
+    {
+      "id": "scam.prize_claim",
+      "family": "prize",
+      "label": "Prize to claim",
+      "severity": 2,
+      "why": "Says you won or were selected and asks you to claim it.",
+      "explain": "This page tells you that you have won or been selected for a prize and asks you to claim it, often after a short survey and with a time limit. Researchers found most such pages lead to forms asking for personal or card details.",
+      "tip": "A real prize does not ask you to pay or enter card details to claim it.",
+      "required": [
+        "\\b(congratulations|congrats)\\b[^.!]{0,60}\\b(you|your)\\b[^.!]{0,40}\\b(won|winner|selected|chosen|lucky)\\b|\\byou('ve| have) (been selected|won|been chosen)\\b|\\byou are (our |the |today's )?(lucky )?(winner|selected)\\b",
+        "\\b(claim|collect|redeem|spin|answer|survey|questionnaire)\\b[^.]{0,40}\\b(prize|reward|gift|iphone|voucher|now|it|your)\\b"
+      ],
+      "support": {
+        "min": 1,
+        "of": [
+          "\\b(iphone|samsung|gift card|reward|prize|voucher|cash|\\$\\d+)\\b",
+          "\\b(only \\d+ (left|remaining)|expires?|limited time|today only|\\d+:\\d{2})\\b",
+          "\\b(shipping|card details|credit card|pay only)\\b"
+        ]
+      },
+      "quote": 0
+    },
+    {
+      "id": "scam.delivery_fee",
+      "family": "notice",
+      "label": "Fee to release parcel",
+      "severity": 3,
+      "why": "Says a parcel or toll needs a small payment to proceed.",
+      "explain": "This page says a parcel is held, a delivery failed, or a toll or tax is unpaid, and asks for a small payment or your card details to fix it. Security firms tracked thousands of such pages imitating postal services and toll operators in 2024 and 2025.",
+      "tip": "Go to the carrier's or toll operator's own site by typing its address, not through this page.",
+      "required": [
+        "\\b(your |the )?(parcel|package|shipment|consignment|delivery|toll|road charge|tax refund|customs duty)\\b[^.]{0,80}\\b(is |was |has been )?(on hold|held|suspended|could not be delivered|undeliverable|unpaid|outstanding|awaiting payment|incomplete address|returned)\\b",
+        "\\b(pay|payment|fee|charge|card details|settle)\\b[^.]{0,60}([$€£]\\s?\\d{1,2}[.,]\\d{2}|\\b\\d{1,2}[.,]\\d{2}\\s?(€|eur|usd|gbp|kč)\\b|\\b(small|redelivery|customs|shipping|handling) fee\\b)"
+      ],
+      "support": {
+        "min": 1,
+        "of": [
+          "\\b(within (24|48) hours|today|immediately|late fee|penalty|returned to sender|reschedule)\\b",
+          "\\b(usps|royal mail|dhl|fedex|ups|dpd|gls|posti|post ?nl|correos|la poste|deutsche post|e-?zpass|sunpass|fastrak|evri|hermes|canada post|auspost)\\b"
+        ]
+      },
+      "quote": 0
+    },
+    {
+      "id": "scam.recovery_offer",
+      "family": "recovery",
+      "label": "Lost money recovered",
+      "severity": 2,
+      "why": "Offers to get back money you lost to an earlier fraud.",
+      "explain": "This page offers to recover money you lost, often to an earlier investment or crypto fraud, sometimes with a guarantee. Regulators warn that recovery offers are a common second fraud aimed at the same people.",
+      "tip": "Report losses to the police or your regulator; they do not charge to recover funds.",
+      "required": [
+        "\\b(recover|recovery|get back|retrieve|reclaim)\\b[^.]{0,60}\\b(lost|stolen|scammed|your)\\b[^.]{0,40}\\b(funds|money|crypto|bitcoin|investment|assets)\\b"
+      ],
+      "support": {
+        "min": 1,
+        "of": [
+          "\\b(guarantee[sd]?|100%|success rate|no recovery,? no fee|hackers?|ethical hack|chargeback experts?|fund recovery)\\b",
+          "\\b(binary options?|forex|crypto|investment fraud|scammed)\\b"
+        ]
+      },
+      "quote": 0
+    },
+    {
+      "id": "scam.task_earnings",
+      "family": "job",
+      "label": "Pay to earn from tasks",
+      "severity": 2,
+      "why": "Promises daily earnings from simple online tasks after a deposit.",
+      "explain": "This page promises daily pay for simple online tasks such as rating products or liking videos, and asks you to deposit or top up money first. Researchers who studied such task sites found the deposits are not returned.",
+      "tip": "A real job does not ask you to pay to start working.",
+      "required": [
+        "\\b(earn|make|income)\\b[^.]{0,40}(\\d+[^.]{0,20}\\b(per day|daily|a day|per task)|\\b(per day|daily|a day|per task)\\b)",
+        "\\b(tasks?|rate products|like videos|optimi[sz]e (products|apps)|order grabbing|work from home)\\b"
+      ],
+      "support": {
+        "min": 1,
+        "of": [
+          "\\b(deposit|recharge|top[- ]up|vip level|commission|upgrade your level)\\b"
+        ]
+      },
+      "quote": 0
+    }
+  ]
+}

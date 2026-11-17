@@ -1,0 +1,62 @@
+[
+ {
+  "name": "bbc",
+  "url": "https://www.bbc.com/news"
+ },
+ {
+  "name": "dailymail",
+  "url": "https://www.dailymail.co.uk/news/index.html"
+ },
+ {
+  "name": "foxnews",
+  "url": "https://www.foxnews.com/politics"
+ },
+ {
+  "name": "amazon",
+  "url": "https://www.amazon.com/Apple-AirPods-Pro-2nd-Generation/dp/B0D1XD1ZV3"
+ },
+ {
+  "name": "refactoringui",
+  "url": "https://www.refactoringui.com/"
+ },
+ {
+  "name": "grammarly",
+  "url": "https://www.grammarly.com/plans"
+ },
+ {
+  "name": "forbesadvisor",
+  "url": "https://www.forbes.com/advisor/credit-cards/best-credit-cards/"
+ },
+ {
+  "name": "heritage",
+  "url": "https://www.heritage.org/"
+ },
+ {
+  "name": "aclu",
+  "url": "https://www.aclu.org/"
+ },
+ {
+  "name": "wikipedia",
+  "url": "https://en.wikipedia.org/wiki/Scott_Trust"
+ },
+ {
+  "name": "irs",
+  "url": "https://www.irs.gov/"
+ },
+ {
+  "name": "substack",
+  "url": "https://www.lennysnewsletter.com/"
+ },
+ {
+  "name": "notion",
+  "url": "https://www.notion.com/pricing"
+ },
+ {
+  "name": "allbirds",
+  "url": "https://www.allbirds.com/products/mens-wool-runners"
+ },
+ {
+  "name": "mit",
+  "url": "https://www.mit.edu/"
+ }
+]
