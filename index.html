@@ -37,7 +37,7 @@
     <p class="hero__sub">It asks three questions: what the page is doing to you, who is behind it, and what they get if you comply. Each label has a one-line reason, and the evidence is in the panel.</p>
     <div class="actions">
       <a class="btn" href="#get-it">How to install it by hand</a>
-      <span class="group"><a class="standalone" data-slot="REPO_URL" aria-disabled="true" tabindex="-1">Read the code</a> <span class="chip" data-pending="REPO_URL">Not published yet</span></span>
+      <span class="group"><a class="standalone" data-slot="REPO_URL" href="https://github.com/JoshCS/subtext">Read the code</a></span>
     </div>
     <p class="hero__status">Subtext is an early test version, v0.2. It is built for Chrome, Edge, Brave and Arc.</p>
     <figure class="shot shot--hero">
@@ -264,7 +264,7 @@
     </div>
     <p class="measure after-cards-note">This list is a summary. It leaves out the other public sources that Show context uses, chart images in the one-pass analysis, the opt-in web check, and analysing saved pages.</p>
     <div class="actions">
-      <span class="group"><a class="standalone" data-slot="REPO_URL" aria-disabled="true" tabindex="-1">Read the full list, request by request</a> <span class="chip" data-pending="REPO_URL">Not published yet</span></span>
+      <span class="group"><a class="standalone" data-slot="REPO_URL" href="https://github.com/JoshCS/subtext#privacy">Read the full list, request by request</a></span>
     </div>
     <h3>Why the extension asks to read every site</h3>
     <p class="measure">Subtext must read a page to label it. It reads the page inside your browser. Subtext makes no scan and no requests on a site that you exclude in Settings.</p>
@@ -305,10 +305,8 @@
           <li>There is no browser store listing.</li>
           <li>Only AI models have reviewed the results on real pages. No person has reviewed them yet.</li>
           <li>The makers wrote the outlet list by hand. 25 of its 134 entries still need a second review.</li>
-          <li>You cannot yet send a correction, because Subtext has no contact address.</li>
           <li>ChatGPT support is not tested.</li>
           <li>The test for equal treatment of left-leaning and right-leaning pages is not done.</li>
-          <li>The download link and the code link are not published.</li>
         </ul>
       </div>
     </div>
@@ -320,14 +318,14 @@
   <div class="wrap">
     <h2 id="h-get-it">Install Subtext from a zip file in Chrome, Edge, Brave or Arc</h2>
     <ol class="measure">
-      <li>Download <span data-slot-text="DOWNLOAD_URL">the zip file</span> <span class="chip" data-pending="DOWNLOAD_URL">Not published yet</span> and unzip it. Developers can clone <span data-slot-text="REPO_URL">the code</span> <span class="chip" data-pending="REPO_URL">Not published yet</span> instead.</li>
+      <li>Download <a href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">the zip file</a> and unzip it. Developers can clone <a href="https://github.com/JoshCS/subtext">the code</a> instead.</li>
       <li>Type <code>chrome://extensions</code> in the address bar. In Edge, type <code>edge://extensions</code>, and in Brave, type <code>brave://extensions</code>.</li>
       <li>Turn on Developer mode. In Chrome the switch is at the top right.</li>
       <li>Click Load unpacked and choose the unzipped folder. In a clone, choose the folder named extension.</li>
       <li>Pin the Subtext icon and visit any page. The icon shows a count of labels. Click the icon to open the panel.</li>
     </ol>
     <div class="actions">
-      <span class="group"><a class="btn" data-slot="DOWNLOAD_URL" aria-disabled="true" tabindex="-1">Download v0.2 (zip)</a> <span class="chip" data-pending="DOWNLOAD_URL">Not published yet</span></span>
+      <span class="group"><a class="btn" data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">Download v0.2 (zip)</a></span>
     </div>
   </div>
 </section>
@@ -380,8 +378,8 @@
     <p>Code: AGPL-3.0-or-later. Rules, documents and outlet list: CC BY-SA 4.0.</p>
     <nav aria-label="Footer">
       <ul>
-        <li data-slot-hidden="REPO_URL" hidden><a data-slot="REPO_URL" aria-disabled="true" tabindex="-1">Source</a></li>
-        <li data-slot-hidden="DOWNLOAD_URL" hidden><a data-slot="DOWNLOAD_URL" aria-disabled="true" tabindex="-1">Download</a></li>
+        <li><a data-slot="REPO_URL" href="https://github.com/JoshCS/subtext">Source</a></li>
+        <li><a data-slot="DOWNLOAD_URL" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">Download</a></li>
         <li><a href="#privacy">Privacy</a></li>
       </ul>
     </nav>
