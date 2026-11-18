@@ -1,0 +1,105 @@
+:root{color-scheme:light;--ink:#182c31;--paper:#faf8f1;--link:#174e65;--line:#bdc7bf;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}
+html{scroll-padding-top:20px}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.58 system-ui,sans-serif}
+.wrap{width:min(1120px,89%);margin:auto}
+header,footer,nav,.actions{display:flex;align-items:center}
+header,footer{justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line)}
+nav,.actions{gap:24px}
+a{color:var(--link);text-underline-offset:.22em;font-weight:600}
+a:hover{text-decoration-thickness:2px}
+.brand{font:700 34px/1 var(--serif);letter-spacing:-2px;color:var(--ink);text-decoration:none}
+nav a{font-size:15px}
+.navcta{padding:5px 15px;border:1px solid;border-radius:4px;text-decoration:none}
+.hero,.pair,.walkthrough,.faq{display:grid;align-items:center;gap:clamp(32px,6vw,100px)}
+.hero{grid-template-columns:1.12fr 1fr;padding-block:clamp(48px,7vw,105px)}
+h1,h2,.headline{font-family:var(--serif);font-weight:400;letter-spacing:-.047em}
+h1{font-size:clamp(60px,6.8vw,100px);line-height:.99;margin:0 0 24px}
+h2{font-size:clamp(36px,4vw,56px);line-height:1.06;margin:0 0 22px}
+.intro{font-size:clamp(18px,1.5vw,22px);max-width:50ch}
+.actions{flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;background:var(--ink);color:white;padding:12px 21px;border-radius:4px;text-decoration:none}
+.fine,figcaption,small{font-size:13px;color:#526263}
+.fine{margin-bottom:0}
+figure{margin:0}
+.clipping{background:#fffef8;border:1px solid var(--line);padding:clamp(22px,3vw,42px);box-shadow:7px 8px 0 #e5e4d8}
+.rule{height:3px;background:var(--ink);margin:14px 0}
+.type,.clipping aside b{font-size:13px;font-weight:700}
+.headline{font-size:clamp(32px,3.4vw,49px);line-height:1.08;margin:12px 0}
+.byline{font:italic 17px/1.5 var(--serif);margin:15px 0 24px}
+.clipping aside{background:#e9f0df;border-left:3px solid #667c47;padding:14px 20px}
+.clipping aside p{margin:5px 0 0}
+.clipping small{display:block;margin-top:13px}
+.proof{background:#e8ede7}
+.pair,.walkthrough,.faq{grid-template-columns:1fr 1fr;padding-block:clamp(44px,6vw,86px)}
+img,video{width:100%;height:auto;display:block}
+.capture img,video{border:1px solid var(--line);border-radius:4px}
+figcaption{margin-top:9px}
+.clipping figcaption{margin:0}
+.walkthrough{grid-template-columns:.85fr 1.15fr}
+.install{background:var(--ink);color:white}
+.install .btn{background:#e8f0c8;color:var(--ink);margin-top:8px}
+ol{padding:0;list-style:none;counter-reset:step}
+li{counter-increment:step;padding:13px 0 13px 36px;border-top:1px solid #55686a;position:relative}
+li:before{content:counter(step);position:absolute;left:0;color:#c6d7ad;font:22px var(--serif)}
+code{font-size:.94em}
+.faq{align-items:start;grid-template-columns:.8fr 1.2fr}
+details{border-top:1px solid var(--line);padding:15px 0}
+summary{cursor:pointer;font-weight:650}
+footer{border-top:1px solid var(--line);border-bottom:0;padding-block:28px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;background:white;padding:8px}
+a:focus-visible,summary:focus-visible{outline:3px solid #bc7600;outline-offset:4px}
+@media(max-width:740px){.hero,.pair,.walkthrough,.faq{grid-template-columns:1fr}
+.proof .pair>div{grid-row:1}
+.hero{padding-top:42px}
+.wrap{width:89%}
+nav{gap:13px}
+.brand{font-size:29px}
+.actions{gap:17px}
+.faq h2{margin:0}
+.install ol{margin:0}
+header{padding:16px 0}
+}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--paper:#172529;--ink:#e9ede4;--link:#bbdcd6;--line:#596a65}
+.clipping{background:#202f32;box-shadow:7px 8px 0 #0f191b}
+.proof,.clipping aside{background:#263834}
+.fine,figcaption,small{color:#b9c9c3}
+.btn{background:#dbe6ca;color:#182c31}
+.install{background:#0d191c}
+.install .btn{color:#182c31}
+.skip:focus{background:#182c31}
+}
+
+.hero>*,.pair>*,.walkthrough>*,.faq>*{min-width:0}
+code{overflow-wrap:anywhere}
+@media(max-width:370px){header nav,footer nav{gap:9px}nav a{font-size:14px}.navcta{padding-inline:9px}}
+
+.field,.why-inner{padding-block:clamp(44px,6vw,84px)}
+.field-intro{max-width:64ch;font-size:20px}
+.questions{display:grid;grid-template-columns:1fr 1fr;gap:24px clamp(30px,7vw,96px);margin:32px 0}
+.questions article{border-top:1px solid var(--line);padding-top:16px}
+h3{font:400 clamp(24px,2.4vw,34px)/1.13 var(--serif);letter-spacing:-.025em;margin:0}
+.questions p,.walkthrough p{margin:12px 0}
+
+
+.walkthrough details{margin-top:14px;font-size:15px}
+.why{border-top:1px solid var(--line)}
+.why-inner{width:min(65ch,89%);margin:auto}
+.why p{font:400 clamp(20px,1.7vw,25px)/1.52 var(--serif)}
+@media(max-width:740px){.questions{grid-template-columns:1fr}.field-intro{font-size:18px}}
+@media(max-width:370px){header nav a{font-size:13px}}
+
+.walkthrough{display:block;max-width:860px}
+.walkthrough>p{max-width:63ch;margin-bottom:24px}
+.investigate{background:var(--ink);color:var(--paper)}
+.investigate .pair{align-items:start}
+.case{border-left:2px solid currentColor;padding-left:clamp(18px,2.5vw,34px)}
+.case p:last-child,.investigate .pair>div p:last-child{margin-bottom:0}
+.case h3{font-size:clamp(24px,2.2vw,32px)}
+
+/* phone: every stand-alone link is at least 44px tall and wide (added at integration, 2026-11-18) */
+@media(max-width:740px){nav a,a.brand,.actions a,.field>a,details>a,small>a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}.field>a,details>a,small>a,.actions a:not(.btn){justify-content:flex-start}}
+/* phone: keep the wordmark clear of the links (added at integration, 2026-11-18) */
+@media(max-width:740px){body>header{gap:16px}}
+@media(max-width:420px){.brand{font-size:25px;letter-spacing:-1.5px}nav{gap:10px}nav a{font-size:14px}.navcta{padding-inline:10px}}
