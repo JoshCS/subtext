@@ -1,6 +1,6 @@
 # Privacy: what leaves your browser, and when
 
-This page lists every request the Subtext extension can make. It was checked against the code in `extension/` for version 0.2.0. Each setting is shown with its name in `extension/common.js` and its default value.
+This page lists every request the Subtext extension can make. It was checked against the code in `extension/` for version 0.3.0. Each setting is shown with its name in `extension/common.js` and its default value.
 
 The README has the same list in longer form, under [Privacy](README.md#privacy). If the two differ, the code decides. Please [open an issue](https://github.com/JoshCS/subtext/issues) when you find a difference.
 
@@ -50,8 +50,10 @@ Subtext works out what the page is about. It then asks a few free public sources
 |---|---|
 | Wikidata and Wikipedia | The registrable domain, or the site's Wikidata id from the bundled table. On an article, also names or a short phrase from the headline, then an article title for its page views. |
 | Google News | Headline words, on articles only. |
-| ProPublica Nonprofit Explorer | A US tax ID. When no tax ID is known, the legal name printed on the organization's own page. If the page prints no legal name, the site's name is sent. |
-| SEC (`data.sec.gov`) | A company's SEC number. |
+| ProPublica Nonprofit Explorer | A US tax ID. When no tax ID is known, the legal name printed on the organization's own page. If the page prints no legal name, the site's name is sent. When the footer of an organization's own page prints one US tax ID beside a label such as EIN or Tax ID, that nine-digit number is sent. A number in the main content is never read. |
+| SEC (`data.sec.gov`) | A company's SEC number. When Wikidata names one company as the owner or developer of the site's product, that company's Wikidata id goes to Wikidata and its SEC number goes to the SEC. |
+| The site's own status page | A request for the public incident feed (`/api/v2/incidents.json`). It is sent only when the page's footer, header or navigation links to a status page under the site's own domain. It carries nothing about the page you are on. The status host is often run for the site by another company, and it sees your IP address. |
+| National Park Service (`irmaservices.nps.gov`) | The park's four-letter code from the page address. Only on an nps.gov page about one park. |
 | Official statistics | One series or indicator code, and a country code where needed. The services are the US Bureau of Labor Statistics, the New York Fed, Freddie Mac and FRED. Outside the US they are the UK Office for National Statistics, Eurostat and the World Bank. |
 | Federal Election Commission | An organization's name and your FEC key. Used only when you saved a key (`fecKey: ''`, empty by default). |
 | Internet Archive, Tranco, Google Public DNS, Hacker News search | The registrable domain. |

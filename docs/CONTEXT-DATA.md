@@ -37,6 +37,10 @@ The first version charted whatever series was easy to get. On a pasta recipe it 
 - **When Wikidata gives a ticker but no SEC number,** the number comes from the SEC's own ticker list (bundled, `extension/data/sec-tickers.json`, rebuilt by `scripts/build-sec-tickers.js`) only when the ticker and the company name both match.
 - **With no ticker either,** the number is accepted only when exactly one listed company has exactly that name.
 - **A nonprofit's legal name:** when the page itself names its legal entity and no tax ID is known, ProPublica is asked for that exact name. It is accepted only when exactly one filer carries it. "… Support Fund" and "… Action Fund" are different filers and are never merged.
+- **A tax ID printed on the page:** read only from the page's own footer, only when a label such as EIN or Tax ID stands beside it, and only when the footer prints exactly one. A number in the main content (an invoice, an account page, an application form) is never read. It is used only on a .org site, an organization's own page, or where the footer text beside it calls the organization a nonprofit ("tax exempt" does not count). The filer's name that ProPublica returns must agree with something the page does not write: the site's Wikidata label (only when the entity came from the exact-website lookup), or the site's address itself, whose registrable-domain label must equal the filer's name run together or its initials of four letters or more. The site's name as the page gives it, its title and a legal name in its footer confirm nothing. A fiscal sponsor's ID, a listing site's profile of a charity and a page that copies a well-known charity's ID and name therefore give no chart. The card states what is known: "This page prints the tax ID NN-NNNNNNN. IRS filings under that ID are from NAME." The chart's note says the ID was read from the page.
+- **The company behind a product:** when the site's or subject's Wikidata item is a product or software and is not itself a filer, one hop is made to the organization Wikidata names as owner or parent, or, when neither is stated, as developer, publisher or operator. Exactly one current organization is required. A statement that carries a proportion (a minority stake) or a point in time (a dated snapshot) is not read as "is owned by". When an ownership or parent statement has ended and no current one stands beside it, there is no hop: the developer is not read in its place. A company with the product's own name (Asana, Asana Inc.) stands wherever the site's own records would. A company with another name (Slack, Salesforce) is shown only on pages about the site itself, never on an article or an inner page labelled as about the site, and the card states the link and that the figures are for the whole company. The owner must pass the SEC identity rules above. There is never a second hop.
+- **A status page:** only a host the page links to from its own footer, header or navigation is asked, and only when that host sits under the site's own registrable domain (a page on a subdomain: under that subdomain). No other host is ever requested, whatever the link's text says and whatever the host calls itself in its feed, so a status page on a vendor's domain gives no chart. Redirects are refused. The chart is named after the site, and on an inner page it is labelled as about the site, not this page.
+- **A park:** only on nps.gov, and only when the first part of the address path is a park unit code that the Park Service's statistics service knows. Not on a news article and not under a path that contains `/news/`.
 - **FEC:** a committee is accepted only when the FEC lists its connected organization as exactly the entity's name, with a committee type that fits. Individual donors are never looked up: people who share a name cannot be told apart.
 
 ## Series rules (in code)
@@ -57,7 +61,9 @@ The first version charted whatever series was easy to get. On a pasta recipe it 
 | nonprofit_finances | records | revenue by tax year from IRS Form 990, expenses, the filer's legal name | a tax ID (or the legal name on the page, once) | click or automatic |
 | sec_financials | records | annual revenue and net income from SEC annual reports | an SEC number | click or automatic |
 | sec_filings | records | recent material filings, or the filings in a peak month | an SEC number | click or automatic |
-| news_coverage | coverage | articles per day on the story, 30 days; other outlets covering it | headline words | click or automatic |
+| status_incidents | records | incidents a service reported on its own status page, by month, for the months its feed fully covers (Atlassian Statuspage and incident.io feeds); a dated list when the feed is short. Written by the vendor, and the card says so | a request to a status host under the site's own domain, linked from the page's footer, header or navigation | click or automatic, only when such a link exists |
+| park_visits | statistic | monthly recreation visits to one US national park, about 5 years, from the National Park Service | the park's four-letter code | click or automatic, nps.gov park pages only |
+| news_coverage | coverage | articles per day on the story, 30 days; other outlets covering it. Never leads: folded with the attention charts | headline words | click or automatic |
 | subject_views | topic | daily Wikipedia views of the subject's article, 90 days | an article title | click or automatic |
 | subject_trends | topic | weekly Google search interest in the subject, 12 months | the subject's name, **with the reader's Google cookies** | click only |
 | site_views | site | monthly Wikipedia views of the site's article, 24 months | an article title | click or automatic |
@@ -137,6 +143,42 @@ Run `eval4`, after every fix above (lead charts only; not judged, because the pa
 - **Suites:** the timing-sensitive UI and regression tests failed once when run while the machine was under heavy load, and passed when run alone. Nothing in this work changed them.
 
 These pages have now been used to find and fix faults, so they are no longer unseen. The next change must be measured on new pages.
+
+### Four more sources, measured on 53 new pages (17 Nov 2026)
+
+Added: a tax ID printed in the page's footer, one hop from a product to the company behind it, incidents from the site's own status page, and visits for an nps.gov park page. Census building permits was researched and not built: the survey publishes one file per region per year, so six years for one city needs six requests, against the limit of three per source.
+
+**Pages.** A new set, with the answer key written before any run: 30 pages drawn the same way as the first 36 (`eval/context/pages-2.json`), and 23 pages aimed at the five situations, with hard negatives (`eval/context/pages-2-targeted.json`). The code before the change (commit 3d3e98a) and the code after it ran on the same pages on the same day. One judge rated both results for each page without knowing which was which. Both sets are now USED.
+
+**What the 30 ordinary pages showed.** The new sources changed one page: a software pricing page gained a chart of the incidents the service reported on its own status page, which the judge rated useful. Every other difference between the two runs was the news chart changing with the live feed. Pages with no chart: 18 before, 17 after. So these four sources do not change how often a reader meets a chart in ordinary browsing; they answer well in the situations they are built for, and those situations are uncommon.
+
+**How the whole feature did on the 30 ordinary pages (new build, same judge).** This is the first blind rating of the rebuilt feature on pages it had never met.
+- 13 pages got a chart. 5 were rated useful: the GDP series a story names, two companies' SEC figures on stories and pages about those companies, a nonprofit's IRS filings on its own page, and the status incidents above. 2 were marginal: a company's yearly revenue on a story about one quarter, and a maker's revenue on a product page.
+- 6 were rated not helpful. Four of the six were the count of news articles on the story: every time it led, the judge said it answers nothing a reader of the story would ask. One was Wikipedia views for an athlete. One was the publisher's own finances on a page about something else.
+- 17 pages got no chart. The judge called 15 of them right to be empty (recipes, buying guides, small private shops, a how-to page). 2 were misses: a UK GDP story (the ONS quarterly GDP series is not among the 16 built) and a charity story where the subject was found but its tax ID was not.
+- So the gap on ordinary pages is not the empty ones. It is the charts that lead without helping, and the news-article count is most of them.
+
+**What the 23 targeted pages showed.** Before: 1 chart. After: 8. The judge preferred the new result on 7 pages and the old one on none, found no chart misleading, and rated every sentence honest about whose record it shows.
+- Park visits: both park pages got a chart, both rated useful. The non-park nps.gov page and the article about a park on another site got none.
+- Status incidents: 2 of 3 pages that link a status page got a chart, both rated useful. The third got none (its status page is not under its own domain). The two negatives got none.
+- Printed tax ID: 1 of 3 got a chart, rated useful. One was refused because its domain's label is not the filer's name; one is an inner page of a .org site, which the router treats as an article, so the path did not run. The page that prints a fiscal sponsor's ID got none.
+- Product to company: 2 of 3 got a chart, both rated marginal: a company's revenue says who stands behind a product, and little about the product. The third was blocked by a stale SEC number on the product's own Wikidata item. The two negatives got none.
+- Housing pages: nothing, because building permits is not built.
+
+**Limits of this measurement.**
+- The three product pages were on sites the building agent had already tried, and six sites' status feeds had been probed while that source was built. Those results are a regression check, not a fresh measurement.
+- The page-set writer saw the project's instruction file, so it was not fully blind to how the feature works.
+- The two new page files are not in the public copy yet: their free-text `checked` fields were written on this machine and have not had the content review the first list had.
+- One AI judge, no person. A reader's view of "useful" may differ, most of all for a parent company's revenue on a product page.
+- After the judging, two wordings were changed: the status chart's name (a page title had been used as the site's name) and the line for a company that carries its product's name. Selection did not change.
+
+**Review before the run.** An adversarial review found 15 defects, fixed before the measurement. The serious ones: any link labelled "Status" was taken as the site's status page, so a posted link could plant records and make the browser call a chosen host; a page could borrow a charity's tax ID and name; a tax ID on an account page was sent; a crafted feed could stall the worker. The fixes are strict by design and cost charts: only a status host under the site's own domain, linked from the footer, header or navigation; a tax ID only from the footer, confirmed by the site's Wikidata label or its exact domain label.
+
+### Change made from that judgement (17 Nov 2026)
+
+The count of news articles on a story no longer leads. It is folded with the attention charts under "Coverage and attention data". When it is found, the site's own records are still not shown in its place. On an article about a company or an organization, that subject's records now lead where the count used to.
+
+This change came from the 30 pages above, so they cannot measure it. It was checked on those pages only as a regression (live, the same day). Of the four pages where the count led, three now show no leading chart. On the fourth, a story about a Senate candidate, Wikipedia views of the candidate now lead, because they show a clear spike and that rule is unchanged; the judge rated the one spike chart that led in the first run as not helpful, so this is a known weak spot. The two company stories still lead with the company's SEC figures. Its effect on new pages is not measured.
 
 ## Routing table: every free source kept from the 464-source catalog
 

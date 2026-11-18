@@ -452,7 +452,60 @@
     for (const s of document.querySelectorAll('script[type="application/ld+json"]')) { try { const j = JSON.parse(s.textContent); for (const x of [].concat(j['@graph'] || j)) { const k = x && x.keywords; if (k) tags.push(...(Array.isArray(k) ? k : String(k).split(','))); if (x && typeof x.datePublished === 'string' && !ldDate) ldDate = x.datePublished; if (x && x['@type']) types.push(String(x['@type'])); } } catch (e) { /* not JSON */ } }
     // the page's own publication date, when it states one in a machine-readable place
     let published = metaC('meta[property="article:published_time"]') || metaC('meta[name="date"]') || metaC('meta[itemprop="datePublished"]') || ldDate || ((document.querySelector('time[datetime]') || {}).dateTime || '');
-    return { url: location.href, title: document.title, productPage: types.some((t) => /^product$/i.test(String(t).trim())), published: /^\d{4}-\d{2}-\d{2}/.test(published) ? published.slice(0, 10) : '', siteName: metaC('meta[property="og:site_name"]'), keywords: tags.map((t) => String(t).trim()).filter((t) => t && t.length < 60).slice(0, 15), text: ctx && ctx.index ? mainText().slice(0, 60000) : '' };
+    /* Three more signals, read from the page's own footer, header and navigation, which the main text leaves out. The worker checks each again.
+       taxIds: US tax IDs printed beside a label ("EIN: 12-3456789", "Tax ID# 12-3456789") in the page's footer, and nowhere else: a
+         number in the main content can be a customer's, an applicant's or a partner's (an invoice, an account page, a grant form).
+         A nine-digit number with no label is never taken.
+       taxIdNonprofit: the footer text around such an ID calls the organization a nonprofit.
+       statusPages: the site's own status page, as linked from its footer, header or navigation: a host under the site's own domain.
+         A link in the main content, a comment or a post is anyone's link and is never taken; no other host is ever taken.
+       footerText: the footer's text, for checks on the device only; it is never sent anywhere. */
+    // The page's own footer, header or navigation: one whose nearest section is the page itself, not a post's footer, a card's footer or a signature
+    const INSIDE = 'main, [role="main"], article, [role="article"], [role="comment"], section, aside, blockquote, details, dialog, fieldset, figure, td';
+    const ofPage = (el) => !(el.parentElement && el.parentElement.closest(INSIDE));
+    const outermost = (els) => els.filter((el) => !els.some((o) => o !== el && o.contains(el)));
+    const pageFooters = outermost(Array.from(document.querySelectorAll('footer, [role="contentinfo"], #footer, .footer, #site-footer, .site-footer')).filter(ofPage));
+    // `whole` is the whole text of the page's footer and nothing else: labelled tax IDs are read only from it
+    let whole = ''; try { whole = pageFooters.map((el) => el.innerText || '').join('\n'); } catch (e) { whole = ''; }
+    if (whole.length > 400000) whole = whole.slice(0, 200000) + '\n' + whole.slice(-200000);
+    const taxIds = []; let taxIdNonprofit = false;
+    // the label, then at most 40 characters with no digit in them, then NN-NNNNNNN. "EIN" in capitals only: "ein" is a German word.
+    const idShape = '[^\\d]{0,40}?(?<![\\d-])(\\d{2})[-\\u2010-\\u2013](\\d{7})(?![\\d-])';
+    const labelled = [...whole.matchAll(new RegExp('\\bE\\.?I\\.?N\\b' + idShape, 'g')), ...whole.matchAll(new RegExp('\\b(?:tax(?:payer)?[\\s-]?i\\.?d\\b|tax(?:payer)?[\\s-]identification\\b|employer identification\\b)' + idShape, 'gi'))].sort((a, b) => a.index - b.index);
+    for (const m of labelled) {
+      const id = m[1] + '-' + m[2]; if (!taxIds.includes(id)) taxIds.push(id);
+      // "tax exempt" is not in this list: a billing form asks "Tax exempt: No"
+      if (/501\s*\(?c\)?|non-?profit|not-for-profit|tax[- ]deductible|charit/i.test(whole.slice(Math.max(0, m.index - 300), m.index + m[0].length + 300))) taxIdNonprofit = true;
+      if (taxIds.length >= 6) break;
+    }
+    const here = location.hostname.toLowerCase().replace(/^www\./, ''); const reg = (MLCommon.registrableDomain && MLCommon.registrableDomain(here)) || here;
+    /* A status link must point under the site's own domain, and never at the site's own host. A page on the registrable domain itself
+       (example.com, www.example.com) may link any other host under it; a page on a subdomain only a host under that subdomain, because
+       a platform that gives each tenant a subdomain may be on no list. The worker applies the same rule again (SubtextContextData.ownStatusHost). */
+    const base = here === reg ? reg : here;
+    const REGION = 'footer, header, nav, [role="contentinfo"], [role="banner"], [role="navigation"]';
+    const CONTENT = 'main, [role="main"], article, [role="article"], [role="comment"]';
+    const statusPages = []; const statusText = [];
+    for (const a of document.querySelectorAll(REGION.split(', ').map((r) => r + ' a[href]').join(', '))) {
+      if (a.closest(CONTENT)) continue; // inside the main content or a post, whatever element wraps the link
+      let region = a.closest(REGION); for (let up = region; up; up = up.parentElement && up.parentElement.closest(REGION)) region = up; // the outermost of them
+      if (!region || !ofPage(region)) continue;
+      let u = null; try { u = new URL(a.href); } catch (e) { continue; }
+      if (u.protocol !== 'https:' || u.origin === location.origin) continue;
+      const h = u.hostname.toLowerCase();
+      if (!h.endsWith('.' + base) || h === 'www.' + base) continue; // another site's host, or this site's own host
+      // "status." under the site's own domain, or a link the page itself labels as its status page
+      if (/^status\./.test(h)) { if (!statusPages.includes(u.origin)) statusPages.push(u.origin); }
+      else if (/^(?:system |service )?status$/i.test((a.textContent || '').slice(0, 80).replace(/\s+/g, ' ').trim())) { if (!statusText.includes(u.origin)) statusText.push(u.origin); }
+      if (statusPages.length >= 4) break;
+    }
+    // the footer's text for the city check (on the device only). A page with no footer element: an element named like one, else the end of the page's text
+    let bodyText = ''; try { bodyText = (document.body && document.body.innerText) || ''; } catch (e) { bodyText = ''; }
+    const foot = Array.from(document.querySelectorAll('footer, [role="contentinfo"]')); const footAlt = foot.length ? foot : Array.from(document.querySelectorAll('[id*="footer" i], [class*="footer" i]'));
+    const outer = outermost(footAlt);
+    const footerText = (outer.length ? outer.map((el) => el.innerText || '').join('\n') : bodyText.slice(-1500)).replace(/\s+/g, ' ').trim().slice(0, 4000);
+    return { url: location.href, title: document.title, productPage: types.some((t) => /^product$/i.test(String(t).trim())), published: /^\d{4}-\d{2}-\d{2}/.test(published) ? published.slice(0, 10) : '', siteName: metaC('meta[property="og:site_name"]'), keywords: tags.map((t) => String(t).trim()).filter((t) => t && t.length < 60).slice(0, 15), text: ctx && ctx.index ? mainText().slice(0, 60000) : '',
+      taxIds, taxIdNonprofit, statusPages: [...new Set(statusPages.concat(statusText))].slice(0, 4), footerText };
   }
   function extractForLLM() {
     if (!ctx) return { error: 'Subtext is muted on this site.' };

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Subtext",
   "short_name": "Subtext",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "minimum_chrome_version": "110",
   "description": "Flags the persuasion, dark-pattern, rhetorical, emotional, data-visualization and ownership tricks a web page is using on you, and explains the psychology behind each one.",
   "icons": {

@@ -60,6 +60,22 @@ const ok = (text) => ({ status: 200, text });
   assert.ok(!/PERSON|999999/.test(JSON.stringify(r)), 'no officer names or pay reach the result');
   n += 6;
 
+  // ---- a tax ID the router read from the page (and confirmed by name): the note says where it came from and which name the IRS has
+  r = await S.run(Object.assign({}, ENTITY, { einFrom: 'page' }), F, fakeIo(ok(body(HAPPY))), NOW);
+  assert.strictEqual(r.chart.note, 'The tax ID 01-2345678 was read from this page. The IRS lists it as Example Civic Fund Inc. These are the filings of that one legal entity; related organizations may file separately.');
+  assert.ok(r.chart.sentence.startsWith('Example Civic Fund Inc reported $8.5 million'), 'the figures are the same record');
+  // and one line above the chart says what is known and no more: the page prints this ID, and these are the filings under it
+  assert.strictEqual(r.chart.relation, 'This page prints the tax ID 01-2345678. IRS filings under that ID are from Example Civic Fund Inc.');
+  assert.ok(!/\bis\b|\bowned\b|\bits\b|this site|this organization/i.test(r.chart.relation), 'it does not say the site is the filer');
+  assert.ok(!('relation' in (await S.run(ENTITY, F, fakeIo(ok(body(HAPPY))), NOW)).chart), 'a tax ID from Wikidata needs no such line');
+  // a very long legal name is cut at a word so that both sentences still fit in the line (240 characters); a feed string is cut before it is cleaned
+  { const longName = 'Example Civic Fund For The ' + 'Advancement And Betterment Of '.repeat(9) + 'Springfield';
+    const rl = await S.run(Object.assign({}, ENTITY, { einFrom: 'page' }), F, fakeIo(ok(body(HAPPY, { name: longName }))), NOW);
+    assert.ok(rl.chart.relation.length <= 240 && /^This page prints the tax ID 01-2345678\. IRS filings under that ID are from Example Civic Fund For The Advancement .*\u2026\.$/.test(rl.chart.relation) && !/Bettermen\u2026|Advancemen\u2026/.test(rl.chart.relation), rl.chart.relation);
+    const t0 = Date.now(); const rh = await S.run(Object.assign({}, ENTITY, { einFrom: 'page' }), F, fakeIo(ok(body(HAPPY, { name: 'A ' + ' \t'.repeat(100000) + 'B' + '<'.repeat(100000) }))), NOW);
+    assert.ok(Date.now() - t0 < 200 && rh.chart.title.length <= 'Revenue: '.length + 400, 'a 300,000-character name is cut to 400 characters first: ' + rh.chart.title.length); }
+  n += 4;
+
   // ---- legal name as given, and a fiscal year that does not end in December
   const fy = HAPPY.filter((x) => x.totrevenue != null).map((x) => row(x.tax_prd_yr, x.totrevenue, { tax_prd: x.tax_prd_yr * 100 + 6, formtype: 1, totnetassetend: undefined, totnetassetsend: 50000 }));
   r = await S.run(ENTITY, F, fakeIo(ok(body(fy, { name: 'Example Civic Fund Of Springfield', subsection_code: 4 }))), NOW);

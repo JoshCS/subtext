@@ -25,7 +25,7 @@ const CONTEXT_HOSTS = /news\.google\.com|wikipedia\.org|wikidata\.org|wikimedia\
 const summarize = (c) => {
   const r = (c && c.result) || {};
   return { status: c && c.status, error: c && c.error, group: r.group, subject: r.subject, terms: r.terms && { entity: r.terms.entity, topic: r.terms.topic, query: r.terms.query }, requests: r.requests,
-    charts: (r.charts || []).map((x) => ({ id: x.id, basis: x.basis, about: x.about, aboutLabel: x.aboutLabel, title: x.title, kind: x.kind, points: (x.points || []).length, missing: (x.points || []).filter((p) => p.v == null).length, sentence: x.sentence, note: x.note, source: x.source && x.source.name, rows: (x.rows || []).map((w) => w.t + ' ' + w.text) })),
+    charts: (r.charts || []).map((x) => ({ id: x.id, basis: x.basis, about: x.about, aboutLabel: x.aboutLabel, relation: x.relation, title: x.title, kind: x.kind, points: (x.points || []).length, missing: (x.points || []).filter((p) => p.v == null).length, sentence: x.sentence, note: x.note, source: x.source && x.source.name, rows: (x.rows || []).map((w) => w.t + ' ' + w.text) })),
     facts: (r.facts || []).map((x) => x.label + ': ' + x.text), ran: (r.ran || []).map((x) => x.id + (x.ok ? (x.chart ? ' chart' : ' ok') : x.error ? ' failed: ' + x.error : ' nothing') + ' | sent ' + x.sends) };
 };
 (async () => {

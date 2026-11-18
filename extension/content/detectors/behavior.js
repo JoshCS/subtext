@@ -232,7 +232,10 @@
   ML.detectors.behavior = {
     install(ctx) {
       if (state.installed) return; state.installed = true; state.cleanups = state.cleanups || [];
-      const onPointer = () => { state.lastClick = performance.now(); state.interacted = true; }, onKey = () => { state.interacted = true; }, onLeave = (e) => { if (e.clientY <= 0) state.lastMouseLeave = performance.now(); }, onLeaveRoot = () => { state.lastMouseLeave = performance.now(); };
+      const onPointer = () => { state.lastClick = performance.now(); state.interacted = true; }, onKey = () => { state.interacted = true; },
+      // mouseleave does not bubble, but a capturing listener on the document or on <html> also receives the event when the pointer leaves ANY element inside it,
+      // for example when a pop-up opens under a resting pointer. Only a leave whose target is the document or the root element means the pointer left the page.
+      onLeave = (e) => { if (e.target === document && e.clientY <= 0) state.lastMouseLeave = performance.now(); }, onLeaveRoot = (e) => { if (e.target === document.documentElement) state.lastMouseLeave = performance.now(); };
       document.addEventListener('pointerdown', onPointer, true); document.addEventListener('keydown', onKey, true); document.addEventListener('mouseleave', onLeave, true); document.documentElement.addEventListener('mouseleave', onLeaveRoot, true);
       state.cleanups.push(() => { document.removeEventListener('pointerdown', onPointer, true); document.removeEventListener('keydown', onKey, true); document.removeEventListener('mouseleave', onLeave, true); document.documentElement.removeEventListener('mouseleave', onLeaveRoot, true); });
       try { watchOverlays(ctx); } catch (e) { /* ignore */ }

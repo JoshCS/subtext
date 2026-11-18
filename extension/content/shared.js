@@ -2,7 +2,7 @@
    Loaded first; every other content script attaches to window.ML. */
 (function () {
   const ML = (window.ML = window.ML || {});
-  ML.VERSION = '0.2.0';
+  ML.VERSION = '0.3.0';
   ML.detectors = ML.detectors || {};
   ML.hasChrome = typeof chrome !== 'undefined' && !!(chrome.runtime && chrome.runtime.id);
   ML.preloaded = window.__ML_PRELOADED || {};

@@ -492,6 +492,8 @@
     return '<div class="ctx__chart' + (primary ? '' : ' ctx__chart--more') + '">' +
       (BASIS[c.basis] || whoShown ? '<div class="ctx__basis">' + (BASIS[c.basis] ? '<span class="tag">' + BASIS[c.basis] + '</span>' : '') + (whoShown ? '<span class="ctx__who">' + esc(who) + '</span>' : '') + '</div>' : '') +
       (about === 'site' ? '<p class="ctx__about">About the site, not this page.</p>' : '') +
+      // how the chart's subject relates to the page ("Slack is owned by Salesforce. The figures are for the whole company, not for Slack alone.")
+      (c.relation && typeof c.relation === 'string' ? '<p class="ctx__relation">' + esc(c.relation) + '</p>' : '') +
       '<div class="ctx__title">' + esc(c.title) + '</div><p class="ctx__sentence">' + esc(c.sentence) + '</p>' +
       (c.kind === 'list' ? '' : chartFigure(c)) +
       (rows.length && c.rowsLabel ? '<div class="ctx__rowshd">' + esc(c.rowsLabel) + '</div>' : '') +
@@ -509,7 +511,7 @@
     const kicker = '<h2 class="ctx__kicker">Context from public data</h2>';
     if (!c || c.status === 'error' || c.status === 'stale') {
       box.innerHTML = kicker + (c && c.status === 'error' ? '<p class="status status--err" role="status">' + ICON.alert + '<span>Could not load context: ' + esc(c.error || 'no response') + '</span></p>' : '') +
-        '<p class="ctx__lead">Look up public records and official statistics about what this page is about: filings, a statistic the page names, coverage of the story.</p>' +
+        '<p class="ctx__lead">Look up public records and official statistics about what this page is about: filings, or a statistic the page names.</p>' +
         '<button type="button" class="ctx__button">Show context</button><p class="ctx__small">Free public sources (IRS and SEC filings, statistical agencies, Google News, Wikipedia and others). No AI key needed. Sends an identifier, a name or a few headline words, never the page address; "What was looked up" lists each request.</p>';
       const b = box.querySelector('.ctx__button');
       const idle = () => { b.disabled = false; b.textContent = 'Show context'; };
@@ -522,13 +524,13 @@
         '<div class="sk" aria-hidden="true"><i class="sk__l sk__l--s"></i><i class="sk__l"></i><i class="sk__l sk__l--m"></i><i class="sk__plot"></i><i class="sk__l sk__l--s"></i></div>';
       return box;
     }
-    // `charts` may lead (records, statistics, real coverage); `other` holds ordinary attention charts, which never lead and stay folded
+    // `charts` may lead (records, statistics); `other` holds the news-article count and ordinary attention charts, which never lead and stay folded
     const r = c.result || {}; const charts = (r.charts || []).filter(Boolean); const other = (r.other || []).filter(Boolean); const facts = (r.facts || []).filter(Boolean);
     let h = kicker;
     // a source that fits the page but could not answer (a daily limit, a missing key) is said up front, not left in the lookup list
     const blocked = !charts.length ? (r.ran || []).filter((x) => x && !x.ok && x.error && !/budget|stopped/i.test(x.error))[0] : null;
     if (charts.length) h += chartBlock(charts[0], r, true);
-    else if (other.length) h += '<p class="ctx__lead ctx__empty"><b>No public record or official statistic was found for this page\'s subject' + (r.subject && r.subject.label ? ', ' + esc(r.subject.label) : '') + '.</b> Attention data is folded below; it shows interest, not what the records say.</p>';
+    else if (other.length) h += '<p class="ctx__lead ctx__empty"><b>No public record or official statistic was found for this page\'s subject' + (r.subject && r.subject.label ? ', ' + esc(r.subject.label) : '') + '.</b> ' + (other.some((x) => x.basis === 'coverage') ? 'Coverage and attention data are' : 'Attention data is') + ' folded below; ' + (other.some((x) => x.basis === 'coverage') ? 'they show' : 'it shows') + ' interest, not what the records say.</p>';
     if (blocked) h += '<p class="ctx__lead" role="status"><b>' + esc(blocked.label || 'One source') + ' could not be read.</b> ' + esc(blocked.error) + '</p>';
     if (charts.length) { /* the lead is shown above */ }
     else if (!other.length) h += '<p class="ctx__lead ctx__empty">' + (r.subject === null ? '<b>Nothing to show for this page.</b> No public record or data series matched what the page is about. Subtext shows no chart rather than one about something else.'
@@ -536,7 +538,8 @@
     if (facts.length) h += '<div class="kvs ctx__facts">' + facts.map((f) => { const links = (f.links || []).filter((l) => l && safeUrl(l.url)).slice(0, 5); return kv(f.label, esc(f.text) + (links.length ? '<span class="kv__links">' + links.map((l) => link(l.url, l.text)).join(' · ') + '</span>' : ''), f.note ? esc(f.note) : ''); }).join('') + '</div>';
     const more = charts.length - 1; const moreLabel = more + ' more chart' + (more > 1 ? 's' : '');
     if (more > 0) h += '<button type="button" class="card__more" data-fold="ctx-charts" data-show="' + moreLabel + '" data-hide="Hide the other charts" aria-expanded="false">' + moreLabel + '</button><div class="card__fold" hidden>' + charts.slice(1).map((x) => chartBlock(x, r, false)).join('') + '</div>';
-    if (other.length) h += '<button type="button" class="card__more" data-fold="ctx-other" data-show="Attention data (' + other.length + ')" data-hide="Hide attention data" aria-expanded="false">Attention data (' + other.length + ')</button><div class="card__fold" hidden>' + other.map((x) => chartBlock(x, r, false)).join('') + '</div>';
+    const foldName = other.some((x) => x.basis === 'coverage') ? 'Coverage and attention data' : 'Attention data';
+    if (other.length) h += '<button type="button" class="card__more" data-fold="ctx-other" data-show="' + foldName + ' (' + other.length + ')" data-hide="Hide ' + foldName.toLowerCase() + '" aria-expanded="false">' + foldName + ' (' + other.length + ')</button><div class="card__fold" hidden>' + other.map((x) => chartBlock(x, r, false)).join('') + '</div>';
     const ran = (r.ran || []).filter(Boolean); const byId = {}; for (const x of charts.concat(other)) if (x.id) byId[x.id] = x;
     const outcome = (x) => (x.ok ? (x.chart ? (byId[x.id] && byId[x.id].kind === 'list' ? 'List' : 'Chart') : 'Found') : x.error ? 'Failed' : 'Not enough data');
     const at = String(r.at || '').slice(0, 16).replace('T', ' ');
@@ -849,6 +852,7 @@
 .ctx__basis { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 8px; margin: 2px 0 6px; color: var(--fg2); font-size: 12px; line-height: 17px; }
 .ctx__basis .tag { color: var(--fg); font-weight: 600; }
 .report .ctx__about { margin: -2px 0 6px; color: var(--fg2); font-size: 12px; line-height: 17px; }
+.report .ctx__relation { margin: 0 0 8px; }
 .ctx__title { font-weight: 600; }
 .report .ctx__sentence { margin: 2px 0 0; }
 .report .ctx__src { margin: 8px 0 0; color: var(--fg2); font-size: 12px; line-height: 17px; }

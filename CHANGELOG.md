@@ -4,7 +4,23 @@ Notable changes to Subtext are listed in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Version numbers follow the `version` field in `extension/manifest.json`.
 
-## [Unreleased]
+## [0.3.0] - 2026-11-18
+
+### Added
+
+- Show context: IRS filings for a US tax ID that an organization prints in its page footer.
+- Show context: the company behind a software product, found with one Wikidata step, and that company's SEC figures.
+- Show context: incidents that a service reported on its own status page.
+- Show context: monthly visits for a US national park, on that park's nps.gov pages.
+
+### Changed
+
+- Show context: the count of news articles on a story no longer leads the card. It is folded under "Coverage and attention data".
+
+### Fixed
+
+- A pop-up that opens on a timer while the pointer rests on the page is no longer labelled "Exit-intent pop-up". It is reported as an interrupting pop-up. A pop-up that opens when the pointer leaves the page keeps the label.
+- Settings: the ads.txt line now says the file is asked for at the site's own domain, as the README and the privacy page say.
 
 ## [0.2.0] - 2026-11-17
 

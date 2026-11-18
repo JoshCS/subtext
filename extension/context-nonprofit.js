@@ -1,5 +1,9 @@
 /* Subtext context source: finances a US nonprofit reports to the IRS (Form 990 extracts via ProPublica Nonprofit Explorer).
-   Looked up by tax ID only, never by name. One legal filer per chart: sibling entities (a 501(c)(3) fund and a 501(c)(4)
+   Looked up by tax ID only, never by name. The tax ID comes from Wikidata, from one exact-name lookup, or from the page itself
+   (entity.einFrom === 'page': the router took it from the page's footer, and only after this filer's name agreed with the site's
+   Wikidata label or with its address. Another site can still register an address that matches a filer's name, so the chart then
+   carries a `relation` line that says what is known and no more: the page prints this ID, and these are the filings under it. The
+   note also says where the ID was read). One legal filer per chart: sibling entities (a 501(c)(3) fund and a 501(c)(4)
    action fund) file separately and are never merged or searched for. Contract: docs/CONTEXT-CONTRACT.md.
    Response shape (probed 17 Nov 2026, api_version 2): { organization: { ein (integer, leading zero lost), name (IRS legal name),
    city, state, subsection_code }, filings_with_data: [{ tax_prd (YYYYMM, end of the period), tax_prd_yr (year the period ends),
@@ -42,7 +46,7 @@
       const d = U.json(r.text);
       const org = d && d.organization;
       if (!org || U.num(org.ein) !== Number(ein)) return null; // identity first: the record must be this tax ID
-      const legal = String(org.name || '').replace(/\s+/g, ' ').trim();
+      const legal = String(org.name || '').slice(0, 400).replace(/\s+/g, ' ').trim(); // a feed string is cut before it is cleaned
       if (!legal) return null;
 
       // one row per year the period ends; drop periods that have not ended yet
@@ -82,9 +86,19 @@
       const chart = {
         id: 'nonprofit_finances', basis: 'records', question: 'What does this organization report to the IRS?',
         title: 'Revenue: ' + legal, sentence, kind: 'bars', resolution: 'year', points, unit: 'US dollars', nominal: true,
-        note: 'These are the filings of one legal entity, tax ID ' + dashed(ein) + '. Related organizations may file separately.',
+        // a tax ID read from the page: say so, and say which name the IRS has for it, so a reader can compare the two
+        note: entity.einFrom === 'page' ? 'The tax ID ' + dashed(ein) + ' was read from this page. The IRS lists it as ' + legal + '. These are the filings of that one legal entity; related organizations may file separately.'
+          : 'These are the filings of one legal entity, tax ID ' + dashed(ein) + '. Related organizations may file separately.',
         source
       };
+
+      if (entity.einFrom === 'page') {
+        // the legal name is cut at a word when the line (240 characters) would not hold both sentences
+        const lead = 'This page prints the tax ID ' + dashed(ein) + '. IRS filings under that ID are from '; const room = 240 - lead.length - 1;
+        const cut = legal.slice(0, room - 1); const sp = cut.lastIndexOf(' ');
+        const shown = legal.length <= room ? legal : (sp > 20 ? cut.slice(0, sp) : cut).replace(/[\s,;:.]+$/, '') + '\u2026';
+        chart.relation = lead + shown + (/[.!?]$/.test(shown) ? '' : '.');
+      }
 
       const facts = [];
       const sub = U.num(org.subsection_code);

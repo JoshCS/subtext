@@ -171,25 +171,40 @@
       : has('P856') || has('P159') ? 'organization'
       : has('P577') || has('P50') || has('P57') || has('P123') || has('P86') ? 'work' : 'other';
     const tick = ((((((C.P414 || [])[0] || {}).qualifiers || {}).P249 || [])[0] || {}).datavalue || {}).value || str('P249');
-    return { q, label: (((e.labels || {}).en || {}).value) || '', enwiki: (((e.sitelinks || {}).enwiki || {}).title) || '', founded: /^\+\d{4}/.test(inception) ? inception.slice(1, 5) : '',
+    /* Who is behind the item, for the one-hop owner lookup. Current statements only: the best rank, never a deprecated one, never one
+       with an end date (Trello's former owner, GitHub's deprecated "owned by Microsoft"). A statement that carries a proportion
+       (P1107: a 5 percent stake) or a point in time (P585: who held it on one date) does not say "is owned by" and is skipped.
+       Ownership comes first ("owned by", "parent organization"); who makes or runs it ("developer", "publisher", "operator") is read
+       only when no ownership is stated. When an ownership statement exists but has ended and no current one stands beside it, nobody
+       is read: who made it years ago is not who is behind it now. */
+    const quals = (s) => (s && s.qualifiers) || {};
+    const current = (p) => { const ss = (C[p] || []).filter((s) => s && s.rank !== 'deprecated' && !quals(s).P582 && !quals(s).P1107 && !quals(s).P585); const pref = ss.filter((s) => s.rank === 'preferred'); return (pref.length ? pref : ss).map((s) => (((s.mainsnak || {}).datavalue || {}).value || {}).id).filter(Boolean); };
+    const tier = (ps) => { const m = new Map(); for (const [p, via] of ps) for (const id of current(p)) if (id !== q && !m.has(id)) m.set(id, via); return [...m].map(([id, via]) => ({ q: id, via })); };
+    let owners = tier([['P127', 'owned'], ['P749', 'parent']]);
+    const ownershipEnded = ['P127', 'P749'].some((p) => (C[p] || []).some((s) => s && s.rank !== 'deprecated' && quals(s).P582));
+    if (!owners.length && !ownershipEnded) owners = tier([['P178', 'developed'], ['P123', 'published'], ['P137', 'operated']]);
+    // some items carry their name only as the default for all languages ("mul"): Instagram, Discord Inc.
+    return { q, label: (((e.labels || {}).en || {}).value) || (((e.labels || {}).mul || {}).value) || '', owners: owners.slice(0, 6), enwiki: (((e.sitelinks || {}).enwiki || {}).title) || '', founded: /^\+\d{4}/.test(inception) ? inception.slice(1, 5) : '',
       country: COUNTRY[ids('P17')[0]] || COUNTRY[ids('P27')[0]] || COUNTRY[ids('P495')[0]] || ids('P17')[0] || ids('P27')[0] || '', // a country outside the table keeps its Wikidata id: it is known, and it is not the US
       listed: has('P414'), description: (((e.descriptions || {}).en || {}).value) || '', links: ids('P108').concat(ids('P169'), ids('P112'), ids('P488'), ids('P127'), ids('P749'), ids('P355'), ids('P39'), ids('P54')).slice(0, 40), ein: str('P1297').replace(/\D/g, ''), cik: str('P5531').replace(/\D/g, ''), ticker: typeof tick === 'string' ? tick : '', kind, instanceOf: ids('P31').slice(0, 8) };
   };
   async function fetchEntity(io, by) {
-    const r = await io.get('https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&origin=*&props=labels|descriptions|sitelinks|claims&languages=en&sitefilter=enwiki&' + (by.q ? 'ids=' + enc(by.q) : 'sites=enwiki&titles=' + enc(by.title)));
+    const r = await io.get('https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&origin=*&props=labels|descriptions|sitelinks|claims&languages=en|mul&sitefilter=enwiki&' + (by.q ? 'ids=' + enc(by.q) : 'sites=enwiki&titles=' + enc(by.title)));
     const ents = (json(r.text) || {}).entities || {}; const q = Object.keys(ents).find((k) => /^Q\d+$/.test(k) && !('missing' in ents[k]));
     if (!q) return null; const e = X.entityFrom(q, ents[q]); if (!e.enwiki && by.title) e.enwiki = by.title; return e;
   }
-  // the site's entity: the bundled Wikidata id first (data/owners.json), then one exact-website lookup
+  // the site's entity: the bundled Wikidata id first (data/owners.json), then one exact-website lookup. `matchedBy` records which.
+  // Only the exact-website lookup lets the entity's label confirm a tax ID the page prints (X.filerIsSite)
   async function siteEntity(f, io) {
-    let q = f.entityQ || '';
+    let q = f.entityQ || ''; const matchedBy = q ? 'bundled' : 'website';
     if (!q && f.domain) {
       const sparql = 'SELECT ?item WHERE { VALUES ?u { ' + domainVariants(f.domain).map((v) => '<' + v + '>').join(' ') + ' } ?item wdt:P856 ?u ; wikibase:sitelinks ?n . FILTER NOT EXISTS { ?item wdt:P31 wd:Q5 } } ORDER BY DESC(?n) LIMIT 1'; // a company's address also sits on its founder's item and on its products: never a person, and the item described in the most languages
       const r = await io.get('https://query.wikidata.org/sparql?format=json&query=' + enc(sparql), { accept: 'application/sparql-results+json' });
       const b = ((json(r.text) || {}).results || {}).bindings || [];
       q = b.length ? String(b[0].item.value).split('/').pop() : '';
     }
-    return /^Q\d+$/.test(q) ? fetchEntity(io, { q }) : null;
+    if (!/^Q\d+$/.test(q)) return null;
+    const e = await fetchEntity(io, { q }); if (e) e.matchedBy = matchedBy; return e;
   }
   /* A company whose Wikidata item gives a ticker but no SEC number: take the number from the SEC's own ticker list (bundled,
      data/sec-tickers.json) only when the ticker AND the company's name both match. A ticker alone is reused across exchanges. */
@@ -208,22 +223,111 @@
     const key = nameKey(e.label); const hit = byName.get(rows).get(key);
     return hit && hit.size === 1 && key.length >= 4 ? String([...hit][0]) : '';
   };
+  const CORP = /^(inc|incorporated|corp|corporation|company|co|ltd|plc|llc|group|holdings)$/;
+  // words a company adds to its name; singular forms, as compared
+  const COMPANY_WORDS = /^(technology|technologie|system|motor|industrie|international|enterprise|lab|software|media|entertainment|communication|pharmaceutical|airline|bank|financial|food|brand|store|network|semiconductor|energy|health|global|worldwide|platform|studio|record|foundation|institute|university|association|society)$/;
   /* A US nonprofit whose own page names its legal entity ("Everytown for Gun Safety Support Fund") but whose Wikidata item has no
      tax ID: ask ProPublica for that exact legal name. Accepted only when exactly one filer carries exactly that name; a near name
      ("... Action Fund") is a different legal entity and is refused. Returns the tax ID as nine digits, or ''. */
-  const legalKey = (n) => String(n || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9 ]+/g, ' ').replace(/\b(inc|incorporated)\b/g, ' ').replace(/^\s*the\s+/, '').replace(/\s+/g, ' ').trim();
+  const legalKey = (n) => String(n || '').slice(0, 400).toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9 ]+/g, ' ').replace(/\b(inc|incorporated)\b/g, ' ').replace(/^\s*the\s+/, '').replace(/\s+/g, ' ').trim();
   X.filerByName = async function (io, name) {
     const key = legalKey(name); if (key.split(' ').length < 2) return null;
     const r = await io.get('https://projects.propublica.org/nonprofits/api/v2/search.json?q=' + enc(String(name).slice(0, 90)));
     const j = json(r.text) || {}; if (num(j.num_pages) > 1) return null; // more results than one page shows: "exactly one" cannot be established
     const hits = (j.organizations || []).filter((o) => legalKey(o.name) === key);
-    return hits.length === 1 && num(hits[0].ein) ? { ein: String(hits[0].ein).padStart(9, '0'), name: String(hits[0].name || ''), city: String(hits[0].city || ''), state: String(hits[0].state || '') } : null;
+    return hits.length === 1 && num(hits[0].ein) ? { ein: String(hits[0].ein).padStart(9, '0'), name: String(hits[0].name || '').slice(0, 400), city: String(hits[0].city || '').slice(0, 80), state: String(hits[0].state || '').slice(0, 20) } : null;
   };
   X.einByLegalName = async function (io, name) { const h = await X.filerByName(io, name); return h ? h.ein : ''; };
+  /* The filer ProPublica lists for one tax ID (nine digits), or null. The same address the nonprofit source reads, so within one
+     run the second read is answered from memory and costs no request. */
+  X.filerByEin = async function (io, ein) {
+    if (!/^\d{9}$/.test(String(ein || ''))) return null;
+    const r = await io.get('https://projects.propublica.org/nonprofits/api/v2/organizations/' + ein + '.json', { accept: 'application/json' });
+    if (!r || r.status !== 200) return null; const org = (json(r.text) || {}).organization;
+    if (!org || num(org.ein) !== Number(ein)) return null; // the record must be this tax ID
+    const name = String(org.name || '').slice(0, 400).replace(/\s+/g, ' ').trim();
+    return name ? { ein: String(ein), name, city: String(org.city || '').slice(0, 80), state: String(org.state || '').slice(0, 20) } : null;
+  };
+  /* Do two names name the same organization? Used only to confirm a tax ID the page prints, against the site's Wikidata label: a page
+     can print its fiscal sponsor's or a partner's tax ID. Lower case, no punctuation, no "the / inc / foundation". Every remaining
+     word of the shorter name must be in the longer one, and at least one of them must not be a word many organizations share
+     ("food", "bank", "community", "fund"). When the shorter name is one word, that is agreement only when the longer name has no
+     other word of its own ("Tides" and "Tides Foundation"; not "Atlas" and "Fractured Atlas Productions"). Initials do not agree
+     here; they count only for the site's address (addressIsName). */
+  const NAME_NOISE = new Set('the a an of and for in at to on by inc incorporated corp corporation co company llc ltd limited foundation fdn nfp pbc'.split(' '));
+  const NAME_GENERIC = new Set(('food bank pantry community fund center centre service society association assn trust charity charitie charitable council project program group network institute national international american america united friend county city state regional club church school house home care health family familie children kid youth art education alliance partner partnership coalition league ministrie ministry mission relief rescue shelter aid support public nonprofit organization org development resource initiative collective cooperative housing north south east west central greater new usa us').split(' '));
+  // every word of a name, lower case, accents and punctuation removed. The name is cut to 400 characters first.
+  const allWords = (n) => String(n || '').slice(0, 400).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/&/g, ' and ').replace(/['’.]/g, '').replace(/[^a-z0-9]+/g, ' ').split(' ').filter(Boolean);
+  const nameWords = (n) => allWords(n).filter((w) => !NAME_NOISE.has(w));
+  const sing = (w) => (w.length > 3 ? w.replace(/s$/, '') : w);
+  X.namesAgree = function (a, b) {
+    const A = nameWords(a), B = nameWords(b); if (!A.length || !B.length) return false;
+    const [S, L] = A.length <= B.length ? [A, B] : [B, A];
+    if (S.length === 1 && L.length > 1) return false; // one shared word is not agreement
+    const Ls = new Set(L.map(sing));
+    return S.every((w) => Ls.has(sing(w))) && S.some((w) => w.length >= 3 && !/^\d+$/.test(w) && !NAME_GENERIC.has(sing(w)));
+  };
+  /* Is the site's address the filer's name? The first label of the registrable domain, hyphens dropped, must EQUAL the filer's name
+     run together ("chestercountyfoodbank" for CHESTER COUNTY FOOD BANK INC), or its initials when they are four letters or more
+     ("sfspca"). The filer's name may lose a leading "the", legal words at its end ("inc", "foundation") and its small words ("of",
+     "for", "the"). Containing the name is not enough: "relief-society-donate" is not RELIEF SOCIETY, and the first words of a longer
+     name are not that name. One word that many organizations share ("community") is never enough. */
+  const SMALL_WORDS = new Set('the a an of and for in at to on by'.split(' '));
+  const LEGAL_END = new Set('inc incorporated corp corporation co company llc ltd limited foundation fdn nfp pbc'.split(' '));
+  const addressIsName = (name, registrable) => {
+    const label = String(registrable || '').toLowerCase().split('.')[0].replace(/[^a-z0-9]/g, '');
+    if (label.length < 4) return false;
+    let W = allWords(name); if (W.length > 1 && W[0] === 'the') W = W.slice(1);
+    // the name as filed, then without each legal word at its end
+    const forms = [W]; for (let n = W.length; n > 1 && LEGAL_END.has(W[n - 1]); n--) forms.push(W.slice(0, n - 1));
+    return forms.some((ws) => {
+      const main = ws.filter((w) => !SMALL_WORDS.has(w));
+      if (!main.length || (main.length === 1 && NAME_GENERIC.has(sing(main[0])))) return false;
+      return label === ws.join('') || label === main.join('') || (main.length >= 4 && label === main.map((w) => w[0]).join('')) || (ws.length >= 4 && label === ws.map((w) => w[0]).join(''));
+    });
+  };
+  /* Is this filer the organization behind the site? Its IRS name must agree with something the page does not write:
+     (1) the site's Wikidata label, when the entity came from the exact-website lookup (matchedBy 'website'); or
+     (2) the site's address itself (addressIsName).
+     The site's name as the page gives it (og:site_name), the parts of its title and a legal name in its footer confirm nothing: a page
+     that prints another organization's tax ID can write that organization's name wherever it likes. */
+  X.filerIsSite = function (name, f) {
+    const site = f && f.site; const label = site && site.q && site.label && site.matchedBy === 'website' ? site.label : '';
+    return (!!label && X.namesAgree(name, label)) || addressIsName(name, (f && (f.registrable || f.domain)) || '');
+  };
+  /* The one organization Wikidata names as behind a product, a piece of software or a subsidiary, or null. Exactly one current
+     organization must be named (see entityFrom); two different ones are not resolved by guessing. */
+  X.ownerLink = function (e) { const o = (e && e.owners) || []; return o.length === 1 && /^Q\d+$/.test(o[0].q) ? o[0] : null; };
+  // "Asana" and "Asana, Inc.", "Slack" and "Slack Technologies": the company carries the product's name
+  const plainKey = (n) => nameKey(n).split(' ').filter((w) => !COMPANY_WORDS.test(w.replace(/s$/, ''))).join(' ');
+  // (product, company). A company word is dropped from the company's side only: "Amazon Studios" is not "Amazon"
+  const sameName = (product, company) => !!nameKey(product) && (nameKey(product) === nameKey(company) || nameKey(product) === plainKey(company));
+  const fullStop = (s) => s + (/[.!?]$/.test(s) ? '' : '.');
+  const VIA = { owned: (a, b) => a + ' is owned by ' + b, parent: (a, b) => b + ' is the parent organization of ' + a, developed: (a, b) => a + ' is developed by ' + b, published: (a, b) => a + ' is published by ' + b, operated: (a, b) => a + ' is operated by ' + b };
+  const RELATION_MAX = 240; // characters the card gives the relation line
+  // one plain line: the link Wikidata states, and whose figures these are. When both sentences do not fit, the first stands alone
+  X.ownerRelation = function (owner) {
+    if (!owner || !owner.of || !owner.label || !VIA[owner.via]) return '';
+    if (owner.sameName) return fullStop('The figures are for ' + owner.label.replace(/[.\s]+$/, '') + ', the company behind ' + owner.of).slice(0, RELATION_MAX); // "Dropbox is owned by Dropbox Inc." reads as a slip
+    const first = fullStop(VIA[owner.via](owner.of, owner.label)); const both = first + ' The figures are for the whole company, not for ' + owner.of + ' alone.';
+    return both.length <= RELATION_MAX ? both : first;
+  };
+  /* A relation line from any source, made to fit: whole when it fits; otherwise its first sentence only, never a cut in mid-sentence.
+     A full stop ends a sentence when a space follows it, the next word does not start in lower case ("Example Inc. is the parent"),
+     and it does not follow a title ("St. Example"). One sentence that is too long by itself is cut at a word and marked. */
+  X.fitRelation = function (v) {
+    if (typeof v !== 'string') return '';
+    const t = v.slice(0, 2000).replace(/\s+/g, ' ').trim(); if (t.length <= RELATION_MAX) return t;
+    let end = -1;
+    for (const m of t.matchAll(/[.!?] /g)) {
+      if (m[0][0] === '.' && (/^[\p{Ll}\d]/u.test(t.slice(m.index + 2)) || /(?:^|[^\p{L}])(?:st|dr|mr|mrs|ms|jr|sr|no|vs)$/iu.test(t.slice(0, m.index)))) continue;
+      end = m.index + 1; break;
+    }
+    const first = end > 0 ? t.slice(0, end) : t; if (first.length <= RELATION_MAX) return first;
+    const cut = first.slice(0, RELATION_MAX - 1); const sp = cut.lastIndexOf(' ');
+    return (sp > RELATION_MAX / 2 ? cut.slice(0, sp) : cut).replace(/[\s,;:]+$/, '') + '\u2026';
+  };
   const SUBJECT_KINDS = new Set(['person', 'organization', 'event', 'work', 'product']);
-  const CORP = /^(inc|incorporated|corp|corporation|company|co|ltd|plc|llc|group|holdings)$/;
-  // words a company adds to its name; singular forms, as compared
-  const COMPANY_WORDS = /^(technology|technologie|system|motor|industrie|international|enterprise|lab|software|media|entertainment|communication|pharmaceutical|airline|bank|financial|food|brand|store|network|semiconductor|energy|health|global|worldwide|platform|studio|record|foundation|institute|university|association|society)$/;
   /* What the page is about: a person, organization, event, work or product the page names and repeats, confirmed against Wikipedia and
      Wikidata; or a two- or three-word phrase the page repeats that is the exact title of a Wikipedia article ("robot vacuum").
      One ordinary word is never a subject, and neither is a place or a thing that grows. Returns an Entity, a phrase subject, or null. */
@@ -455,12 +559,35 @@
         the story, attention to the subject. Attention to the site is the last resort on an article, and is labelled as such.
      3. Run them in that order; the first that returns a defensible chart leads. If none does, there is no chart. */
   const SITE_IS_SUBJECT = new Set(['shop', 'organization', 'other']); // the page is about the site itself, or sells for it
+  const OWNER_OF = new Set(['product', 'work', 'organization']); // what can have a company behind it: never a person or an event
   const EVERGREEN = ['recipe', 'guide', 'review', 'listicle'];
+  // the same test the worker applies to the page's own host: nothing is asked of a private or intranet address
+  const publicHost = (h) => !!h && h.includes('.') && !h.includes(':') && !h.startsWith('[') && !/(^|\.)\d+$/.test(h) && !/^0x/i.test(h) && !/\.(local|localhost|internal|test|invalid|lan|home|corp|intranet)$/.test(h);
+  /* May this host be asked as the site's status page? Only a host under the site's own domain, and never the site's own host (with
+     or without www). `domain` is the page's host without www. `registrable` is its registrable domain, worked out in the worker
+     (MLCommon.registrableDomain); one that the page is not on, or that has no dot, is not used, and the page's own host stands in.
+     A page on the registrable domain itself (example.com, www.example.com) may have any other host under it (status.example.com).
+     A page on a subdomain (shop.bigplatform.com) may only have a host under that subdomain: many platforms give each tenant a
+     subdomain and are on no list, and the platform's status page is not the tenant's. No other host is ever requested: a link
+     anyone can post must not choose where a request goes. */
+  const ownDomains = (domain, registrable) => {
+    const d = String(domain || '').toLowerCase().replace(/^www\./, ''); const r = typeof registrable === 'string' ? registrable.toLowerCase().replace(/^www\./, '') : '';
+    return { domain: d, registrable: d && r && r.includes('.') && (d === r || d.endsWith('.' + r)) ? r : d };
+  };
+  X.ownStatusHost = function (host, domain, registrable) {
+    const o = ownDomains(domain, registrable); const h = String(host || '').toLowerCase();
+    if (!o.domain || !o.domain.includes('.') || !h) return false;
+    const base = o.domain === o.registrable ? o.registrable : o.domain;
+    return h.endsWith('.' + base) && h !== 'www.' + base;
+  };
+  // a status page the page links to: an https origin on a public host, nothing else (no path, port, user name or query)
+  const statusOrigin = (v) => { let u = null; try { u = new URL(String(v)); } catch (e) { return ''; } const h = u.hostname.toLowerCase().replace(/\.$/, ''); return u.protocol === 'https:' && !u.username && !u.password && !u.port && publicHost(h) ? 'https://' + h : ''; };
   /* Page facts from the report the content script already made. */
   X.pageFacts = function (p) {
     let u = null; try { u = new URL(p.url); } catch (e) { /* no url */ }
     const host = u ? u.hostname.toLowerCase() : String(p.hostname || '');
     const domain = String(p.domain || host).replace(/^www\./, '');
+    const registrable = ownDomains(domain, p.registrable).registrable; // from the worker, checked again; the page's own host when none is given
     const kind = p.pageKind || 'page';
     const handle = u && /\/products\/([a-z0-9][a-z0-9-]{1,120})\/?$/i.exec(u.pathname);
     const sells = !!p.sells || !!handle || !!p.productPage; // the page marks itself as a product (og:type or schema.org Product)
@@ -476,36 +603,52 @@
     if (/\b(Office for National Statistics|Bank of England)\b/.test(body)) hints.push('GB');
     if (/\b(European Central Bank|Eurostat)\b|\beuro ?zone\b|\beuro area\b/i.test(body)) hints.push('EA');
     const countryHint = hints.length === 1 ? hints[0] : '';
-    return { url: p.url, title: terms.title, text: String(p.text || '').slice(0, 60000), published, origin: u ? u.origin : '', domain, siteName: p.siteName || brand, brand, group, isArticle: group === 'news', articleKind: kind === 'article', countryHint, entityQ: p.entityQ || '', legalName: String(p.legalName || '').replace(/\s+/g, ' ').trim().slice(0, 90), address: String(p.address || '').slice(0, 200), root, shopHandle: handle ? handle[1] : '', terms, site: null, subject: null };
+    // tax IDs the page's footer prints beside a label, as nine digits; anything else the content script sent is dropped
+    const taxIds = [...new Set((Array.isArray(p.taxIds) ? p.taxIds : []).filter((x) => typeof x === 'string' && /^\s*\d{2}-?\d{7}\s*$/.test(x)).map((x) => x.replace(/\D/g, '')))].slice(0, 6);
+    // only a host under the site's own domain is kept, whatever the content script sent (X.ownStatusHost)
+    const statusPages = [...new Set((Array.isArray(p.statusPages) ? p.statusPages : []).filter((x) => typeof x === 'string').map(statusOrigin).filter((x) => x && X.ownStatusHost(x.slice(8), domain, registrable)))].slice(0, 2);
+    const footerText = (typeof p.footerText === 'string' ? p.footerText : '').replace(/\s+/g, ' ').trim().slice(0, 4000);
+    return { taxIds, taxIdNonprofit: !!p.taxIdNonprofit && taxIds.length > 0, statusPages, footerText, owner: null, url: p.url, title: terms.title, text: String(p.text || '').slice(0, 60000), published, origin: u ? u.origin : '', domain, registrable, siteName: p.siteName || brand, brand, group, isArticle: group === 'news', articleKind: kind === 'article', countryHint, entityQ: p.entityQ || '', legalName: String(p.legalName || '').replace(/\s+/g, ' ').trim().slice(0, 90), address: String(p.address || '').slice(0, 200), root, shopHandle: handle ? handle[1] : '', terms, site: null, subject: null };
   };
   const RECORDS = ['fec_committee', 'fec_employer', 'nonprofit_finances', 'sec_financials'];
   /* The ordered list of (source, target) to try. Needs f.site and f.subject. */
   X.candidates = function (f, o) {
     o = o || {}; const R = X.REGISTERED; const out = []; const seen = new Set();
-    const add = (id, target, about) => {
+    const add = (id, target, about, relation) => {
       const s = R[id]; if (!s || (s.cookies && !o.trends)) return;
       if (s.scope === 'entity' && !target) return;
       const key = id + '|' + (s.scope === 'entity' ? target.q || target.label : '');
       if (seen.has(key)) return;
       let ok = false; try { ok = s.scope === 'entity' ? !!s.applies(target, f, o) : !!s.applies(f, o); } catch (e) { ok = false; }
-      if (ok) { seen.add(key); out.push({ id, target: s.scope === 'entity' ? target : null, about }); }
+      if (ok) { seen.add(key); out.push(Object.assign({ id, target: s.scope === 'entity' ? target : null, about }, relation ? { relation } : {})); }
     };
     const subj = f.subject, site = f.site; const real = subj && subj.kind !== 'phrase' ? subj : null;
+    /* The company behind the subject (f.owner, one hop in Wikidata), when the subject files nothing itself. Its SEC records carry a
+       line that states the link. A company with the subject's own name (Asana, owned by Asana Inc.) stands where the subject would.
+       A company with another name (Slack, owned by Salesforce) is shown only on a page about the site itself, and never on an
+       article: a conglomerate's revenue says little about one story that names one of its products. */
+    const owner = f.owner && f.owner.cik && X.ownerRelation(f.owner) ? f.owner : null; const link = owner ? X.ownerRelation(owner) : '';
     add('official_statistic', null, 'page');
+    add('park_visits', null, 'page'); add('building_permits', null, 'page'); // each checks for itself what the page is about, and names its own subject
     if (SITE_IS_SUBJECT.has(f.group)) {
       // a shop, an organization's own pages and a front page are about the site. An inner page of a large site ("Plan your visit" on an
       // agency's site) may be about something else: what is shown is still about the site, and is labelled so
       const about = f.group === 'other' && !f.root ? 'site' : 'subject';
+      const behind = owner && (owner.sameName || about === 'subject') ? owner : null;
       for (const id of RECORDS) add(id, site, about);
-      add('sec_filings', site, about); add('site_views', site, about); add('site_trends', site, about); add('site_discussion', null, about);
+      add('sec_financials', behind, about, link);
+      add('status_incidents', null, about); // only when the page links its own status page (f.statusPages). Before the filings list: on a service's own page its incidents say more about the service than a list of the company's filings
+      add('sec_filings', site, about); add('sec_filings', behind, about, link);
+      add('site_views', site, about); add('site_trends', site, about); add('site_discussion', null, about);
       return out;
     }
     const money = X.moneySignal(f); const second = f.secondary || null; // an organization the headline also names, when the subject is a person or an event
+    const same = owner && owner.sameName ? owner : null;
     add('fec_committee', real, 'subject'); add('fec_employer', real, 'subject'); // these check for themselves that the page is about political money
-    if (money) { add('nonprofit_finances', real, 'subject'); add('sec_financials', real, 'subject'); add('nonprofit_finances', second, 'subject'); add('sec_financials', second, 'subject'); }
+    if (money) { add('nonprofit_finances', real, 'subject'); add('sec_financials', real, 'subject'); add('sec_financials', same, 'subject', link); add('nonprofit_finances', second, 'subject'); add('sec_financials', second, 'subject'); }
     add('news_coverage', null, 'page');
     if (f.group === 'evergreen') { add('subject_trends', subj, 'subject'); add('subject_views', subj, 'subject'); }
-    add('nonprofit_finances', real, 'subject'); add('sec_financials', real, 'subject'); add('nonprofit_finances', second, 'subject'); add('sec_financials', second, 'subject'); add('sec_filings', real, 'subject');
+    add('nonprofit_finances', real, 'subject'); add('sec_financials', real, 'subject'); add('sec_financials', same, 'subject', link); add('nonprofit_finances', second, 'subject'); add('sec_financials', second, 'subject'); add('sec_filings', real, 'subject'); add('sec_filings', same, 'subject', link);
     add('subject_views', subj, 'subject'); add('subject_trends', subj, 'subject');
     // last resort on an article: something about the site, labelled as about the site
     const siteOnly = site && !(subj && subj.q && subj.q === site.q) ? site : null;
@@ -516,24 +659,48 @@
   X.run = async function (f, io, o) {
     o = o || {}; const now = o.now || new Date(); const max = o.maxRequests || MAX_REQUESTS;
     let used = 0; const ran = []; const charts = []; const facts = [];
-    const guarded = { get: async (url, opt) => { if (++used > max) throw new Error('request budget used'); return io.get(url, opt || {}); } };
+    // a second read of the same address in one run is answered from memory and is not counted (never for a request that carries cookies)
+    const memo = new Map();
+    const guarded = { get: async (url, opt) => {
+      opt = opt || {}; const key = opt.cookies ? '' : String(url);
+      if (key && memo.has(key)) return memo.get(key);
+      if (++used > max) throw new Error('request budget used');
+      const r = await io.get(url, opt); if (key && r && r.status === 200) memo.set(key, r); return r;
+    } };
     const err = (e) => String((e && e.message) || e).slice(0, 140);
     try { f.site = await siteEntity(f, guarded); ran.push({ id: 'site', label: 'Who runs this site', ok: !!f.site, sends: f.entityQ ? 'the site\'s Wikidata id to Wikidata' : 'the domain to Wikidata' }); }
     catch (e) { f.site = null; ran.push({ id: 'site', label: 'Who runs this site', ok: false, error: err(e), sends: 'the domain to Wikidata' }); }
     if (SITE_IS_SUBJECT.has(f.group)) {
-      // the page names its own legal entity and no tax ID is known yet: one exact-name lookup among US nonprofit filers
-      /* No tax ID known yet for an organization's own page: one exact-name lookup among US nonprofit filers.
+      const blank = (label) => ({ q: '', label, enwiki: '', founded: '', country: 'US', cik: '', ticker: '', kind: 'organization' });
+      const known = () => !!(f.site && (f.site.ein || f.site.cik));
+      /* The page's footer prints one tax ID beside a label ("EIN: 12-3456789"), on a nonprofit's page: read the filer ProPublica lists
+         for it. It is taken only when that filer's name agrees with something the page does not write (X.filerIsSite: the site's
+         Wikidata label or its address): a page can print a fiscal sponsor's, a partner's or any well-known charity's ID. Two different
+         IDs: none is taken. Off a .org site, the text beside the ID must also call the organization a nonprofit. The content script
+         reads the footer only, so a number on an invoice or an account page is never read. */
+      let refused = '';
+      if (!known() && X.REGISTERED.nonprofit_finances && (f.taxIds || []).length === 1 && (/\.org$/.test(f.domain) || f.group === 'organization' || f.taxIdNonprofit)) {
+        const sends = 'the tax ID printed on this page to ProPublica Nonprofit Explorer';
+        try {
+          const hit = await X.filerByEin(guarded, f.taxIds[0]); const ok = !!hit && X.filerIsSite(hit.name, f);
+          if (ok) f.site = Object.assign(f.site || blank(f.siteName || hit.name), { ein: hit.ein, einFrom: 'page' }); else if (hit) refused = hit.ein;
+          ran.push({ id: 'page_tax_id', label: 'Tax ID printed on the page', ok, sends });
+        } catch (e) { ran.push({ id: 'page_tax_id', label: 'Tax ID printed on the page', ok: false, error: err(e), sends }); }
+      }
+      /* Still no tax ID for an organization's own page: one exact-name lookup among US nonprofit filers.
          The legal name the page itself prints is taken as it is. The site's plain name ("Chester County Food Bank") is accepted only
          when the filer's city also appears on the page: a name alone could be another town's organization. */
-      if (f.group !== 'shop' && !(f.site && (f.site.ein || f.site.cik)) && X.REGISTERED.nonprofit_finances) {
+      if (f.group !== 'shop' && !known() && X.REGISTERED.nonprofit_finances) {
         const viaLegal = !!f.legalName; const name = f.legalName || (f.group === 'organization' ? f.siteName : '');
         if (name) {
           const sends = 'the name "' + name + '" to ProPublica Nonprofit Explorer';
           try {
             let hit = await X.filerByName(guarded, name);
-            // the filer's city and state together, as an address writes them ("Exton, PA"): a city name alone hides inside other words
-            if (hit && !viaLegal && !(hit.city && hit.state && new RegExp('(^|[^\\p{L}])' + hit.city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[,\\s]+' + hit.state + '(?![\\p{L}])', 'iu').test(f.text + ' ' + (f.address || '')))) hit = null;
-            if (hit) f.site = Object.assign(f.site || { q: '', label: name, enwiki: '', founded: '', country: 'US', cik: '', ticker: '', kind: 'organization' }, { ein: hit.ein });
+            // the filer's city and state together, as an address writes them ("Exton, PA"): a city name alone hides inside other words.
+            // The address is often in the footer, which the main text leaves out.
+            if (hit && !viaLegal && !(hit.city && hit.state && new RegExp('(^|[^\\p{L}])' + hit.city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[,\\s]+' + hit.state + '(?![\\p{L}])', 'iu').test(f.text + ' ' + (f.address || '') + ' ' + (f.footerText || '')))) hit = null;
+            if (hit && hit.ein === refused) hit = null; // the tax ID the page prints was found to be another organization's: its name on the page does not change that
+            if (hit) f.site = Object.assign(f.site || blank(name), { ein: hit.ein });
             ran.push({ id: 'legal_name', label: 'Tax ID for the name on the page', ok: !!hit, sends });
           } catch (e) { ran.push({ id: 'legal_name', label: 'Tax ID for the name on the page', ok: false, error: err(e), sends }); }
         }
@@ -550,26 +717,61 @@
     for (const e of [f.site, f.subject]) if (e && !e.cik && e.ticker && o.secTickers) e.cik = X.cikFromTicker(e, o.secTickers);
     if (f.secondary && !f.secondary.cik && f.secondary.ticker && o.secTickers) f.secondary.cik = X.cikFromTicker(f.secondary, o.secTickers);
     for (const e of [f.site, f.subject, f.secondary]) if (e && !e.cik && !e.ein && o.secTickers) e.cik = X.cikFromName(e, o.secTickers);
+    /* The company behind the subject. The site (or an article's subject) files nothing itself and Wikidata names exactly one current
+       organization as its owner, parent, developer, publisher or operator: that organization is read once (one request) and kept in
+       f.owner. One hop only: the owner's own owner is never read. The owner gets SEC records only under the same identity rules as
+       any company (its SEC number on Wikidata, or its ticker with a matching name, or listed with exactly one exact name). */
+    f.owner = null;
+    { const onSite = SITE_IS_SUBJECT.has(f.group); const base = onSite ? f.site : f.subject && f.subject.kind !== 'phrase' ? f.subject : null;
+      // on an article only a company of the subject's own name is ever shown, and a book or a film never shares its publisher's name: not asked
+      const link = base && base.q && base.label && !base.cik && !base.ein && OWNER_OF.has(base.kind) && (onSite || base.kind !== 'work') && X.REGISTERED.sec_financials ? X.ownerLink(base) : null;
+      if (link) {
+        const sends = 'the Wikidata id of the organization that Wikidata names as behind ' + base.label + ' to Wikidata';
+        try {
+          const e = await fetchEntity(guarded, { q: link.q });
+          if (e && e.kind === 'organization' && e.label && e.q !== base.q) {
+            if (!e.cik && e.ticker && o.secTickers) e.cik = X.cikFromTicker(e, o.secTickers);
+            if (!e.cik && !e.ein && o.secTickers) e.cik = X.cikFromName(e, o.secTickers);
+            f.owner = Object.assign(e, { via: link.via, of: base.label, sameName: sameName(base.label, e.label) });
+          }
+          ran.push({ id: 'owner', label: 'The company behind it', ok: !!f.owner, sends });
+        } catch (e) { ran.push({ id: 'owner', label: 'The company behind it', ok: false, error: err(e), sends }); }
+      }
+    }
     const pushFacts = (r) => { for (const x of [].concat((r && r.facts) || [], (r && r.fact) || [])) if (x && x.id) facts.push(x); };
     /* What may lead: records, an official statistic, real coverage, or attention with a clear spike. Ordinary attention (views and
        searches that say nothing in particular) never leads: on unseen pages no such chart told a reader anything about the page.
        It is kept in `other`, which the card folds away. */
-    const other = []; const ATTENTION = new Set(['topic', 'site']);
+    /* The count of news articles on the story never leads either. On 30 unseen pages (17 Nov 2026) it led four times and a blind judge
+       found it unhelpful each time: how many outlets ran a story answers nothing a reader of the story asks. It is folded with the
+       attention charts. Finding it still means something about the page was found, so the site's own records are not shown instead. */
+    const other = []; const ATTENTION = new Set(['topic', 'site']); const FOLDED = new Set(['coverage']); let coverageFound = false;
     for (const c of X.candidates(f, o)) {
-      const src = X.REGISTERED[c.id]; const attention = ATTENTION.has(src.basis);
+      const src = X.REGISTERED[c.id]; const attention = ATTENTION.has(src.basis) || FOLDED.has(src.basis);
       if (charts.length >= (o.maxCharts || 2) && !attention) continue;
       if (attention && (other.length >= 2 || (charts.length >= (o.maxCharts || 2)))) continue;
-      if (c.about === 'site' && SITE_IS_SUBJECT.has(f.group) === false && charts.length) break; // the last resort on an article is not needed once something about the page was found
+      if (c.about === 'site' && SITE_IS_SUBJECT.has(f.group) === false && (charts.length || coverageFound)) break; // the last resort on an article is not needed once something about the page was found
       const sends = src.scope === 'entity' ? src.sends(c.target, f) : src.sends(f);
       try {
         const r = src.scope === 'entity' ? await src.run(c.target, f, guarded, now, o) : await src.run(f, guarded, now, o);
-        if (r && r.chart) { const chart = Object.assign({}, r.chart, { id: c.id, basis: src.basis, question: src.question, about: c.about, aboutLabel: c.target ? c.target.label || c.target.enwiki : c.about === 'page' ? '' : (f.site && f.site.label) || f.siteName, sends, cookies: !!src.cookies }); (attention && !chart.notable ? other : charts).push(chart); }
+        if (r && r.chart) {
+          /* A source may name its own subject (a park, a city): `about: 'subject'` with an `aboutLabel`, or `about: 'page'`, is kept.
+             Otherwise the router says what the chart is about. `relation` is one line on how the chart's subject relates to the page. */
+          const line = (v, n) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, n) : '');
+          const own = ['page', 'subject', 'site'].includes(r.chart.about) ? r.chart.about : ''; const ownLabel = line(r.chart.aboutLabel, 120);
+          const keep = own === 'subject' ? !!ownLabel : !!own; const about = keep ? own : c.about;
+          const aboutLabel = about === 'page' ? '' : (keep && ownLabel) || (c.target ? c.target.label || c.target.enwiki : (f.site && f.site.label) || f.siteName);
+          const chart = Object.assign({}, r.chart, { id: c.id, basis: src.basis, question: src.question, about, aboutLabel, sends, cookies: !!src.cookies });
+          const relation = X.fitRelation(c.relation) || X.fitRelation(r.chart.relation); if (relation) chart.relation = relation; else delete chart.relation;
+          if (FOLDED.has(src.basis)) { coverageFound = true; delete chart.notable; other.push(chart); } // never leads, whatever the source says
+          else (attention && !chart.notable ? other : charts).push(chart);
+        }
         pushFacts(r);
         ran.push({ id: c.id, label: src.label, ok: !!(r && (r.chart || r.fact || (r.facts || []).length)), chart: !!(r && r.chart), error: r && r.error ? String(r.error).slice(0, 140) : undefined, sends });
       } catch (e) { ran.push({ id: c.id, label: src.label, ok: false, error: err(e), sends }); }
     }
     if (f.subject && f.subject.kind !== 'phrase' && !(f.site && f.subject.q === f.site.q)) facts.push(entityFact(f.subject, 'subject', 'This page is about'));
-    if (f.site) facts.push(entityFact(f.site, 'entity', 'This site'));
+    if (f.site && (f.site.q || f.site.enwiki)) facts.push(entityFact(f.site, 'entity', 'This site')); // an entity made from a name or a tax ID on the page has no Wikidata record to cite
     for (const id of Object.keys(F)) {
       const src = F[id]; if (!src.when(f, o)) continue;
       try { const r = await src.run(f, guarded, now); if (r) facts.push(r); ran.push({ id, label: src.label, ok: !!r, sends: src.sends(f) }); }

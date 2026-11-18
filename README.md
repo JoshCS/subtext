@@ -5,7 +5,7 @@ Its checks cover dark patterns, manufactured urgency, social-proof theatre, rhet
 
 Not every check shows a label yet. In this version the wording checks for rhetoric, emotional framing and interpersonal tactics are held back and show nothing, because word matching was wrong too often on real pages ([docs/RELIABILITY.md](docs/RELIABILITY.md)). The optional AI analysis reads the argument instead.
 
-Status: **proof of concept (v0.2)**. No person has labelled its results: every accuracy figure in the docs comes from AI judges or from checks in code, not from people. Treat what it reports as leads to check, not as findings. Built and tested on Chromium: load it in Chrome, Edge, Brave or Arc (Chrome 110 or newer). Safari and Firefox are not built or tested yet. Scanning runs locally, the site's own privacy and terms pages are fetched on load (see [Privacy](#privacy)), and an optional AI deep-analysis layer uses your own Claude (Anthropic) or ChatGPT (OpenAI) API key. The ChatGPT path has not been run with a real key; its model ids and prices are unverified.
+Status: **proof of concept (v0.3)**. No person has labelled its results: every accuracy figure in the docs comes from AI judges or from checks in code, not from people. Treat what it reports as leads to check, not as findings. Built and tested on Chromium: load it in Chrome, Edge, Brave or Arc (Chrome 110 or newer). Safari and Firefox are not built or tested yet. Scanning runs locally, the site's own privacy and terms pages are fetched on load (see [Privacy](#privacy)), and an optional AI deep-analysis layer uses your own Claude (Anthropic) or ChatGPT (OpenAI) API key. The ChatGPT path has not been run with a real key; its model ids and prices are unverified.
 
 Some data files are not in the public copy of this project, so a few features are inactive there: see [Data held out of the public copy](#data-held-out-of-the-public-copy).
 
@@ -57,7 +57,7 @@ Four tiers, so a page with sixty findings is still readable:
 
 Nothing is drawn over the page: no outlines, no boxes. Rest the mouse on a flagged element and a small tooltip names the technique and the why; click the pill or the Subtext toolbar icon for the full breakdown in a resizable panel docked to the right of the page. Small dot markers are available behind a toggle in the panel, off by default. All label copy lives in one file, `extension/rules/labels.json`, and is governed by the rules in [docs/UX.md](docs/UX.md).
 
-## What it checks (v0.2)
+## What it checks (v0.3)
 
 | Layer | What | How |
 |---|---|---|
@@ -82,7 +82,7 @@ Every finding carries: technique, severity (1–3), confidence, the mechanism it
 4. Click **Load unpacked** and choose the `extension/` folder.
 5. Pin the icon. Visit any page; the badge counts what is worth knowing, and clicking the icon opens the report panel on the page.
 
-To share with others without a store listing, `npm run package` produces `dist/subtext-0.2.0.zip`, licence texts included, that they can unzip and load the same way.
+To share with others without a store listing, `npm run package` produces `dist/subtext-0.3.0.zip`, licence texts included, that they can unzip and load the same way.
 
 ### Safari and Firefox
 Neither is built or tested. Safari should be possible through Apple's `xcrun safari-web-extension-converter`, and Firefox would at least need a `background.scripts` fallback and its own test run. Until someone does that work, treat both as not supported.
@@ -186,11 +186,13 @@ The rules run in your browser and nothing goes to this project: there is no Subt
 
 The inquiry can read up to two public sources: allowlisted SEC, publication or trial records, or supported disclosure, methodology, refund, cancellation and subscription-terms paths on the page's own HTTPS origin. These requests omit cookies and referrers and reject redirects, with byte/time limits. When a needed filing or paper is not linked, one query of identifying words from the page may be sent to SEC full-text search or Europe PMC. Those services learn the query and your IP address. The SEC may reject automated access; Subtext reports unavailable evidence rather than bypassing a block. Source passages are bounded excerpts, not guaranteed complete documents. Fetched HTML is parsed without executing it; externally styled visibility is not resolved. Results stay in the tab's extension session, not a domain-wide analysis cache.
 
-**Only when you press Show context** (no AI key needed), Subtext works out what the page is about, then asks the few free public sources that can answer a question about that subject. It makes at most 18 requests. None carries the page address, its query, its text or a referrer, and only Google Trends carries cookies. What each source receives:
+**Only when you press Show context** (no AI key needed), Subtext works out what the page is about, then asks the few free public sources that can answer a question about that subject. It makes at most 18 requests. None carries the page address, its query, its text or a referrer, and only Google Trends carries cookies. Footer text and status-page links are read on your device; footer text is never sent. What each source receives:
 - **Wikidata and Wikipedia:** the registrable domain (or the site's Wikidata id from the bundled table), to find who runs the site. On an article, also one or two names or a two- to three-word phrase from the headline, to find what the page is about, and then an article title for its page views.
 - **Google News:** the headline words (articles only).
-- **ProPublica Nonprofit Explorer:** a US tax ID. When the page names its own legal entity and no tax ID is known, that legal name. On an organization's own page that prints no legal name, the site's name is sent instead.
-- **The SEC (data.sec.gov):** a company's SEC number, nothing else.
+- **ProPublica Nonprofit Explorer:** a US tax ID. When the page names its own legal entity and no tax ID is known, that legal name. On an organization's own page that prints no legal name, the site's name is sent instead. When the footer of a page about its own organization prints one US tax ID beside a label such as EIN or Tax ID, that nine-digit number is sent. A number in the main content is never read. This happens only on a .org site, an organization's own page, or where the footer text beside the ID calls the organization a nonprofit, and never when the footer prints two different IDs.
+- **The SEC (data.sec.gov):** a company's SEC number, nothing else. When Wikidata names one company as the owner or developer of the site's product, that company's Wikidata id is sent to Wikidata, and its SEC number to the SEC.
+- **The site's own status page, only when the page's footer, header or navigation links to it and its host is under the site's own domain:** a request for the public incident feed (`/api/v2/incidents.json`) on that host, and on a second such host only if the first has no feed. No other host is asked, and redirects are not followed. It carries nothing about the page you are on. The status host sees your IP address.
+- **The National Park Service, only on an nps.gov page about one park:** the park's four-letter code (for example GRCA), taken from the page's address, to the Park Service's visitor statistics service (irmaservices.nps.gov). Nothing else from the address is sent.
 - **Official statistics, only when the page names a statistic in its headline or returns to it with numbers:** one series or indicator code, plus a country code where needed, to the US Bureau of Labor Statistics, the New York Fed, Freddie Mac (a fixed file), FRED of the St. Louis Fed, the UK Office for National Statistics, Eurostat or the World Bank. Charts from FRED are kept in memory only, never in storage.
 - **The Federal Election Commission, only with your own free api.data.gov key in Settings and only on pages about political money:** the organization's name, to find a committee the FEC links to it. Individual donors are never looked up.
 - **Google Trends, only after this click and only while "Include Google Trends" is on in Settings (it is on by default):** the subject's name, sent with your Google cookies, because Trends refuses requests without them. Google can link that name to your Google account.

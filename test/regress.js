@@ -379,6 +379,18 @@ const PAGES = {
     check('the same clause in privacy and terms keeps both quotes', sells && sells.count === 2 && sells.evidence.some((e) => /\/privacy$/.test(e.url)) && sells.evidence.some((e) => /\/terms$/.test(e.url)) && sells.meta.kind === 'privacy policy' && sells.meta.alsoIn.kind === 'terms', sells);
     await page.close();
   }
+  { // 3b. a pop-up that opens on a timer under a resting pointer is not an exit pop-up: the pointer left an element, not the page
+    // the pointer is put on the page as soon as it loads, so it is resting there when the fixture's pop-up opens after 1.8 seconds
+    const page = await context.newPage(); await page.goto(L.SHOP, { waitUntil: 'domcontentloaded' }); await page.mouse.move(640, 400);
+    await page.waitForFunction(() => document.documentElement.dataset.mlScanned != null, null, { timeout: 20000 }); await page.waitForTimeout(4200);
+    const popIds = async () => (((await L.state(sw, L.SHOP)) || { report: {} }).report.findings || []).map((f) => f.id).filter((id) => /interrupting_overlay|exit_intent_popup/.test(id));
+    const timed = await popIds();
+    check('a timed pop-up under a resting pointer is an interruption, not an exit pop-up', timed.includes('dark.interrupting_overlay') && !timed.includes('dark.exit_intent_popup'), timed);
+    await page.evaluate(() => document.documentElement.dispatchEvent(new MouseEvent('mouseleave', { clientY: -1, bubbles: false }))); await page.waitForTimeout(2200);
+    const left = await popIds();
+    check('a pop-up that opens when the pointer leaves the page is still an exit pop-up', left.includes('dark.exit_intent_popup'), left);
+    await page.close();
+  }
   { // 4. a single-page app's new route is a new page
     const { page } = await L.open(context, L.SHOP); await page.waitForTimeout(3200); const before = await L.state(sw, L.SHOP); const ids = (st) => ((st && st.report.findings) || []).map((f) => f.id); const carried = (st) => ids(st).filter((id) => /^(dark\.(interrupting_overlay|exit_intent_popup|nagging)|urgency\.(live_countdown|fake_countdown_reset)|policy\.)/.test(id));
     check('the route starts with pop-up, countdown and policy findings', carried(before).length >= 3, carried(before));

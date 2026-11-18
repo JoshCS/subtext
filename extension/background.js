@@ -1,7 +1,7 @@
 /* Subtext — background service worker.
    Per-tab reports, outlet ownership lookup, toolbar badge, cross-origin fetch relay, optional ToS;DR lookup,
    and the optional AI deep analysis (Claude or ChatGPT, user's own key) via the shared ai.js module. */
-importScripts('common.js', 'context-data.js', 'context-nonprofit.js', 'context-sec.js', 'context-stats.js', 'context-fec.js', 'ai.js', 'claim-context.js', 'public-records.js', 'investigate.js', 'inquiry-sources.js', 'investigation-guides.js', 'inquiry.js', 'evidence-book.js');
+importScripts('common.js', 'context-data.js', 'context-nonprofit.js', 'context-sec.js', 'context-stats.js', 'context-fec.js', 'context-status.js', 'context-parks.js', 'ai.js', 'claim-context.js', 'public-records.js', 'investigate.js', 'inquiry-sources.js', 'investigation-guides.js', 'inquiry.js', 'evidence-book.js');
 
 const tabState = new Map();
 // A route is the URL without its fragment, unless the fragment is the route (#/orders, #!/orders). content/engine.js keeps the same rule.
@@ -73,7 +73,7 @@ async function lookupOperator(hostname) { const d = await loadOperators(); const
 let buyoutsP = null; const loadBuyouts = () => buyoutsP || (buyoutsP = fetch(chrome.runtime.getURL('data/buyouts.json')).then((r) => r.json()).catch(() => ({ domains: {} })));
 async function lookupBuyout(hostname) { const d = await loadBuyouts(); const h = String(hostname || '').toLowerCase().replace(/^www\./, ''); for (const c of Array.from(new Set([h, MLCommon.registrableDomain(h)]))) { const row = d.domains && d.domains[c]; if (row) return { firm: row[0], year: row[1], ref: row[2], q: row[3], built: d.built }; } return null; }
 async function lookupOwner(hostname) { const d = await loadOwners(); for (const c of candidates(hostname)) { const row = d.rows && d.rows[c]; if (row) return { row: Object.assign({ as_of: d.built }, row), matched: c }; } return null; }
-// The site's own ads.txt: the request goes only to the site already being visited, with no cookies and no referrer. Cached 7 days per domain. A setting turns it off.
+// The site's own ads.txt: the request goes to the registrable domain of the site already being visited, then to www. plus that domain, with no cookies and no referrer. Cached 7 days per domain. A setting turns it off.
 // judged on the raw hostname: the registrable-domain step turns 10.0.0.1 into 0.1, which a browser reads as a different address
 const isPublicHost = (h) => !!h && h.includes('.') && !h.includes(':') && !h.startsWith('[') && !/(^|\.)\d+$/.test(h) && !/^0x/i.test(h) && !/\.(local|localhost|internal|test|invalid|lan|home|corp|intranet)$/.test(h);
 const adsTxtPending = new Map();
@@ -218,6 +218,19 @@ async function compareRecord(tabId, key, route) {
 // fit this page; each request sends only what its source line says, with no Referer. Only Google Trends is sent with the reader's
 // cookies (Trends refuses requests without them), only after a click, and only while "Google Trends" is on in Settings.
 const contextJobs = new Map(); const contextTimers = new Set(); let secTickers; // the SEC's ticker list, read once from the bundled file
+const CONTEXT_MAX_BYTES = 3000000; // of one answer; the rest is not read
+// the body through a stream reader: reading stops at `max` bytes and the rest of the answer is cancelled, never held in memory
+async function readCapped(r, max) {
+  if (!r.body) return '';
+  const reader = r.body.getReader(); const dec = new TextDecoder(); let text = '', got = 0;
+  for (;;) {
+    const { done, value } = await reader.read(); if (done) break;
+    const room = max - got; const part = value.length > room ? value.subarray(0, room) : value;
+    got += part.length; text += dec.decode(part, { stream: true });
+    if (got >= max) { reader.cancel().catch(() => {}); break; }
+  }
+  return text;
+}
 function contextIo(allowCookies, job) {
   return { get: async (url, opt) => {
     opt = opt || {};
@@ -225,8 +238,12 @@ function contextIo(allowCookies, job) {
     if (job.cancelled) throw new Error('stopped'); // the tab was muted, closed or moved on: no further request leaves
     const ac = new AbortController(); const to = setTimeout(() => ac.abort(), 12000); job.abort = () => ac.abort();
     try {
-      const r = await fetch(url, { credentials: opt.cookies && allowCookies ? 'include' : 'omit', referrerPolicy: 'no-referrer', cache: 'no-store', signal: ac.signal, headers: opt.accept ? { accept: opt.accept } : {} });
-      const text = (await r.text()).slice(0, 3e6); return { status: r.status, text };
+      // a source may refuse redirects (`redirect: 'error'`, the status source): the request then fails at the first host and the address it points to is never asked
+      const r = await fetch(url, { credentials: opt.cookies && allowCookies ? 'include' : 'omit', referrerPolicy: 'no-referrer', cache: 'no-store', redirect: opt.redirect === 'error' ? 'error' : 'follow', signal: ac.signal, headers: opt.accept ? { accept: opt.accept } : {} });
+      // for the sources that follow redirects: one may end somewhere else, and an answer from a host that is not public https is not read
+      let end = null; try { end = new URL(r.url || url); } catch (e) { /* keep null */ }
+      if (!end || end.protocol !== 'https:' || !isPublicHost(end.hostname.toLowerCase())) { if (r.body) r.body.cancel().catch(() => {}); return { status: 0, text: '', error: 'redirected to a host that is not public https' }; }
+      return { status: r.status, text: await readCapped(r, CONTEXT_MAX_BYTES) };
     } catch (e) { return { status: 0, text: '', error: String(e) }; } finally { clearTimeout(to); }
   } };
 }
@@ -255,7 +272,7 @@ async function loadContext(tabId, route, trigger) {
     if (!page || page.error || !sameRoute(page.url, job.route)) throw new Error('Could not read this page.');
     if (!(await setContext({ route: job.route, status: 'busy' }))) return { ok: false, stale: true };
     const meta = st.report.meta || {}; const row = st.owner && st.owner.row; const outlet = st.outlet && st.outlet.entry;
-    const facts = SubtextContextData.pageFacts({ url: job.route, title: page.title, published: page.published, siteName: page.siteName || (outlet && outlet.name) || (row && row.site) || '', text: page.text, keywords: page.keywords, pageKind: meta.pageKind, isArticle: meta.isArticle, sells: !!(meta.commerce && meta.commerce.sells), productPage: !!page.productPage, entityQ: (row && row.q) || '', entityLabel: (outlet && outlet.name) || (row && row.site) || page.siteName || '', outletName: (outlet && outlet.name) || '', legalName: (() => { const P = st.report.provenance || {}; return P.entity || P.orgSchema || (P.copyrightEntity ? P.copyright : '') || ''; })(), address: (st.report.provenance && st.report.provenance.address) || '', nonprofit: !!(row && /nonprofit|charity|foundation/i.test(row.kind || '')) });
+    const facts = SubtextContextData.pageFacts({ url: job.route, title: page.title, published: page.published, siteName: page.siteName || (outlet && outlet.name) || (row && row.site) || '', text: page.text, keywords: page.keywords, pageKind: meta.pageKind, isArticle: meta.isArticle, sells: !!(meta.commerce && meta.commerce.sells), productPage: !!page.productPage, entityQ: (row && row.q) || '', entityLabel: (outlet && outlet.name) || (row && row.site) || page.siteName || '', outletName: (outlet && outlet.name) || '', legalName: (() => { const P = st.report.provenance || {}; return P.entity || P.orgSchema || (P.copyrightEntity ? P.copyright : '') || ''; })(), address: (st.report.provenance && st.report.provenance.address) || '', registrable: MLCommon.registrableDomain(host.toLowerCase().replace(/^www\./, '')) /* worked out here, never taken from the page: status hosts and the tax-ID name check are held to it */, taxIds: page.taxIds, taxIdNonprofit: page.taxIdNonprofit === true, statusPages: page.statusPages, footerText: page.footerText, nonprofit: !!(row && /nonprofit|charity|foundation/i.test(row.kind || '')) });
     const trends = trigger === 'click' && settings.contextTrends !== false;
     await SubtextContextStats.ready; // the statistics registry (a bundled file) is read once
     if (secTickers === undefined) { try { secTickers = (await (await fetch(chrome.runtime.getURL('data/sec-tickers.json'))).json()).rows || null; } catch (e) { secTickers = null; } }

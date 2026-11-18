@@ -2,11 +2,19 @@
 # scripts/export-public.js copies these files and nothing else: a file that is not listed here is not copied,
 # and the script prints it as skipped. To publish a new file, add its path here.
 # Lines that start with # are comments. No wildcards.
+.github/ISSUE_TEMPLATE/1-wrong-label.yml
+.github/ISSUE_TEMPLATE/2-data-correction.yml
+.github/ISSUE_TEMPLATE/3-bug.yml
+.github/ISSUE_TEMPLATE/config.yml
+.github/PULL_REQUEST_TEMPLATE.md
 .gitignore
+CHANGELOG.md
+CONTRIBUTING.md
 DEMO.md
 LICENSE
 LICENSE-DATA
 NOTICE
+PRIVACY.md
 README.md
 SECURITY.md
 data/lists/allowlist.json
@@ -25,6 +33,7 @@ docs/RESEARCH.md
 docs/TAXONOMY.md
 docs/THREAT-MODEL.md
 docs/UX.md
+docs/img/panel-on-test-shop.png
 eval/badpages-fetch.py
 eval/badpages-run.js
 eval/calibrate.js
@@ -94,9 +103,11 @@ extension/content/shared.js
 extension/content/ui.js
 extension/context-data.js
 extension/context-fec.js
+extension/context-parks.js
 extension/context-nonprofit.js
 extension/context-sec.js
 extension/context-stats.js
+extension/context-status.js
 extension/context.js
 extension/data/category-playbook.json
 extension/data/outlets.json
@@ -149,9 +160,11 @@ test/claim-context.js
 test/context-chart.js
 test/context-data.js
 test/context-fec.js
+test/context-parks.js
 test/context-nonprofit.js
 test/context-sec.js
 test/context-stats.js
+test/context-status.js
 test/context-worker.js
 test/evidence-book.js
 test/fingerprint.js
