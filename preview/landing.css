@@ -76,8 +76,13 @@ code{overflow-wrap:anywhere}
 @media(max-width:370px){header nav,footer nav{gap:9px}nav a{font-size:14px}.navcta{padding-inline:9px}}
 
 .field,.why-inner{padding-block:clamp(44px,6vw,84px)}
-.field-intro{max-width:64ch;font-size:20px}
-.questions{display:grid;grid-template-columns:1fr 1fr;gap:24px clamp(30px,7vw,96px);margin:32px 0}
+/* The heading and its introduction sit on the same two columns as the questions below: heading over the left column, introduction over the right. */
+.field{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(30px,7vw,96px);align-items:end}
+.field>*{grid-column:1/-1}
+.field>h2{grid-column:1;margin:0}
+.field>.field-intro{grid-column:2;margin:0 0 6px;font-size:20px}
+.field>a{justify-self:start}
+.questions{display:grid;grid-template-columns:1fr 1fr;gap:24px clamp(30px,7vw,96px);margin:36px 0 32px}
 .questions article{border-top:1px solid var(--line);padding-top:16px}
 h3{font:400 clamp(24px,2.4vw,34px)/1.13 var(--serif);letter-spacing:-.025em;margin:0}
 .questions p,.walkthrough p{margin:12px 0}
@@ -87,7 +92,7 @@ h3{font:400 clamp(24px,2.4vw,34px)/1.13 var(--serif);letter-spacing:-.025em;marg
 .why{border-top:1px solid var(--line)}
 .why-inner{width:min(65ch,89%);margin:auto}
 .why p{font:400 clamp(20px,1.7vw,25px)/1.52 var(--serif)}
-@media(max-width:740px){.questions{grid-template-columns:1fr}.field-intro{font-size:18px}}
+@media(max-width:740px){.questions{grid-template-columns:1fr}.field{grid-template-columns:1fr}.field>h2,.field>.field-intro{grid-column:1}.field>h2{margin-bottom:18px}.field>.field-intro{font-size:18px}}
 @media(max-width:370px){header nav a{font-size:13px}}
 
 .walkthrough{display:block;max-width:860px}
