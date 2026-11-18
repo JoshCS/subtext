@@ -114,3 +114,6 @@ h3{font:400 clamp(24px,2.4vw,34px)/1.13 var(--serif);letter-spacing:-.025em;marg
 @media(max-width:480px){nav a{white-space:nowrap;font-size:13px}.navcta{padding-inline:9px}}
 @media(max-width:360px){nav a:first-child{display:none}}
 @media(max-width:360px){.hero{padding-top:28px}}
+/* headline "Your personal industry insider" sets on two lines at every width (2026-11-18) */
+h1{font-size:clamp(46px,5.3vw,74px);line-height:1.02;text-wrap:balance}
+@media(max-width:740px){h1{font-size:min(11.5vw,60px)}}
