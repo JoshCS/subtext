@@ -27,7 +27,7 @@
 <nav aria-label="Main navigation">
 <a href="#example">How it works</a>
 <a href="#privacy">Privacy</a>
-<a class="navcta" href="#get-it">Install</a>
+<a class="navcta" href="#get-it">Project status</a>
 </nav>
 </header>
 <main id="main">
@@ -36,10 +36,10 @@
 <h1>What’s behind<br>this page?</h1>
 <p class="intro">Subtext is a browser extension that helps you see who’s behind what you’re reading, what they want you to do, and the incentives behind their content.</p>
 <div class="actions">
-<a class="btn" href="#get-it">Get Subtext</a>
-<a href="#demo">Watch the demo ↓</a>
+<a class="btn" href="#demo">Watch the 70-second walkthrough</a>
+<a rel="noopener" href="https://github.com/JoshCS/subtext">View the project on GitHub</a>
 </div>
-<p class="fine">Open-source Chrome extension · Manual install</p>
+<p class="fine">Pre-beta · Chrome extension in development</p>
 </div>
 <figure class="clipping">
 <figcaption>A real example · Guardian Labs</figcaption>
@@ -50,7 +50,7 @@
 <p class="byline">The article cites a study of stress levels in gallery visitors.</p>
 <aside>
 <b>The connection</b>
-<p>Art Fund helped pay for the study. It also sells the museum pass the article asks you to buy.</p>
+<p>Art Fund helped pay for the study. It also sells the museum pass the article asks you to buy. Taking the kids to Young V&amp;A, the museum pictured in the article? General admission is already free.</p>
 </aside>
 </figure>
 </section>
@@ -63,8 +63,7 @@
 <article><h3>Why am I being rushed?</h3><p>A timer tells you there are only ten minutes left on the sale, but every time you refresh the page, the timer starts over.</p></article>
 <article><h3>What am I agreeing to?</h3><p>“Cancel anytime” can still mean you’ve paid for the year. If you quit in February, can you get the rest back?</p></article>
 <article><h3>Where did this story come from?</h3><p>Say you’re reading a story about reducing taxes on billionaires. It was originally written by a news organization owned by a billionaire who has some level of editorial control. That matters.</p></article>
-</div><a href="../demo/index.html">Try the example pages →</a>
-</div></section>
+</div></div></section>
 <section class="wrap walkthrough" id="demo">
 <h2>Here’s what it looks like.</h2>
 <figure><video controls playsinline preload="metadata" width="1280" height="832" poster="assets/walkthrough-poster.webp" aria-label="Narrated Subtext walkthrough on two demonstration pages" aria-describedby="walkthrough-text" src="assets/walkthrough.mp4"></video>
@@ -81,25 +80,17 @@
 <p>This matters now more than ever. With AI, there’s been a massive increase in the volume of misleading content being shared. It’s getting harder to trust what we’re seeing and reading online. Understanding the subtext is no longer optional as we navigate this new version of the internet.</p>
 </div></section>
 <section id="get-it" class="install">
-<div class="wrap pair">
-<div>
-<h2>Install Subtext</h2>
-<p>Load the zip in Chrome. You can do the standard checks without an AI key.</p>
-<a class="btn" rel="noopener" href="https://github.com/JoshCS/subtext/releases/download/v0.2.0/subtext-0.2.0.zip">Download v0.2.0 (.zip)</a>
-</div>
-<ol>
-<li>Unzip the downloaded file.</li>
-<li>Open <code>chrome://extensions</code> and turn on <strong>Developer mode</strong>.</li>
-<li>Select <strong>Load unpacked</strong> and choose the unzipped extension folder.</li>
-<li>Open a page and click Subtext in the Extensions menu.</li>
-</ol>
+<div class="wrap status">
+<h2>About the pre-beta</h2>
+<p>Subtext is still in development. The walkthrough shows some of the checks that work today. The build on GitHub is an early version of the Chrome extension. It’s missing parts of the product we’re working on, and we’re not ready to ask people to test it yet.</p>
+<a class="btn" rel="noopener" href="https://github.com/JoshCS/subtext">View the project on GitHub</a>
 </div>
 </section>
 <section id="privacy" class="wrap faq">
-<h2>Before you install</h2>
+<h2>Questions about the project</h2>
 <div>
 <details open>
-<summary>If I open Subtext on a shop, who hears about it?</summary>
+<summary>If I open Subtext on a site, is it private?</summary>
 <p>The checks run in your browser. Subtext may fetch site policies, ad records and seller details. There’s no Subtext server collecting scans. Exclude sites in Settings.</p>
 <p>Show context sends lookup terms to outside sources. Google Trends uses your Google cookies, so Google can tie the topic to your account. You can turn that off.</p>
 <a rel="noopener" href="https://github.com/JoshCS/subtext#privacy">See which requests each setting makes →</a>
@@ -116,7 +107,7 @@
 </details>
 <details>
 <summary>Which browsers have been tested?</summary>
-<p>Chrome has been tested. Edge, Brave and Arc haven’t been tested separately. Safari and Firefox are unsupported. The download is on GitHub.</p>
+<p>Chrome has been tested. Edge, Brave and Arc haven’t been tested separately. Safari and Firefox are unsupported.</p>
 </details>
 </div>
 </section>
